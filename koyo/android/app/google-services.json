@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "924395100608",
+    "project_id": "koyo-b6f9f",
+    "storage_bucket": "koyo-b6f9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924395100608:android:356f5cd306c2a7d2359025",
+        "android_client_info": {
+          "package_name": "com.example.koyo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzhSApTLOYel7bS3n1UocqmilnvuTApkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
