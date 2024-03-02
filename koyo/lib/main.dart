@@ -1,48 +1,47 @@
-import 'package:flutter/material.dart';
-import 'package:koyo/router.dart';
-import 'package:koyo/home.dart';
-import 'package:koyo/sports.dart';
-import 'package:koyo/hakuran.dart';
-import 'package:koyo/bunkou.dart';
-import 'package:koyo/map.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';//必須
+import 'package:koyo/router.dart';//ページ遷移指定用
+import 'package:koyo/home.dart';//アプリのホーム画面
+import 'package:koyo/sports.dart';//体育祭ページ
+import 'package:koyo/hakuran.dart';//博覧会ぺーじ
+import 'package:koyo/bunkou.dart';//文化祭、後夜祭ページ
+import 'package:koyo/map.dart';//校舎内マップページ
+import 'package:firebase_core/firebase_core.dart';//firebase連携で必須
+import 'firebase_options.dart';//同じくfirebase
 
 //メインの関数、ここからすべては始まる
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();//firebaseを使うための定型文
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,       
   );
   runApp(const MyApp());
 }                          
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget {//アプリのいろんな設定
   const MyApp({super.key});
 
   
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerDelegate: goRouter.routerDelegate,
+      routerDelegate: goRouter.routerDelegate,//gorouterを使うための定型文
       routeInformationParser: goRouter.routeInformationParser,
       routeInformationProvider: goRouter.routeInformationProvider,
       
-      title: '第７６回向陽祭',
+      title: '第７６回向陽祭',//アプリタイトル
       theme: ThemeData(
-        colorScheme: const ColorScheme(
+        colorScheme: const ColorScheme(//アプリの色設定
           brightness: Brightness.light, 
           primary: (Color.fromARGB(255, 25, 118, 210)), 
           onPrimary:  (Colors.white), 
           secondary:  (Colors.white), 
           onSecondary:  (Colors.black), 
           error:   (Color.fromARGB(255, 25, 118, 210)), 
-          onError:  (Colors.black), 
-          background:  (Color.fromARGB(255, 245, 245, 245)), //grey
+          onError:  (Colors.white), 
+          background:  (Colors.white), //grey50
           onBackground: (Colors.white), 
-          surface: (Color.fromARGB(255, 25, 118, 210)), 
+          surface: (Color.fromARGB(255, 241, 249, 255)), 
           onSurface: (Colors.black),),
         useMaterial3: true,
       ),
@@ -51,7 +50,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatefulWidget {//statefulなやつ
   const MyHomePage({super.key});
   
   @override
@@ -60,24 +59,24 @@ class MyHomePage extends StatefulWidget {
   
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-   int _currentindex =0;
-  static const _screens = [
-    Home(),
-    Sports(),
-    Hakuran(),
+class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継いだstate(必須)
+   int _currentindex =0;//bottomnavigationbarの選択時の変数
+  static const _screens = [//各画面を格納
+    Home(),//ホーム画面
+    Sports(),//体育祭
+    Hakuran(),//博覧会
     Bunkou(),//文化と後夜でございます
-    Map()
+    Map()//校内マップ
   ];
   
 
-  void tap(int index) => setState(() => _currentindex = index );
+  void tap(int index) => setState(() => _currentindex = index );//bottomnavigationbarタップ時の処理
 
   @override
   Widget build(BuildContext context) {
     
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(//bottomnavigationbarのみため
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),     
           BottomNavigationBarItem(icon: Icon(Icons.sports_tennis), label: '体育祭'), 
@@ -92,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
         unselectedLabelStyle:const TextStyle(color: Colors.grey)
       ),
 
-      body: _screens[_currentindex],
+      body: _screens[_currentindex],//_screensリストの_currentindex番目を取り出し
       
     );
   }

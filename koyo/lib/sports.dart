@@ -12,7 +12,10 @@ class Sports extends StatefulWidget {
 
 class _Sports extends State<Sports> {
 
-List<String> sp= ["101","102","103","104","105","106","107","108","109"];
+List<String> sp= ["開会式","台風の目","女(80m*4)/男(160m*4)\nリレー 予選","パン買い競争","応援団",
+"妨害玉入れ","8の字ジャンプ","十字綱引き","女(80m*4)/男(160m*4)\nリレー 上位決勝","部対抗リレー","閉会式"];//競技名のリスト
+List<String> time= ["09:20","09:40","10:20","10:55","11:40","12:05","12:20","13:00","13:40","14:20","14:50","15:20"];//時間のリスト
+List<String> spat= ["@クラス席","クラス対抗","ブロック対抗","クラス対抗","","クラス対抗","ブロック対抗","クラス対抗","ブロック対抗","クラス対抗","@クラス席"];//場所リスト
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +26,13 @@ List<String> sp= ["101","102","103","104","105","106","107","108","109"];
         title: const Text('体育祭',style: TextStyle(color: Colors.white),),
         centerTitle: true,
       ),
-      body:  Padding(//naosu
+      body: SingleChildScrollView(//スクロール可能
+        child: Padding(//余白設定
         padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,),
-          child:SingleChildScrollView(
-        child: Column(
+          horizontal: 5,
+          vertical: 12,
+          ),
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
         children:[
           const Padding(
@@ -36,12 +40,15 @@ List<String> sp= ["101","102","103","104","105","106","107","108","109"];
             child: Column(
                crossAxisAlignment: CrossAxisAlignment.start,
                   children:[ 
-                    Text('体育祭',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 40),),
-                Text('1月1日（月）08:00 ~08:00',style: TextStyle(fontSize: 20),),
+                    Text('体育祭',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35),),
+                    SizedBox(
+                      height: 5,
+                    ),
+                Text('6月19日（月）@日本ガイシホール',style: TextStyle(fontSize: 18),),
                   ]
             )
                   ),
-        const SizedBox(
+        const SizedBox(//間設定
           height: 15,
         ),
         const Center(child:
@@ -50,28 +57,28 @@ List<String> sp= ["101","102","103","104","105","106","107","108","109"];
         const SizedBox(
           height: 10,
         ),
-        ListView.builder(
+        ListView.builder(//体育祭の各種目を一覧表示
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 9,
+            itemCount: sp.length,
           itemBuilder: (BuildContext context, int index) {
-            return Padding(
+            return Padding(//ここからを表示
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
               child:
               Card(
-                elevation: 0,
+                elevation: 2,
                 shape: RoundedRectangleBorder(
-            side: const BorderSide(color: Colors.grey),
+            //side: const BorderSide(color: Colors.grey),
             borderRadius: BorderRadius.circular(10)
           ),
               child: ListTile(
-                leading: const Text('08:00',style: TextStyle(fontSize: 30),),
+                leading: Text(time[index],style: const TextStyle(fontSize: 25,fontWeight: FontWeight.w400),),
                 title: Text(sp[index],style: const TextStyle(fontSize: 20),),
-                subtitle: const Text('@グラウンド'),
-                tileColor: Colors.white,
+                subtitle: Text(spat[index]),
+                tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: () {
                   context.push('/$index');
-                },
+                },//gorouterでのタップ時遷移　仮
                  shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),

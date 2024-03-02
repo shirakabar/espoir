@@ -93,3 +93,6 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - images/esupo.png
+    - images/crowdone.jpg
+    - images/crowdtwo.jpg
+    - images/crowdthree.jpg

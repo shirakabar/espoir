@@ -47,26 +47,23 @@ class _Bunkou extends State<Bunkou> {
          indicatorColor: Colors.white,
         ),
       ),
-      body: 
-      
+      body: SingleChildScrollView(child: 
       Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 12,
         ),
-
-      child: Column(
-        children: [
-        Expanded(
-          child: Container(
+      child: 
+        Expanded(child: 
+          Container(
             child: _widgetoptions.elementAt(_currentpageindex)
           )
-        ,)
-        
-        ],
+        )
     ),
     ),
-    )
+    
+      )
+      
     );
     
 }
