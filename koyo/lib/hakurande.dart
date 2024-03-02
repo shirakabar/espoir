@@ -18,12 +18,12 @@ List<String> sp= ["101","102","103","104","105","106","107","108","109"];
   Widget build(BuildContext context) {
     
     return Scaffold(
-      body:  Padding(//naosu
+      body: SingleChildScrollView(child:
+        Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 12,
         ),
-        child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
         children:[
@@ -63,7 +63,7 @@ List<String> sp= ["101","102","103","104","105","106","107","108","109"];
                 leading: const Text('08:00',style: TextStyle(fontSize: 30),),
                 title: Text(sp[index],style: const TextStyle(fontSize: 20),),
                 subtitle: const Text('@グラウンド'),
-                tileColor: Colors.white,
+                //tileColor: Colors.white,
                 onTap: () {
                   context.push('/$index');
                 },

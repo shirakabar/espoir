@@ -29,9 +29,7 @@ class _Bunka extends State<Bunka> {
     
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-      body: 
-      Column(
+      child:  Column(
          crossAxisAlignment: CrossAxisAlignment.start,
         children: [ const Padding(
         padding: EdgeInsets.symmetric(
@@ -63,7 +61,6 @@ class _Bunka extends State<Bunka> {
         ,)
         
         ],
-    ),
     ),
     
     );

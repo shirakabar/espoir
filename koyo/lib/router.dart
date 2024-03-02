@@ -1,17 +1,19 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-//import 'package:koyo/crowd.dart';
+import 'package:koyo/crowd.dart';
 import 'package:koyo/main.dart';
 import 'package:koyo/come.dart';
 import 'package:koyo/firestore.dart';
+import 'package:koyo/result.dart';
 
+//gorouterは画面遷移用の外部パッケージ
 //遷移先一覧
 
 final goRouter = GoRouter(
   
-  initialLocation: '/',
+  initialLocation: '/',//最初に表示される画面
   
-  routes: [
+  routes: [//各画面のpath、名前を指定
     GoRoute(
       path: '/',
       name: 'initial',
@@ -45,7 +47,7 @@ final goRouter = GoRouter(
       },
     ),
 
-    /*GoRoute(
+    GoRoute(
       path: '/crowd',
       name: 'crowd',
       pageBuilder: (context, state) {
@@ -54,6 +56,17 @@ final goRouter = GoRouter(
           child: const Crowd(),
         );
       },
-    ),*/
+    ),
+
+    GoRoute(
+      path: '/result',
+      name: 'result',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Result(),
+        );
+      },
+    ),
   ]
 );

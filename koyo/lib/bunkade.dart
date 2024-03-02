@@ -20,8 +20,8 @@ class _Bunkagym extends State<Bunkagym> {
    Widget build(BuildContext context) {
     
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
+      body: 
+      Column(
           crossAxisAlignment: CrossAxisAlignment.start,
         children:[
            const SizedBox(
@@ -66,9 +66,9 @@ class _Bunkagym extends State<Bunkagym> {
           
          )
       ]
-      )
+      
       ),
-    
+      
     );
    }
 }

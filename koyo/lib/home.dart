@@ -12,17 +12,12 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
- 
-List<String> news=['one','two','three','four'];
-
-
 
   @override
   Widget build(BuildContext context) {
     
 
     return Scaffold(
-          backgroundColor: Colors.grey[100],
       body: 
          SingleChildScrollView(child:
         Column(
@@ -30,43 +25,41 @@ List<String> news=['one','two','three','four'];
           children: <Widget>[
             Container(
               color: Theme.of(context).primaryColor,
-              width: double.infinity,
-              height: 420,//機種によってはオーバーフローするっぽい
+              width: double.infinity,//横無限
+              height: 425,//機種によってはオーバーフローするっぽい
               child: Column(children: [
                 const Text('第76回向陽祭',style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),),
-                Image.asset('images/esupo.png',fit: BoxFit.contain)
+                Image.asset('images/esupo.png',fit: BoxFit.contain)//エスポワールの画像
               ],
               )
               ),
             Container(
               color: Colors.indigo[900],
               width: double.infinity,
-              height: 25,
-              child: const Text('博覧会:8:00~8:00',style: (TextStyle(color: Colors.white)),textAlign: TextAlign.center,),
+              height: 15,
+              //child: const Text('博覧会:8:00~8:00',style: (TextStyle(color: Colors.white)),textAlign: TextAlign.center,),
             ),
 
             const SizedBox(
              height: 40,
             ),
-          
-            
-            
+                             
               
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,//均等に横に並べる
                 children: [
                 OutlinedButton(
                 onPressed: () {
-                  context.push('/crowd');//結果ページへ遷移
+                  context.push('/result');//結果ページへ遷移
                 },
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  side: const BorderSide(color: Colors.transparent),
+                  backgroundColor: Colors.transparent,//背景透明
+                  side: const BorderSide(color: Colors.transparent),//OutlinedButtonのoutlineを透明にするという冒涜
                   fixedSize: const Size(135, 50)
                 ),
                 child: Column(
                   children: [
-                    Icon(Icons.emoji_events,color: Theme.of(context).primaryColor,),
+                    Icon(Icons.emoji_events,color: Theme.of(context).primaryColor,),//アイコン
                     const Text('結果',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)
                   ],
                 )
@@ -76,7 +69,7 @@ List<String> news=['one','two','three','four'];
                 
                 OutlinedButton(
                 onPressed: () {
-                  context.push('/');
+                  context.push('/crowd');
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Colors.transparent,
@@ -195,22 +188,22 @@ List<String> news=['one','two','three','four'];
               SizedBox(
                 height:200,
                 child: ListView.builder(
-                shrinkWrap: true,
-                itemExtent: 200,
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
+                shrinkWrap: true,//なんか必要
+                itemExtent: 180,//高さ
+                scrollDirection: Axis.horizontal,//横スクロール
+                itemCount: 3,//仮
                 itemBuilder:  (BuildContext context, int index) {
             return  Card(
+                elevation: 5,//影
                 margin: const EdgeInsets.symmetric(horizontal: 5), 
                 shape: const RoundedRectangleBorder(
-            side: BorderSide(color: Colors.grey),
-            borderRadius: BorderRadius.all(Radius.circular(20))
-
+            //side: BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.all(Radius.circular(20))//角はとろう
           ),
               child: ListTile(
-                title: const Text('試験アナウンス',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                subtitle: const Text('あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよわをん'),
-                tileColor: Colors.white,//長くなると...をつけたい　タイトルとサブタイトルのあいだにボーダーをいれたい
+                title: const Text('試験アナウンス',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20),),
+                //subtitle: const Text('あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよわをん'),
+                //tileColor: Colors.white,
                 onTap: () {
                   context.push('/$index');
                 },
@@ -229,7 +222,7 @@ List<String> news=['one','two','three','four'];
               ),
               Padding(padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               child:Column(children: [
-              const Divider(
+              const Divider(//線
                   height: 1,
                   thickness: 1,
                   color: Colors.grey,
