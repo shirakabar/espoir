@@ -5,6 +5,7 @@ import 'package:koyo/main.dart';
 import 'package:koyo/come.dart';
 import 'package:koyo/firestore.dart';
 import 'package:koyo/result.dart';
+import 'package:koyo/ticket.dart';
 
 //gorouterは画面遷移用の外部パッケージ
 //遷移先一覧
@@ -65,6 +66,17 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: const Result(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/ticket',
+      name: 'ticket',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Ticket(),
         );
       },
     ),
