@@ -16,15 +16,23 @@ class _Home extends State<Home> {
   @override
   Widget build(BuildContext context) {
     
-
     return Scaffold(
       body: 
          SingleChildScrollView(child:
         Column(
            mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Container(
-              color: Theme.of(context).primaryColor,
+            Padding(padding: const EdgeInsets.all(5),
+            child: Container(
+              decoration: (BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: const [BoxShadow(
+                  color: (Color.fromARGB(255, 100, 159, 218)),  
+                  blurRadius: 20.0,
+                  spreadRadius: 5.0,
+                )],
+                color: Theme.of(context).primaryColor,
+              )),
               width: double.infinity,//横無限
               height: 425,//機種によってはオーバーフローするっぽい
               child: Column(children: [
@@ -33,12 +41,13 @@ class _Home extends State<Home> {
               ],
               )
               ),
-            Container(
+              ),
+           /* Container(
               color: Colors.indigo[900],
               width: double.infinity,
               height: 15,
               //child: const Text('博覧会:8:00~8:00',style: (TextStyle(color: Colors.white)),textAlign: TextAlign.center,),
-            ),
+            ),*/
 
             const SizedBox(
              height: 40,
@@ -69,7 +78,7 @@ class _Home extends State<Home> {
                 
                 OutlinedButton(
                 onPressed: () {
-                  context.push('/crowd');
+                  context.push('/ticket');
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Colors.transparent,
@@ -88,7 +97,7 @@ class _Home extends State<Home> {
                 
                OutlinedButton(
                 onPressed: () {
-                  context.push('/');
+                  context.push('/crowd');
                 },
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Colors.transparent,
@@ -183,22 +192,21 @@ class _Home extends State<Home> {
                 height: 10,
               ),
 
-              Padding(padding: const EdgeInsets.symmetric(horizontal: 5), 
+              Padding(padding: const EdgeInsets.only(left: 5), 
               child:
               SizedBox(
-                height:200,
-                child: ListView.builder(
-                shrinkWrap: true,//なんか必要
-                itemExtent: 180,//高さ
+                height:180,
+                child: ListView.builder(//なぜか下の影が切れてる
+                itemExtent: 180,//横幅
                 scrollDirection: Axis.horizontal,//横スクロール
                 itemCount: 3,//仮
                 itemBuilder:  (BuildContext context, int index) {
-            return  Card(
+            return Card(
                 elevation: 5,//影
                 margin: const EdgeInsets.symmetric(horizontal: 5), 
                 shape: const RoundedRectangleBorder(
             //side: BorderSide(color: Colors.grey),
-            borderRadius: BorderRadius.all(Radius.circular(20))//角はとろう
+           borderRadius: BorderRadius.all(Radius.circular(20))//角はとろう
           ),
               child: ListTile(
                 title: const Text('試験アナウンス',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20),),
@@ -211,7 +219,7 @@ class _Home extends State<Home> {
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
             )
-             
+              
                 );
                 }
               ),
