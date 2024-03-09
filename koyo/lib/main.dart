@@ -39,9 +39,9 @@ class MyApp extends StatelessWidget {//アプリのいろんな設定
           onSecondary:  (Colors.black), 
           error:   (Color.fromARGB(255, 25, 118, 210)), 
           onError:  (Colors.white), 
-          background:  (Colors.white), //grey50
+          background:  Color.fromARGB(255, 251, 251, 251), //grey50
           onBackground: (Colors.white), 
-          surface: (Color.fromARGB(255, 241, 249, 255)), 
+          surface: (Color.fromARGB(255, 226, 226, 226)), 
           onSurface: (Colors.black),),
         useMaterial3: true,
       ),
@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継�
         fixedColor: Colors.blueAccent,
         onTap: tap,
         unselectedItemColor: Colors.grey,
-        unselectedLabelStyle:const TextStyle(color: Colors.grey)
+        type: BottomNavigationBarType.fixed,
       ),
 
       body: _screens[_currentindex],//_screensリストの_currentindex番目を取り出し
@@ -97,3 +97,31 @@ class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継�
   }
 }
 
+/*class Bar extends StatelessWidget{
+  const Bar({required this.title,required this.bottom,super.key});
+  final String title;
+  final dynamic bottom;
+  
+  @override
+  Widget build(BuildContext context) {
+    
+  return AppBar(
+    backgroundColor: Theme.of(context).primaryColor,
+    title:  Text(title,style: const TextStyle(color: Colors.white),),
+    centerTitle: true,
+    bottom: bottom,
+    leading: IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  context.push('/');
+                },
+    ),
+    actions: [IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  context.push('/');
+                },
+    ),],
+  );
+}
+}*/

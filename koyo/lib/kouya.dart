@@ -1,71 +1,113 @@
 import 'package:flutter/material.dart';
+import 'package:koyo/kouyade.dart';
 
-//後夜祭ページのタブ遷移先一覧
-
-class Kouya extends StatefulWidget {
-
+//文化祭ページのタブ遷移先一覧
+//stickeytabbarはネットから
+class Kouya extends StatelessWidget {
   const Kouya({super.key});
 
   @override
-  State<Kouya> createState() => _Kouya();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: DefaultTabController(
+        length: 2,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              _headerSection(),
+              _tabSection()
+            ];
+          },
+          body: const TabBarView(
+            children: [
+               Kouyagym(),
+               Kouyagym(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _Kouya extends State<Kouya> {
-  int _currentpageindex = 0;
-
-  void _taptab(int index) {
-    setState(() {
-      _currentpageindex = index;
-  });
-  }
-  static const List<Widget> _widgetoptions = <Widget>[
-    
-  ] ;//体育館、運動場、オンデマンド
-
-  @override
-  
-   Widget build(BuildContext context) {
-    
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-      body: 
-      
-      Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
-
-      child: Column(
-        children: [
-          const Column(
+//header部分
+Widget _headerSection() {
+  return SliverList(
+    delegate: SliverChildListDelegate(
+      [ const Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 12,),
+          child: Column(
                crossAxisAlignment: CrossAxisAlignment.start,
                   children:[ 
-                    Text('体育祭',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 40),),
-                Text('1月1日（月）08:00 ~08:00',style: TextStyle(fontSize: 20),),
+                     Padding(
+                     padding: EdgeInsets.only(left:20,top:15),
+                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                       children:[ 
+                        Text('後夜祭',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35),),
+                     SizedBox(
+                      height: 5,
+                    ),
+                Text('6月19日（月）',style: TextStyle(fontSize: 18),),
+                  ]
+            )
+                  ),
                   ]
             ),
-          TabBar(
-        onTap: _taptab,
-        tabs: const [
-           Tab( text:''),
-           Tab( text:''),
-        ],
-      
         ),
-
-        Expanded(
-          child: Container(
-            child: _widgetoptions.elementAt(_currentpageindex)
-          )
-        ,)
-        
-        ],
+      ],
     ),
-    ),
-    )
-    );
-    
+  );
 }
+
+//TabBar部分
+Widget _tabSection() {
+  return const SliverPersistentHeader(
+    pinned: true,
+    delegate: _StickyTabBarDelegate(
+      tabBar: TabBar(
+        labelColor: Colors.black,
+        tabs: [
+          Tab(
+            text: '体育館',
+          ),
+          Tab(
+            text: '運動場',
+          )
+        ],
+      ),
+    ),
+  );
+}
+
+//SliverPersistentHeaderDelegateを継承したTabBarを作る
+class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
+  const _StickyTabBarDelegate({required this.tabBar});
+
+  final TabBar tabBar;
+
+  @override
+  double get minExtent => tabBar.preferredSize.height;
+
+  @override
+  double get maxExtent => tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      color: Colors.white,
+      child: tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_StickyTabBarDelegate oldDelegate) {
+    return tabBar != oldDelegate.tabBar;
+  }
 }
