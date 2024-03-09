@@ -3,28 +3,9 @@ import 'package:koyo/hakurande.dart';
 
 //博覧ページのタブ遷移先
 
-class Hakuran extends StatefulWidget {
-
+class Hakuran extends StatelessWidget {
   const Hakuran({super.key});
-
-  @override
-  State<Hakuran> createState() => _Hakuran();
-}
-
-class _Hakuran extends State<Hakuran> {
-  int _currentpageindex = 0;
-
-  void _taptab(int index) {
-    setState(() {
-      _currentpageindex = index;
-  });
-  }
-  static const List<Widget> _widgetoptions = <Widget>[
-    Kyo(),
-    Butai(),
-    Club()
-  ] ;
-
+  
   @override
   
    Widget build(BuildContext context) {
@@ -36,12 +17,11 @@ class _Hakuran extends State<Hakuran> {
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text('博覧会',style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        bottom: TabBar(
-        onTap: _taptab,
-        tabs: const [
+        bottom: const TabBar(
+        tabs: [
            Tab( text:'教室'),
            Tab( text:'舞台'),
-           Tab( text:'その他'),
+           Tab( text:'部活動'),
         ],
          unselectedLabelColor: Colors.white,
          labelColor: Colors.white,
@@ -49,12 +29,13 @@ class _Hakuran extends State<Hakuran> {
         ),
 
       ),
-      body:
-        Expanded(
-          child: Container(
-            child: _widgetoptions.elementAt(_currentpageindex)
-          )
-        ,)
+      body: const TabBarView(
+        children: [
+          Kyo(),
+          Butai(),
+          Club()
+          ],
+        )
     ),    
     );
 }

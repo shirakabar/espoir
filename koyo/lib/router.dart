@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:koyo/crowd.dart';
 import 'package:koyo/main.dart';
 import 'package:koyo/come.dart';
-import 'package:koyo/firestore.dart';
 import 'package:koyo/result.dart';
 import 'package:koyo/ticket.dart';
 
@@ -37,16 +36,6 @@ final goRouter = GoRouter(
       },
     ),
 
-       GoRoute(
-      path: '/store',
-      name: 'store',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: const MyWidget(),
-        );
-      },
-    ),
 
     GoRoute(
       path: '/crowd',

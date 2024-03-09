@@ -17,38 +17,70 @@ class _Home extends State<Home> {
   Widget build(BuildContext context) {
     
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            context.push('/');
+          }, 
+          icon: const Icon(Icons.menu),
+          ),
+        actions: [IconButton(
+          onPressed: () {
+            context.push('/');
+          }, 
+          icon: const Icon(Icons.menu),
+          ),],
+        backgroundColor: const Color(0xFFEEEEEE),
+        title: const Text('第76回向陽祭',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
+        centerTitle: true,
+
+        ),
       body: 
          SingleChildScrollView(child:
         Column(
            mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Padding(padding: const EdgeInsets.all(5),
-            child: Container(
-              decoration: (BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [BoxShadow(
-                  color: (Color.fromARGB(255, 100, 159, 218)),  
-                  blurRadius: 20.0,
-                  spreadRadius: 5.0,
-                )],
+            Container(
+              width: double.infinity,
+              height: 430,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    begin: FractionalOffset.topCenter,
+                    end: FractionalOffset.bottomCenter,
+                    colors: [
+                      Colors.white,
+                      Color(0xFFEEEEEE),
+                      ],
+               stops: [
+                  0.5,
+                  1.0,
+                 ],
+    ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 25),      
+                child:  Container(
+                decoration: (BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  /*boxShadow: const [BoxShadow(
+                    color: (Color.fromARGB(255, 100, 159, 218)),  
+                    blurRadius: 20.0,
+                    spreadRadius: 5.0,
+                )],*/
                 color: Theme.of(context).primaryColor,
               )),
               width: double.infinity,//横無限
-              height: 425,//機種によってはオーバーフローするっぽい
-              child: Column(children: [
-                const Text('第76回向陽祭',style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),),
-                Image.asset('images/esupo.png',fit: BoxFit.contain)//エスポワールの画像
+              height: 300,//機種によってはオーバーフローするっぽい
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                //const Text('第76回向陽祭',style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),),
+                Image.asset('images/esupo.png',fit: BoxFit.fitHeight)//エスポワールの画像
               ],
               )
+            ),
               ),
-              ),
-           /* Container(
-              color: Colors.indigo[900],
-              width: double.infinity,
-              height: 15,
-              //child: const Text('博覧会:8:00~8:00',style: (TextStyle(color: Colors.white)),textAlign: TextAlign.center,),
-            ),*/
-
+            ),
+        
             const SizedBox(
              height: 40,
             ),
@@ -202,6 +234,7 @@ class _Home extends State<Home> {
                 itemCount: 3,//仮
                 itemBuilder:  (BuildContext context, int index) {
             return Card(
+                color: Colors.white,
                 elevation: 5,//影
                 margin: const EdgeInsets.symmetric(horizontal: 5), 
                 shape: const RoundedRectangleBorder(
@@ -215,6 +248,7 @@ class _Home extends State<Home> {
                 onTap: () {
                   context.push('/$index');
                 },
+                tileColor: Colors.white,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),

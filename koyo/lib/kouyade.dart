@@ -3,19 +3,19 @@ import 'package:go_router/go_router.dart';
 
 //文化祭のdetail各ページの詳細
 
-class Bunkagym extends StatefulWidget {
+class Kouyagym extends StatefulWidget {
 
-  const Bunkagym({super.key});
+  const Kouyagym({super.key});
 
   @override
-  State<Bunkagym> createState() => _Bunkagym();
+  State<Kouyagym> createState() => _Kouyagym();
 }
 
-class _Bunkagym extends State<Bunkagym> {
+class _Kouyagym extends State<Kouyagym> {
 
-  List<String> eveat= ["@中棟1階 多目的2教室","102","103","104","105"];
-  List<String> time= ["8:00","午前","8:00","8:00","8:00",];
-  List<String> eve= ["レジン作り","お気軽TRPG倶楽部","レジンを作ろう!","レジンを作ろう!","レジンを作ろう!",];
+  List<String> eveat= ["101","102","103","104","105"];
+  List<String> time= ["8:00","8:00","8:00","8:00","8:00",];
+  List<String> eve= ["レジンを作ろう!","レジンを作ろう!","レジンを作ろう!","レジンを作ろう!","レジンを作ろう!",];
   @override
   
    Widget build(BuildContext context) {

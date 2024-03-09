@@ -17,10 +17,12 @@ List<String> half =['10:30','11:30','12:30','13:30','14:30'];
 final num =0;
 
 
+
   @override
   Widget build(BuildContext context) {
+    
     final DateTime now = DateTime.now();//現在時刻　hh:mmの形
-    final int nowcom = now.hour * 100 + now.minute + 900;//現在時刻　hhmmの整数 9時間足して日本時間に変換
+    final int nowcom = now.hour * 100 + now.minute;//現在時刻　hhmmの整数 9時間足して日本時間に変換
 
     return Scaffold(
       appBar:  AppBar(
@@ -35,6 +37,7 @@ final num =0;
         children: [
         //注意書きsitaiii
         const Text('希望の時間帯を選択してください',style: TextStyle(fontSize: 20),),
+        Text('現在時刻：$nowcom'),//仮
         const SizedBox(height:25),
         StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
