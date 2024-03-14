@@ -30,7 +30,6 @@ class Bunkou extends StatelessWidget {
 
       ),
       body: const TabBarView(
-        physics: NeverScrollableScrollPhysics(),
         children: [
            Bunka(),
            Kouya(),

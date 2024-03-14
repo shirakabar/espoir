@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:koyo/main.dart';
 
 //体育祭のスケジュール一覧
 
@@ -21,11 +22,8 @@ List<String> spat= ["@クラス席","クラス対抗","ブロック対抗","ク�
   Widget build(BuildContext context) {
     
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: const Text('体育祭',style: TextStyle(color: Colors.white),),
-        centerTitle: true,
-      ),
+      appBar: const Bar(title: '体育祭',),
+      drawer: const Draw(),
       body: SingleChildScrollView(//スクロール可能
         child: Padding(//余白設定
         padding: const EdgeInsets.symmetric(

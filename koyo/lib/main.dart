@@ -7,6 +7,7 @@ import 'package:koyo/bunkou.dart';//文化祭、後夜祭ページ
 import 'package:koyo/map.dart';//校舎内マップページ
 import 'package:firebase_core/firebase_core.dart';//firebase連携で必須
 import 'firebase_options.dart';//同じくfirebase
+import 'package:go_router/go_router.dart';
 
 //メインの関数、ここからすべては始まる
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {//アプリのいろんな設定
           onError:  (Colors.white), 
           background:  Color.fromARGB(255, 251, 251, 251), //grey50
           onBackground: (Colors.white), 
-          surface: (Color.fromARGB(255, 226, 226, 226)), 
+          surface: Color.fromARGB(255, 251, 251, 251),
           onSurface: (Colors.black),),
         useMaterial3: true,
       ),
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {//アプリのいろんな設定
 
 class MyHomePage extends StatefulWidget {//statefulなやつ
   const MyHomePage({super.key});
-  
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 
@@ -83,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継�
           BottomNavigationBarItem(icon: Icon(Icons.search), label: '博覧会'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: '文化・後夜'),
           BottomNavigationBarItem(icon: Icon(Icons.map), label: 'マップ'),
-        ],//labelがみえないのなぜ
+        ],
         currentIndex: _currentindex,
         fixedColor: Colors.blueAccent,
         onTap: tap,
@@ -97,10 +98,12 @@ class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継�
   }
 }
 
-/*class Bar extends StatelessWidget{
-  const Bar({required this.title,required this.bottom,super.key});
+class Bar extends StatelessWidget implements PreferredSizeWidget {
+  const Bar({required this.title,super.key});
   final String title;
-  final dynamic bottom;
+
+   @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   
   @override
   Widget build(BuildContext context) {
@@ -109,19 +112,79 @@ class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継�
     backgroundColor: Theme.of(context).primaryColor,
     title:  Text(title,style: const TextStyle(color: Colors.white),),
     centerTitle: true,
-    bottom: bottom,
-    leading: IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {
-                  context.push('/');
-                },
-    ),
     actions: [IconButton(
-                icon: const Icon(Icons.menu),
+                icon: const Icon(Icons.notifications),
                 onPressed: () {
-                  context.push('/');
+                  context.push('/come');
                 },
     ),],
   );
 }
-}*/
+}
+
+
+class Draw extends StatelessWidget{
+  const Draw({super.key});
+  @override
+  Widget build(BuildContext context) {
+
+  return Drawer(child: ListView(
+          children: <Widget>[
+            SizedBox(
+              height: 320,
+              child: DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                const Text('第76回向陽祭',style: TextStyle(fontSize: 30,color: Colors.white),),
+                FittedBox(
+                  fit: BoxFit.fitHeight,
+                  child: Image.asset('images/esupo.png'),
+                  )
+              ]
+              )
+            ),
+            ),
+            ListTile(
+              title: const Text('ホーム'),
+              leading: const Icon(Icons.home),
+              onTap: () {
+                context.go('/');
+              },
+            ),
+            const Tile(label: "結果", rout: '/come', icon: Icons.emoji_events),
+            const Tile(label: "整理券", rout: '/come', icon: Icons.receipt),
+            const Tile(label: "アンケート", rout: '/come', icon: Icons.description),
+            const Tile(label: "アカウント", rout: '/come', icon: Icons.account_circle),
+            const Tile(label: "お問い合わせ", rout: '/come', icon: Icons.support_agent),
+            const Tile(label: "要項", rout: '/come', icon: Icons.article),
+            const Tile(label: "利用規約", rout: '/come', icon: null),
+          ],
+        ),
+
+  );
+
+  
+  }
+}
+
+class Tile extends StatelessWidget{
+  const Tile({super.key,required this.label,required this.rout,required this.icon});
+  final String label;
+  final String rout;
+  final IconData ?icon;
+
+  @override
+ Widget build(BuildContext context){
+ return ListTile(
+              title: Text(label),
+              leading: Icon(icon),
+              onTap: (){
+                context.push(rout);
+              },
+            );
+ }
+}

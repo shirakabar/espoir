@@ -69,5 +69,6 @@ final goRouter = GoRouter(
         );
       },
     ),
+
   ]
 );

@@ -55,8 +55,8 @@ Widget _headerSection() {
             )
                   ),
                   ]
-            ),
-        ),
+      )
+      )
       ],
     ),
   );
@@ -69,6 +69,7 @@ Widget _tabSection() {
     delegate: _StickyTabBarDelegate(
       tabBar: TabBar(
         labelColor: Colors.black,
+        
         tabs: [
           Tab(
             text: '部活動',
