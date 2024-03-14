@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:koyo/butai.dart';
 
 //博覧のdetailそれぞれのページの内容記載
 
@@ -53,7 +54,7 @@ List<dynamic> post=[
           height: 15,
         ),
         const Center(child:
-        Text('スケジュール',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20),), 
+        Text('教室発表',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20),), 
         ),
         const SizedBox(
           height: 10,
@@ -93,12 +94,15 @@ List<dynamic> post=[
             borderRadius: BorderRadius.circular(10)
           ),
               child: ListTile(
+               contentPadding: const EdgeInsets.symmetric(horizontal:20),
                leading: FittedBox(
                     fit: BoxFit.fitHeight,
                     child: post.elementAt(index)
                   ),
-                title: Text(title[index],style: const TextStyle(fontSize: 17),),
-                subtitle: Text(kyoat[index]),
+                title: Padding(padding: const EdgeInsets.symmetric(horizontal:2),
+                  child: Text(title[index],style: const TextStyle(fontSize: 17),),),
+                subtitle: Padding(padding: const EdgeInsets.symmetric(horizontal:2),
+                  child: Text(kyoat[index],style: const TextStyle(fontSize: 14)),),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 trailing: FittedBox(
                     fit: BoxFit.fitHeight,
@@ -154,68 +158,130 @@ List<dynamic> post=[
                   }
 
 
-class Butai extends StatefulWidget {
-   const Butai({super.key});
-
-   @override
-   State<Butai> createState() => _Butai();
-}
-
-class _Butai extends State<Butai> {
-
-List<String> sp= ["101","102","103","104","105","106","107","108","109"];
+class Butai extends StatelessWidget {
+  const Butai({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children:[
-         Expanded(
-          child:ListView.builder(
-            itemCount: 9,
-          itemBuilder: (BuildContext context, int index) {
-            return  GestureDetector(
-              onTap: ()  {
-                context.push('/$index');
-                  }, 
-             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 3),
-              child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.blueGrey[50],
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(2, 2),
+      body: DefaultTabController(
+        length: 3,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              _headerSection(),
+              _tabSection()
+            ];
+          },
+          body: const TabBarView(
+            children: [
+               Ichiran(),
+               First(),
+               Second(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-                   )
-                ]
-                ),
-              alignment: Alignment.topLeft,
-              width: double.infinity,
-              height: 90,
-              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 3),
-              child: Column(
-                children: [
-                  Text(sp[index],style: const TextStyle(fontSize: 20),),
-                  const Text("Title",style: TextStyle(fontSize: 15),)
-              ],
+//header部分
+Widget _headerSection() {
+  return SliverList(
+    delegate: SliverChildListDelegate(
+      [ const Padding(//余白設定
+        padding: EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 12,
+          ),
+          child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+          Padding(
+           padding: EdgeInsets.only(left:20,top:15),
+            child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[ 
+                    Text('博覧会',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35),),
+                    SizedBox(
+                      height: 5,
+                    ),
+                Text('6月19日（月）9:00~15:00\n6月19日（月）9:30~15:30',style: TextStyle(fontSize: 18),),
+                  ]
             )
-            )
-            )
-            );
-          }
-          )
-         )
+                  ),
+         SizedBox(//間設定
+          height: 15,
+        ),
+         Center(child:
+        Text('舞台発表',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20),), 
+        ),
+        SizedBox(
+          height: 10,
+        ),
       ]
+    )
       )
-      
-        );
+      ]
+    )
+  );
 }
+
+//TabBar部分
+Widget _tabSection() {
+  return const SliverPersistentHeader(
+    pinned: true,
+    delegate: _StickyTabBarDelegate(
+      tabBar: TabBar(
+        labelColor: Colors.black,
+        
+        tabs: [
+          Tab(
+            text: '発表一覧',
+          ),
+          Tab(
+            text: '一日目',
+          ),
+          Tab(
+            text: '二日目',
+          )
+        ],
+      ),
+    ),
+  );
 }
+
+//SliverPersistentHeaderDelegateを継承したTabBarを作る
+class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
+  const _StickyTabBarDelegate({required this.tabBar});
+
+  final TabBar tabBar;
+
+  @override
+  double get minExtent => tabBar.preferredSize.height;
+
+  @override
+  double get maxExtent => tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      color: Colors.white,
+      child: tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_StickyTabBarDelegate oldDelegate) {
+    return tabBar != oldDelegate.tabBar;
+  }
+}
+
 
 class Club extends StatefulWidget {
    const Club({super.key});
@@ -226,56 +292,74 @@ class Club extends StatefulWidget {
 
 class _Club extends State<Club> {
 
-List<String> sp= ["101","102","103","104","105","106","107","108","109"];
-
   @override
   Widget build(BuildContext context) {
     
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+    return SingleChildScrollView(//スクロール可能
+        child: Padding(//余白設定
+        padding: const EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 12,
+          ),
+          child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
         children:[
-         Expanded(
-          child:ListView.builder(
-            itemCount: 9,
+          const Padding(
+           padding: EdgeInsets.only(left:20,top:15),
+            child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[ 
+                    Text('博覧会',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35),),
+                    SizedBox(
+                      height: 5,
+                    ),
+                Text('6月19日（月）9:00~15:00\n6月19日（月）9:30~15:30',style: TextStyle(fontSize: 18),),
+                  ]
+            )
+                  ),
+        const SizedBox(//間設定
+          height: 15,
+        ),
+        const Center(child:
+        Text('展示一覧',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20),), 
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        ListView.builder(//体育祭の各種目を一覧表示
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 5,
           itemBuilder: (BuildContext context, int index) {
-            return  GestureDetector(
-              onTap: ()  {
-                context.push('/$index');
-                  }, 
-             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 3),
-              child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.blueGrey[50],
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(2, 2),
-
-                   )
-                ]
-                ),
-              alignment: Alignment.topLeft,
-              width: double.infinity,
-              height: 90,
-              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 3),
-              child: Column(
-                children: [
-                  Text(sp[index],style: const TextStyle(fontSize: 20),),
-                  const Text("Title",style: TextStyle(fontSize: 15),)
-              ],
+            return Padding(//ここからを表示
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
+              child:
+              Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+            //side: const BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10)
+          ),
+              child: ListTile(
+                tileColor: const Color.fromARGB(255, 241, 249, 255),
+                onTap: () {
+                  context.push('/$index');
+                },//gorouterでのタップ時遷移　仮
+                 shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+              )
             )
-            )
-            )
+            
+        
             );
           }
-          )
+          
          )
       ]
       )
-      
+      )
         );
+      
 }
 }

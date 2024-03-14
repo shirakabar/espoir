@@ -34,6 +34,7 @@ class _Bunkagym extends State<Bunkagym> {
         const SizedBox(
           height: 10,
         ),
+        
         Expanded(child: ListView.builder(//体育祭の各種目を一覧表示
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -45,7 +46,6 @@ class _Bunkagym extends State<Bunkagym> {
               Card(
                 elevation: 2,
                 shape: RoundedRectangleBorder(
-            //side: const BorderSide(color: Colors.grey),
             borderRadius: BorderRadius.circular(10)
           ),
               child: ListTile(
