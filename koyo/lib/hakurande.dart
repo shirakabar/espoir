@@ -99,7 +99,7 @@ List<dynamic> post=[
                     fit: BoxFit.fitHeight,
                     child: post.elementAt(index)
                   ),
-                title: Padding(padding: const EdgeInsets.symmetric(horizontal:2),
+                title: Padding(padding: const EdgeInsets.symmetric(horizontal:5),
                   child: Text(title[index],style: const TextStyle(fontSize: 17),),),
                 subtitle: Padding(padding: const EdgeInsets.symmetric(horizontal:2),
                   child: Text(kyoat[index],style: const TextStyle(fontSize: 14)),),

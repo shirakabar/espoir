@@ -29,10 +29,17 @@ class Map extends StatelessWidget {
       body: InteractiveViewer(child:
       TabBarView(
         physics: const NeverScrollableScrollPhysics(),
-        children: [
-           Image.asset('images/crowdone.jpg'),
-           Image.asset('images/crowdtwo.jpg'),
-           Image.asset('images/crowdthree.jpg'),
+        children: [Stack(
+          children: [ 
+            Image.asset('images/mapone.jpg'),
+            Positioned(
+              top: 10.0,
+              left:10.0,
+              child: OutlinedButton(onPressed: () {},child: const Text('outlinedButton'))
+            ),
+            ]),
+           Image.asset('images/maptwo.jpg'),
+           Image.asset('images/mapthree.jpg'),
           ],
         )
     ),    

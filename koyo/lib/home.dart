@@ -99,7 +99,7 @@ class _Home extends State<Home> {
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('現在の公演',
+                    child: Text('おしらせ',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
