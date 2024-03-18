@@ -5,6 +5,7 @@ import 'package:koyo/main.dart';
 import 'package:koyo/come.dart';
 import 'package:koyo/result.dart';
 import 'package:koyo/ticket.dart';
+import 'package:koyo/news.dart';
 
 //gorouterは画面遷移用の外部パッケージ
 //遷移先一覧
@@ -70,5 +71,15 @@ final goRouter = GoRouter(
       },
     ),
 
+     GoRoute(
+      path: '/news',
+      name: 'news',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const News(),
+        );
+      },
+    ),
   ]
 );

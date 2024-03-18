@@ -115,7 +115,7 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
     actions: [IconButton(
                 icon: const Icon(Icons.notifications),
                 onPressed: () {
-                  context.push('/come');
+                  context.push('/news');
                 },
     ),],
   );
@@ -125,13 +125,15 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
 
 class Draw extends StatelessWidget{
   const Draw({super.key});
+  
   @override
   Widget build(BuildContext context) {
 
   return Drawer(child: ListView(
+          padding: EdgeInsets.zero,
           children: <Widget>[
             SizedBox(
-              height: 320,
+              height: 345,
               child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
@@ -147,13 +149,6 @@ class Draw extends StatelessWidget{
               ]
               )
             ),
-            ),
-            ListTile(
-              title: const Text('ホーム'),
-              leading: const Icon(Icons.home),
-              onTap: () {
-                context.go('/');
-              },
             ),
             const Tile(label: "結果", rout: '/come', icon: Icons.emoji_events),
             const Tile(label: "整理券", rout: '/come', icon: Icons.receipt),

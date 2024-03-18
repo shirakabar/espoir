@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.25.4
   cloud_firestore: ^4.15.5
+  firebase_auth: ^4.17.9
 
 dev_dependencies:
   flutter_test:
@@ -97,3 +98,6 @@ flutter:
     - images/crowdtwo.jpg
     - images/crowdthree.jpg
     - images/postest.jpg
+    - images/mapone.jpg
+    - images/maptwo.jpg
+    - images/mapthree.jpg
