@@ -88,9 +88,9 @@ class _Home extends State<Home> {
               const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
                   children: [
-                    Button(label: 'アカウント',rout: '/',icon: Icons.account_circle), //outlinedbuttonのクラス
-                    Button(label: 'お問い合わせ', rout: '/', icon: Icons.support_agent),
-                    Button(label: '要項', rout: '/', icon: Icons.article),
+                    Button(label: 'アカウント',rout: '/account',icon: Icons.account_circle), //outlinedbuttonのクラス
+                    Button(label: 'お問い合わせ', rout: '/login', icon: Icons.support_agent),
+                    Button(label: '要項', rout: '/come', icon: Icons.article),
                   ]),
               const SizedBox(
                 height: 20,
@@ -99,7 +99,7 @@ class _Home extends State<Home> {
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('おしらせ',
+                    child: Text('メニュー',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -133,8 +133,8 @@ class _Home extends State<Home> {
                                     SizedBox(
                                       width: double.infinity,
                                       height: 150,
-                                      child: Image.network(
-                                        'https://source.unsplash.com/300x200/?resort',
+                                      child: Image.asset(
+                                        'images/kouya.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -147,7 +147,7 @@ class _Home extends State<Home> {
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 3, horizontal: 8),
                                   child: const Text(
-                                    '管弦楽部',
+                                    '後夜祭',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 22,
@@ -161,7 +161,7 @@ class _Home extends State<Home> {
                                   padding:
                                       const EdgeInsets.only(left:8,bottom: 2),
                                   child: const Text(
-                                    '文化祭@体育館',
+                                    '',
                                     style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 17,
@@ -201,6 +201,18 @@ class _Home extends State<Home> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Column(children: [
+                    const Divider(
+                      //線
+                      height: 1,
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    ListTile(
+                      title: const Text('管理者用'),
+                      onTap: () {
+                        context.push('/come');
+                      },
+                    ),
                     const Divider(
                       //線
                       height: 1,

@@ -113,7 +113,7 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
     title:  Text(title,style: const TextStyle(color: Colors.white),),
     centerTitle: true,
     actions: [IconButton(
-                icon: const Icon(Icons.notifications),
+                icon: const Icon(Icons.notifications, color: Colors.white,),
                 onPressed: () {
                   context.push('/news');
                 },
