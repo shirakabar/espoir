@@ -39,6 +39,8 @@ dependencies:
   cloud_firestore: ^4.15.5
   firebase_auth: ^4.17.9
   google_sign_in: ^6.2.1
+  carousel_slider: ^4.2.1
+  dots_indicator: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -102,3 +104,6 @@ flutter:
     - images/mapone.jpg
     - images/maptwo.jpg
     - images/kouya.jpg
+    - images/hakuran.jpg
+    - images/bunkasai.jpg
+    - images/taiikusai.jpg

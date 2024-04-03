@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/main.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 //ほおむ
 
 class Home extends StatefulWidget {
@@ -11,34 +13,21 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+  int _current = 0;
 
   @override
   
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Draw(),
-        appBar: AppBar(
-            actions: [
-              IconButton(
-                onPressed: () {
-                  context.push('/');
-                },
-                icon: const Icon(Icons.notifications),
-              ),
-            ],
-            backgroundColor: const Color(0xFFEEEEEE),
-            title: const Text('第76回向陽祭',
-                style: TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold)),
-            centerTitle: true,
-           ),
+        appBar: const Bar(title: '第76回向陽祭'),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
                 width: double.infinity,
-                height: 430,
+                height: 370,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: FractionalOffset.topCenter,
@@ -53,7 +42,8 @@ class _Home extends State<Home> {
                     ],
                   ),
                 ),
-                child: Padding(
+                child: Column(children: [
+                  /*Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                   child: Container(
@@ -70,8 +60,64 @@ class _Home extends State<Home> {
                               fit: BoxFit.fitHeight) //エスポワールの画像
                         ],
                       )),
-                ),
+                ),*/
+                const SizedBox(
+                height: 10,
               ),
+                CarouselSlider(
+            items: const [
+               CarouselContainerbox(title: '向陽祭',img: 'images/esupo.png',),
+               CarouselContainerbox(title: '体育祭',img: 'images/taiikusai.jpg',),
+               CarouselContainerbox(title: '文化祭',img: 'images/bunkasai.jpg',),
+               CarouselContainerbox(title: '博覧会',img: 'images/hakuran.jpg',),
+               CarouselContainerbox(title: '後夜祭',img: 'images/kouya.jpg',),
+            ],
+
+            options: CarouselOptions(
+              height: 250, //高さ
+              initialPage: 0, //最初に表示されるページ
+              autoPlay: true,//自動でスライドしてくれるか
+              viewportFraction: 0.95,//各カードの表示される範囲の割合
+              enableInfiniteScroll: true,//最後のカードから最初のカードへの遷移
+              autoPlayInterval: const Duration(seconds: 15),//カードのインターバル
+              autoPlayAnimationDuration: const Duration(milliseconds: 400),
+                                            //スライドが始まって終わるまでの時間
+              onPageChanged: (index, reason) {
+                    setState(() {
+                      _current = index;
+                    });
+                  }
+            ),
+          ),
+          const SizedBox(
+                height: 5,
+              ),
+          DotsIndicator(
+             dotsCount: 5,
+             position: _current,
+             decorator: const DotsDecorator(
+              size: Size.square(5.0),
+              activeSize: Size.square(5.0),
+              )
+             ),
+          const SizedBox(
+                height: 9,
+              ),
+          Container(
+          width: 350,
+          height: 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Theme.of(context).primaryColor,
+          ),
+          child: const Text('なんかかきたい',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.white),)
+          ),
+          const SizedBox(
+                height: 10,
+              ),
+                ]
+                )
+             ),
               const SizedBox(
                 height: 40,
               ),
@@ -268,5 +314,53 @@ class Button extends StatelessWidget {
             )
           ],
         ));
+  }
+}
+
+class CarouselContainerbox extends StatelessWidget{
+  const CarouselContainerbox({required this.img,required this.title,super.key});
+
+  final String img;
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
+      child: Container(
+      width: double.infinity, //横無限
+      height: 210,
+      decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            image: DecorationImage(
+          image: AssetImage(img),
+          fit: BoxFit.cover,
+        )),
+      child: Container(
+      width: double.infinity, //横無限
+      height: 210,
+      decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            gradient: const LinearGradient(
+                    begin: FractionalOffset.topCenter,
+                    end: FractionalOffset.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Color.fromARGB(150, 0, 0, 0),
+                    ],
+                    stops: [
+                      0.7,
+                      1,
+                    ],
+                  ), 
+        ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20,vertical:15),
+        child: Align(alignment: Alignment.bottomLeft,
+                   child: Text(title,style: const TextStyle(color:Colors.white,fontSize: 23,fontWeight: FontWeight.bold))
+      )
+      )
+        ),
+    ),
+        );
   }
 }

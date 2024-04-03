@@ -8,7 +8,6 @@ import 'package:koyo/result.dart';
 import 'package:koyo/ticket.dart';
 import 'package:koyo/news.dart';
 import 'package:koyo/account.dart';
-import 'package:koyo/logout.dart';
 
 //gorouterは画面遷移用の外部パッケージ
 //遷移先一覧
@@ -106,15 +105,5 @@ final goRouter = GoRouter(
       },
     ),
 
-    GoRoute(
-      path: '/logout',
-      name: 'logout',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: const Logout(),
-        );
-      },
-    ),
   ]
 );

@@ -40,7 +40,7 @@ class _News extends State<News> {
                       StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection('news')
-                              .orderBy('createdAt')
+                              .orderBy('createdAt', descending: true)
                               .snapshots(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
@@ -60,7 +60,8 @@ class _News extends State<News> {
                                 itemBuilder: (BuildContext context, int index) {
                                   final doc = docs[index];
                                   final data = doc.data()! as Map<String,dynamic>;
-                                  DateTime createdAt = data["createdAt"].toDate();
+                                  final DateTime createdAt = data["createdAt"].toDate();
+                                  String time = ('${createdAt.year}/${createdAt.month}/${createdAt.day} ${createdAt.hour}:${createdAt.minute}');
                                   final String title = doc.id;
                                   return Padding(
                                       //ここからを表示
@@ -72,18 +73,14 @@ class _News extends State<News> {
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           child: ListTile(
-                                            title: Text(
-                                              title,
-                                              style:
-                                                  const TextStyle(fontSize: 20),
-                                            ),
-                                            subtitle: Text('$createdAt'),
+                                            title: Text(title,style: const TextStyle(fontSize: 18),),
+                                            subtitle: Text('${data["createdBy"]}  $time',style: const TextStyle(color: Colors.grey)),
                                             tileColor: const Color.fromARGB(
                                                 255, 241, 249, 255),
                                             onTap: () {
                                               Navigator.push(
                                                context,
-                                                MaterialPageRoute(builder: (context) => Newsde(title: title,createdAt: createdAt,content: data['content'])),
+                                                MaterialPageRoute(builder: (context) => Newsde(title: title,time: time,content: data['content'],createdBy: data['createdBy'])),
                                                 );
                                             }, //gorouterでのタップ時遷移　仮
                                             shape: const RoundedRectangleBorder(
@@ -98,10 +95,11 @@ class _News extends State<News> {
 }
 
 class Newsde extends StatelessWidget{
-  const Newsde({super.key,required this.title,required this.createdAt,required this.content});
+  const Newsde({super.key,required this.title,required this.time,required this.content,required this.createdBy});
   final String title;
-  final DateTime createdAt;
+  final String time;
   final String content;
+  final String createdBy;
 
   @override
   Widget build(BuildContext context) {
@@ -111,36 +109,26 @@ class Newsde extends StatelessWidget{
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColor,
         ),
-        body: Padding(
-                //余白設定
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 5,
-                  vertical: 12,
-                ),
-                child: SizedBox(
-                  height: 500,
-                  width: double.infinity,
-                  child: Card(
-                  color: const Color.fromARGB(255, 241, 249, 255),
-                  child: Padding(
-                    padding: const EdgeInsets.all(7),
-                    child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListTile(
-                    title: Text(title,style: const TextStyle(fontSize: 20),),
-                    subtitle: Text('$createdAt'),
-                  ),
-                  Padding(padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child:
-                  Text(content,style: const TextStyle(fontSize: 20),)
-                  )
+        body: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 12,),
+          color: const Color.fromARGB(255, 241, 249, 255),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                      Text(title,style: const TextStyle(fontSize: 23)),
+                      const SizedBox(height: 3,width:double.infinity),
+                      Text('$createdBy  $time',style: const TextStyle(fontSize: 16,color: Colors.grey)),
+                      const SizedBox(height: 5,width:double.infinity),
+                      Text(content,style: const TextStyle(fontSize: 18),),
+                      const SizedBox(height: 3,width:double.infinity),
                     ]
                 )
-                )
-                  )
-                )
-            )
+                    )
+          )
+        
     );
   }
 }
