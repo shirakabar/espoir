@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/kouyade.dart';
+import 'package:koyo/bunkakouya/kouyade.dart';
 
 //文化祭ページのタブ遷移先一覧
 //stickeytabbarはネットから
@@ -101,7 +101,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      color: Colors.white,
+      color: const Color.fromARGB(255, 251, 251, 251),
       child: tabBar,
     );
   }

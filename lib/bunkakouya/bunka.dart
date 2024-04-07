@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/bunkade.dart';
+import 'package:koyo/bunkakouya/bunkade.dart';
 
 //文化祭ページのタブ遷移先一覧
 //stickeytabbarはネットから
@@ -68,8 +68,6 @@ Widget _tabSection() {
     pinned: true,
     delegate: _StickyTabBarDelegate(
       tabBar: TabBar(
-        labelColor: Colors.black,
-        
         tabs: [
           Tab(
             text: '部活動',
@@ -102,7 +100,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      color: Colors.white,
+      color: const Color.fromARGB(255, 251, 251, 251),
       child: tabBar,
     );
   }

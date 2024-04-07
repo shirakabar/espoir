@@ -1,13 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:koyo/crowd.dart';
-import 'package:koyo/login.dart';
+import 'package:koyo/home/login.dart';
 import 'package:koyo/main.dart';
 import 'package:koyo/come.dart';
-import 'package:koyo/result.dart';
-import 'package:koyo/ticket.dart';
+import 'package:koyo/home/result.dart';
+import 'package:koyo/home/ticket.dart';
 import 'package:koyo/news.dart';
-import 'package:koyo/account.dart';
+import 'package:koyo/newsmake.dart';
+import 'package:koyo/home/account.dart';
+import 'package:koyo/home/crowd.dart';
 
 //gorouterは画面遷移用の外部パッケージ
 //遷移先一覧
@@ -105,5 +106,15 @@ final goRouter = GoRouter(
       },
     ),
 
+    GoRoute(
+      path: '/newsmake',
+      name: 'newsmake',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Newsmake(),
+        );
+      },
+    ),
   ]
 );
