@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/main.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:koyo/widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 //ほおむ
 
-class Home extends StatefulWidget {
+final user = FirebaseAuth.instance.currentUser;
+final isLoggedInAdminProvider = StreamProvider.autoDispose((_) {
+  CollectionReference ref = FirebaseFirestore.instance.collection('Admins');
+  return ref.snapshots().map((snapshot) {
+    final list = snapshot.docs.toList();
+    return list;
+  });
+});
+class Home extends ConsumerStatefulWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _Home();
+  ConsumerState<Home> createState() => _Home();
 }
-
-class _Home extends State<Home> {
+class _Home extends ConsumerState<Home>{
   int _current = 0;
 
   @override
-  
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Draw(),
@@ -43,24 +53,6 @@ class _Home extends State<Home> {
                   ),
                 ),
                 child: Column(children: [
-                  /*Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-                  child: Container(
-                      decoration: (BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Theme.of(context).primaryColor,
-                      )),
-                      width: double.infinity, //横無限
-                      height: 300, //機種によってはオーバーフローするっぽい
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset('images/esupo.png',
-                              fit: BoxFit.fitHeight) //エスポワールの画像
-                        ],
-                      )),
-                ),*/
                 const SizedBox(
                 height: 10,
               ),
@@ -96,8 +88,8 @@ class _Home extends State<Home> {
              dotsCount: 5,
              position: _current,
              decorator: const DotsDecorator(
-              size: Size.square(5.0),
-              activeSize: Size.square(5.0),
+              size: Size.square(6.0),
+              activeSize: Size.square(6.0),
               )
              ),
           const SizedBox(
@@ -136,7 +128,7 @@ class _Home extends State<Home> {
                   children: [
                     Button(label: 'アカウント',rout: '/account',icon: Icons.account_circle), //outlinedbuttonのクラス
                     Button(label: 'お問い合わせ', rout: '/login', icon: Icons.support_agent),
-                    Button(label: '要項', rout: '/come', icon: Icons.article),
+                    Button(label: '要項', rout: '/newsmake', icon: Icons.article),
                   ]),
               const SizedBox(
                 height: 20,
@@ -216,28 +208,7 @@ class _Home extends State<Home> {
                                 ),
                               ],
                             ),
-                          ); /*Card(
-                color: Colors.white,
-                elevation: 5,//影
-                margin: const EdgeInsets.symmetric(horizontal: 5), 
-                shape: const RoundedRectangleBorder(
-            //side: BorderSide(color: Colors.grey),
-           borderRadius: BorderRadius.all(Radius.circular(20))//角はとろう
-          ),
-              child: ListTile(
-                title: const Text('試験アナウンス',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20),),
-                //subtitle: const Text('あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよわをん'),
-                //tileColor: Colors.white,
-                onTap: () {
-                  context.push('/$index');
-                },
-                tileColor: Colors.white,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-            )
-              
-                );*/
+                          );
                         }),
                   ),
               const SizedBox(
@@ -247,12 +218,14 @@ class _Home extends State<Home> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Column(children: [
-                    const Divider(
+                    if (ref.watch(isLoggedInAdminProvider) == user!.uid)
+                     const Divider(
                       //線
                       height: 1,
                       thickness: 1,
                       color: Colors.grey,
                     ),
+                    if (ref.watch(isLoggedInAdminProvider) == user!.uid)
                     ListTile(
                       title: const Text('管理者用'),
                       onTap: () {
@@ -283,84 +256,4 @@ class _Home extends State<Home> {
   }
 }
 
-class Button extends StatelessWidget {
-  //outlinedbuttonのクラスを作成し、使いまわす
-  const Button(
-      {required this.label, required this.rout, required this.icon, super.key});
-  final String label;
-  final String rout;
-  final IconData icon;
 
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-        onPressed: () {
-          context.push(rout);
-        },
-        style: OutlinedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            side: const BorderSide(color: Colors.transparent),
-            fixedSize: const Size(135, 50)),
-        child: Column(
-          children: [
-            Icon(
-              icon,
-              color: Theme.of(context).primaryColor,
-            ),
-            Text(
-              label,
-              style: const TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.bold),
-            )
-          ],
-        ));
-  }
-}
-
-class CarouselContainerbox extends StatelessWidget{
-  const CarouselContainerbox({required this.img,required this.title,super.key});
-
-  final String img;
-  final String title;
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
-      child: Container(
-      width: double.infinity, //横無限
-      height: 210,
-      decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-          image: AssetImage(img),
-          fit: BoxFit.cover,
-        )),
-      child: Container(
-      width: double.infinity, //横無限
-      height: 210,
-      decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: const LinearGradient(
-                    begin: FractionalOffset.topCenter,
-                    end: FractionalOffset.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Color.fromARGB(150, 0, 0, 0),
-                    ],
-                    stops: [
-                      0.7,
-                      1,
-                    ],
-                  ), 
-        ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20,vertical:15),
-        child: Align(alignment: Alignment.bottomLeft,
-                   child: Text(title,style: const TextStyle(color:Colors.white,fontSize: 23,fontWeight: FontWeight.bold))
-      )
-      )
-        ),
-    ),
-        );
-  }
-}

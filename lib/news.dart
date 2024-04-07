@@ -30,10 +30,21 @@ class _News extends State<News> {
                     children: [
                       const Padding(
                           padding: EdgeInsets.only(left: 20, top: 15),
-                          child: Text(
+                          child: Column(children: [
+                            Align(alignment:  Alignment.centerLeft,
+                            child: Text(
                             '※タップで詳細を確認できます',
                             style: TextStyle(fontSize: 15, color: Colors.grey),
-                          )),
+                          ),
+                            ),
+                            Align(alignment:  Alignment.centerLeft,
+                            child: Text(
+                            '※スライドで削除できます',
+                            style: TextStyle(fontSize: 15, color: Colors.grey),
+                          )
+                            )
+                          ])
+                          ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -61,7 +72,7 @@ class _News extends State<News> {
                                   final doc = docs[index];
                                   final data = doc.data()! as Map<String,dynamic>;
                                   final DateTime createdAt = data["createdAt"].toDate();
-                                  String time = ('${createdAt.year}/${createdAt.month}/${createdAt.day} ${createdAt.hour}:${createdAt.minute}');
+                                  final String time = _gettime(createdAt);
                                   final String title = doc.id;
                                   return Padding(
                                       //ここからを表示
@@ -72,7 +83,32 @@ class _News extends State<News> {
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          child: ListTile(
+                                          child: Dismissible(
+                                            key: ObjectKey(doc),
+                                            onDismissed: (DismissDirection direction) {
+                                              setState(() {
+                                                docs.removeAt(index);
+                                                FirebaseFirestore.instance
+                                                .collection('news')
+                                                .doc(doc.id)
+                                                .delete();
+                                              });
+                                              const snackBar = SnackBar(
+                                                content: Text("お知らせを削除しました"),
+                                                duration: Duration(seconds: 1),
+                                                );
+                                                if (context.mounted) {
+                                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                                  }
+                                                },
+                                                direction: DismissDirection.endToStart,
+                                                background: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(10),
+                                                    color: Colors.red,
+                                                  ),
+                                                  ),
+                                            child: ListTile(
                                             title: Text(title,style: const TextStyle(fontSize: 18),),
                                             subtitle: Text('${data["createdBy"]}  $time',style: const TextStyle(color: Colors.grey)),
                                             tileColor: const Color.fromARGB(
@@ -82,15 +118,24 @@ class _News extends State<News> {
                                                context,
                                                 MaterialPageRoute(builder: (context) => Newsde(title: title,time: time,content: data['content'],createdBy: data['createdBy'])),
                                                 );
-                                            }, //gorouterでのタップ時遷移　仮
+                                            }, 
                                             shape: const RoundedRectangleBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10)),
                                             ),
-                                          )));
+                                          ))
+                                  ));
                                 });
                           })
                     ]))));
+  }
+
+   String _gettime(DateTime createdAt) {
+    if (createdAt.minute < 10) {
+      return '${createdAt.year}/${createdAt.month}/${createdAt.day} ${createdAt.hour}:0${createdAt.minute}';
+    } else {
+      return '${createdAt.year}/${createdAt.month}/${createdAt.day} ${createdAt.hour}:${createdAt.minute}';
+    }
   }
 }
 

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';//必須
 import 'package:koyo/router.dart';//ページ遷移指定用
-import 'package:koyo/home.dart';//アプリのホーム画面
-import 'package:koyo/sports.dart';//体育祭ページ
-import 'package:koyo/hakuran.dart';//博覧会ぺーじ
-import 'package:koyo/bunkou.dart';//文化祭、後夜祭ページ
-import 'package:koyo/map.dart';//校舎内マップページ
+import 'package:koyo/home/home.dart';//アプリのホーム画面
+import 'package:koyo/sports festival/sports.dart';//体育祭ページ
+import 'package:koyo/hakurankai/hakuran.dart';//博覧会ぺーじ
+import 'package:koyo/bunkakouya/bunkou.dart';//文化祭、後夜祭ページ
+import 'package:koyo/map/map.dart';//校舎内マップページ
 import 'package:firebase_core/firebase_core.dart';//firebase連携で必須
 import 'firebase_options.dart';//同じくfirebase
 import 'package:go_router/go_router.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 //メインの関数、ここからすべては始まる
 
 void main() async {
@@ -16,7 +16,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,       
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }                          
 
 class MyApp extends StatelessWidget {//アプリのいろんな設定
@@ -112,8 +112,10 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
     backgroundColor: Theme.of(context).primaryColor,
     title:  Text(title,style: const TextStyle(color: Colors.white),),
     centerTitle: true,
+    iconTheme: const IconThemeData(color: Colors.white),
     actions: [IconButton(
-                icon: const Icon(Icons.notifications, color: Colors.white,),
+                icon: const Icon(Icons.notifications),
+
                 onPressed: () {
                   context.push('/news');
                 },

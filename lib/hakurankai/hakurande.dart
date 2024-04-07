@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:koyo/butai.dart';
+import 'package:koyo/hakurankai/butai.dart';
 
 //博覧のdetailそれぞれのページの内容記載
 
@@ -301,7 +301,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      color: Colors.white,
+      color: const Color.fromARGB(255, 251, 251, 251),
       child: tabBar,
     );
   }

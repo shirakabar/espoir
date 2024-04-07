@@ -31,7 +31,20 @@ class _Account extends State<Account> {
               Container(
                 width: double.infinity,
                 height: 300,
-                color: Theme.of(context).primaryColor,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: FractionalOffset.topCenter,
+                    end: FractionalOffset.bottomCenter,
+                    colors: [
+                      Colors.white,
+                      Colors.grey,
+                    ],
+                    stops: [
+                      0.5,
+                      1.0,
+                    ],
+                  ),
+                ),
                 child: Column(children:[
                   const SizedBox(
                     width: double.infinity,
@@ -39,7 +52,7 @@ class _Account extends State<Account> {
                     ),
           CircleAvatar(
               backgroundImage: NetworkImage(url),
-              radius: 40,
+              radius: 50,
             ),
             const SizedBox(
               width: double.infinity,
@@ -48,13 +61,13 @@ class _Account extends State<Account> {
             Text(
               name,
               style: const TextStyle(
-                fontSize: 18,color: Colors.white,
+                fontSize: 20,color: Colors.white,
               ),
             ),
             Text(
               email,
               style: const TextStyle(
-                fontSize: 12,color: Colors.white,
+                fontSize: 14,color: Colors.white,
               ),
             ),
         
@@ -96,7 +109,7 @@ class _LoginAccount extends State<LoginAccount> {
               style: OutlinedButton.styleFrom(
                 backgroundColor: Colors.white,
                 side: BorderSide(color: Theme.of(context).primaryColor),
-                fixedSize: const Size(200, 40)
+                fixedSize: const Size(300, 40)
               ),
               onPressed: () {
                 setState(() {
