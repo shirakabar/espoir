@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/home/resultde.dart';
-
+import 'package:go_router/go_router.dart';
 //体育祭などの結果発表ページ
 
 class Result extends StatefulWidget{
@@ -32,6 +32,13 @@ class _Result extends State<Result>{
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text('結果発表',style: TextStyle(color: Colors.white)),
         centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.white),
+        actions: [IconButton(
+                  icon: const Icon(Icons.notifications),
+                onPressed: () {
+                  context.push('/news');
+                },
+       ),],
         bottom: TabBar(
         onTap: _taptab,
         tabs: const [
