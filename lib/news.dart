@@ -1,54 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-class News extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:koyo/loginprovider.dart';
+class News extends ConsumerStatefulWidget {
   const News({super.key});
 
   @override
-  State<News> createState() => _News();
+  ConsumerState<News> createState() => _News();
 }
 
-class _News extends State<News> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('お知らせ',style: TextStyle(color: Colors.white),),
-          centerTitle: true,
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
-        body: SingleChildScrollView(
-            //スクロール可能
-            child: Padding(
-                //余白設定
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 5,
-                  vertical: 12,
-                ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                          padding: EdgeInsets.only(left: 20, top: 15),
-                          child: Column(children: [
-                            Align(alignment:  Alignment.centerLeft,
-                            child: Text(
-                            '※タップで詳細を確認できます',
-                            style: TextStyle(fontSize: 15, color: Colors.grey),
-                          ),
-                            ),
-                            Align(alignment:  Alignment.centerLeft,
-                            child: Text(
-                            '※スライドで削除できます',
-                            style: TextStyle(fontSize: 15, color: Colors.grey),
-                          )
-                            )
-                          ])
-                          ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      StreamBuilder<QuerySnapshot>(
+class _News extends ConsumerState<News> {
+
+  Widget _adminscreen() {
+   return StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
                               .collection('news')
                               .orderBy('createdAt', descending: true)
@@ -126,7 +90,110 @@ class _News extends State<News> {
                                           ))
                                   ));
                                 });
-                          })
+                          });
+  }
+
+  Widget _studentscreen () {
+    return StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection('news')
+                              .orderBy('createdAt', descending: true)
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return const Text('エラー');
+                            }
+                            if (!snapshot.hasData) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            }
+
+                            final docs = snapshot.data!.docs;
+
+                            return ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: docs.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final doc = docs[index];
+                                  final data = doc.data()! as Map<String,dynamic>;
+                                  final DateTime createdAt = data["createdAt"].toDate();
+                                  final String time = _gettime(createdAt);
+                                  final String title = doc.id;
+                                  return Padding(
+                                      //ここからを表示
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 1),
+                                      child: Card(
+                                          elevation: 2,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child:ListTile(
+                                            title: Text(title,style: const TextStyle(fontSize: 18),),
+                                            subtitle: Text('${data["createdBy"]}  $time',style: const TextStyle(color: Colors.grey)),
+                                            tileColor: const Color.fromARGB(
+                                                255, 241, 249, 255),
+                                            onTap: () {
+                                              Navigator.push(
+                                               context,
+                                                MaterialPageRoute(builder: (context) => Newsde(title: title,time: time,content: data['content'],createdBy: data['createdBy'])),
+                                                );
+                                            }, 
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                            ),
+                                          )
+                                  ));
+                                });
+                          });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: const Text('お知らせ',style: TextStyle(color: Colors.white),),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
+        body: SingleChildScrollView(
+            //スクロール可能
+            child: Padding(
+                //余白設定
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 5,
+                  vertical: 12,
+                ),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 15),
+                          child: Column(children: [
+                            const Align(alignment:  Alignment.centerLeft,
+                            child: Text(
+                            '※タップで詳細を確認できます',
+                            style: TextStyle(fontSize: 15, color: Colors.grey),
+                          ),
+                            ),
+                            if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
+                            const Align(alignment:  Alignment.centerLeft,
+                            child: Text(
+                            '※スライドで削除できます',
+                            style: TextStyle(fontSize: 15, color: Colors.grey),
+                          )
+                            )
+                          ])
+                          ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
+                      _adminscreen(),
+                      if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.loggedInAdmin)
+                      _studentscreen()
                     ]))));
   }
 

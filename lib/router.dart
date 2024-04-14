@@ -1,13 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:koyo/home/login.dart';
+import 'package:koyo/home/account.dart';
 import 'package:koyo/main.dart';
 import 'package:koyo/come.dart';
 import 'package:koyo/home/result.dart';
 import 'package:koyo/home/ticket.dart';
 import 'package:koyo/news.dart';
 import 'package:koyo/newsmake.dart';
-import 'package:koyo/home/account.dart';
 import 'package:koyo/home/crowd.dart';
 
 //gorouterは画面遷移用の外部パッケージ
@@ -80,17 +79,6 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: const News(),
-        );
-      },
-    ),
-
-    GoRoute(
-      path: '/login',
-      name: 'login',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: const Login(),
         );
       },
     ),

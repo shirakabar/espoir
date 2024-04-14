@@ -135,7 +135,7 @@ class Draw extends StatelessWidget{
           padding: EdgeInsets.zero,
           children: <Widget>[
             SizedBox(
-              height: 345,
+              height: 200,
               child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
@@ -143,11 +143,14 @@ class Draw extends StatelessWidget{
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                const Text('第76回向陽祭',style: TextStyle(fontSize: 30,color: Colors.white),),
-                FittedBox(
-                  fit: BoxFit.fitHeight,
-                  child: Image.asset('images/esupo.png'),
-                  )
+               SizedBox(
+                    height: 80,
+                    child:Image.asset('images/koyoicon.jpg',fit: BoxFit.fitHeight,),
+                ),
+                const SizedBox(
+            height: 5,
+          ),
+                 const Text('第76回向陽祭',style: TextStyle(fontSize: 20,color: Colors.white),),
               ]
               )
             ),
@@ -158,7 +161,22 @@ class Draw extends StatelessWidget{
             const Tile(label: "アカウント", rout: '/come', icon: Icons.account_circle),
             const Tile(label: "お問い合わせ", rout: '/come', icon: Icons.support_agent),
             const Tile(label: "要項", rout: '/come', icon: Icons.article),
-            const Tile(label: "利用規約", rout: '/come', icon: null),
+            const Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    ListTile(
+                      title: const Text('利用規約'),
+                      onTap: () {
+                        context.push('/come');
+                      },
+                    ),
+                    const Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
           ],
         ),
 

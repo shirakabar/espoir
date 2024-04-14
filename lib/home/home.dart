@@ -7,6 +7,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:koyo/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:koyo/loginprovider.dart';
 //ほおむ
 
 final user = FirebaseAuth.instance.currentUser;
@@ -37,7 +38,7 @@ class _Home extends ConsumerState<Home>{
             children: <Widget>[
               Container(
                 width: double.infinity,
-                height: 370,
+                height: 365,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: FractionalOffset.topCenter,
@@ -102,8 +103,8 @@ class _Home extends ConsumerState<Home>{
             borderRadius: BorderRadius.circular(5),
             color: Theme.of(context).primaryColor,
           ),
-          child: const Text('なんかかきたい',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.white),)
-          ),
+          child: const Center(child: Text('シンボルマーク募集中！',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),)
+          ),),
           const SizedBox(
                 height: 10,
               ),
@@ -144,72 +145,19 @@ class _Home extends ConsumerState<Home>{
                             fontWeight: FontWeight.bold)),
                   )),
               const SizedBox(
-                height: 10,
+                height: 8,
               ),
               SizedBox(
-                    height: 230,
-                    child: ListView.builder(
+                    height: 180,
+                    child: ListView(
                         itemExtent: 300, //横幅
                         scrollDirection: Axis.horizontal, //横スクロール
-                        itemCount: 3, //仮
                         padding: const EdgeInsets.only(left:5),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            //ネットからのデザイン
-                            elevation: 4,
-                            margin: const EdgeInsets.all(5),
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            clipBehavior:
-                                Clip.antiAliasWithSaveLayer, // 画像を丸角にする
-                            child: Column(
-                              children: [
-                                Stack(
-                                  children: [
-                                    SizedBox(
-                                      width: double.infinity,
-                                      height: 150,
-                                      child: Image.asset(
-                                        'images/kouya.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                // タイトル
-                                Container(
-                                  color: Colors.white,
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 3, horizontal: 8),
-                                  child: const Text(
-                                    '後夜祭',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                ),
-                                // 説明文
-                                Container(
-                                  color: Colors.white,
-                                  width: double.infinity,
-                                  padding:
-                                      const EdgeInsets.only(left:8,bottom: 2),
-                                  child: const Text(
-                                    '',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
+                        children: const [
+                          Menucard(title: 'アクセス', img: 'images/access.png', rout: '/come'),
+                          Menucard(title: '中学生へ', img: 'images/koyobuilding.jpg', rout: '/come'),
+                          ]
+                        ),
                   ),
               const SizedBox(
                 height: 15,
@@ -218,16 +166,30 @@ class _Home extends ConsumerState<Home>{
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Column(children: [
-                    if (ref.watch(isLoggedInAdminProvider) == user!.uid)
+                    if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
                      const Divider(
                       //線
                       height: 1,
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                    if (ref.watch(isLoggedInAdminProvider) == user!.uid)
+                    if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
                     ListTile(
                       title: const Text('管理者用'),
+                      onTap: () {
+                        context.push('/come');
+                      },
+                    ),
+                    if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
+                     const Divider(
+                      //線
+                      height: 1,
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
+                    ListTile(
+                      title: const Text('クラス運営'),
                       onTap: () {
                         context.push('/come');
                       },
