@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //ほおむ
+//
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -172,7 +174,10 @@ class _Home extends State<Home> {
                 ),
                
                 OutlinedButton(
+                  //お問い合わせじゃなかったら別のところに追いやってね
                 onPressed: () {
+                  final url = Uri.parse('https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__kqOgrtUOTlOV0lDVFZZSktRTDNGTUJGODYzODRENy4u');
+                  launchUrl(url);
                   context.push('/');
                 },
                 style: OutlinedButton.styleFrom(
