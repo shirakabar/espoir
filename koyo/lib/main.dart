@@ -6,10 +6,10 @@ import 'package:koyo/hakurankai/hakuran.dart';//博覧会ぺーじ
 import 'package:koyo/bunkakouya/bunkou.dart';//文化祭、後夜祭ページ
 import 'package:koyo/map/map.dart';//校舎内マップページ
 import 'package:firebase_core/firebase_core.dart';//firebase連携で必須
-import 'firebase_options.dart';//同じくfirebase
+import 'settings/firebase_options.dart';//同じくfirebase
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:koyo/koyo_icons.dart';//文化祭、後夜祭ページ
+import 'package:koyo/settings/koyo_icons.dart';//文化祭、後夜祭ページ
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:io';
 

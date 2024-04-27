@@ -6,7 +6,7 @@ import 'package:koyo/come.dart';
 import 'package:koyo/home/result.dart';
 import 'package:koyo/home/ticket.dart';
 import 'package:koyo/news.dart';
-import 'package:koyo/newsmake.dart';
+import 'package:koyo/staff/newsmake.dart';
 import 'package:koyo/home/crowd.dart';
 
 //gorouterは画面遷移用の外部パッケージ
