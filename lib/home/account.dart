@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/main.dart';
+import 'package:koyo/widget.dart';
 import 'package:koyo/home/login.dart';
 import 'package:koyo/home/logout.dart';
 import 'package:koyo/loginprovider.dart';
@@ -22,12 +22,21 @@ class _AccountState extends ConsumerState<Account> {
         body: SingleChildScrollView(child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.start, 
           children: [
-            Container(
-            width: double.infinity, // Containerを横幅いっぱいに表示
-            height: 280, // Containerの高さを指定してます
-            color: Colors.blue,
-            child: Image.asset('images/koyobuilding.jpg',fit: BoxFit.cover,)
-          ),
+           Container(
+      width: double.infinity, //横無限
+      height: 280,
+      decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            image: const DecorationImage(
+          image: AssetImage('images/koyobuilding.jpg'),
+          fit: BoxFit.cover,
+        )),
+      child: Container(
+      width: double.infinity, //横無限
+      height: 280,
+      color: const Color.fromARGB(30, 0, 0, 0),
+      )
+           ),
           if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
           const Logout(),
               if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.notLoggedIn)

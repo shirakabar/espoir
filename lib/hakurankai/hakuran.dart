@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/hakurankai/hakurande.dart';
 import 'package:go_router/go_router.dart';
+import 'package:koyo/widget.dart';
 
 //博覧ページのタブ遷移先
 
@@ -14,7 +15,7 @@ class Hakuran extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-      drawer: const Drawer(),
+      drawer: const Draw(),
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text('博覧会',style: TextStyle(color: Colors.white)),

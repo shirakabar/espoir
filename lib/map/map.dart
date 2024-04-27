@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:koyo/widget.dart';
 class Map extends StatelessWidget {
   const Map({super.key});
   
@@ -10,7 +11,7 @@ class Map extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-      drawer: const Drawer(),
+      drawer: const Draw(),
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text('校内マップ',style: TextStyle(color: Colors.white)),

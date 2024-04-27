@@ -219,6 +219,7 @@ class Newsde extends StatelessWidget{
         appBar: AppBar(
           title: const Text('お知らせ詳細',style: TextStyle(color: Colors.white),),
           centerTitle: true,
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Theme.of(context).primaryColor,
         ),
         body: Card(

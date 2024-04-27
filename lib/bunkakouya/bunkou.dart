@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:koyo/bunkakouya/bunka.dart';
 import 'package:koyo/bunkakouya/kouya.dart';
 import 'package:go_router/go_router.dart';
+import 'package:koyo/widget.dart';
 
 //文化、後夜のタブ遷移先一覧
 
@@ -15,7 +16,7 @@ class Bunkou extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-      drawer: const Drawer(),
+      drawer: const Draw(),
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text('文化祭・後夜祭',style: TextStyle(color: Colors.white)),

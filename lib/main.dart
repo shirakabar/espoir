@@ -7,8 +7,12 @@ import 'package:koyo/bunkakouya/bunkou.dart';//文化祭、後夜祭ページ
 import 'package:koyo/map/map.dart';//校舎内マップページ
 import 'package:firebase_core/firebase_core.dart';//firebase連携で必須
 import 'firebase_options.dart';//同じくfirebase
-import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:koyo/koyo_icons.dart';//文化祭、後夜祭ページ
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'dart:io';
+
 //メインの関数、ここからすべては始まる
 
 void main() async {
@@ -16,9 +20,82 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,       
   );
+
+  final messagingInstance = FirebaseMessaging.instance;
+  messagingInstance.requestPermission();
+
+   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  if (Platform.isAndroid) {
+    final androidImplementation =
+        flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
+    await androidImplementation?.createNotificationChannel(
+      const AndroidNotificationChannel(
+        'default_notification_channel',
+        'プッシュ通知のチャンネル名',
+        importance: Importance.max,
+      ),
+    );
+    await androidImplementation?.requestNotificationsPermission();
+  }
+
+  // 通知設定の初期化を行う
+  _initNotification();
+
   runApp(const ProviderScope(child: MyApp()));
 }                          
 
+Future<void> _initNotification() async {
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    // バックグラウンド起動中に通知をタップした場合の処理
+  });
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    final notification = message.notification;
+    final android = message.notification?.android;
+
+    // フォアグラウンド起動中に通知が来た場合の処理
+
+    // フォアグラウンド起動中に通知が来た場合、
+    // Androidは通知が表示されないため、ローカル通知として表示する
+    // https://firebase.flutter.dev/docs/messaging/notifications#application-in-foreground
+    if (Platform.isAndroid) {
+      // プッシュ通知をローカルから表示する
+      await FlutterLocalNotificationsPlugin().show(
+        0,
+        notification!.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            'default_notification_channel',
+            'プッシュ通知のチャンネル名',
+            importance: Importance.max, // 通知の重要度の設定
+            icon: android?.smallIcon,
+          ),
+        ),
+      );
+    }
+    
+  });
+
+  // ローカルから表示したプッシュ通知をタップした場合の処理を設定
+  flutterLocalNotificationsPlugin.initialize(
+    const InitializationSettings(
+      android: AndroidInitializationSettings(
+          '@mipmap/ic_launcher'), //通知アイコンの設定は適宜行ってください
+      iOS: DarwinInitializationSettings(),
+    ),
+    /*onDidReceiveNotificationResponse: (details) {
+      if (details.payload != null) {
+        final payloadMap =
+            json.decode(details.payload!) as Map<String, dynamic>;
+        debugPrint(payloadMap.toString());
+      }
+    },*/
+  );
+}
 class MyApp extends StatelessWidget {//アプリのいろんな設定
   const MyApp({super.key});
 
@@ -35,7 +112,7 @@ class MyApp extends StatelessWidget {//アプリのいろんな設定
         colorScheme: const ColorScheme(//アプリの色設定
           brightness: Brightness.light, 
           primary: (Color.fromARGB(255, 25, 118, 210)), 
-          onPrimary:  (Colors.white), 
+          onPrimary:  (Color.fromARGB(255, 255, 255, 255)), 
           secondary:  (Colors.white), 
           onSecondary:  (Colors.black), 
           error:   (Color.fromARGB(255, 25, 118, 210)), 
@@ -81,8 +158,8 @@ class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継�
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),     
           BottomNavigationBarItem(icon: Icon(Icons.sports_tennis), label: '体育祭'), 
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: '博覧会'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: '文化・後夜'),
+          BottomNavigationBarItem(icon: Icon(Koyo.hakurankaiicon), label: '博覧会'),
+          BottomNavigationBarItem(icon: Icon(Koyo.kouyasaiicon), label: '文化・後夜'),
           BottomNavigationBarItem(icon: Icon(Icons.map), label: 'マップ'),
         ],
         currentIndex: _currentindex,
@@ -98,108 +175,3 @@ class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継�
   }
 }
 
-class Bar extends StatelessWidget implements PreferredSizeWidget {
-  const Bar({required this.title,super.key});
-  final String title;
-
-   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-  
-  @override
-  Widget build(BuildContext context) {
-    
-  return AppBar(
-    backgroundColor: Theme.of(context).primaryColor,
-    title:  Text(title,style: const TextStyle(color: Colors.white),),
-    centerTitle: true,
-    iconTheme: const IconThemeData(color: Colors.white),
-    actions: [IconButton(
-                icon: const Icon(Icons.notifications),
-
-                onPressed: () {
-                  context.push('/news');
-                },
-    ),],
-  );
-}
-}
-
-
-class Draw extends StatelessWidget{
-  const Draw({super.key});
-  
-  @override
-  Widget build(BuildContext context) {
-
-  return Drawer(child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            SizedBox(
-              height: 200,
-              child: DrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-               SizedBox(
-                    height: 80,
-                    child:Image.asset('images/koyoicon.jpg',fit: BoxFit.fitHeight,),
-                ),
-                const SizedBox(
-            height: 5,
-          ),
-                 const Text('第76回向陽祭',style: TextStyle(fontSize: 20,color: Colors.white),),
-              ]
-              )
-            ),
-            ),
-            const Tile(label: "結果", rout: '/come', icon: Icons.emoji_events),
-            const Tile(label: "整理券", rout: '/come', icon: Icons.receipt),
-            const Tile(label: "アンケート", rout: '/come', icon: Icons.description),
-            const Tile(label: "アカウント", rout: '/come', icon: Icons.account_circle),
-            const Tile(label: "お問い合わせ", rout: '/come', icon: Icons.support_agent),
-            const Tile(label: "要項", rout: '/come', icon: Icons.article),
-            const Divider(
-                      height: 1,
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-                    ListTile(
-                      title: const Text('利用規約'),
-                      onTap: () {
-                        context.push('/come');
-                      },
-                    ),
-                    const Divider(
-                      height: 1,
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-          ],
-        ),
-
-  );
-
-  
-  }
-}
-
-class Tile extends StatelessWidget{
-  const Tile({super.key,required this.label,required this.rout,required this.icon});
-  final String label;
-  final String rout;
-  final IconData ?icon;
-
-  @override
- Widget build(BuildContext context){
- return ListTile(
-              title: Text(label),
-              leading: Icon(icon),
-              onTap: (){
-                context.push(rout);
-              },
-            );
- }
-}
