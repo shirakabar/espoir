@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:koyo/map/fourthfloor.dart';
+import 'package:koyo/map/firstfloor.dart';
+import 'package:koyo/map/secondfloor.dart';
+import 'package:koyo/map/thirdfloor.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/widget.dart';
+
 class Map extends StatelessWidget {
   const Map({super.key});
   
@@ -9,7 +14,7 @@ class Map extends StatelessWidget {
    Widget build(BuildContext context) {
     
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
       drawer: const Draw(),
       appBar: AppBar(
@@ -28,6 +33,7 @@ class Map extends StatelessWidget {
            Tab( text:'1F'),
            Tab( text:'2F'),
            Tab( text:'3F'),
+           Tab( text:'4F'),
         ],
          unselectedLabelColor: Colors.white,
          labelColor: Colors.white,
@@ -36,19 +42,13 @@ class Map extends StatelessWidget {
 
       ),
       body: InteractiveViewer(child:
-      TabBarView(
-        physics: const NeverScrollableScrollPhysics(),
-        children: [Stack(
-          children: [ 
-            Image.asset('images/mapone.jpg'),
-            Positioned(
-              top: 10.0,
-              left:10.0,
-              child: OutlinedButton(onPressed: () {},child: const Text('outlinedButton'))
-            ),
-            ]),
-           Image.asset('images/maptwo.jpg'),
-           Image.asset('images/mapthree.jpg'),
+      const TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+           FirstFloor(),
+           SecondFloor(),
+           ThirdFloor(),
+           FourthFloor(),
           ],
         )
     ),    

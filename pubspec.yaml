@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.25.4
   cloud_firestore: ^4.15.5
+  url_launcher: ^6.2.6
   firebase_auth: ^4.17.9
   google_sign_in: ^6.2.1
   carousel_slider: ^4.2.1
@@ -110,6 +111,10 @@ flutter:
         
   assets:
     - images/esupo.png
+    - images/1f.png
+    - images/2f.png
+    - images/3f.png
+    - images/4f.png
     - images/crowdone.jpg
     - images/crowdtwo.jpg
     - images/crowdthree.jpg
