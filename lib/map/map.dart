@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/fourthfloor.dart';
-import 'package:koyo/firstfloor.dart';
-import 'package:koyo/secondfloor.dart';
-import 'package:koyo/thirdfloor.dart';
+import 'package:koyo/map/fourthfloor.dart';
+import 'package:koyo/map/firstfloor.dart';
+import 'package:koyo/map/secondfloor.dart';
+import 'package:koyo/map/thirdfloor.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/widget.dart';
 
