@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/loginprovider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-//import '../localdata.dart';
+import '../localdata.dart';
 
 class Logout extends ConsumerStatefulWidget {
   const Logout({super.key});
@@ -11,14 +11,13 @@ class Logout extends ConsumerStatefulWidget {
 }
 
 class _Logout extends ConsumerState<Logout> {
-  String classname = '';
-  /*_getData() async {
-      classname = await LocalData.readLocalData('class');
-  }*/
-
+  Future<dynamic> _readclass() async {
+      return LocalData.readLocalData('class');
+  }
+  
   @override
   Widget build(BuildContext context) {
-    //classname = _getData();
+
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(children: [
@@ -29,16 +28,33 @@ class _Logout extends ConsumerState<Logout> {
           const SizedBox(
             height: 10,
           ),
-          
-          if (ref.watch(currentLoginStatusProvider) ==
-              CurrentLoginStatus.loggedInStudent)
-            Text('$classnameの生徒でログインしています'),
-          if (ref.watch(currentLoginStatusProvider) ==
-              CurrentLoginStatus.loggedInAdmin)
-            Text('管理者でログインしています($classname)'),
-          if (ref.watch(currentLoginStatusProvider) ==
-              CurrentLoginStatus.loggedInStaff)
-            Text('スタッフでログインしています($classname)'),
+
+          FutureBuilder<dynamic>(
+      future: _readclass(),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+
+        } else if (snapshot.hasError) {
+          return const Text('エラーが発生しました');
+
+        } else if (ref.watch(currentLoginStatusProvider) ==
+              CurrentLoginStatus.loggedInStudent) {
+          return Text('$_readclassの生徒でログインしています');
+
+        } else if (ref.watch(currentLoginStatusProvider) ==
+              CurrentLoginStatus.loggedInAdmin) {
+          return Text('管理者でログインしています($_readclass)');
+
+        } else if (ref.watch(currentLoginStatusProvider) ==
+              CurrentLoginStatus.loggedInStaff) {
+          return Text('スタッフでログインしています($_readclass)');
+
+        } else {
+          return const Text('');
+        }
+      }
+          ),
           const SizedBox(
             height: 10,
           ),

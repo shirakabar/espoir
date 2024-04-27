@@ -30,12 +30,12 @@ class _Login extends ConsumerState<Login> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
                     child: Column(children: [
-                      const Text(
+                      /*const Text(
                           'ログイン',
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 20),
                         ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(height: 20,),*/
                       TextFormField(
                         autovalidateMode: AutovalidateMode.disabled,
                         validator: (value) {
@@ -144,7 +144,8 @@ class _Login extends ConsumerState<Login> {
                       const SizedBox(height: 10, width: double.infinity),
                       OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
+                            fixedSize: const Size(120, 40),
+                              backgroundColor: Theme.of(context).primaryColor,
                               side: BorderSide(
                                   color: Theme.of(context).primaryColor)),
                           onPressed: () async {
@@ -180,7 +181,7 @@ class _Login extends ConsumerState<Login> {
                               }
                             }
                           },
-                          child: const Text('ログイン'))
+                          child: const Text('ログイン',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
                     ])));
   }
 }

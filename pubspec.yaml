@@ -44,11 +44,14 @@ dependencies:
   riverpod: ^2.5.1
   flutter_riverpod: ^2.5.1
   shared_preferences: ^2.2.2
+  firebase_messaging: ^14.8.2
+  flutter_local_notifications: ^17.0.1
+  flutter_native_splash: ^2.4.0
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -98,6 +101,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
+  fonts:
+    - family: Koyo
+      fonts:
+        - asset: fonts/Koyo.ttf
+        
   assets:
     - images/esupo.png
     - images/crowdone.jpg
@@ -111,5 +121,17 @@ flutter:
     - images/bunkasai.jpg
     - images/taiikusai.jpg
     - images/koyobuilding.jpg
-    - images/koyoicon.jpg
     - images/access.png
+    - images/hakuran.png
+    - images/koyoicon.png
+
+flutter_native_splash:
+    color: "#FFFFFF"
+    image: 'images/hakuran.png'
+    android: true
+    ios: true
+    fullscreen: true
+    android_12:
+      icon_background_color: '#FFFFFF'
+      image: 'images/hakuran.png'
+

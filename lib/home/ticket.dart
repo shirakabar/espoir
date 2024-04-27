@@ -26,6 +26,7 @@ final num =0;
 
     return Scaffold(
       appBar:  AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text('整理券取得',style: TextStyle(color: Colors.white),),
         centerTitle: true,

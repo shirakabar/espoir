@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:koyo/main.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:koyo/widget.dart';
@@ -103,7 +102,7 @@ class _Home extends ConsumerState<Home>{
             borderRadius: BorderRadius.circular(5),
             color: Theme.of(context).primaryColor,
           ),
-          child: const Center(child: Text('シンボルマーク募集中！',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),)
+          child: const Center(child: Text('テスト画面です！！',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),)
           ),),
           const SizedBox(
                 height: 10,
