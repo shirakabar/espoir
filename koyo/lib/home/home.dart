@@ -7,6 +7,7 @@ import 'package:koyo/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:koyo/loginprovider.dart';
+import 'package:url_launcher/url_launcher.dart';
 //ほおむ
 
 final user = FirebaseAuth.instance.currentUser;
@@ -123,12 +124,32 @@ class _Home extends ConsumerState<Home>{
               const SizedBox(
                 height: 20,
               ),
-              const Row(
+            Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
                   children: [
-                    Button(label: 'アカウント',rout: '/account',icon: Icons.account_circle), //outlinedbuttonのクラス
-                    Button(label: 'お問い合わせ', rout: '/login', icon: Icons.support_agent),
-                    Button(label: '要項', rout: '/newsmake', icon: Icons.article),
+                    const Button(label: 'アカウント',rout: '/account',icon: Icons.account_circle), //outlinedbuttonのクラス
+                    OutlinedButton(
+                  //お問い合わせじゃなかったら別のところに追いやってね
+                onPressed: () {
+                  final url = Uri.parse('https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__kqOgrtUOTlOV0lDVFZZSktRTDNGTUJGODYzODRENy4u');
+                  launchUrl(url);
+                  context.push('/');
+                },
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  side: const BorderSide(color: Colors.transparent),
+                                     fixedSize: const Size(135, 50)
+                ),
+                child: Column(
+                  children: [
+                    Icon(Icons.support_agent,color: Theme.of(context).primaryColor,),
+                    const Text('お問い合わせ',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)
+                  ],
+                )
+                
+                ),
+                    //const Button(label: 'お問い合わせ', rout: '/login', icon: Icons.support_agent),
+                    const Button(label: '要項', rout: '/newsmake', icon: Icons.article),
                   ]),
               const SizedBox(
                 height: 20,
