@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/loginprovider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../localdata.dart';
+import '../data/localdata.dart';
 
 class Logout extends ConsumerStatefulWidget {
   const Logout({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../localdata.dart';
+import '../data/localdata.dart';
 
 final isLoggedInStudentProvider = StateProvider<bool>((ref) => false);
 final isLoggedInStaffProvider = StateProvider<bool>((ref) => false);
