@@ -6,6 +6,7 @@ import 'package:koyo/come.dart';
 import 'package:koyo/home/result.dart';
 import 'package:koyo/home/ticket.dart';
 import 'package:koyo/news.dart';
+import 'package:koyo/pdfview.dart';
 import 'package:koyo/staff/newsmake.dart';
 import 'package:koyo/home/crowd.dart';
 
@@ -104,5 +105,6 @@ final goRouter = GoRouter(
         );
       },
     ),
+
   ]
 );

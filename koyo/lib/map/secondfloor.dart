@@ -18,7 +18,7 @@ class SecondFloor extends StatelessWidget {
             top: 40,
             width: 400,
             height: 250,
-            child: Image.asset('images/2f.png'),
+            child: Image.asset('assets/images/2f.png'),
           ),
           // Positionedで配置
           Positioned(

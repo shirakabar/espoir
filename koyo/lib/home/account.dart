@@ -28,7 +28,7 @@ class _AccountState extends ConsumerState<Account> {
       decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             image: const DecorationImage(
-          image: AssetImage('images/koyobuilding.jpg'),
+          image: AssetImage('assets/images/koyobuilding.jpg'),
           fit: BoxFit.cover,
         )),
       child: Container(
