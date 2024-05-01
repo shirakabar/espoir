@@ -49,6 +49,9 @@ dependencies:
   flutter_local_notifications: ^17.0.1
   flutter_native_splash: ^2.4.0
   google_fonts: ^6.2.1
+  flutter_pdfview: ^1.3.2
+  path_provider: ^2.1.3
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:
@@ -110,33 +113,34 @@ flutter:
         - asset: fonts/Koyo.ttf
         
   assets:
-    - images/esupo.png
-    - images/1f.png
-    - images/2f.png
-    - images/3f.png
-    - images/4f.png
-    - images/crowdone.jpg
-    - images/crowdtwo.jpg
-    - images/crowdthree.jpg
-    - images/postest.jpg
-    - images/mapone.jpg
-    - images/maptwo.jpg
-    - images/kouya.jpg
-    - images/hakuran.jpg
-    - images/bunkasai.jpg
-    - images/taiikusai.jpg
-    - images/koyobuilding.jpg
-    - images/access.png
-    - images/hakuran.png
-    - images/koyoicon.png
+    - assets/images/esupo.png
+    - assets/images/1f.png
+    - assets/images/2f.png
+    - assets/images/3f.png
+    - assets/images/4f.png
+    - assets/images/crowdone.jpg
+    - assets/images/crowdtwo.jpg
+    - assets/images/crowdthree.jpg
+    - assets/images/postest.jpg
+    - assets/images/mapone.jpg
+    - assets/images/maptwo.jpg
+    - assets/images/kouya.jpg
+    - assets/images/hakuran.jpg
+    - assets/images/bunkasai.jpg
+    - assets/images/taiikusai.jpg
+    - assets/images/koyobuilding.jpg
+    - assets/images/access.png
+    - assets/images/hakuran.png
+    - assets/images/koyoicon.png
+    - assets/docs/sportsprogram.pdf
 
 flutter_native_splash:
     color: "#FFFFFF"
-    image: 'images/hakuran.png'
+    image: 'assets/images/hakuran.png'
     android: true
     ios: true
     fullscreen: true
     android_12:
       icon_background_color: '#FFFFFF'
-      image: 'images/hakuran.png'
+      image: 'assets/images/hakuran.png'
 

@@ -14,10 +14,6 @@ class Sports extends StatefulWidget {
 
 class _Sports extends State<Sports> {
 
-List<String> sp= ["開会式","台風の目","女(80m*4)/男(160m*4)\nリレー 予選","パン買い競争","応援団",
-"妨害玉入れ","8の字ジャンプ","十字綱引き","女(80m*4)/男(160m*4)\nリレー 上位決勝","部対抗リレー","閉会式"];//競技名のリスト
-List<String> time= ["09:20","09:40","10:20","10:55","11:40","12:05","12:20","13:00","13:40","14:20","14:50","15:20"];//時間のリスト
-List<String> spat= ["@クラス席","クラス対抗","ブロック対抗","クラス対抗","","クラス対抗","ブロック対抗","クラス対抗","ブロック対抗","クラス対抗","@クラス席"];//場所リスト
 final _taiikusaidata = TaiikusaidataList().taiikusaidata;
 
   @override

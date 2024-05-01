@@ -47,16 +47,39 @@ class _Kyo extends State<Kyo> {
     "@中棟3階",
   ];
   List<dynamic> post = [
-    Image.asset('images/postest.jpg'),
-    Image.asset('images/postest.jpg'),
-    Image.asset('images/postest.jpg'),
-    Image.asset('images/postest.jpg'),
-    Image.asset('images/postest.jpg'),
-    Image.asset('images/postest.jpg'),
-    Image.asset('images/postest.jpg'),
-    Image.asset('images/postest.jpg'),
-    Image.asset('images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),
   ];
+
+  _crowd(int index) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('classes').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Image.asset('assets/images/crowdone.jpg');
+          }
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final docs = snapshot.data!.docs;
+          final doc = docs[index];
+          final data = doc.data()! as Map<String, dynamic>;
+          final List<Widget> crowdimg = <Widget>[
+            Image.asset('assets/images/crowdone.jpg'),
+            Image.asset('assets/images/crowdtwo.jpg'),
+            Image.asset('assets/images/crowdthree.jpg'),
+          ];
+          return crowdimg.elementAt(data['crowd']);
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,84 +129,58 @@ class _Kyo extends State<Kyo> {
                         height: 10,
                       ),
                       ListView.builder(
-                                //体育祭の各種目を一覧表示
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: 9,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Padding(
-                                      //ここからを表示
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 1),
-                                      child: Card(
-                                          elevation: 2,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: ListTile(
-                                            contentPadding:
-                                                const EdgeInsets.symmetric(
-                                                    horizontal: 20),
-                                            leading: FittedBox(
-                                                fit: BoxFit.fitHeight,
-                                                child: post.elementAt(index)),
-                                            title: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 5),
-                                              child: Text(
-                                                title[index],
-                                                style: const TextStyle(
-                                                    fontSize: 17),
-                                              ),
-                                            ),
-                                            subtitle: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 2),
-                                              child: Text(kyoat[index],
-                                                  style: const TextStyle(
-                                                      fontSize: 14)),
-                                            ),
-                                            tileColor: const Color.fromARGB(
-                                                255, 241, 249, 255),
-                                            trailing: FittedBox(
-                                                fit: BoxFit.fitHeight,
-                                                child: Crowd(index: index,)),
-
-                                            /*DropdownButton(
-              items: const [
-                DropdownMenuItem(
-                  value: 0,
-                  child: Text('1'),
-                ),
-                DropdownMenuItem(
-                  value: 1,
-                  child: Text('2'),
-                ),
-                DropdownMenuItem(
-                  value: 2,
-                  child: Text('3'),
-                ),
-              ],
-              onChanged: (value) {
-               FirebaseFirestore.instance
-                        .collection('classes')
-                        .doc(doc.id)
-                        .update({'crowd' : value});
-              },
-              value: data['crowd'],
-            ),]
-            ),*/
-                                            onTap: () {
-                                              context.push('/$index');
-                                            }, //gorouterでのタップ時遷移　仮
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                            ),
-                                          )));
-                                })
+                          //体育祭の各種目を一覧表示
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 9,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                                //ここからを表示
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 1),
+                                child: Card(
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: ListTile(
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                      leading: FittedBox(
+                                          fit: BoxFit.fitHeight,
+                                          child: post.elementAt(index)),
+                                      title: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: Text(
+                                          title[index],
+                                          style: const TextStyle(fontSize: 17),
+                                        ),
+                                      ),
+                                      subtitle: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 2),
+                                        child: Text(kyoat[index],
+                                            style:
+                                                const TextStyle(fontSize: 14)),
+                                      ),
+                                      tileColor: const Color.fromARGB(
+                                          255, 241, 249, 255),
+                                      trailing:  ClipRRect(
+                                            borderRadius: BorderRadius.circular(5), 
+                                            child: FittedBox(
+                                          fit: BoxFit.fitHeight,
+                                          child: _crowd(index))),
+                                      onTap: () {
+                                        context.push('/$index');
+                                      }, //gorouterでのタップ時遷移　仮
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                      ),
+                                    )));
+                          })
                     ]))));
   }
 }
@@ -394,7 +391,7 @@ class _Club extends State<Club> {
   }
 }
 
-class Crowd extends StatefulWidget{
+/*class Crowd extends StatefulWidget{
    const Crowd({super.key,required this.index});
    final int index;
 
@@ -412,7 +409,7 @@ class _Crowd extends State<Crowd> {
                               .snapshots(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
-                              return Image.asset('images/crowdone.jpg');
+                              return Image.asset('assets/images/crowdone.jpg');
                             }
                             if (!snapshot.hasData) {
                               return const Center(
@@ -424,13 +421,13 @@ class _Crowd extends State<Crowd> {
                                   final data =
                                       doc.data()! as Map<String, dynamic>;
                                   final List<Widget> crowdimg = <Widget>[
-                                    Image.asset('images/crowdone.jpg'),
-                                    Image.asset('images/crowdtwo.jpg'),
-                                    Image.asset('images/crowdthree.jpg'),
+                                    Image.asset('assets/images/crowdone.jpg'),
+                                    Image.asset('assets/images/crowdtwo.jpg'),
+                                    Image.asset('assets/images/crowdthree.jpg'),
                                   ];
                             return crowdimg.elementAt(data['crowd']);
                           }
     );
 
   }
-}
+}*/
