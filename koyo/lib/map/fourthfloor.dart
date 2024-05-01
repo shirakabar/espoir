@@ -17,7 +17,7 @@ class FourthFloor extends StatelessWidget {
             top: 40,
             width: 400,
             height: 250,
-            child: Image.asset('images/4f.png'),
+            child: Image.asset('assets/images/4f.png'),
           ),
           // Positionedで配置
           Positioned(

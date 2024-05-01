@@ -17,7 +17,7 @@ class FirstFloor extends StatelessWidget {
             top: 40,
             width: 400,
             height: 250,
-            child: Image.asset('images/1f.png'),
+            child: Image.asset('assets/images/1f.png'),
           ),
           // Positionedで配置
         ],

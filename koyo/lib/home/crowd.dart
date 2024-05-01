@@ -36,9 +36,9 @@ class _Crowd extends State<Crowd>{
            final doc = docs[index];
            final data = doc.data()! as Map<String,dynamic>;
            final List<Widget> crowdimg = <Widget>[
-             Image.asset('images/crowdone.jpg'),
-             Image.asset('images/crowdtwo.jpg'),
-             Image.asset('images/crowdthree.jpg'),
+             Image.asset('assets/images/crowdone.jpg'),
+             Image.asset('assets/images/crowdtwo.jpg'),
+             Image.asset('assets/images/crowdthree.jpg'),
            ];
             return Padding(padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                    child: Row(
