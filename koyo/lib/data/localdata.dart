@@ -4,16 +4,16 @@ class LocalData {
   static Future saveLocalData<T>(String name, T value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     switch (T) {
-      case int:
+      case const (int):
         await prefs.setInt(name, value as int);
         break;
-      case String:
+      case const (String):
         await prefs.setString(name, value as String);
         break;
-      case bool:
+      case const (bool):
         await prefs.setBool(name, value as bool);
         break;
-      case List:
+      case const (List):
         await prefs.setStringList(name, value as List<String>);
         break;
       default:
@@ -25,16 +25,16 @@ class LocalData {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Object? result;
     switch (T) {
-      case int:
+      case const (int):
         result = prefs.getInt(name);
         break;
-      case String:
+      case const (String):
         result = prefs.getString(name);
         break;
-      case bool:
+      case const (bool):
         result = prefs.getBool(name);
         break;
-      case List:
+      case const (List):
         result = prefs.getStringList(name);
         break;
       default:

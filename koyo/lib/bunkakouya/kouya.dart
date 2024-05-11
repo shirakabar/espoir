@@ -70,7 +70,6 @@ Widget _tabSection() {
     pinned: true,
     delegate: _StickyTabBarDelegate(
       tabBar: TabBar(
-        labelColor: Colors.black,
         tabs: [
           Tab(
             text: '体育館',

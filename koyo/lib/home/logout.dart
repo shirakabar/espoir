@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/loginprovider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../data/localdata.dart';
+//import '../data/localdata.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Logout extends ConsumerStatefulWidget {
   const Logout({super.key});
@@ -11,68 +12,64 @@ class Logout extends ConsumerStatefulWidget {
 }
 
 class _Logout extends ConsumerState<Logout> {
-  Future<dynamic> _readclass() async {
-      return LocalData.readLocalData('class');
+  String? classname;
+  
+ Future<String?> _getclass() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString("class");
   }
   
   @override
   Widget build(BuildContext context) {
-
+    _getclass().then((value) {
+      setState(() {
+        classname = value;
+      });
+    });
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(children: [
-          const Text(
-            'ログアウト',
-            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-          ),
           const SizedBox(
             height: 10,
           ),
 
-          FutureBuilder<dynamic>(
-      future: _readclass(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+        if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInStudent) 
+          Text('$classnameの生徒でログインしています'),
 
-        } else if (snapshot.hasError) {
-          return const Text('エラーが発生しました');
+         if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin) 
+          Text('管理者でログインしています($classname)'),
 
-        } else if (ref.watch(currentLoginStatusProvider) ==
-              CurrentLoginStatus.loggedInStudent) {
-          return Text('$_readclassの生徒でログインしています');
+        if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInStaff)
+          Text('スタッフでログインしています($classname)'),
 
-        } else if (ref.watch(currentLoginStatusProvider) ==
-              CurrentLoginStatus.loggedInAdmin) {
-          return Text('管理者でログインしています($_readclass)');
-
-        } else if (ref.watch(currentLoginStatusProvider) ==
-              CurrentLoginStatus.loggedInStaff) {
-          return Text('スタッフでログインしています($_readclass)');
-
-        } else {
-          return const Text('');
-        }
-      }
-          ),
           const SizedBox(
             height: 10,
           ),
           OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
+                minimumSize: const Size(200, 50),
+                  backgroundColor: Theme.of(context).primaryColor,
                   side: BorderSide(color: Theme.of(context).primaryColor)),
               onPressed: () async {
-                await LoginDataManager.logout(ref);
+                try {
+                  await LoginDataManager.logout(ref);
                 const snackBar = SnackBar(
                   content: Text("ログアウトしました"),
                   duration: Duration(seconds: 1),
                 );
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
+                }} catch(e) {
+                  const snackBar = SnackBar(
+                  content: Text("エラーが発生しました"),
+                  duration: Duration(seconds: 1),
+                );
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }}
+                
               },
-              child: const Text('ログアウト'))
+              child: const Text('ログアウト',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
         ]));
   }
 }
