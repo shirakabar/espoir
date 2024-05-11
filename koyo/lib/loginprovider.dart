@@ -30,7 +30,7 @@ class LoginDataManager {
   ) async {
     //ローカルデータの更新
     await LocalData.saveLocalData(_stringToSaveLoginData(loginType), true);
-    await LocalData.saveLocalData('class', classname);
+    await LocalData.saveLocalData("class", classname);
     //プロバイダーの更新
     await setLoginDataProviderDataFromLocal(ref);
   }
@@ -40,6 +40,7 @@ class LoginDataManager {
     await LocalData.saveLocalData(_stringToSaveLoginData(LoginType.student), false);
     await LocalData.saveLocalData(_stringToSaveLoginData(LoginType.staff), false);
     await LocalData.saveLocalData(_stringToSaveLoginData(LoginType.admin), false);
+    LocalData.deleteLocalData("class");
     //プロバイダーの更新
     await setLoginDataProviderDataFromLocal(ref);
   }

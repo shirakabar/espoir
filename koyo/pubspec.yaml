@@ -38,8 +38,6 @@ dependencies:
   firebase_core: ^2.25.4
   cloud_firestore: ^4.15.5
   url_launcher: ^6.2.6
-  firebase_auth: ^4.17.9
-  google_sign_in: ^6.2.1
   carousel_slider: ^4.2.1
   dots_indicator: ^3.0.0
   riverpod: ^2.5.1
@@ -136,11 +134,11 @@ flutter:
 
 flutter_native_splash:
     color: "#FFFFFF"
-    image: 'assets/images/hakuran.png'
+    image: 'assets/images/koyoicon.png'
     android: true
     ios: true
     fullscreen: true
     android_12:
       icon_background_color: '#FFFFFF'
-      image: 'assets/images/hakuran.png'
+      image: 'assets/images/koyoicon.png'
 
