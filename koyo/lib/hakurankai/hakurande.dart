@@ -262,7 +262,6 @@ Widget _tabSection() {
     pinned: true,
     delegate: _StickyTabBarDelegate(
       tabBar: TabBar(
-        labelColor: Colors.black,
         tabs: [
           Tab(
             text: '発表一覧',

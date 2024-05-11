@@ -135,10 +135,11 @@ class _Login extends ConsumerState<Login> {
                             errorStyle:
                                 const TextStyle(color: Color(0xFFB71C1C))),
                       ),
-                      const SizedBox(height: 20, width: 200),
+                      const SizedBox(height: 20, width: double.infinity),
+
                       OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            fixedSize: const Size(double.infinity, 60),
+                            minimumSize: const Size(200, 50),
                               backgroundColor: Theme.of(context).primaryColor,
                               side: BorderSide(
                                   color: Theme.of(context).primaryColor)),
@@ -163,7 +164,8 @@ class _Login extends ConsumerState<Login> {
                               }
 
                               if (canlogin) {
-                                await LoginDataManager.login(ref, logintype!, _classcontroller.text);
+                                try {
+                                  await LoginDataManager.login(ref, logintype!, _classcontroller.text);
                                 const snackBar = SnackBar(
                                   content: Text("ログインしました"),
                                   duration: Duration(seconds: 1),
@@ -171,6 +173,14 @@ class _Login extends ConsumerState<Login> {
                                 if (context.mounted) {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
+                                }} catch (e) {
+                                  const snackBar = SnackBar(
+                                    content: Text("エラーが発生しました"),
+                                    duration: Duration(seconds: 1),
+                                    );
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                }
                                 }
                               }
                             }

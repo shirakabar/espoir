@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:koyo/pdfview.dart';
 
 class Bar extends StatelessWidget implements PreferredSizeWidget {
   const Bar({required this.title, super.key});
@@ -32,6 +34,14 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
 
 class Draw extends StatelessWidget {
   const Draw({super.key});
+
+  Widget tile({required String label, required void Function() ontap, required IconData icon}) {
+    return ListTile(
+      title: Text(label),
+      leading: Icon(icon),
+      onTap: ontap
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,15 +76,31 @@ class Draw extends StatelessWidget {
                       ),
                     ])),
           ),
-          const Tile(label: "結果", rout: '/come', icon: Icons.emoji_events),
-          const Tile(label: "整理券", rout: '/come', icon: Icons.receipt),
-          const Tile(label: "アンケート", rout: '/come', icon: Icons.description),
-          const Tile(label: "アカウント", rout: '/come', icon: Icons.account_circle),
-          const Tile(label: "お問い合わせ", rout: '/come', icon: Icons.support_agent),
-          const Tile(label: "要項", rout: '/come', icon: Icons.article),
+           tile(label: "結果", ontap: () => context.push('/result'), icon: Icons.emoji_events),
+           tile(label: "整理券", ontap: () => context.push('/come'), icon: Icons.receipt),
+           tile(label: "アンケート", ontap: () => context.push('/come'), icon: Icons.description),
+           tile(label: "アカウント", ontap: () => context.push('/account'), icon: Icons.account_circle),
+           tile(label: "お問い合わせ", ontap: () {
+            final url = Uri.parse(
+                              'https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__kqOgrtUOTlOV0lDVFZZSktRTDNGTUJGODYzODRENy4u');
+                          launchUrl(url);
+                          context.push('/');
+           }, icon: Icons.support_agent),
+           tile(label: "要項", ontap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Pdfview(
+                                    pdf: 'assets/docs/sportsprogram.pdf',
+                                    title: '体育祭実施要項')),
+                          );
+                        }, icon: Icons.article),
           Align(
               alignment: Alignment.bottomCenter,
-              child: Column(children: [
+              child: ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
                 const Divider(
                   height: 1,
                   thickness: 1,
@@ -94,25 +120,6 @@ class Draw extends StatelessWidget {
               ]))
         ],
       ),
-    );
-  }
-}
-
-class Tile extends StatelessWidget {
-  const Tile(
-      {super.key, required this.label, required this.rout, required this.icon});
-  final String label;
-  final String rout;
-  final IconData? icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(label),
-      leading: Icon(icon),
-      onTap: () {
-        context.push(rout);
-      },
     );
   }
 }
@@ -171,40 +178,6 @@ class CarouselContainerbox extends StatelessWidget {
   }
 }
 
-class Button extends StatelessWidget {
-  //outlinedbuttonのクラスを作成し、使いまわす
-  const Button(
-      {required this.label, required this.rout, required this.icon, super.key});
-  final String label;
-  final String rout;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-        onPressed: () {
-          context.push(rout);
-        },
-        style: OutlinedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            side: const BorderSide(color: Colors.transparent),
-            fixedSize: const Size(135, 50)),
-        child: Column(
-          children: [
-            Icon(
-              icon,
-              color: Theme.of(context).primaryColor,
-            ),
-            Text(
-              label,
-              style: const TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.bold),
-            )
-          ],
-        ));
-  }
-}
-
 class Menucard extends StatelessWidget {
   const Menucard(
       {required this.title, required this.img, required this.rout, super.key});
@@ -222,8 +195,8 @@ class Menucard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Container(
-            width: double.infinity, //横無限
-            height: 150,
+            width: 350, 
+            height: 200,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
@@ -231,8 +204,8 @@ class Menucard extends StatelessWidget {
                   fit: BoxFit.cover,
                 )),
             child: Container(
-                width: double.infinity, //横無限
-                height: 150,
+                width: 350,
+                height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   gradient: const LinearGradient(
@@ -262,61 +235,3 @@ class Menucard extends StatelessWidget {
         ));
   }
 }
-
-/*
-Card(
-                            //ネットからのデザイン
-                            elevation: 4,
-                            margin: const EdgeInsets.all(5),
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            clipBehavior:
-                                Clip.antiAliasWithSaveLayer, // 画像を丸角にする
-                            child: Column(
-                              children: [
-                                Stack(
-                                  children: [
-                                    SizedBox(
-                                      width: double.infinity,
-                                      height: 150,
-                                      child: Image.asset(
-                                        img,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                // タイトル
-                                Container(
-                                  color: Colors.white,
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 3, horizontal: 8),
-                                  child: Text(
-                                    title,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 22,
-                                    ),
-                                  ),
-                                ),
-                                // 説明文
-                                Container(
-                                  color: Colors.white,
-                                  width: double.infinity,
-                                  padding:
-                                      const EdgeInsets.only(left:8,bottom: 2),
-                                  child: const Text(
-                                    '',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-*/

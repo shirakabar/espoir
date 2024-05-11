@@ -42,12 +42,7 @@ class _News extends ConsumerState<News> {
                                       //ここからを表示
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 1),
-                                      child: Card(
-                                          elevation: 2,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Dismissible(
+                                      child: Dismissible(
                                             key: ObjectKey(doc),
                                             onDismissed: (DismissDirection direction) {
                                               setState(() {
@@ -72,7 +67,12 @@ class _News extends ConsumerState<News> {
                                                     color: Colors.red,
                                                   ),
                                                   ),
-                                            child: ListTile(
+                                            child: Card(
+                                          elevation: 2,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: ListTile(
                                             title: Text(title,style: const TextStyle(fontSize: 18),),
                                             subtitle: Text('${data["createdBy"]}  $time',style: const TextStyle(color: Colors.grey)),
                                             tileColor: const Color.fromARGB(

@@ -6,9 +6,9 @@ import 'package:koyo/come.dart';
 import 'package:koyo/home/result.dart';
 import 'package:koyo/home/ticket.dart';
 import 'package:koyo/news.dart';
-import 'package:koyo/pdfview.dart';
 import 'package:koyo/staff/newsmake.dart';
 import 'package:koyo/home/crowd.dart';
+import 'package:koyo/staff/pushnotificaion.dart';
 
 //gorouterは画面遷移用の外部パッケージ
 //遷移先一覧
@@ -102,6 +102,17 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: const Newsmake(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/push',
+      name: 'push',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Push(),
         );
       },
     ),

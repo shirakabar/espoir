@@ -5,20 +5,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:koyo/pdfview.dart';
 import 'package:koyo/widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:koyo/loginprovider.dart';
 import 'package:url_launcher/url_launcher.dart';
 //ほおむ
-
-final user = FirebaseAuth.instance.currentUser;
-final isLoggedInAdminProvider = StreamProvider.autoDispose((_) {
-  CollectionReference ref = FirebaseFirestore.instance.collection('Admins');
-  return ref.snapshots().map((snapshot) {
-    final list = snapshot.docs.toList();
-    return list;
-  });
-});
 
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});
@@ -29,6 +18,29 @@ class Home extends ConsumerStatefulWidget {
 
 class _Home extends ConsumerState<Home> {
   int _current = 0;
+
+
+  Widget homebutton({required String label,required void Function() onpressed,required IconData icon}) {
+    return OutlinedButton(
+        onPressed: onpressed,
+        style: OutlinedButton.styleFrom(
+            backgroundColor: Colors.transparent,
+            side: const BorderSide(color: Colors.transparent),
+            fixedSize: const Size(135, 50)),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              color: Theme.of(context).primaryColor,
+            ),
+            Text(
+              label,
+              style: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.bold),
+            )
+          ],
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,16 +148,12 @@ class _Home extends ConsumerState<Home> {
               const SizedBox(
                 height: 40,
               ),
-              const Row(
+              Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
                   children: [
-                    Button(
-                        label: '結果', rout: '/result', icon: Icons.emoji_events),
-                    Button(label: '整理券', rout: '/ticket', icon: Icons.receipt),
-                    Button(
-                        label: 'アンケート',
-                        rout: '/crowd',
-                        icon: Icons.description),
+                    homebutton(label: '結果',onpressed: () => context.push('/result'),icon:  Icons.emoji_events),
+                    homebutton(label: '整理券',onpressed: () => context.push('/come'),icon: Icons.receipt),
+                    homebutton(label: 'アンケート',onpressed: () => context.push('/come'),icon: Icons.description),
                   ]),
               const SizedBox(
                 height: 20,
@@ -153,64 +161,26 @@ class _Home extends ConsumerState<Home> {
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
                   children: [
-                    const Button(
-                        label: 'アカウント',
-                        rout: '/account',
-                        icon: Icons.account_circle), //outlinedbuttonのクラス
-                    OutlinedButton(
-                        //お問い合わせじゃなかったら別のところに追いやってね
-                        onPressed: () {
+                    homebutton(label: 'アカウント',onpressed: () => context.push('/account'),icon: Icons.account_circle), //outlinedbuttonのクラス
+                    homebutton(label: 'お問い合わせ',
+                    onpressed: () {
                           final url = Uri.parse(
                               'https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__kqOgrtUOTlOV0lDVFZZSktRTDNGTUJGODYzODRENy4u');
                           launchUrl(url);
                           context.push('/');
                         },
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            side: const BorderSide(color: Colors.transparent),
-                            fixedSize: const Size(135, 50)),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.support_agent,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            const Text(
-                              'お問い合わせ',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        )),
-                    //const Button(label: 'お問い合わせ', rout: '/login', icon: Icons.support_agent),
-                    //const Button(label: '要項', rout: '/pdfview', icon: Icons.article),
-                    OutlinedButton(
-                        onPressed: () {
+                        icon: Icons.support_agent),
+                    homebutton(label: '要項',
+                        onpressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Pdfview(pdf: 'assets/docs/sportsprogram.pdf', title: '体育祭実施要項')),
+                                builder: (context) => const Pdfview(
+                                    pdf: 'assets/docs/sportsprogram.pdf',
+                                    title: '体育祭実施要項')),
                           );
                         },
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            side: const BorderSide(color: Colors.transparent),
-                            fixedSize: const Size(135, 50)),
-                        child: Column(
-                          children: [
-                            Icon(
-                              Icons.article,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            const Text(
-                              '要項',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        )),
+                        icon: Icons.article),
                   ]),
               const SizedBox(
                 height: 20,
@@ -229,9 +199,9 @@ class _Home extends ConsumerState<Home> {
                 height: 8,
               ),
               SizedBox(
-                height: 180,
+                height: 200,
                 child: ListView(
-                    itemExtent: 300, //横幅
+                    itemExtent: 350, //横幅
                     scrollDirection: Axis.horizontal, //横スクロール
                     padding: const EdgeInsets.only(left: 5),
                     children: const [
@@ -270,6 +240,22 @@ class _Home extends ConsumerState<Home> {
                       ),
                     if (ref.watch(currentLoginStatusProvider) !=
                         CurrentLoginStatus.notLoggedIn)
+                      const Divider(
+                        //線
+                        height: 1,
+                        thickness: 1,
+                        color: Colors.grey,
+                      ),
+                      if (ref.watch(currentLoginStatusProvider) ==
+                        CurrentLoginStatus.loggedInStaff)
+                      ListTile(
+                        title: const Text('スタッフ用'),
+                        onTap: () {
+                          context.push('/push');
+                        },
+                      ),
+                      if (ref.watch(currentLoginStatusProvider) ==
+                        CurrentLoginStatus.loggedInStaff)
                       const Divider(
                         //線
                         height: 1,

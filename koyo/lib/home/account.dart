@@ -39,7 +39,7 @@ class _AccountState extends ConsumerState<Account> {
            ),
           if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
           const Logout(),
-              if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.notLoggedIn)
+          if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.notLoggedIn)
           const Login(),
           
           ]),
