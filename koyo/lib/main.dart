@@ -112,8 +112,8 @@ class MyApp extends StatelessWidget {//アプリのいろんな設定
         colorScheme: const ColorScheme(//アプリの色設定
           brightness: Brightness.light, 
           primary: (Color.fromARGB(255, 25, 118, 210)), 
-          onPrimary:  (Color.fromARGB(255, 255, 255, 255)), 
-          secondary:  (Colors.white), 
+          onPrimary:  (Colors.white), 
+          secondary:  (Color.fromARGB(255, 25, 118, 210)), 
           onSecondary:  (Colors.black), 
           error:   (Color.fromARGB(255, 25, 118, 210)), 
           onError:  (Colors.white), 

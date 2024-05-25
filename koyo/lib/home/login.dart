@@ -41,6 +41,7 @@ class _Login extends ConsumerState<Login> {
                         },
                         controller: _classcontroller,
                         onChanged: (value) => setState(() {}),
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),

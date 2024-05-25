@@ -1,3 +1,4 @@
+//このページは製作者に許可を取って千種祭アプリを真似してます
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalData {

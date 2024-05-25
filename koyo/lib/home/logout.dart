@@ -43,7 +43,7 @@ class _Logout extends ConsumerState<Logout> {
           Text('スタッフでログインしています($classname)'),
 
           const SizedBox(
-            height: 10,
+            height: 50,
           ),
           OutlinedButton(
               style: OutlinedButton.styleFrom(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:go_router/go_router.dart';
 
 class Ticket extends StatefulWidget{
   const Ticket({super.key});
@@ -63,11 +62,7 @@ final num =0;
                         .collection('classes')
                         .doc(doc.id)
                         .update({hour[index] : data[hour[index]] - 1 });
-                        FirebaseFirestore.instance
-                        .collection('Users')
-                        .doc()
-                        .update({doc.id : hour[index]});
-                         context.go('/');
+                        
                      }
 
                      taphalf () {                 
@@ -75,11 +70,7 @@ final num =0;
                         .collection('classes')
                         .doc(doc.id)
                         .update({half[index] : data[half[index]] - 1 });
-                        FirebaseFirestore.instance
-                        .collection('Users')
-                        .doc()
-                        .update({doc.id : half[index]});
-                         context.go('/');
+                        
                      }
 
                      final int hourcom = int.parse(hour[index].replaceAll(':',""));//整理券の時間hhmmの整数

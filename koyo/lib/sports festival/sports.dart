@@ -40,7 +40,7 @@ final _taiikusaidata = TaiikusaidataList().taiikusaidata;
                     SizedBox(
                       height: 5,
                     ),
-                Text('6月19日（月）@日本ガイシホール',style: TextStyle(fontSize: 18),),
+                Text('6月17日（月）@愛知県体育館',style: TextStyle(fontSize: 18),),
                   ]
             )
                   ),

@@ -26,7 +26,8 @@ class _Home extends ConsumerState<Home> {
         style: OutlinedButton.styleFrom(
             backgroundColor: Colors.transparent,
             side: const BorderSide(color: Colors.transparent),
-            fixedSize: const Size(135, 50)),
+            //fixedSize: const Size(double.infinity, 50)
+            ),
         child: Column(
           children: [
             Icon(
@@ -76,7 +77,7 @@ class _Home extends ConsumerState<Home> {
                       items: const [
                         CarouselContainerbox(
                           title: '向陽祭',
-                          img: 'assets/images/esupo.png',
+                          img: 'assets/images/symbol.jpg',
                         ),
                         CarouselContainerbox(
                           title: '体育祭',
@@ -134,7 +135,7 @@ class _Home extends ConsumerState<Home> {
                       ),
                       child: const Center(
                           child: Text(
-                        'テスト画面です！！',
+                        'カウントダウン準備中...',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -150,10 +151,10 @@ class _Home extends ConsumerState<Home> {
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
-                  children: [
-                    homebutton(label: '結果',onpressed: () => context.push('/result'),icon:  Icons.emoji_events),
-                    homebutton(label: '整理券',onpressed: () => context.push('/come'),icon: Icons.receipt),
-                    homebutton(label: 'アンケート',onpressed: () => context.push('/come'),icon: Icons.description),
+                  children: [ 
+                    homebutton(label: '''　 結果  　''',onpressed: () => context.push('/result'),icon:  Icons.emoji_events),
+                    homebutton(label: '''　 整理券 　''',onpressed: () => context.push('/come'),icon: Icons.receipt),
+                    homebutton(label: '''アンケート''',onpressed: () => context.push('/come'),icon: Icons.description),
                   ]),
               const SizedBox(
                 height: 20,
@@ -161,8 +162,9 @@ class _Home extends ConsumerState<Home> {
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
                   children: [
-                    homebutton(label: 'アカウント',onpressed: () => context.push('/account'),icon: Icons.account_circle), //outlinedbuttonのクラス
-                    homebutton(label: 'お問い合わせ',
+                    
+                    homebutton(label: '''アカウント''',onpressed: () => context.push('/account'),icon: Icons.account_circle), //outlinedbuttonのクラス
+                    homebutton(label: '''お問い合わせ''',
                     onpressed: () {
                           final url = Uri.parse(
                               'https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__kqOgrtUOTlOV0lDVFZZSktRTDNGTUJGODYzODRENy4u');
@@ -170,7 +172,7 @@ class _Home extends ConsumerState<Home> {
                           context.push('/');
                         },
                         icon: Icons.support_agent),
-                    homebutton(label: '要項',
+                    homebutton(label: '''　 要項 　''',
                         onpressed: () {
                           Navigator.push(
                             context,
@@ -235,7 +237,7 @@ class _Home extends ConsumerState<Home> {
                       ListTile(
                         title: const Text('管理者用'),
                         onTap: () {
-                          context.push('/come');
+                          context.push('/adminselect');
                         },
                       ),
                     if (ref.watch(currentLoginStatusProvider) !=
@@ -251,7 +253,7 @@ class _Home extends ConsumerState<Home> {
                       ListTile(
                         title: const Text('スタッフ用'),
                         onTap: () {
-                          context.push('/push');
+                          context.push('/staffselect');
                         },
                       ),
                       if (ref.watch(currentLoginStatusProvider) ==
@@ -277,9 +279,9 @@ class _Home extends ConsumerState<Home> {
                       color: Colors.grey,
                     ),
                     ListTile(
-                      title: const Text('利用規約'),
+                      title: const Text('法的事項'),
                       onTap: () {
-                        context.push('/newsmake');
+                        context.push('/policyselect');
                       },
                     ),
                     const Divider(

@@ -36,15 +36,18 @@ class _Resultsp extends State<Resultsp> {
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
 
-          if (classdetailList[index].runtimeType != int) {
-            return ListTile(
-              leading: Text('${classdetailList[index].place}位'),
-              title: Text(classdetailList[index].classname),
-              trailing: Text('${classdetailList[index].point}点'),
-            );
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+              ListTile(
+              leading: Text('${classdetailList[index].place}位',style: const TextStyle(fontSize: 16),),
+              title: Text(classdetailList[index].classname,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+              trailing: Text('${classdetailList[index].point}点',style: const TextStyle(fontSize: 16),),
+            ),
+            const Divider(height: 1,color: Colors.grey,indent: 5,endIndent: 5),
+            ]);
           }
-          return null;
-        },
+          
       );
     }
   }
@@ -94,23 +97,22 @@ class _Resultsp extends State<Resultsp> {
                     
                   return Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      child: Column(
+                          horizontal: 10, vertical: 2),
+                      child: Card(
+                        color: const Color.fromARGB(255, 241, 249, 255),
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                                decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 241, 249, 255),
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
+                            Padding(
+                                  padding: const EdgeInsets.only(right: 10, left: 10,top: 10,bottom: 20),
                                   child: Column(
                                     children: [
                                       Text(
                                         sportsList[index].sportstitle,
-                                        style: const TextStyle(fontSize: 15),
+                                        style: const TextStyle(fontSize: 17),
                                       ),
                                       const SizedBox(
                                         height: 5,
@@ -119,8 +121,9 @@ class _Resultsp extends State<Resultsp> {
                                       _resultlist(sportsList[index].classdetailList)
                                     ],
                                   ),
-                                ))
-                          ]));
+                                )
+                          ]),)
+                      );
                 },
               );
             }));

@@ -13,9 +13,9 @@ class Bunkagym extends StatefulWidget {
 
 class _Bunkagym extends State<Bunkagym> {
 
-  List<String> eveat= ["@中棟1階 多目的2教室","102","103","104","105"];
-  List<String> time= ["8:00","午前","8:00","8:00","8:00",];
-  List<String> eve= ["レジン作り","お気軽TRPG倶楽部","レジンを作ろう!","レジンを作ろう!","レジンを作ろう!",];
+  List<String> eveat= ["","","","","",];
+  List<String> time= ["","","","","",];
+  List<String> eve= ["","","","","",];
   @override
   
    Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _Bunkagym extends State<Bunkagym> {
                 subtitle: Text(eveat[index]),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: () {
-                  context.push('/$index');
+                  context.push('/come');
                 },//gorouterでのタップ時遷移　仮
                  shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
