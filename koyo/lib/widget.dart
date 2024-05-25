@@ -107,9 +107,9 @@ class Draw extends StatelessWidget {
                   color: Colors.grey,
                 ),
                 ListTile(
-                  title: const Text('利用規約'),
+                  title: const Text('法的事項'),
                   onTap: () {
-                    context.push('/come');
+                    context.push('/policyselect');
                   },
                 ),
                 const Divider(
@@ -130,6 +130,7 @@ class CarouselContainerbox extends StatelessWidget {
 
   final String img;
   final String title;
+  
   @override
   Widget build(BuildContext context) {
     return Card(

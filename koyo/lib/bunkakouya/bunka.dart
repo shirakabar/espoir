@@ -50,7 +50,7 @@ Widget _headerSection() {
                      SizedBox(
                       height: 5,
                     ),
-                Text('6月19日（月）',style: TextStyle(fontSize: 18),),
+                Text('9月5日（木）',style: TextStyle(fontSize: 18),),
                   ]
             )
                   ),

@@ -1,6 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:koyo/home/account.dart';
+import 'package:koyo/home/adminselect.dart';
+import 'package:koyo/home/policyselect.dart';
+import 'package:koyo/home/resultmake.dart';
+import 'package:koyo/home/staffselect.dart';
 import 'package:koyo/main.dart';
 import 'package:koyo/come.dart';
 import 'package:koyo/home/result.dart';
@@ -113,6 +117,50 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: const Push(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/resultmake',
+      name: 'resultmake',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Resultmakesp(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/adminselect',
+      name: 'adminselect',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Adminselect(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/staffselect',
+      name: 'staffselect',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Staffselect(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/policyselect',
+      name: 'policyselect',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Policyselect(),
         );
       },
     ),

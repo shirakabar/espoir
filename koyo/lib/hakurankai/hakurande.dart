@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:koyo/hakurankai/butai.dart';
 
 //博覧のdetailそれぞれのページの内容記載
@@ -14,39 +14,40 @@ class Kyo extends StatefulWidget {
 
 class _Kyo extends State<Kyo> {
   List<String> kyo = [
-    "101",
-    "102",
-    "103",
-    "104",
-    "105",
-    "106",
-    "107",
-    "108",
-    "109"
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
   ];
   List<String> title = [
-    "格付けチェック",
-    "104格付けチェック",
-    "104格付けチェック",
-    "104格付けチェック",
-    "104格付けチェック",
-    "104格付けチェック",
-    "104格付けチェック",
-    "104格付けチェック",
-    "104格付けチェック",
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
   ];
   List<String> kyoat = [
-    "@中棟3階 104教室",
-    "@中棟3階",
-    "@中棟3階",
-    "@中棟3階",
-    "@中棟3階",
-    "@中棟3階",
-    "@中棟3階",
-    "@中棟3階",
-    "@中棟3階",
+   '',
+   '',
+   '',
+   '',
+   '',
+   '',
+   '',
+   '',
+   '',
   ];
   List<dynamic> post = [
+    /*Image.asset('assets/images/postest.jpg'),
     Image.asset('assets/images/postest.jpg'),
     Image.asset('assets/images/postest.jpg'),
     Image.asset('assets/images/postest.jpg'),
@@ -54,11 +55,19 @@ class _Kyo extends State<Kyo> {
     Image.asset('assets/images/postest.jpg'),
     Image.asset('assets/images/postest.jpg'),
     Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),
+    Image.asset('assets/images/postest.jpg'),*/
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
   ];
 
-  _crowd(int index) {
+  /*_crowd(int index) {
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('classes').snapshots(),
         builder: (context, snapshot) {
@@ -79,7 +88,7 @@ class _Kyo extends State<Kyo> {
           ];
           return crowdimg.elementAt(data['crowd']);
         });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +119,7 @@ class _Kyo extends State<Kyo> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '6月19日（月）9:00~15:00\n6月19日（月）9:30~15:30',
+                                  '9月6日（金）\n9月7日（土）',
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ])),
@@ -132,7 +141,7 @@ class _Kyo extends State<Kyo> {
                           //体育祭の各種目を一覧表示
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 9,
+                          itemCount: kyo.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                                 //ここからを表示
@@ -171,9 +180,9 @@ class _Kyo extends State<Kyo> {
                                             borderRadius: BorderRadius.circular(5), 
                                             child: FittedBox(
                                           fit: BoxFit.fitHeight,
-                                          child: _crowd(index))),
+                                          child: /*_crowd(index)*/Image.asset('assets/images/crowdone.jpg'))),
                                       onTap: () {
-                                        context.push('/$index');
+                                        context.push('/come');
                                       }, //gorouterでのタップ時遷移　仮
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -235,7 +244,7 @@ Widget _headerSection() {
                       height: 5,
                     ),
                     Text(
-                      '6月19日（月）9:00~15:00\n6月19日（月）9:30~15:30',
+                      '9月6日（金）\n9月7日（土）',
                       style: TextStyle(fontSize: 18),
                     ),
                   ])),
@@ -342,7 +351,7 @@ class _Club extends State<Club> {
                           height: 5,
                         ),
                         Text(
-                          '6月19日（月）9:00~15:00\n6月19日（月）9:30~15:30',
+                          '9月6日（金）\n9月7日（土）',
                           style: TextStyle(fontSize: 18),
                         ),
                       ])),
@@ -360,7 +369,6 @@ class _Club extends State<Club> {
                 height: 10,
               ),
               ListView.builder(
-                  //体育祭の各種目を一覧表示
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 5,
@@ -378,7 +386,7 @@ class _Club extends State<Club> {
                               tileColor:
                                   const Color.fromARGB(255, 241, 249, 255),
                               onTap: () {
-                                context.push('/$index');
+                                context.push('/come');
                               }, //gorouterでのタップ時遷移　仮
                               shape: const RoundedRectangleBorder(
                                 borderRadius:
@@ -389,44 +397,3 @@ class _Club extends State<Club> {
             ])));
   }
 }
-
-/*class Crowd extends StatefulWidget{
-   const Crowd({super.key,required this.index});
-   final int index;
-
-  @override
-  State<Crowd> createState() => _Crowd();
-}
-
-class _Crowd extends State<Crowd> {
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-                          stream: FirebaseFirestore.instance
-                              .collection('classes')
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return Image.asset('assets/images/crowdone.jpg');
-                            }
-                            if (!snapshot.hasData) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
-
-                            final docs = snapshot.data!.docs;
-                            final doc = docs[widget.index];
-                                  final data =
-                                      doc.data()! as Map<String, dynamic>;
-                                  final List<Widget> crowdimg = <Widget>[
-                                    Image.asset('assets/images/crowdone.jpg'),
-                                    Image.asset('assets/images/crowdtwo.jpg'),
-                                    Image.asset('assets/images/crowdthree.jpg'),
-                                  ];
-                            return crowdimg.elementAt(data['crowd']);
-                          }
-    );
-
-  }
-}*/

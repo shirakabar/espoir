@@ -1,3 +1,4 @@
+//このページは製作者に許可を取って千種祭アプリを真似してます
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/localdata.dart';
 

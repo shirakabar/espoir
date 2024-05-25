@@ -131,6 +131,9 @@ flutter:
     - assets/images/hakuran.png
     - assets/images/koyoicon.png
     - assets/docs/sportsprogram.pdf
+    - assets/docs/termsofservice.pdf
+    - assets/docs/plivacypolicy.pdf
+    - assets/images/symbol.jpg
 
 flutter_native_splash:
     color: "#FFFFFF"

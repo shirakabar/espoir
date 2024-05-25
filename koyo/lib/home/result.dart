@@ -20,6 +20,7 @@ class _Result extends State<Result>{
   }
   static const List<Widget> _widgetoptions = <Widget>[
     Resultsp(),
+    Resultsp()
     //ResultHa(),
   ] ;
 
