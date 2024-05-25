@@ -32,7 +32,7 @@ class _Ichiran extends State<Ichiran> {
                 subtitle: const Text(''),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: () {
-                  context.push('/$index');
+                  context.push('/come');
                 },//gorouterでのタップ時遷移　仮
                  shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -77,7 +77,7 @@ class _First extends State<First> {
                 subtitle: const Text(''),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: () {
-                  context.push('/$index');
+                  context.push('/come');
                 },//gorouterでのタップ時遷移　仮
                  shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -122,7 +122,7 @@ class _Second extends State<Second> {
                 subtitle: const Text(''),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: () {
-                  context.push('/$index');
+                  context.push('/come');
                 },//gorouterでのタップ時遷移　仮
                  shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
