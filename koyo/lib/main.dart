@@ -12,6 +12,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:koyo/settings/koyo_icons.dart';//文化祭、後夜祭ページ
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:io';
+import 'package:flutter/services.dart';
 
 //メインの関数、ここからすべては始まる
 
@@ -42,7 +43,12 @@ void main() async {
   // 通知設定の初期化を行う
   _initNotification();
 
-  runApp(const ProviderScope(child: MyApp()));
+  SystemChrome.setPreferredOrientations([
+    // 縦向き
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+  runApp(const ProviderScope(child: MyApp()));});
 }                          
 
 Future<void> _initNotification() async {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:koyo/pdfview.dart';
 import 'package:koyo/widget.dart';
 import 'package:koyo/data/sportsdata.dart';
 
@@ -73,8 +73,14 @@ final _taiikusaidata = TaiikusaidataList().taiikusaidata;
                 subtitle: Text(_taiikusaidata[index].place),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: () {
-                  context.push('/$index');
-                },//gorouterでのタップ時遷移　仮
+                  Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Pdfview(
+                                    pdf: 'assets/docs/sportsprogram.pdf',
+                                    title: '体育祭実施要項')),
+                          );
+                },
                  shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
