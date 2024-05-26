@@ -189,7 +189,7 @@ class Menucard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          context.push('/come');
+          context.push(rout);
         },
         child: Card(
           shape: RoundedRectangleBorder(

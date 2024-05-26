@@ -43,7 +43,7 @@ class _Push extends State<Push> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '※競技開始10分前に送信してください\n  (送信には数分のラグが生じます)',
+                                  '※競技開始12分前に送信してください\n  (送信には数分のラグが生じます)',
                                   style: TextStyle(
                                       fontSize: 15, color: Colors.grey),
                                 ),

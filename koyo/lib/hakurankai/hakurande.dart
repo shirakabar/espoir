@@ -156,9 +156,9 @@ class _Kyo extends State<Kyo> {
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                               horizontal: 20),
-                                      leading: FittedBox(
+                                      /*leading: FittedBox(
                                           fit: BoxFit.fitHeight,
-                                          child: post.elementAt(index)),
+                                          child: post.elementAt(index)),*/
                                       title: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 5),
@@ -176,11 +176,11 @@ class _Kyo extends State<Kyo> {
                                       ),
                                       tileColor: const Color.fromARGB(
                                           255, 241, 249, 255),
-                                      trailing:  ClipRRect(
+                                      /*trailing:  ClipRRect(
                                             borderRadius: BorderRadius.circular(5), 
                                             child: FittedBox(
                                           fit: BoxFit.fitHeight,
-                                          child: /*_crowd(index)*/Image.asset('assets/images/crowdone.jpg'))),
+                                          child: /*_crowd(index)*/Image.asset('assets/images/crowdone.jpg'))),*/
                                       onTap: () {
                                         context.push('/come');
                                       }, //gorouterでのタップ時遷移　仮
