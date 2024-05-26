@@ -132,17 +132,24 @@ class _Resultmakesp extends State<Resultmakesp> {
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
                         onPressed: ( _sportscontroller.text == '' || _ordercontroller.text == '' ) 
-                            ?  null
-                            : () {
-                                FirebaseFirestore.instance
+                            ?  () {
+                              debugPrint(_sportscontroller.text);
+                              debugPrint(_ordercontroller.text);
+                            }
+                            : () { try{
+                              FirebaseFirestore.instance
                                     .collection("Results")
                                     .doc("taiikusairesult")
                                     .update({
                                   _sportscontroller.text: {
                                     _ordercontroller.text: {}
-                                  }
-                                });
-
+                                    }
+                                  });
+                                }catch(e) {
+                                  debugPrint(e.toString());
+                                  debugPrint(_sportscontroller.text);
+                              debugPrint(_ordercontroller.text);
+                                }
                                 const snackBar = SnackBar(
                                   content: Text("更新しました"),
                                   duration: Duration(seconds: 1),

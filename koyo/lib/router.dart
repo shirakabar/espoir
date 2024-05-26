@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:koyo/hakurankai/hakurande.dart';
 import 'package:koyo/home/account.dart';
 import 'package:koyo/home/adminselect.dart';
 import 'package:koyo/home/policyselect.dart';
@@ -161,6 +162,17 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: const Policyselect(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/test',
+      name: 'test',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Kyo(),
         );
       },
     ),
