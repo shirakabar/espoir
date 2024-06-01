@@ -210,7 +210,7 @@ class _Home extends ConsumerState<Home> {
                       Menucard(
                           title: 'アクセス',
                           img: 'assets/images/access.png',
-                          rout: '/test'),
+                          rout: '/come'),
                       Menucard(
                           title: '中学生へ',
                           img: 'assets/images/koyobuilding.jpg',

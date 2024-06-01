@@ -148,7 +148,7 @@ class _Resultmakesp extends State<Resultmakesp> {
                                 }catch(e) {
                                   debugPrint(e.toString());
                                   debugPrint(_sportscontroller.text);
-                              debugPrint(_ordercontroller.text);
+                                  debugPrint(_ordercontroller.text);
                                 }
                                 const snackBar = SnackBar(
                                   content: Text("更新しました"),
