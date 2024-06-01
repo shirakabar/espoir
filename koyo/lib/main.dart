@@ -1,3 +1,4 @@
+//import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';//必須
 import 'package:koyo/router.dart';//ページ遷移指定用
 import 'package:koyo/home/home.dart';//アプリのホーム画面
@@ -17,16 +18,27 @@ import 'package:flutter/services.dart';
 //メインの関数、ここからすべては始まる
 
 void main() async {
+  //FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
   WidgetsFlutterBinding.ensureInitialized();//firebaseを使うための定型文
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,       
   );
+  FirebaseMessaging.instance.subscribeToTopic('news');
 
   final messagingInstance = FirebaseMessaging.instance;
   messagingInstance.requestPermission();
 
    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  if (Platform.isAndroid) {
+
+  if (Platform.isIOS) {
+    await messagingInstance.requestPermission();
+    // iOSでフォアグランド通知を行うための設定
+    await messagingInstance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+  } else if (Platform.isAndroid) {
     final androidImplementation =
         flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>();
@@ -42,6 +54,12 @@ void main() async {
 
   // 通知設定の初期化を行う
   _initNotification();
+
+  //final message = await FirebaseMessaging.instance.getInitialMessage();
+
+  final fcmToken = await messagingInstance.getToken();
+  debugPrint('FCM TOKEN: $fcmToken');
+
 
   SystemChrome.setPreferredOrientations([
     // 縦向き
@@ -90,7 +108,7 @@ Future<void> _initNotification() async {
   flutterLocalNotificationsPlugin.initialize(
     const InitializationSettings(
       android: AndroidInitializationSettings(
-          '@mipmap/ic_launcher'), //通知アイコンの設定は適宜行ってください
+          '@drawable/koyoicon'), 
       iOS: DarwinInitializationSettings(),
     ),
     /*onDidReceiveNotificationResponse: (details) {

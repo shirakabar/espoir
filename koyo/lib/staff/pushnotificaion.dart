@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/widget.dart';
 import 'package:koyo/data/sportsdata.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 //体育祭のスケジュール一覧
 
@@ -13,6 +14,18 @@ class Push extends StatefulWidget {
 
 class _Push extends State<Push> {
   final _taiikusaidata = TaiikusaidataList().taiikusaidata;
+
+Future<void> pushNotification(String text) async {
+  final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('pushnotification');
+  try {
+     await callable.call(<String, dynamic>{
+      'text': text,
+    });
+    debugPrint('Notification sent successfully');
+  } catch (e) {
+    debugPrint('Failed to send notification: $e');
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +110,8 @@ class _Push extends State<Push> {
                                                   child: const Text("送信"),
                                                   onPressed: () {
                                                     try {
+                                                      //FirebaseFunctions.instance.httpsCallable('pushnotification').call({'text': _taiikusaidata[index].title});
+                                                      pushNotification(_taiikusaidata[index].title);
                                                       const snackBar = SnackBar(
                                                       content: Text("招集通知を送信しました"),
                                                       duration: Duration(seconds: 1),);
