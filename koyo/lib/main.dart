@@ -198,4 +198,4 @@ class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継�
     );
   }
 }
-
+//なかしょー誕生日おめでとう！アプリ製作お疲れ様ヾ(｡・ω・)ﾉﾟ
