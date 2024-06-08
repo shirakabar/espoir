@@ -19,6 +19,7 @@ import 'package:flutter/services.dart';
 
 void main() async {
   //FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
+  //Firebaseのデバッグ用
   WidgetsFlutterBinding.ensureInitialized();//firebaseを使うための定型文
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,       
@@ -44,8 +45,8 @@ void main() async {
             AndroidFlutterLocalNotificationsPlugin>();
     await androidImplementation?.createNotificationChannel(
       const AndroidNotificationChannel(
-        'default_notification_channel',
-        'プッシュ通知のチャンネル名',
+        'koyo_festival76',
+        '第７６回向陽祭',
         importance: Importance.max,
       ),
     );
@@ -57,8 +58,8 @@ void main() async {
 
   //final message = await FirebaseMessaging.instance.getInitialMessage();
 
-  final fcmToken = await messagingInstance.getToken();
-  debugPrint('FCM TOKEN: $fcmToken');
+  //final fcmToken = await messagingInstance.getToken();
+  //debugPrint('FCM TOKEN: $fcmToken');
 
 
   SystemChrome.setPreferredOrientations([
@@ -93,8 +94,8 @@ Future<void> _initNotification() async {
         notification.body,
         NotificationDetails(
           android: AndroidNotificationDetails(
-            'default_notification_channel',
-            'プッシュ通知のチャンネル名',
+            'koyo_festival76',
+            '第７６回向陽祭',
             importance: Importance.max, // 通知の重要度の設定
             icon: android?.smallIcon,
           ),
