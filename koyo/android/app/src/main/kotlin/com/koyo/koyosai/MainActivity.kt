@@ -1,4 +1,4 @@
-package com.example.koyo
+package com.koyo.koyosai
 
 import io.flutter.embedding.android.FlutterActivity
 

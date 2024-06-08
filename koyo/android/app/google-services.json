@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:924395100608:android:356f5cd306c2a7d2359025",
+        "mobilesdk_app_id": "1:924395100608:android:9ddcd0b5e391e55e359025",
         "android_client_info": {
-          "package_name": "com.example.koyo"
+          "package_name": "com.koyo.koyosai"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "924395100608-uvnejc08e34hntnlo2rk6540ocjnbqb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAzhSApTLOYel7bS3n1UocqmilnvuTApkY"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924395100608-uvnejc08e34hntnlo2rk6540ocjnbqb0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "924395100608-d2mec7jkcflsls60etcpcc1cdppdsoa9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.koyo"
+              }
+            }
+          ]
         }
       }
     }
