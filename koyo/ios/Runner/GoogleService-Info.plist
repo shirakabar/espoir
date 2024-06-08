@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>924395100608-83haabsdpp6nknsssag4ulj7hvpgudmr.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCEJ9SQhYpzi6aaaJT63Y8abbbS4Pt-bzo</string>
 	<key>GCM_SENDER_ID</key>
@@ -9,7 +11,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.koyo</string>
+	<string>com.koyo.koyosai</string>
 	<key>PROJECT_ID</key>
 	<string>koyo-b6f9f</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +27,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:924395100608:ios:72dc48ae55125eaf359025</string>
+	<string>1:924395100608:ios:1e93db177870564b359025</string>
 </dict>
 </plist>
