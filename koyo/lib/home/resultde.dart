@@ -97,7 +97,7 @@ class _Resultsp extends State<Resultsp> {
                     
                   return Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 2),
+                          horizontal: 15, vertical: 2),
                       child: Card(
                         color: const Color.fromARGB(255, 241, 249, 255),
                           elevation: 2,
@@ -107,15 +107,15 @@ class _Resultsp extends State<Resultsp> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
-                                  padding: const EdgeInsets.only(right: 10, left: 10,top: 10,bottom: 20),
+                                  padding: const EdgeInsets.only(right: 10, left: 10,top: 12,bottom: 20),
                                   child: Column(
                                     children: [
                                       Text(
                                         sportsList[index].sportstitle,
-                                        style: const TextStyle(fontSize: 17),
+                                        style: const TextStyle(fontSize: 18),
                                       ),
                                       const SizedBox(
-                                        height: 5,
+                                        height: 7,
                                         width: double.infinity,
                                       ),
                                       _resultlist(sportsList[index].classdetailList)
