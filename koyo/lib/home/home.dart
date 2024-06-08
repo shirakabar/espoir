@@ -103,7 +103,7 @@ class _Home extends ConsumerState<Home> {
                           viewportFraction: 0.95, //各カードの表示される範囲の割合
                           enableInfiniteScroll: true, //最後のカードから最初のカードへの遷移
                           autoPlayInterval:
-                              const Duration(seconds: 15), //カードのインターバル
+                              const Duration(seconds: 8), //カードのインターバル
                           autoPlayAnimationDuration:
                               const Duration(milliseconds: 400),
                           //スライドが始まって終わるまでの時間
