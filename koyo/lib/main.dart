@@ -1,4 +1,6 @@
 //import 'package:cloud_functions/cloud_functions.dart';
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';//必須
 import 'package:koyo/router.dart';//ページ遷移指定用
 import 'package:koyo/home/home.dart';//アプリのホーム画面
