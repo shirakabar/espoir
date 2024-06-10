@@ -169,7 +169,7 @@ class _Home extends ConsumerState<Home> {
                           final url = Uri.parse(
                               'https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__kqOgrtUOTlOV0lDVFZZSktRTDNGTUJGODYzODRENy4u');
                           launchUrl(url);
-                          context.push('/');
+                          context.push('/');//消したほうがいいかもしれない、
                         },
                         icon: Icons.support_agent),
                     homebutton(label: '''　 要項 　''',

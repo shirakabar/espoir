@@ -117,7 +117,6 @@ flutter:
         - asset: fonts/Koyo.ttf
    
   assets:
-    - assets/images/esupo.png
     - assets/images/1f.png
     - assets/images/2f.png
     - assets/images/3f.png
@@ -126,15 +125,12 @@ flutter:
     - assets/images/crowdtwo.jpg
     - assets/images/crowdthree.jpg
     - assets/images/postest.jpg
-    - assets/images/mapone.jpg
-    - assets/images/maptwo.jpg
     - assets/images/kouya.jpg
     - assets/images/hakuran.jpg
     - assets/images/bunkasai.jpg
     - assets/images/taiikusai.jpg
     - assets/images/koyobuilding.jpg
     - assets/images/access.png
-    - assets/images/hakuran.png
     - assets/images/koyoicon.png
     - assets/docs/sportsprogram.pdf
     - assets/docs/termsofservice.pdf
