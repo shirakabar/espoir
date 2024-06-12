@@ -49,9 +49,7 @@ class Draw extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          SizedBox(
-            height: 200,
-            child: DrawerHeader(
+        DrawerHeader(
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
                 ),
@@ -75,10 +73,17 @@ class Draw extends StatelessWidget {
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ])),
-          ),
            tile(label: "結果", ontap: () => context.push('/result'), icon: Icons.emoji_events),
-           tile(label: "整理券", ontap: () => context.push('/come'), icon: Icons.receipt),
-           tile(label: "アンケート", ontap: () => context.push('/come'), icon: Icons.description),
+           tile(label: "ホームページ", ontap: () {
+            final url = Uri.parse(
+                              'https://www.nagoya-c.ed.jp/school/koyo-h/index.html');
+                          launchUrl(url);
+           }, icon: Icons.receipt),
+           tile(label: "アンケート", ontap: () {
+            final url = Uri.parse(
+                              'https://docs.google.com/forms/d/e/1FAIpQLSenWU97munsKfYxjUQZ5Giws7LJux-6CCJxvGlmazFfSErfBA/viewform?usp=sf_link');
+                          launchUrl(url);
+           }, icon: Icons.description),
            tile(label: "アカウント", ontap: () => context.push('/account'), icon: Icons.account_circle),
            tile(label: "お問い合わせ", ontap: () {
             final url = Uri.parse(
@@ -181,16 +186,14 @@ class CarouselContainerbox extends StatelessWidget {
 
 class Menucard extends StatelessWidget {
   const Menucard(
-      {required this.title, required this.img, required this.rout, super.key});
+      {required this.title, required this.img, required this.ontap, super.key});
   final String title;
   final String img;
-  final String rout;
+  final Function() ontap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          context.push(rout);
-        },
+        onTap: ontap,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

@@ -1,11 +1,10 @@
 //import 'package:cloud_functions/cloud_functions.dart';
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';//必須
+import 'package:koyo/hakurankai/hakurande.dart';
 import 'package:koyo/router.dart';//ページ遷移指定用
 import 'package:koyo/home/home.dart';//アプリのホーム画面
 import 'package:koyo/sports festival/sports.dart';//体育祭ページ
-import 'package:koyo/hakurankai/hakuran.dart';//博覧会ぺーじ
+//import 'package:koyo/hakurankai/hakuran.dart';//博覧会ぺーじ
 import 'package:koyo/bunkakouya/bunkou.dart';//文化祭、後夜祭ページ
 import 'package:koyo/map/map.dart';//校舎内マップページ
 import 'package:firebase_core/firebase_core.dart';//firebase連携で必須
@@ -168,8 +167,9 @@ class _MyHomePageState extends State<MyHomePage> {//statefulWidgetを受け継�
    int _currentindex =0;//bottomnavigationbarの選択時の変数
   static const _screens = [//各画面を格納
     Home(),//ホーム画面
-    Sports(),//体育祭
-    Hakuran(),//博覧会
+    Sports(),//体育祭]
+    Kyo(),
+    //Hakuran(),//博覧会
     Bunkou(),//文化と後夜でございます
     Map()//校内マップ
   ];

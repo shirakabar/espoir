@@ -136,6 +136,8 @@ flutter:
     - assets/docs/termsofservice.pdf
     - assets/docs/plivacypolicy.pdf
     - assets/images/symbol.jpg
+    - assets/docs/hakurankaipolicy.pdf
+    - assets/docs/bunkasaipolicy.pdf
 
 flutter_native_splash:
     color: "#FFFFFF"

@@ -19,7 +19,6 @@ class Home extends ConsumerStatefulWidget {
 class _Home extends ConsumerState<Home> {
   int _current = 0;
 
-
   Widget homebutton({required String label,required void Function() onpressed,required IconData icon}) {
     return OutlinedButton(
         onPressed: onpressed,
@@ -135,7 +134,7 @@ class _Home extends ConsumerState<Home> {
                       ),
                       child: const Center(
                           child: Text(
-                        'カウントダウン準備中...',
+                        '体育祭は6/17‼',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -153,8 +152,16 @@ class _Home extends ConsumerState<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
                   children: [ 
                     homebutton(label: '''　 結果  　''',onpressed: () => context.push('/result'),icon:  Icons.emoji_events),
-                    homebutton(label: '''　 整理券 　''',onpressed: () => context.push('/come'),icon: Icons.receipt),
-                    homebutton(label: '''アンケート''',onpressed: () => context.push('/come'),icon: Icons.description),
+                    homebutton(label: '''ホームページ'''/*'''　 整理券 　'''*/,onpressed: () {
+                      final url = Uri.parse(
+                              'https://www.nagoya-c.ed.jp/school/koyo-h/index.html');
+                          launchUrl(url);
+                    },icon: Icons.receipt),
+                    homebutton(label: '''アンケート''',onpressed: () {
+                      final url = Uri.parse(
+                              'https://docs.google.com/forms/d/e/1FAIpQLSenWU97munsKfYxjUQZ5Giws7LJux-6CCJxvGlmazFfSErfBA/viewform?usp=sf_link');
+                          launchUrl(url);
+                    },icon: Icons.description),
                   ]),
               const SizedBox(
                 height: 20,
@@ -169,7 +176,7 @@ class _Home extends ConsumerState<Home> {
                           final url = Uri.parse(
                               'https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__kqOgrtUOTlOV0lDVFZZSktRTDNGTUJGODYzODRENy4u');
                           launchUrl(url);
-                          context.push('/');//消したほうがいいかもしれない、
+                          //context.push('/');//消したほうがいいかもしれない、
                         },
                         icon: Icons.support_agent),
                     homebutton(label: '''　 要項 　''',
@@ -206,15 +213,23 @@ class _Home extends ConsumerState<Home> {
                     itemExtent: 350, //横幅
                     scrollDirection: Axis.horizontal, //横スクロール
                     padding: const EdgeInsets.only(left: 5),
-                    children: const [
+                    children: [
                       Menucard(
                           title: 'アクセス',
                           img: 'assets/images/access.png',
-                          rout: '/come'),
+                          ontap: () {
+                            final url = Uri.parse(
+                              'https://www.nagoya-c.ed.jp/school/koyo-h/index.html');
+                          launchUrl(url);
+                          },),
                       Menucard(
                           title: '中学生へ',
                           img: 'assets/images/koyobuilding.jpg',
-                          rout: '/come'),
+                          ontap: () {
+                            final url = Uri.parse(
+                              'https://www.nagoya-c.ed.jp/school/koyo-h/d_juken.html');
+                          launchUrl(url);
+                          },),
                     ]),
               ),
               const SizedBox(
@@ -256,7 +271,7 @@ class _Home extends ConsumerState<Home> {
                           context.push('/staffselect');
                         },
                       ),
-                      if (ref.watch(currentLoginStatusProvider) ==
+                      /*if (ref.watch(currentLoginStatusProvider) ==
                         CurrentLoginStatus.loggedInStaff)
                       const Divider(
                         //線
@@ -271,7 +286,7 @@ class _Home extends ConsumerState<Home> {
                         onTap: () {
                           context.push('/come');
                         },
-                      ),
+                      ),*/
                     const Divider(
                       //線
                       height: 1,
