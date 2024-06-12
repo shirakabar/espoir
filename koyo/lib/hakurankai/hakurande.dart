@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:koyo/hakurankai/butai.dart';
+import 'package:koyo/pdfview.dart';
+import 'package:koyo/widget.dart';
+import 'package:koyo/data/hakurandata.dart';
+
 
 //博覧のdetailそれぞれのページの内容記載
 
@@ -13,59 +17,7 @@ class Kyo extends StatefulWidget {
 }
 
 class _Kyo extends State<Kyo> {
-  List<String> kyo = [
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-  ];
-  List<String> title = [
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-  ];
-  List<String> kyoat = [
-   '',
-   '',
-   '',
-   '',
-   '',
-   '',
-   '',
-   '',
-   '',
-  ];
-  List<dynamic> post = [
-    /*Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),
-    Image.asset('assets/images/postest.jpg'),*/
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ];
+  final _hakurankaidata = HakurankaidataList().hakurankaidata;
 
   /*_crowd(int index) {
     return StreamBuilder<QuerySnapshot>(
@@ -93,6 +45,8 @@ class _Kyo extends State<Kyo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const Bar(title: '博覧会'),
+      drawer: const Draw(),//仮
         body: SingleChildScrollView(
             //スクロール可能
             child: Padding(
@@ -141,7 +95,7 @@ class _Kyo extends State<Kyo> {
                           //体育祭の各種目を一覧表示
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: kyo.length,
+                          itemCount: _hakurankaidata.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                                 //ここからを表示
@@ -163,14 +117,14 @@ class _Kyo extends State<Kyo> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 5),
                                         child: Text(
-                                          title[index],
+                                          _hakurankaidata[index].title,
                                           style: const TextStyle(fontSize: 17),
                                         ),
                                       ),
                                       subtitle: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
-                                        child: Text(kyoat[index],
+                                        child: Text(_hakurankaidata[index].place,
                                             style:
                                                 const TextStyle(fontSize: 14)),
                                       ),
@@ -182,7 +136,13 @@ class _Kyo extends State<Kyo> {
                                           fit: BoxFit.fitHeight,
                                           child: /*_crowd(index)*/Image.asset('assets/images/crowdone.jpg'))),*/
                                       onTap: () {
-                                        context.push('/come');
+                                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Pdfview(
+                                    pdf: 'assets/docs/hakurankaipolicy.pdf',
+                                    title: '博覧会実施要項')),
+                          );
                                       }, //gorouterでのタップ時遷移　仮
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(

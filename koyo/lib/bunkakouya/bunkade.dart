@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
+import 'package:koyo/data/bunkasaidata.dart';
+import 'package:koyo/pdfview.dart';
 //文化祭のdetail各ページの詳細
 
 class Bunkagym extends StatefulWidget {
@@ -12,10 +12,7 @@ class Bunkagym extends StatefulWidget {
 }
 
 class _Bunkagym extends State<Bunkagym> {
-
-  List<String> eveat= ["","","","","",];
-  List<String> time= ["","","","","",];
-  List<String> eve= ["","","","","",];
+ final _bunkasaidata = BunkasaidataList().bunkasaidata;
   @override
   
    Widget build(BuildContext context) {
@@ -38,7 +35,7 @@ class _Bunkagym extends State<Bunkagym> {
         Expanded(child: ListView.builder(//体育祭の各種目を一覧表示
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: eve.length,
+            itemCount: _bunkasaidata.length,
           itemBuilder: (BuildContext context, int index) {
             return Padding(//ここからを表示
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
@@ -49,13 +46,19 @@ class _Bunkagym extends State<Bunkagym> {
             borderRadius: BorderRadius.circular(10)
           ),
               child: ListTile(
-                leading: Text(time[index],style: const TextStyle(fontSize: 25,fontWeight: FontWeight.w400),),
-                title: Text(eve[index],style: const TextStyle(fontSize: 20),),
-                subtitle: Text(eveat[index]),
+                leading: Text(_bunkasaidata[index].time,style: const TextStyle(fontSize: 25,fontWeight: FontWeight.w400),),
+                title: Text(_bunkasaidata[index].title,style: const TextStyle(fontSize: 20),),
+                subtitle: Text(_bunkasaidata[index].place),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: () {
-                  context.push('/come');
-                },//gorouterでのタップ時遷移　仮
+                  Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Pdfview(
+                                    pdf: 'assets/docs/bunkasaipolicy.pdf',
+                                    title: '文化祭実施要項')),
+                          );
+                },//タップ時遷移　仮
                  shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
