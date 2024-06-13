@@ -41,7 +41,7 @@ class _Resultsp extends State<Resultsp> {
               children: [
               ListTile(
               leading: Text('${classdetailList[index].place}位',style: const TextStyle(fontSize: 16),),
-              title: Text(classdetailList[index].classname,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+              title: Text(classdetailList[index].classname,style: const TextStyle(fontSize: 16),),
               trailing: Text('${classdetailList[index].point}点',style: const TextStyle(fontSize: 16),),
             ),
             const Divider(height: 1,color: Colors.grey,indent: 5,endIndent: 5),

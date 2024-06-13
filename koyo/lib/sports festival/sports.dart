@@ -68,9 +68,9 @@ final _taiikusaidata = TaiikusaidataList().taiikusaidata;
             borderRadius: BorderRadius.circular(10)
           ),
               child: ListTile(
-                leading: Text(_taiikusaidata[index].time,style: const TextStyle(fontSize: 25,fontWeight: FontWeight.w400),),
-                title: Text(_taiikusaidata[index].title,style: const TextStyle(fontSize: 20),),
-                subtitle: Text(_taiikusaidata[index].place),
+                leading: Text(_taiikusaidata[index].time,style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400),),
+                title: Text(_taiikusaidata[index].title,style: const TextStyle(fontSize: 21),),
+                //subtitle: Text(_taiikusaidata[index].place),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: () {
                   Navigator.push(

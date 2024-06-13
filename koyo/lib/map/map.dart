@@ -28,8 +28,8 @@ class Map extends StatelessWidget {
                   context.push('/news');
                 },
        ),],
-        bottom: const TabBar(
-        tabs: [
+        bottom: TabBar(
+        tabs: const [
            Tab( text:'1F'),
            Tab( text:'2F'),
            Tab( text:'3F'),
@@ -38,6 +38,7 @@ class Map extends StatelessWidget {
          unselectedLabelColor: Colors.white,
          labelColor: Colors.white,
          indicatorColor: Colors.white,
+         dividerColor: Theme.of(context).primaryColor,
         ),
 
       ),

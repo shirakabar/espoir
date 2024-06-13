@@ -76,6 +76,7 @@ Widget _tabSection() {
             text: '半日教室',
           )
         ],
+        dividerColor: Colors.white
       ),
     ),
   );
@@ -100,7 +101,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      color: const Color.fromARGB(255, 251, 251, 251),
+      color: Colors.white,
       child: tabBar,
     );
   }

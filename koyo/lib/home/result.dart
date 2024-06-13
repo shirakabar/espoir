@@ -11,18 +11,6 @@ class Result extends StatefulWidget{
 }
 
 class _Result extends State<Result>{
- int _currentpageindex = 0;
-
-  void _taptab(int index) {
-    setState(() {
-      _currentpageindex = index;
-  });
-  }
-  static const List<Widget> _widgetoptions = <Widget>[
-    Resultsp(),
-    Resultsp()
-    //ResultHa(),
-  ] ;
 
 @override
   Widget build(BuildContext context) {
@@ -41,7 +29,6 @@ class _Result extends State<Result>{
                 },
        ),],
         bottom: TabBar(
-        onTap: _taptab,
         tabs: const [
            Tab( text:'体育祭'),
            Tab( text:'博覧会'),
@@ -49,15 +36,17 @@ class _Result extends State<Result>{
          unselectedLabelColor: Colors.white,
          labelColor: Colors.white,
          indicatorColor: Colors.white,
+         dividerColor: Theme.of(context).primaryColor,
         ),
 
       ),
       body:
-        Expanded(
-          child: Container(
-            child: _widgetoptions.elementAt(_currentpageindex)
-          )
-        ,)
+        const TabBarView(
+        children: [
+           Resultsp(),
+           Resultsp(),
+          ],
+        )
     ),    
     );
 }
