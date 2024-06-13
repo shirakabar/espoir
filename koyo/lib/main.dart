@@ -62,7 +62,7 @@ void main() async {
   //final fcmToken = await messagingInstance.getToken();
   //debugPrint('FCM TOKEN: $fcmToken');
 
-
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);//ステータスバー
   SystemChrome.setPreferredOrientations([
     // 縦向き
     DeviceOrientation.portraitUp,
@@ -140,12 +140,10 @@ class MyApp extends StatelessWidget {//アプリのいろんな設定
           primary: (Color.fromARGB(255, 25, 118, 210)), 
           onPrimary:  (Colors.white), 
           secondary:  (Color.fromARGB(255, 25, 118, 210)), 
-          onSecondary:  (Colors.black), 
+          onSecondary:  (Colors.white), 
           error:   (Color.fromARGB(255, 25, 118, 210)), 
           onError:  (Colors.white), 
-          background:  Color.fromARGB(255, 251, 251, 251), //grey50
-          onBackground: (Colors.white), 
-          surface: Color.fromARGB(255, 251, 251, 251),
+          surface: Colors.white,//Color.fromARGB(255, 251, 251, 251),
           onSurface: (Colors.black),),
         useMaterial3: true,
       ),

@@ -76,7 +76,7 @@ class _Resultlist extends State<Resultlist> {
               children: [
               ListTile(
               leading: Text('${classdetailList[index].place}位',style: const TextStyle(fontSize: 16),),
-              title: Text(classdetailList[index].classname,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+              title: Text(classdetailList[index].classname,style: const TextStyle(fontSize: 16),),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min, 
                 children: [
@@ -273,13 +273,12 @@ class _Resultdialog extends State<Resultdialog> {
                       TextField(
                         controller: _classcontroller,
                         onChanged: (value) => setState(() {}),
-                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                             labelStyle: const TextStyle(
                               fontSize: 13,
                               color: Colors.grey,
                             ),
-                            labelText: 'クラス名(例:101)',
+                            labelText: 'ブロック名(例:青ブロック)',
                             floatingLabelStyle: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context).primaryColor,

@@ -28,11 +28,12 @@ class Bunkou extends StatelessWidget {
                   context.push('/news');
                 },
        ),],
-        bottom: const TabBar(
-        tabs: [
+        bottom: TabBar(
+        tabs: const [
            Tab( text:'文化祭'),
            Tab( text:'後夜祭'),
         ],
+         dividerColor: Theme.of(context).primaryColor,
          unselectedLabelColor: Colors.white,
          labelColor: Colors.white,
          indicatorColor: Colors.white,

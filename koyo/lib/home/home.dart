@@ -42,8 +42,13 @@ class _Home extends ConsumerState<Home> {
         ));
   }
 
+  Future _init(WidgetRef ref) async {
+    //init login data
+    LoginDataManager.setLoginDataProviderDataFromLocal(ref);
+  }
   @override
   Widget build(BuildContext context) {
+    _init(ref);
     return Scaffold(
         drawer: const Draw(),
         appBar: const Bar(title: '第76回向陽祭'),
@@ -60,7 +65,7 @@ class _Home extends ConsumerState<Home> {
                       end: FractionalOffset.bottomCenter,
                       colors: [
                         Colors.white,
-                        Color(0xFFEEEEEE),
+                        Color.fromARGB(255, 245, 245, 245),
                       ],
                       stops: [
                         0.5,
@@ -134,7 +139,7 @@ class _Home extends ConsumerState<Home> {
                       ),
                       child: const Center(
                           child: Text(
-                        '体育祭は6/17‼',
+                        '体育祭は6月17日‼',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -176,7 +181,6 @@ class _Home extends ConsumerState<Home> {
                           final url = Uri.parse(
                               'https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__kqOgrtUOTlOV0lDVFZZSktRTDNGTUJGODYzODRENy4u');
                           launchUrl(url);
-                          //context.push('/');//消したほうがいいかもしれない、
                         },
                         icon: Icons.support_agent),
                     homebutton(label: '''　 要項 　''',
@@ -255,14 +259,14 @@ class _Home extends ConsumerState<Home> {
                           context.push('/adminselect');
                         },
                       ),
-                    if (ref.watch(currentLoginStatusProvider) !=
+                    /*if (ref.watch(currentLoginStatusProvider) !=
                         CurrentLoginStatus.notLoggedIn)
                       const Divider(
                         //線
                         height: 1,
                         thickness: 1,
                         color: Colors.grey,
-                      ),
+                      ),*/
                       if (ref.watch(currentLoginStatusProvider) ==
                         CurrentLoginStatus.loggedInStaff)
                       ListTile(

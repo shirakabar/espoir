@@ -92,8 +92,7 @@ Future<void> pushNotification(String text) async {
                                         _taiikusaidata[index].title,
                                         style: const TextStyle(fontSize: 20),
                                       ),
-                                      subtitle:
-                                          Text(_taiikusaidata[index].place),
+                                      //subtitle:Text(_taiikusaidata[index].place),
                                       tileColor: const Color.fromARGB(
                                           255, 241, 249, 255),
                                       onTap: () {

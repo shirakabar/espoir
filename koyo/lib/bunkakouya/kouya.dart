@@ -81,6 +81,7 @@ Widget _tabSection() {
             text: 'オンデマンド',
           )*/
         ],
+        dividerColor: Colors.white
       ),
     ),
   );
@@ -105,7 +106,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      color: const Color.fromARGB(255, 251, 251, 251),
+      color: Colors.white,
       child: tabBar,
     );
   }
