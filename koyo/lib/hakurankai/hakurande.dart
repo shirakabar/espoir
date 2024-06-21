@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:koyo/hakurankai/butai.dart';
-import 'package:koyo/pdfview.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/pdfview.dart';
+import 'package:koyo/widget/widget.dart';
 import 'package:koyo/data/hakurandata.dart';
 
 

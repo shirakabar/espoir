@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/hakurankai/hakurande.dart';
 import 'package:go_router/go_router.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/widget.dart';
 
 //博覧ページのタブ遷移先
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/data/kouyasaidata.dart';
-import 'package:koyo/pdfview.dart';
+import 'package:koyo/widget/pdfview.dart';
 //文化祭のdetail各ページの詳細
 
 class Kouyagym extends StatefulWidget {

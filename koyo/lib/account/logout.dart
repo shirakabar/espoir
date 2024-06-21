@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/loginprovider.dart';
+import 'package:koyo/settings/loginprovider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import '../data/localdata.dart';
 import 'package:shared_preferences/shared_preferences.dart';

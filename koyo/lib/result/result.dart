@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/home/resultde.dart';
+import 'package:koyo/result/resultde.dart';
 import 'package:go_router/go_router.dart';
 //体育祭などの結果発表ページ
 

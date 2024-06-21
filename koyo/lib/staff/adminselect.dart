@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/widget.dart';
 
 class Adminselect extends StatelessWidget {
   const Adminselect({super.key});

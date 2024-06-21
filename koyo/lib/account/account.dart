@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/widget.dart';
-import 'package:koyo/home/login.dart';
-import 'package:koyo/home/logout.dart';
-import 'package:koyo/loginprovider.dart';
+import 'package:koyo/widget/widget.dart';
+import 'package:koyo/account/login.dart';
+import 'package:koyo/account/logout.dart';
+import 'package:koyo/settings/loginprovider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Account extends ConsumerStatefulWidget {

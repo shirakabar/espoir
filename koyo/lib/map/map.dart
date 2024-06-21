@@ -4,7 +4,7 @@ import 'package:koyo/map/firstfloor.dart';
 import 'package:koyo/map/secondfloor.dart';
 import 'package:koyo/map/thirdfloor.dart';
 import 'package:go_router/go_router.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/widget.dart';
 
 class Map extends StatelessWidget {
   const Map({super.key});
