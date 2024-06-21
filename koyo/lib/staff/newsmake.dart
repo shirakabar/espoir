@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/widget.dart';
 
 class Newsmake extends StatefulWidget{
   const Newsmake({super.key});

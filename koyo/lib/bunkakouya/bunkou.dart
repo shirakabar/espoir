@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:koyo/bunkakouya/bunka.dart';
 import 'package:koyo/bunkakouya/kouya.dart';
 import 'package:go_router/go_router.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/widget.dart';
 
 //文化、後夜のタブ遷移先一覧
 

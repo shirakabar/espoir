@@ -1,18 +1,17 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:koyo/home/account.dart';
-import 'package:koyo/home/adminselect.dart';
+import 'package:koyo/account/account.dart';
+import 'package:koyo/staff/adminselect.dart';
 import 'package:koyo/home/policyselect.dart';
-import 'package:koyo/home/resultmake.dart';
-import 'package:koyo/home/staffselect.dart';
-import 'package:koyo/main.dart';
-import 'package:koyo/come.dart';
-import 'package:koyo/home/result.dart';
+import 'package:koyo/result/resultmake.dart';
+import 'package:koyo/staff/staffselect.dart';
+import 'package:koyo/widget/come.dart';
+import 'package:koyo/result/result.dart';
 import 'package:koyo/home/ticket.dart';
-import 'package:koyo/news.dart';
+import 'package:koyo/home/news.dart';
 import 'package:koyo/staff/newsmake.dart';
-import 'package:koyo/home/crowd.dart';
 import 'package:koyo/staff/pushnotificaion.dart';
+import 'package:koyo/widget/bottomnavi.dart';
 
 //gorouterは画面遷移用の外部パッケージ
 //遷移先一覧
@@ -20,15 +19,15 @@ import 'package:koyo/staff/pushnotificaion.dart';
 final goRouter = GoRouter(
   
   initialLocation: '/',//最初に表示される画面
-  
-  routes: [//各画面のpath、名前を指定
-    GoRoute(
+
+  //各画面のpath、名前を指定
+  routes: [GoRoute(
       path: '/',
       name: 'initial',
       pageBuilder: (context, state) {
         return MaterialPage(
           key: state.pageKey,
-          child: const MyHomePage(),
+          child: const Bottomnavi(),
         );
       },
     ),
@@ -40,17 +39,6 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: const Come(),
-        );
-      },
-    ),
-
-    GoRoute(
-      path: '/crowd',
-      name: 'crowd',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          key: state.pageKey,
-          child: const Crowd(),
         );
       },
     ),

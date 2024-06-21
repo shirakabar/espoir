@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:koyo/widget.dart';
-import 'package:koyo/resultwidget.dart';
+import 'package:koyo/widget/widget.dart';
+import 'package:koyo/result/resultwidget.dart';
 
 class Classdetail {
   const Classdetail(
@@ -13,10 +13,11 @@ class Classdetail {
 }
 
 class Sportsdetail {
-  const Sportsdetail(
-      {required this.order,
-      required this.sportstitle,
-      required this.classdetailList});
+  const Sportsdetail({
+    required this.order,
+    required this.sportstitle,
+    required this.classdetailList
+    });
 
   final int order;
   final String sportstitle;
@@ -104,8 +105,8 @@ class _Resultmakesp extends State<Resultmakesp> {
               data.forEach((String sportstitle, dynamic orders) {
                 orders.forEach((String order, dynamic classes) {
                   final List<Classdetail> classdetailList = [];
-                  debugPrint(
-                      'data:$data'); //data: {男女リレー: {3: {105: {place: 5, point: 5}, 106: {place: 6, point: 6}}}, 向陽リレー: {1: {101: {place: 1, point: 1}, 102: {place: 2, point: 2}}}}
+                  debugPrint('data:$data'); 
+                      //data: {男女リレー: {3: {105: {place: 5, point: 5}, 106: {place: 6, point: 6}}}, 向陽リレー: {1: {101: {place: 1, point: 1}, 102: {place: 2, point: 2}}}}
 
                   classes.forEach((String? classname, dynamic classresults) {
                     classdetailList.add(Classdetail(

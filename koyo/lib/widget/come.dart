@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 //カミングすーん
 

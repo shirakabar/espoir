@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/widget.dart';
 
 
 class Pdfview extends StatefulWidget {

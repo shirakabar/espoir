@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/widget.dart';
 import 'package:koyo/data/sportsdata.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 

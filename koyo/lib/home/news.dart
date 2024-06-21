@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:koyo/loginprovider.dart';
+import 'package:koyo/settings/loginprovider.dart';
 class News extends ConsumerStatefulWidget {
   const News({super.key});
 

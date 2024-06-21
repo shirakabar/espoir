@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:koyo/pdfview.dart';
+import 'package:koyo/widget/pdfview.dart';
 
 class Bar extends StatelessWidget implements PreferredSizeWidget {
   const Bar({required this.title, super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/pdfview.dart';
-import 'package:koyo/widget.dart';
+import 'package:koyo/widget/pdfview.dart';
+import 'package:koyo/widget/widget.dart';
 
 class Policyselect extends StatelessWidget {
   const Policyselect({super.key});
