@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:koyo/hakurankai/butai.dart';
 import 'package:koyo/widget/pdfview.dart';
-import 'package:koyo/widget/widget.dart';
 import 'package:koyo/data/hakurandata.dart';
 
 
@@ -19,7 +18,7 @@ class Kyo extends StatefulWidget {
 class _Kyo extends State<Kyo> {
   final _hakurankaidata = HakurankaidataList().hakurankaidata;
 
-  /*_crowd(int index) {
+  _crowd(int index) {
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('classes').snapshots(),
         builder: (context, snapshot) {
@@ -40,13 +39,11 @@ class _Kyo extends State<Kyo> {
           ];
           return crowdimg.elementAt(data['crowd']);
         });
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Bar(title: '博覧会'),
-      drawer: const Draw(),//仮
         body: SingleChildScrollView(
             //スクロール可能
             child: Padding(
@@ -110,9 +107,9 @@ class _Kyo extends State<Kyo> {
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                               horizontal: 20),
-                                      /*leading: FittedBox(
+                                      leading: FittedBox(
                                           fit: BoxFit.fitHeight,
-                                          child: post.elementAt(index)),*/
+                                          child: Image.asset('assets/images/postest.jpg')),//仮の画像
                                       title: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 5),
@@ -130,11 +127,11 @@ class _Kyo extends State<Kyo> {
                                       ),
                                       tileColor: const Color.fromARGB(
                                           255, 241, 249, 255),
-                                      /*trailing:  ClipRRect(
+                                      trailing:  ClipRRect(
                                             borderRadius: BorderRadius.circular(5), 
                                             child: FittedBox(
                                           fit: BoxFit.fitHeight,
-                                          child: /*_crowd(index)*/Image.asset('assets/images/crowdone.jpg'))),*/
+                                          child: _crowd(index))),
                                       onTap: () {
                                         Navigator.push(
                             context,

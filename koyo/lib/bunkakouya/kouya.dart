@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/bunkakouya/kouyade.dart';
-//import 'package:koyo/bunkakouya/ondemand.dart';
+import 'package:koyo/bunkakouya/ondemand.dart';
 
 //文化祭ページのタブ遷移先一覧
 //stickeytabbarはネットから
@@ -11,7 +11,7 @@ class Kouya extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 2,
+        length: 3,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -23,7 +23,7 @@ class Kouya extends StatelessWidget {
             children: [
                Kouyagym(),
                Kouyagym(),
-               //Ondemand(),
+               Ondemand(),
             ],
           ),
         ),
@@ -77,9 +77,9 @@ Widget _tabSection() {
           Tab(
             text: '運動場',
           ),
-          /*Tab(
+          Tab(
             text: 'オンデマンド',
-          )*/
+          )
         ],
         dividerColor: Colors.white
       ),

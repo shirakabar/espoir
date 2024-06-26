@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';//必須
-import 'package:koyo/hakurankai/hakurande.dart';
+import 'package:koyo/hakurankai/hakuran.dart';
 import 'package:koyo/home/home.dart';//アプリのホーム画面
 import 'package:koyo/sportsfestival/sports.dart';//体育祭ページ
 import 'package:koyo/bunkakouya/bunkou.dart';//文化祭、後夜祭ページ
@@ -18,8 +18,7 @@ class _Bottomnavi extends State<Bottomnavi> {//statefulWidgetを受け継いだs
   static const _screens = [//各画面を格納
     Home(),//ホーム画面
     Sports(),//スポーツ関係
-    Kyo(),
-    //Hakuran(),//博覧会
+    Hakuran(),//博覧会
     Bunkou(),//文化・後夜
     Map()//校内マップ
   ];
