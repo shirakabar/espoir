@@ -79,7 +79,7 @@ class Draw extends StatelessWidget {
                               'https://www.nagoya-c.ed.jp/school/koyo-h/index.html');
                           launchUrl(url);
            }, icon: Icons.receipt),
-           tile(label: "アンケート", ontap: () {
+           tile(label: "整理券", ontap: () {
             final url = Uri.parse(
                               'https://docs.google.com/forms/d/e/1FAIpQLSenWU97munsKfYxjUQZ5Giws7LJux-6CCJxvGlmazFfSErfBA/viewform?usp=sf_link');
                           launchUrl(url);

@@ -25,7 +25,6 @@ class _Home extends ConsumerState<Home> {
         style: OutlinedButton.styleFrom(
             backgroundColor: Colors.transparent,
             side: const BorderSide(color: Colors.transparent),
-            //fixedSize: const Size(double.infinity, 50)
             ),
         child: Column(
           children: [
@@ -157,7 +156,7 @@ class _Home extends ConsumerState<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
                   children: [ 
                     homebutton(label: '''　 結果  　''',onpressed: () => context.push('/result'),icon:  Icons.emoji_events),
-                    homebutton(label: '''ホームページ'''/*'''　 整理券 　'''*/,onpressed: () {
+                    homebutton(label: '''　 整理券 　''',onpressed: () {
                       final url = Uri.parse(
                               'https://www.nagoya-c.ed.jp/school/koyo-h/index.html');
                           launchUrl(url);
@@ -259,14 +258,14 @@ class _Home extends ConsumerState<Home> {
                           context.push('/adminselect');
                         },
                       ),
-                    /*if (ref.watch(currentLoginStatusProvider) !=
+                    if (ref.watch(currentLoginStatusProvider) !=
                         CurrentLoginStatus.notLoggedIn)
                       const Divider(
                         //線
                         height: 1,
                         thickness: 1,
                         color: Colors.grey,
-                      ),*/
+                      ),
                       if (ref.watch(currentLoginStatusProvider) ==
                         CurrentLoginStatus.loggedInStaff)
                       ListTile(
@@ -275,7 +274,7 @@ class _Home extends ConsumerState<Home> {
                           context.push('/staffselect');
                         },
                       ),
-                      /*if (ref.watch(currentLoginStatusProvider) ==
+                      if (ref.watch(currentLoginStatusProvider) ==
                         CurrentLoginStatus.loggedInStaff)
                       const Divider(
                         //線
@@ -290,7 +289,7 @@ class _Home extends ConsumerState<Home> {
                         onTap: () {
                           context.push('/come');
                         },
-                      ),*/
+                      ),
                     const Divider(
                       //線
                       height: 1,

@@ -1,8 +1,6 @@
-//import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';//必須
 import 'package:koyo/settings/router.dart';//ページ遷移指定用
 import 'package:koyo/settings/notificationsettings.dart';//通知設定
-//import 'package:koyo/hakurankai/hakuran.dart';//博覧会ページ
 import 'package:firebase_core/firebase_core.dart';//firebase連携で必須
 import 'settings/firebase_options.dart';//同じくfirebase
 import 'package:flutter_riverpod/flutter_riverpod.dart';
