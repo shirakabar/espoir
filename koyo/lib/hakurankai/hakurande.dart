@@ -10,7 +10,7 @@ import 'package:koyo/data/hakurandata.dart';
 
 class Kyo extends StatefulWidget {
   const Kyo({super.key});
-
+  
   @override
   State<Kyo> createState() => _Kyo();
 }
@@ -59,7 +59,7 @@ class _Kyo extends State<Kyo> {
                           padding: EdgeInsets.only(left: 20, top: 15),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                              children: [        
                                 Text(
                                   '博覧会',
                                   style: TextStyle(
@@ -239,6 +239,7 @@ Widget _tabSection() {
             text: '二日目',
           )
         ],
+        dividerColor: Colors.white,
       ),
     ),
   );
@@ -263,7 +264,7 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
-      color: const Color.fromARGB(255, 251, 251, 251),
+      color: Colors.white,
       child: tabBar,
     );
   }

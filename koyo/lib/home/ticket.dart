@@ -1,8 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:koyo/data/localdata.dart';
 
 class Ticket extends StatefulWidget{
-  const Ticket({super.key});
+  const Ticket({super.key,required this.classname});
+
+  final String classname;
 
   @override
   State<Ticket> createState() => _Ticket();
@@ -12,22 +17,39 @@ class _Ticket extends State<Ticket>{
 
 List<String> hour =['10:00','11:00','12:00','13:00','14:00','15:00'];
 List<String> half =['10:30','11:30','12:30','13:30','14:30'];
+  int nowcom = 0;//テスト用
+  //int nowcom = DateTime.now().hour * 100 + DateTime.now().minute;
 
-final num =0;
+  Future<void> saveTicket(start, end, classname) async {
+    String day = '${DateTime.now().month}/${DateTime.now().day}';
+    Map<String,dynamic> jsonData = {'time' : '$start ~ $end','classname' : classname,'day' : day,'starttime' : start};
+    final jsonString = jsonEncode(jsonData).toString();
+    await LocalData.saveLocalData(start, jsonString);
+  }
+  
+  void _onTimer(Timer timer) {
+   DateTime now = DateTime.now();//現在時刻　hh:mmの形
+   int nowint = now.hour * 100 + now.minute;//現在時刻　hhmmの整数 9時間足して日本時間に変換
+   setState(() {
+    nowcom = nowint;
+   });
+  }
 
-
+  @override
+  void initState() {
+    super.initState();
+    //Timer.periodic(const Duration(seconds: 1), _onTimer);
+  }
 
   @override
   Widget build(BuildContext context) {
-    
-    final DateTime now = DateTime.now();//現在時刻　hh:mmの形
-    final int nowcom = now.hour * 100 + now.minute;//現在時刻　hhmmの整数 9時間足して日本時間に変換
+    final classname = widget.classname;
 
     return Scaffold(
       appBar:  AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text('整理券取得',style: TextStyle(color: Colors.white),),
+        title: Text('$classname整理券取得',style: const TextStyle(color: Colors.white),),
         centerTitle: true,
       ),
       body: Padding(
@@ -35,14 +57,15 @@ final num =0;
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-        //注意書きsitaiii
         const Text('希望の時間帯を選択してください',style: TextStyle(fontSize: 20),),
-        Text('現在時刻：$nowcom'),//仮
+        Text('現在時刻：$nowcom'),
+        
         const SizedBox(height:25),
-        StreamBuilder<QuerySnapshot>(
+        StreamBuilder<DocumentSnapshot>(//各クラスのドキュメントをstreambuilderで監視
                   stream: FirebaseFirestore.instance
-                      .collection('classes')
-                      .snapshots(),
+                  .collection('Ticket')
+                  .doc(classname)
+                  .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return const Text('エラーが発生しました');
@@ -50,28 +73,32 @@ final num =0;
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    final docs = snapshot.data!.docs;
-                    final doc = docs[num];
-                    final data = doc.data()! as Map<String?,dynamic>;
+                    final data = snapshot.data;
                     
-                    return Expanded(child: ListView.builder(
+                    return Expanded(child: 
+                    
+                    ListView.builder(
                     itemCount: 5,
                     itemBuilder: (BuildContext context, int index) {
-                     taphour () {                 
+                     onTapped (start, end) {          
                         FirebaseFirestore.instance
-                        .collection('classes')
-                        .doc(doc.id)
-                        .update({hour[index] : data[hour[index]] - 1 });
-                        
+                        .collection('Ticket')
+                        .doc(classname)
+                        .update({start : data?[start] - 1 });
+                        saveTicket(start, end, classname);
+                        //LocalData.saveLocalData(hour, classname);
+                        Navigator.pop(context);
                      }
 
-                     taphalf () {                 
+                     /*taphalf (start, end) {       
                         FirebaseFirestore.instance
-                        .collection('classes')
-                        .doc(doc.id)
-                        .update({half[index] : data[half[index]] - 1 });
-                        
-                     }
+                        .collection('Ticket')
+                        .doc(classname)
+                        .update({start : data?[start] - 1 });
+                        //LocalData.saveLocalData(half, classname);
+                        saveTicket(start, end, classname);
+                        Navigator.pop(context);
+                     }*/
 
                      final int hourcom = int.parse(hour[index].replaceAll(':',""));//整理券の時間hhmmの整数
                      final int halfcom = int.parse(half[index].replaceAll(':',""));
@@ -82,25 +109,25 @@ final num =0;
                       Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4,vertical:7),
                       child: OutlinedButton(
-                       onPressed: data[hour[index]] < 1 || hourcom <= nowcom ? null :() => taphour(),//三項演算子をつかうらしい ||はOR
+                       onPressed: data?[hour[index]] < 1 || hourcom <= nowcom ? null :() => onTapped(hour[index], half[index]),//三項演算子をつかうらしい ||はOR
                        style: OutlinedButton.styleFrom(
                        backgroundColor: Colors.transparent,//背景透明
                        side: BorderSide(color: Theme.of(context).primaryColor),
                        fixedSize: const Size(135, 50)
                        ),
-                       child: Text('${hour[index]}~${half[index]} 残り${data[hour[index]]} '),
+                       child: Text('${hour[index]}~${half[index]} 残り${data?[hour[index]]} '),
                        ),),
 
                        Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4,vertical:7),
                       child: OutlinedButton(
-                       onPressed: data[half[index]] < 1 || halfcom <= nowcom ? null :() => taphalf(),//三項演算子をつかうらしい ||はOR
+                       onPressed: data?[half[index]] < 1 || halfcom <= nowcom ? null :() => onTapped(half[index], hour[index + 1]),//三項演算子をつかうらしい ||はOR
                        style: OutlinedButton.styleFrom(
                        backgroundColor: Colors.transparent,//背景透明
                        side: BorderSide(color: Theme.of(context).primaryColor),
                        fixedSize: const Size(135, 50)
                        ),
-                       child: Text('${half[index]}~${hour[index + 1]} 残り${data[half[index]]}'),
+                       child: Text('${half[index]}~${hour[index + 1]} 残り${data?[half[index]]}'),
                        ),)
                      ]
                       );

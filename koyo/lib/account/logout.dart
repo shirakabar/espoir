@@ -36,11 +36,14 @@ class _Logout extends ConsumerState<Logout> {
         if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInStudent) 
           Text('$classnameの生徒でログインしています'),
 
-         if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin) 
+        if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin) 
           Text('管理者でログインしています($classname)'),
 
         if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInStaff)
           Text('スタッフでログインしています($classname)'),
+        
+        if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn) 
+          const Text('メニューにボタンが追加されました'),
 
           const SizedBox(
             height: 50,

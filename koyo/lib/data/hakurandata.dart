@@ -23,5 +23,14 @@ class HakurankaidataList {
    const Hakurankaidata(title: 'あの金は何処へ ', place: '中棟3階107教室'),
    const Hakurankaidata(title: '西蔵祭', place: '中棟4階108教室'),
    const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
+   const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
+   const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
+   const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
+   const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
+   const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
+   const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
+   const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
+   const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
+   const Hakurankaidata(title: '名探偵 109 赤孤島の殺人', place: '中棟4階109教室'),   
   ];
 }

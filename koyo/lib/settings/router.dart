@@ -1,13 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:koyo/account/account.dart';
+import 'package:koyo/home/mobilescan.dart';
+import 'package:koyo/home/ticketlist.dart';
 import 'package:koyo/staff/adminselect.dart';
 import 'package:koyo/home/policyselect.dart';
 import 'package:koyo/result/resultmake.dart';
 import 'package:koyo/staff/staffselect.dart';
 import 'package:koyo/widget/come.dart';
 import 'package:koyo/result/result.dart';
-import 'package:koyo/home/ticket.dart';
 import 'package:koyo/home/news.dart';
 import 'package:koyo/staff/newsmake.dart';
 import 'package:koyo/staff/pushnotificaion.dart';
@@ -55,12 +56,12 @@ final goRouter = GoRouter(
     ),
 
     GoRoute(
-      path: '/ticket',
-      name: 'ticket',
+      path: '/ticketlist',
+      name: 'ticketlist',
       pageBuilder: (context, state) {
         return MaterialPage(
           key: state.pageKey,
-          child: const Ticket(),
+          child: const TicketList(),
         );
       },
     ),
@@ -149,6 +150,17 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: const Policyselect(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/mobilescan',
+      name: 'mobilescan',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Mobilescan(),
         );
       },
     ),

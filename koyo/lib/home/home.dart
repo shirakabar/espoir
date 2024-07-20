@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:koyo/data/localdata.dart';
+import 'package:koyo/settings/koyo_icons.dart';
 import 'package:koyo/widget/pdfview.dart';
 import 'package:koyo/widget/widget.dart';
 import 'package:koyo/settings/loginprovider.dart';
@@ -40,14 +42,15 @@ class _Home extends ConsumerState<Home> {
           ],
         ));
   }
-
-  Future _init(WidgetRef ref) async {
-    //init login data
+  
+  @override
+  void initState() {
     LoginDataManager.setLoginDataProviderDataFromLocal(ref);
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    _init(ref);
     return Scaffold(
         drawer: const Draw(),
         appBar: const Bar(title: '第76回向陽祭'),
@@ -155,17 +158,16 @@ class _Home extends ConsumerState<Home> {
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
                   children: [ 
-                    homebutton(label: '''　 結果  　''',onpressed: () => context.push('/result'),icon:  Icons.emoji_events),
-                    homebutton(label: '''　 整理券 　''',onpressed: () {
-                      final url = Uri.parse(
-                              'https://www.nagoya-c.ed.jp/school/koyo-h/index.html');
-                          launchUrl(url);
-                    },icon: Icons.receipt),
-                    homebutton(label: '''アンケート''',onpressed: () {
-                      final url = Uri.parse(
+                    Expanded(child: homebutton(label: '結果',onpressed: () => context.push('/result'),icon:  Icons.emoji_events), ),
+                    
+                    Expanded(child: homebutton(label: '整理券',onpressed: () => context.push('/ticketlist'),icon: Koyo.ticketicon),),
+                    
+                    Expanded(child: homebutton(label: '''アンケート''',onpressed: () {
+                     final url = Uri.parse(
                               'https://docs.google.com/forms/d/e/1FAIpQLSenWU97munsKfYxjUQZ5Giws7LJux-6CCJxvGlmazFfSErfBA/viewform?usp=sf_link');
                           launchUrl(url);
-                    },icon: Icons.description),
+                    },icon: Icons.description),),
+                    
                   ]),
               const SizedBox(
                 height: 20,
@@ -174,15 +176,15 @@ class _Home extends ConsumerState<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly, //均等に横に並べる
                   children: [
                     
-                    homebutton(label: '''アカウント''',onpressed: () => context.push('/account'),icon: Icons.account_circle), //outlinedbuttonのクラス
-                    homebutton(label: '''お問い合わせ''',
+                    Expanded(child: homebutton(label: 'アカウント',onpressed: () => context.push('/account'),icon: Icons.account_circle)), //outlinedbuttonのクラス
+                    Expanded(child: homebutton(label: 'お問い合わせ',
                     onpressed: () {
                           final url = Uri.parse(
                               'https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__kqOgrtUOTlOV0lDVFZZSktRTDNGTUJGODYzODRENy4u');
                           launchUrl(url);
                         },
-                        icon: Icons.support_agent),
-                    homebutton(label: '''　 要項 　''',
+                        icon: Icons.support_agent)),
+                    Expanded(child: homebutton(label: '要項',
                         onpressed: () {
                           Navigator.push(
                             context,
@@ -192,7 +194,7 @@ class _Home extends ConsumerState<Home> {
                                     title: '体育祭実施要項')),
                           );
                         },
-                        icon: Icons.article),
+                        icon: Icons.article)),
                   ]),
               const SizedBox(
                 height: 20,
@@ -217,13 +219,20 @@ class _Home extends ConsumerState<Home> {
                     scrollDirection: Axis.horizontal, //横スクロール
                     padding: const EdgeInsets.only(left: 5),
                     children: [
+                      if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
+                      Menucard(title: '管理者用', img: 'assets/images/koyobuilding.jpg', ontap: () => context.push('/adminselect')),
+                      if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInStaff)
+                      Menucard(title: 'スタッフ用', img: 'assets/images/koyobuilding.jpg', ontap: () => context.push('/staffselect')),
+                      if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
+                      Menucard(title: 'クラス運営', img: 'assets/images/koyobuilding.jpg', ontap: () => context.push('/come')),
                       Menucard(
                           title: 'アクセス',
                           img: 'assets/images/access.png',
                           ontap: () {
-                            final url = Uri.parse(
+                            /*final url = Uri.parse(
                               'https://www.nagoya-c.ed.jp/school/koyo-h/index.html');
-                          launchUrl(url);
+                          launchUrl(url);*/
+                          LocalData.saveLocalData('10:00', '101');
                           },),
                       Menucard(
                           title: '中学生へ',
@@ -242,54 +251,6 @@ class _Home extends ConsumerState<Home> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Column(children: [
-                    if (ref.watch(currentLoginStatusProvider) ==
-                        CurrentLoginStatus.loggedInAdmin)
-                      const Divider(
-                        //線
-                        height: 1,
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
-                    if (ref.watch(currentLoginStatusProvider) ==
-                        CurrentLoginStatus.loggedInAdmin)
-                      ListTile(
-                        title: const Text('管理者用'),
-                        onTap: () {
-                          context.push('/adminselect');
-                        },
-                      ),
-                    if (ref.watch(currentLoginStatusProvider) !=
-                        CurrentLoginStatus.notLoggedIn)
-                      const Divider(
-                        //線
-                        height: 1,
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
-                      if (ref.watch(currentLoginStatusProvider) ==
-                        CurrentLoginStatus.loggedInStaff)
-                      ListTile(
-                        title: const Text('スタッフ用'),
-                        onTap: () {
-                          context.push('/staffselect');
-                        },
-                      ),
-                      if (ref.watch(currentLoginStatusProvider) ==
-                        CurrentLoginStatus.loggedInStaff)
-                      const Divider(
-                        //線
-                        height: 1,
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
-                    if (ref.watch(currentLoginStatusProvider) !=
-                        CurrentLoginStatus.notLoggedIn)
-                      ListTile(
-                        title: const Text('クラス運営'),
-                        onTap: () {
-                          context.push('/come');
-                        },
-                      ),
                     const Divider(
                       //線
                       height: 1,
