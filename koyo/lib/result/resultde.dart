@@ -74,7 +74,7 @@ class _Resultsp extends State<Resultsp> {
               data.forEach((String sportstitle, dynamic orders) {
                     orders.forEach((String order, dynamic classes) {
                       final List<Classdetail> classdetailList = [];
-                      debugPrint('data:$data'); //data: {男女リレー: {3: {105: {place: 5, point: 5}, 106: {place: 6, point: 6}}}, 向陽リレー: {1: {101: {place: 1, point: 1}, 102: {place: 2, point: 2}}}}
+                      //debugPrint('data:$data'); //data: {男女リレー: {3: {105: {place: 5, point: 5}, 106: {place: 6, point: 6}}}, 向陽リレー: {1: {101: {place: 1, point: 1}, 102: {place: 2, point: 2}}}}
 
                       classes.forEach((String? classname, dynamic classresults) {
 

@@ -52,6 +52,7 @@ dependencies:
   path: ^1.9.0
   cloud_functions: ^4.7.6
   flutter_launcher_icons: ^0.13.1
+  mobile_scanner: ^5.1.1
 
 dev_dependencies:
   flutter_test:

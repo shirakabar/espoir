@@ -27,12 +27,13 @@ class Hakuran extends StatelessWidget {
                   context.push('/news');
                 },
        ),],
-        bottom: const TabBar(
-        tabs: [
+        bottom: TabBar(
+        tabs: const [
            Tab( text:'教室'),
            Tab( text:'舞台'),
            Tab( text:'部活動'),
         ],
+         dividerColor: Theme.of(context).primaryColor,
          unselectedLabelColor: Colors.white,
          labelColor: Colors.white,
          indicatorColor: Colors.white,
