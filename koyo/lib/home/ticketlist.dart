@@ -205,6 +205,7 @@ class _TicketList extends State<TicketList> {
       }
     }
   }*/
+
   Widget ticketcard({required index}) {
     return GestureDetector(onTap: () {
                 showDialog(
@@ -218,7 +219,7 @@ class _TicketList extends State<TicketList> {
                       );
                     });
               },child: Card(
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             color: const Color.fromARGB(255, 241, 249, 255),
             elevation: 2,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

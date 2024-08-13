@@ -220,11 +220,11 @@ class _Home extends ConsumerState<Home> {
                     padding: const EdgeInsets.only(left: 5),
                     children: [
                       if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
-                      Menucard(title: '管理者用', img: 'assets/images/koyobuilding.jpg', ontap: () => context.push('/adminselect')),
+                      Menucard(title: '管理者用', img: 'assets/images/symbol.jpg', ontap: () => context.push('/adminselect')),
                       if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInStaff)
-                      Menucard(title: 'スタッフ用', img: 'assets/images/koyobuilding.jpg', ontap: () => context.push('/staffselect')),
+                      Menucard(title: 'スタッフ用', img: 'assets/images/symbol.jpg', ontap: () => context.push('/staffselect')),
                       if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
-                      Menucard(title: 'クラス運営', img: 'assets/images/koyobuilding.jpg', ontap: () => context.push('/come')),
+                      Menucard(title: 'クラス運営', img: 'assets/images/symbol.jpg', ontap: () => context.push('/classmanage')),
                       Menucard(
                           title: 'アクセス',
                           img: 'assets/images/access.png',

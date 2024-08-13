@@ -53,6 +53,7 @@ dependencies:
   cloud_functions: ^4.7.6
   flutter_launcher_icons: ^0.13.1
   mobile_scanner: ^5.1.1
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -122,9 +123,9 @@ flutter:
     - assets/images/2f.png
     - assets/images/3f.png
     - assets/images/4f.png
-    - assets/images/crowdone.jpg
-    - assets/images/crowdtwo.jpg
-    - assets/images/crowdthree.jpg
+    - assets/images/crowdone.png
+    - assets/images/crowdtwo.png
+    - assets/images/crowdthree.png
     - assets/images/postest.jpg
     - assets/images/kouya.jpg
     - assets/images/hakuran.jpg
@@ -137,6 +138,7 @@ flutter:
     - assets/docs/termsofservice.pdf
     - assets/docs/plivacypolicy.pdf
     - assets/images/symbol.jpg
+    - assets/images/nomalicon.jpg
     - assets/docs/hakurankaipolicy.pdf
     - assets/docs/bunkasaipolicy.pdf
 

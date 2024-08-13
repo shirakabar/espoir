@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:koyo/settings/loginprovider.dart';
+
 class News extends ConsumerStatefulWidget {
   const News({super.key});
 
@@ -10,151 +11,187 @@ class News extends ConsumerStatefulWidget {
 }
 
 class _News extends ConsumerState<News> {
-
   Widget _adminscreen() {
-   return StreamBuilder<QuerySnapshot>(
-                          stream: FirebaseFirestore.instance
-                              .collection('news')
-                              .orderBy('createdAt', descending: true)
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return const Text('エラー');
-                            }
-                            if (!snapshot.hasData) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
-
-                            final docs = snapshot.data!.docs;
-
-                            return ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: docs.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final doc = docs[index];
-                                  final data = doc.data()! as Map<String,dynamic>;
-                                  final DateTime createdAt = data["createdAt"].toDate();
-                                  final String time = _gettime(createdAt);
-                                  final String title = doc.id;
-                                  return Padding(
-                                      //ここからを表示
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 1),
-                                      child: Dismissible(
-                                            key: ObjectKey(doc),
-                                            onDismissed: (DismissDirection direction) {
-                                              setState(() {
-                                                docs.removeAt(index);
-                                                FirebaseFirestore.instance
-                                                .collection('news')
-                                                .doc(doc.id)
-                                                .delete();
-                                              });
-                                              const snackBar = SnackBar(
-                                                content: Text("お知らせを削除しました"),
-                                                duration: Duration(seconds: 1),
-                                                );
-                                                if (context.mounted) {
-                                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                                  }
-                                                },
-                                                direction: DismissDirection.endToStart,
-                                                background: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(10),
-                                                    color: Colors.red,
-                                                  ),
-                                                  ),
-                                            child: Card(
-                                          elevation: 2,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: ListTile(
-                                            title: Text(title,style: const TextStyle(fontSize: 18),),
-                                            subtitle: Text('${data["createdBy"]}  $time',style: const TextStyle(color: Colors.grey)),
-                                            tileColor: const Color.fromARGB(
-                                                255, 241, 249, 255),
-                                            onTap: () {
-                                              Navigator.push(
-                                               context,
-                                                MaterialPageRoute(builder: (context) => Newsde(title: title,time: time,content: data['content'],createdBy: data['createdBy'])),
-                                                );
-                                            }, 
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                            ),
-                                          ))
-                                  ));
-                                });
-                          });
-  }
-
-  Widget _studentscreen () {
     return StreamBuilder<QuerySnapshot>(
-                          stream: FirebaseFirestore.instance
-                              .collection('news')
-                              .orderBy('createdAt', descending: true)
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return const Text('エラー');
-                            }
-                            if (!snapshot.hasData) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
+        stream: FirebaseFirestore.instance
+            .collection('news')
+            .orderBy('createdAt', descending: true)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Text('エラー');
+          }
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-                            final docs = snapshot.data!.docs;
+          final docs = snapshot.data!.docs;
 
-                            return ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: docs.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final doc = docs[index];
-                                  final data = doc.data()! as Map<String,dynamic>;
-                                  final DateTime createdAt = data["createdAt"].toDate();
-                                  final String time = _gettime(createdAt);
-                                  final String title = doc.id;
-                                  return Padding(
-                                      //ここからを表示
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 1),
-                                      child: Card(
-                                          elevation: 2,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child:ListTile(
-                                            title: Text(title,style: const TextStyle(fontSize: 18),),
-                                            subtitle: Text('${data["createdBy"]}  $time',style: const TextStyle(color: Colors.grey)),
-                                            tileColor: const Color.fromARGB(
-                                                255, 241, 249, 255),
-                                            onTap: () {
-                                              Navigator.push(
-                                               context,
-                                                MaterialPageRoute(builder: (context) => Newsde(title: title,time: time,content: data['content'],createdBy: data['createdBy'])),
-                                                );
-                                            }, 
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                            ),
-                                          )
-                                  ));
-                                });
-                          });
+          return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: docs.length,
+              itemBuilder: (BuildContext context, int index) {
+                final doc = docs[index];
+                final data = doc.data()! as Map<String, dynamic>;
+                final DateTime createdAt = data["createdAt"].toDate();
+                final String time = _gettime(createdAt);
+                final String title = doc.id;
+                return Padding(
+                    //ここからを表示
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                    child: Card(
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: ListTile(
+                          title: Text(
+                            title,
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                          subtitle: Text('${data["createdBy"]}  $time',
+                              style: const TextStyle(color: Colors.grey)),
+                          trailing: IconButton(
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return deletenewsdialog(
+                                          title: title,
+                                          docs: docs,
+                                          index: index);
+                                    });
+                              },
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.grey[700],
+                              )),
+                          tileColor: const Color.fromARGB(255, 241, 249, 255),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Newsde(
+                                      title: title,
+                                      time: time,
+                                      content: data['content'],
+                                      createdBy: data['createdBy'])),
+                            );
+                          },
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                        )));
+              });
+        });
   }
+
+  Widget deletenewsdialog(
+      {required String title, required dynamic docs, required int index}) {
+    return AlertDialog(
+      title: const Text("おしらせ削除"),
+      content: Text(
+        "$titleのおしらせを削除します\n本当によろしいですか？",
+        style: const TextStyle(fontSize: 16),
+      ),
+      actions: [
+        TextButton(
+            child: const Text("削除"),
+            onPressed: () {
+              setState(() {
+                docs.removeAt(index);
+                FirebaseFirestore.instance
+                    .collection('news')
+                    .doc(title)
+                    .delete();
+              });
+              const snackBar = SnackBar(
+                content: Text("お知らせを削除しました"),
+                duration: Duration(seconds: 1),
+              );
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            }),
+        TextButton(
+          child: const Text("閉じる"),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ],
+    );
+  }
+
+  Widget _studentscreen() {
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('news')
+            .orderBy('createdAt', descending: true)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Text('エラー');
+          }
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final docs = snapshot.data!.docs;
+
+          return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: docs.length,
+              itemBuilder: (BuildContext context, int index) {
+                final doc = docs[index];
+                final data = doc.data()! as Map<String, dynamic>;
+                final DateTime createdAt = data["createdAt"].toDate();
+                final String time = _gettime(createdAt);
+                final String title = doc.id;
+                return Padding(
+                    //ここからを表示
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                    child: Card(
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: ListTile(
+                          title: Text(
+                            title,
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                          subtitle: Text('${data["createdBy"]}  $time',
+                              style: const TextStyle(color: Colors.grey)),
+                          tileColor: const Color.fromARGB(255, 241, 249, 255),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Newsde(
+                                      title: title,
+                                      time: time,
+                                      content: data['content'],
+                                      createdBy: data['createdBy'])),
+                            );
+                          },
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                        )));
+              });
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.white),
-          title: const Text('お知らせ',style: TextStyle(color: Colors.white),),
+          title: const Text(
+            'お知らせ',
+            style: TextStyle(color: Colors.white),
+          ),
           centerTitle: true,
           backgroundColor: Theme.of(context).primaryColor,
         ),
@@ -172,32 +209,37 @@ class _News extends ConsumerState<News> {
                       Padding(
                           padding: const EdgeInsets.only(left: 20, top: 15),
                           child: Column(children: [
-                            const Align(alignment:  Alignment.centerLeft,
-                            child: Text(
-                            '※タップで詳細を確認できます',
-                            style: TextStyle(fontSize: 15, color: Colors.grey),
-                          ),
+                            const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '※タップで詳細を確認できます',
+                                style:
+                                    TextStyle(fontSize: 15, color: Colors.grey),
+                              ),
                             ),
-                            if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
-                            const Align(alignment:  Alignment.centerLeft,
-                            child: Text(
-                            '※スライドで削除できます',
-                            style: TextStyle(fontSize: 15, color: Colors.grey),
-                          )
-                            )
-                          ])
-                          ),
+                            if (ref.watch(currentLoginStatusProvider) ==
+                                CurrentLoginStatus.loggedInAdmin)
+                              const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '※ゴミ箱をタップして削除できます',
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.grey),
+                                  ))
+                          ])),
                       const SizedBox(
                         height: 10,
                       ),
-                      if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInAdmin)
-                      _adminscreen(),
-                      if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.loggedInAdmin)
-                      _studentscreen()
+                      if (ref.watch(currentLoginStatusProvider) ==
+                          CurrentLoginStatus.loggedInAdmin)
+                        _adminscreen(),
+                      if (ref.watch(currentLoginStatusProvider) !=
+                          CurrentLoginStatus.loggedInAdmin)
+                        _studentscreen()
                     ]))));
   }
 
-   String _gettime(DateTime createdAt) {
+  String _gettime(DateTime createdAt) {
     if (createdAt.minute < 10) {
       return '${createdAt.year}/${createdAt.month}/${createdAt.day} ${createdAt.hour}:0${createdAt.minute}';
     } else {
@@ -206,8 +248,13 @@ class _News extends ConsumerState<News> {
   }
 }
 
-class Newsde extends StatelessWidget{
-  const Newsde({super.key,required this.title,required this.time,required this.content,required this.createdBy});
+class Newsde extends StatelessWidget {
+  const Newsde(
+      {super.key,
+      required this.title,
+      required this.time,
+      required this.content,
+      required this.createdBy});
   final String title;
   final String time;
   final String content;
@@ -217,31 +264,38 @@ class Newsde extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('お知らせ詳細',style: TextStyle(color: Colors.white),),
+          title: const Text(
+            'お知らせ詳細',
+            style: TextStyle(color: Colors.white),
+          ),
           centerTitle: true,
           iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Theme.of(context).primaryColor,
         ),
         body: Card(
-          margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 12,),
-          color: const Color.fromARGB(255, 241, 249, 255),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                      Text(title,style: const TextStyle(fontSize: 23)),
-                      const SizedBox(height: 3,width:double.infinity),
-                      Text('$createdBy  $time',style: const TextStyle(fontSize: 16,color: Colors.grey)),
-                      const SizedBox(height: 5,width:double.infinity),
-                      Text(content,style: const TextStyle(fontSize: 18),),
-                      const SizedBox(height: 3,width:double.infinity),
-                    ]
-                )
-                    )
-          )
-        
-    );
+            margin: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 12,
+            ),
+            color: const Color.fromARGB(255, 241, 249, 255),
+            child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title, style: const TextStyle(fontSize: 23)),
+                      const SizedBox(height: 3, width: double.infinity),
+                      Text('$createdBy  $time',
+                          style: const TextStyle(
+                              fontSize: 16, color: Colors.grey)),
+                      const SizedBox(height: 5, width: double.infinity),
+                      Text(
+                        content,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      const SizedBox(height: 3, width: double.infinity),
+                    ]))));
   }
 }
