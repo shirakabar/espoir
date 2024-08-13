@@ -1,11 +1,12 @@
 //このページは製作者に許可を取って千種祭アプリを真似してます
+//StateProviderは今後非推奨となるらしい
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/localdata.dart';
 
 final isLoggedInStudentProvider = StateProvider<bool>((ref) => false);
 final isLoggedInStaffProvider = StateProvider<bool>((ref) => false);
 final isLoggedInAdminProvider = StateProvider<bool>((ref) => false);
-
+final loggedInClassProvider = StateProvider<String>((ref) => '');
 final currentLoginStatusProvider = StateProvider<CurrentLoginStatus>((ref) => CurrentLoginStatus.notLoggedIn);
 
 enum LoginType { student, staff, admin }
@@ -50,6 +51,7 @@ class LoginDataManager {
     final bool isLoggedInStudent = await LocalData.readLocalData<bool>(_stringToSaveLoginData(LoginType.student)) ?? false;
     final bool isLoggedInStaff = await LocalData.readLocalData<bool>(_stringToSaveLoginData(LoginType.staff)) ?? false;
     final bool isLoggedInAdmin = await LocalData.readLocalData<bool>(_stringToSaveLoginData(LoginType.admin)) ?? false;
+    final String loggedInClass = await LocalData.readLocalData<String>('class') ?? '1';
 
     //set current login status
     if (isLoggedInStudent) {
@@ -66,5 +68,6 @@ class LoginDataManager {
     ref.read(isLoggedInStudentProvider.notifier).state = isLoggedInStudent;
     ref.read(isLoggedInStaffProvider.notifier).state = isLoggedInStaff;
     ref.read(isLoggedInAdminProvider.notifier).state = isLoggedInAdmin;
+    ref.read(loggedInClassProvider.notifier).state = loggedInClass;
   }
 }

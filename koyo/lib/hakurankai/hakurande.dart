@@ -23,7 +23,7 @@ class _Kyo extends State<Kyo> {
         stream: FirebaseFirestore.instance.collection('classes').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Image.asset('assets/images/crowdone.jpg');
+            return Image.asset('assets/images/crowdzero.png');
           }
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
@@ -33,9 +33,9 @@ class _Kyo extends State<Kyo> {
           final doc = docs[index];
           final data = doc.data()! as Map<String, dynamic>;
           final List<Widget> crowdimg = <Widget>[
-            Image.asset('assets/images/crowdone.jpg'),
-            Image.asset('assets/images/crowdtwo.jpg'),
-            Image.asset('assets/images/crowdthree.jpg'),
+            Image.asset('assets/images/crowdone.png'),
+            Image.asset('assets/images/crowdtwo.png'),
+            Image.asset('assets/images/crowdthree.png'),
           ];
           return crowdimg.elementAt(data['crowd']);
         });

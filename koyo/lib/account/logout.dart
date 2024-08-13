@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/settings/loginprovider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-//import '../data/localdata.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Logout extends ConsumerStatefulWidget {
   const Logout({super.key});
@@ -12,20 +10,10 @@ class Logout extends ConsumerStatefulWidget {
 }
 
 class _Logout extends ConsumerState<Logout> {
-  String? classname;
-  
- Future<String?> _getclass() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString("class");
-  }
   
   @override
   Widget build(BuildContext context) {
-    _getclass().then((value) {
-      setState(() {
-        classname = value;
-      });
-    });
+    String classname = ref.watch(loggedInClassProvider);
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(children: [

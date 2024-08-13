@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:koyo/data/localdata.dart';
+import 'package:koyo/widget/widget.dart';
 
 class Ticket extends StatefulWidget{
   const Ticket({super.key,required this.classname});
@@ -46,12 +47,7 @@ List<String> half =['10:30','11:30','12:30','13:30','14:30'];
     final classname = widget.classname;
 
     return Scaffold(
-      appBar:  AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text('$classname整理券取得',style: const TextStyle(color: Colors.white),),
-        centerTitle: true,
-      ),
+      appBar:  Bar(title: '$classname整理券確認'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         child: Column(
@@ -89,16 +85,6 @@ List<String> half =['10:30','11:30','12:30','13:30','14:30'];
                         //LocalData.saveLocalData(hour, classname);
                         Navigator.pop(context);
                      }
-
-                     /*taphalf (start, end) {       
-                        FirebaseFirestore.instance
-                        .collection('Ticket')
-                        .doc(classname)
-                        .update({start : data?[start] - 1 });
-                        //LocalData.saveLocalData(half, classname);
-                        saveTicket(start, end, classname);
-                        Navigator.pop(context);
-                     }*/
 
                      final int hourcom = int.parse(hour[index].replaceAll(':',""));//整理券の時間hhmmの整数
                      final int halfcom = int.parse(half[index].replaceAll(':',""));

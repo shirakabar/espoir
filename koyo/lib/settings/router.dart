@@ -1,8 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:koyo/account/account.dart';
+import 'package:koyo/home/classmanage.dart';
 import 'package:koyo/home/mobilescan.dart';
 import 'package:koyo/home/ticketlist.dart';
+import 'package:koyo/home/ticketmanage.dart';
 import 'package:koyo/staff/adminselect.dart';
 import 'package:koyo/home/policyselect.dart';
 import 'package:koyo/result/resultmake.dart';
@@ -165,6 +167,27 @@ final goRouter = GoRouter(
       },
     ),
 
+    GoRoute(
+      path: '/classmanage',
+      name: 'classmanage',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Classmanage(),
+        );
+      },
+    ),
+
+     GoRoute(
+      path: '/ticketmanage',
+      name: 'ticketmanage',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Ticketmanage(),
+        );
+      },
+    ),
 
   ]
 );
