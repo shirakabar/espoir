@@ -27,10 +27,16 @@ class _Crowd extends State<Crowd> {
                   .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Image.asset('assets/images/crowdzero.png',height: 50,width: 50);
+            return Container(
+              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+              clipBehavior: Clip.antiAlias,
+              child: Image.asset('assets/images/crowdzero.png',height: 50,width: 50));
           }
           if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
+            return Container(
+              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+              clipBehavior: Clip.antiAlias,
+              child: Image.asset('assets/images/crowdzero.png',height: 50,width: 50));//const Center(child: CircularProgressIndicator());
           }
 
           Map<String, dynamic> data =

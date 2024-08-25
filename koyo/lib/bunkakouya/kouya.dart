@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/bunkakouya/kouyade.dart';
-import 'package:koyo/bunkakouya/ondemand.dart';
+//import 'package:koyo/bunkakouya/ondemand.dart';
 
 //文化祭ページのタブ遷移先一覧
 //stickeytabbarはネットから
