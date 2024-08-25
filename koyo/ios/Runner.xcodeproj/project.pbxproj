@@ -495,7 +495,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C3BY7GV9;
 				ENABLE_BITCODE = NO;
@@ -505,6 +505,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
+				"MARKETING_VERSION[sdk=iphoneos*]" = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.koyo.koyosai;
 				PRODUCT_NAME = koyo;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -720,7 +722,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C3BY7GV9;
 				ENABLE_BITCODE = NO;
@@ -730,6 +732,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
+				"MARKETING_VERSION[sdk=iphoneos*]" = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.koyo.koyosai;
 				PRODUCT_NAME = koyo;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -756,7 +760,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C3BY7GV9;
 				ENABLE_BITCODE = NO;
@@ -766,6 +770,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
+				"MARKETING_VERSION[sdk=iphoneos*]" = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.koyo.koyosai;
 				PRODUCT_NAME = koyo;
 				PROVISIONING_PROFILE_SPECIFIER = "";

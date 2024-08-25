@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {//アプリのいろんな設定
       title: '第７６回向陽祭',//アプリタイトル
       theme: ThemeData(
         colorScheme: const ColorScheme(//アプリの色設定
+          background: (Colors.white),
+          onBackground: (Colors.white),
           brightness: Brightness.light, 
           primary: (Color.fromARGB(255, 25, 118, 210)), 
           onPrimary:  (Colors.white), 
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {//アプリのいろんな設定
           onSurface: (Colors.black),),
         useMaterial3: true,
       ),
+      
     );
   }
 }
