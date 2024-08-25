@@ -1,9 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:koyo/hakurankai/butai.dart';
-import 'package:koyo/widget/pdfview.dart';
 import 'package:koyo/data/hakurandata.dart';
+
+class Crowd extends StatefulWidget {
+  const Crowd({super.key,required this.index});
+
+  final int index;
+  @override
+  State<Crowd> createState() => _Crowd();
+}
+
+class _Crowd extends State<Crowd> {
+  final List<String> classlist = ['101','102','103','104','105','106','107','108','109',
+  '201','202','203','204','205','206','207','208','209',
+  '301','302','303','304','305','306','307','308','309',
+  ];
+
+  @override
+  Widget build(BuildContext context){
+    final index = widget.index;
+    return StreamBuilder<DocumentSnapshot>(//各クラスのドキュメントをstreambuilderで監視
+                  stream: FirebaseFirestore.instance
+                  .collection('Crowd')
+                  .doc('classes')
+                  .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Image.asset('assets/images/crowdzero.png',height: 50,width: 50);
+          }
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          Map<String, dynamic> data =
+                  snapshot.data!.data() as Map<String, dynamic>;
+          final List<Widget> crowdimg = <Widget>[
+            Image.asset('assets/images/crowdone.png',height: 50,width: 50),
+            Image.asset('assets/images/crowdtwo.png',height: 50,width: 50),
+            Image.asset('assets/images/crowdthree.png',height: 50,width: 50),
+          ];
+          return Container(
+      decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+      clipBehavior: Clip.antiAlias,
+      child: crowdimg.elementAt(data[classlist[index]]));
+        });
+  }
+}
 
 
 //博覧のdetailそれぞれのページの内容記載
@@ -17,29 +60,10 @@ class Kyo extends StatefulWidget {
 
 class _Kyo extends State<Kyo> {
   final _hakurankaidata = HakurankaidataList().hakurankaidata;
-
-  _crowd(int index) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('classes').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Image.asset('assets/images/crowdzero.png');
-          }
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final docs = snapshot.data!.docs;
-          final doc = docs[index];
-          final data = doc.data()! as Map<String, dynamic>;
-          final List<Widget> crowdimg = <Widget>[
-            Image.asset('assets/images/crowdone.png'),
-            Image.asset('assets/images/crowdtwo.png'),
-            Image.asset('assets/images/crowdthree.png'),
-          ];
-          return crowdimg.elementAt(data['crowd']);
-        });
-  }
+  final List<String> classlist = ['101','102','103','104','105','106','107','108','109',
+  '201','202','203','204','205','206','207','208','209',
+  '301','302','303','304','305','306','307','308','309',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -107,9 +131,9 @@ class _Kyo extends State<Kyo> {
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                               horizontal: 20),
-                                      leading: FittedBox(
+                                     /* leading: FittedBox(
                                           fit: BoxFit.fitHeight,
-                                          child: Image.asset('assets/images/postest.jpg')),//仮の画像
+                                          child: Image.asset('assets/images/postest.jpg')),//仮の画像*/
                                       title: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 5),
@@ -127,20 +151,14 @@ class _Kyo extends State<Kyo> {
                                       ),
                                       tileColor: const Color.fromARGB(
                                           255, 241, 249, 255),
-                                      trailing:  ClipRRect(
-                                            borderRadius: BorderRadius.circular(5), 
-                                            child: FittedBox(
-                                          fit: BoxFit.fitHeight,
-                                          child: _crowd(index))),
-                                      onTap: () {
+                                      trailing: Crowd(index: index),
+                                      onTap: /*() {
                                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Pdfview(
-                                    pdf: 'assets/docs/hakurankaipolicy.pdf',
-                                    title: '博覧会実施要項')),
+                                builder: (context) => KyoDe(classname: classlist[index],title: _hakurankaidata[index].title, place: _hakurankaidata[index].place, detail: _hakurankaidata[index].detail)),
                           );
-                                      }, //gorouterでのタップ時遷移　仮
+                                      }, */null,
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10)),
@@ -283,6 +301,7 @@ class Club extends StatefulWidget {
 }
 
 class _Club extends State<Club> {
+  final _clubdata = ClubdataList().clubdata; 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -329,7 +348,7 @@ class _Club extends State<Club> {
               ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 5,
+                  itemCount: _clubdata.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                         //ここからを表示
@@ -343,9 +362,22 @@ class _Club extends State<Club> {
                             child: ListTile(
                               tileColor:
                                   const Color.fromARGB(255, 241, 249, 255),
-                              onTap: () {
-                                context.push('/come');
-                              }, //gorouterでのタップ時遷移　仮
+                              onTap: null,
+                              title: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: Text(
+                                          _clubdata[index].title,
+                                          style: const TextStyle(fontSize: 17),
+                                        ),
+                                      ),
+                                      subtitle: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 2),
+                                        child: Text(_clubdata[index].place,
+                                            style:
+                                                const TextStyle(fontSize: 14)),
+                                      ),
                               shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),

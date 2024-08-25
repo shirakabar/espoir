@@ -18,8 +18,8 @@ class _Ticket extends State<Ticket>{
 
 List<String> hour =['10:00','11:00','12:00','13:00','14:00','15:00'];
 List<String> half =['10:30','11:30','12:30','13:30','14:30'];
-  int nowcom = 0;//テスト用
-  //int nowcom = DateTime.now().hour * 100 + DateTime.now().minute;
+  //int nowcom = 0;//テスト用
+  int nowcom = DateTime.now().hour * 100 + DateTime.now().minute;
 
   Future<void> saveTicket(start, end, classname) async {
     String day = '${DateTime.now().month}/${DateTime.now().day}';
@@ -39,7 +39,7 @@ List<String> half =['10:30','11:30','12:30','13:30','14:30'];
   @override
   void initState() {
     super.initState();
-    //Timer.periodic(const Duration(seconds: 1), _onTimer);
+    Timer.periodic(const Duration(seconds: 1), _onTimer);
   }
 
   @override

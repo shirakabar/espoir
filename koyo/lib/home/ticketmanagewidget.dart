@@ -55,7 +55,7 @@ class _Ticketmanagedialog extends State<Ticketmanagedialog> {
                           --localnumber;
                         });
                       }: null,
-                      onLongPress: (localnumber > 10) ?() {
+                      onLongPress: (localnumber >= 10) ?() {
                         setState(() {
                           localnumber -= 10;
                         });

@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:koyo/data/localdata.dart';
 import 'package:koyo/settings/koyo_icons.dart';
+import 'package:koyo/widget/bottomnavi.dart';
 import 'package:koyo/widget/pdfview.dart';
 import 'package:koyo/widget/widget.dart';
 import 'package:koyo/settings/loginprovider.dart';
@@ -80,26 +80,31 @@ class _Home extends ConsumerState<Home> {
                       height: 10,
                     ),
                     CarouselSlider(
-                      items: const [
-                        CarouselContainerbox(
+                      items: [
+                        const CarouselContainerbox(
                           title: '向陽祭',
                           img: 'assets/images/symbol.jpg',
+                          ontap: null,
                         ),
                         CarouselContainerbox(
                           title: '体育祭',
                           img: 'assets/images/taiikusai.jpg',
+                          ontap: () => ref.watch(bottomnaviProvider.notifier).setindex(1),
                         ),
                         CarouselContainerbox(
                           title: '文化祭',
                           img: 'assets/images/bunkasai.jpg',
+                          ontap: () => ref.watch(bottomnaviProvider.notifier).setindex(3),
                         ),
                         CarouselContainerbox(
                           title: '博覧会',
                           img: 'assets/images/hakuran.jpg',
+                          ontap: () => ref.watch(bottomnaviProvider.notifier).setindex(2),
                         ),
                         CarouselContainerbox(
                           title: '後夜祭',
                           img: 'assets/images/kouya.jpg',
+                          ontap: () => ref.watch(bottomnaviProvider.notifier).setindex(3),
                         ),
                       ],
                       options: CarouselOptions(
@@ -141,7 +146,7 @@ class _Home extends ConsumerState<Home> {
                       ),
                       child: const Center(
                           child: Text(
-                        '体育祭は6月17日‼',
+                        '向陽祭は9月5日から‼',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -162,9 +167,9 @@ class _Home extends ConsumerState<Home> {
                     
                     Expanded(child: homebutton(label: '整理券',onpressed: () => context.push('/ticketlist'),icon: Koyo.ticketicon),),
                     
-                    Expanded(child: homebutton(label: '''アンケート''',onpressed: () {
+                    Expanded(child: homebutton(label: '投票',onpressed: () {
                      final url = Uri.parse(
-                              'https://docs.google.com/forms/d/e/1FAIpQLSenWU97munsKfYxjUQZ5Giws7LJux-6CCJxvGlmazFfSErfBA/viewform?usp=sf_link');
+                              'https://forms.gle/dQ7mhnnWPkfj84jR8');
                           launchUrl(url);
                     },icon: Icons.description),),
                     
@@ -184,17 +189,19 @@ class _Home extends ConsumerState<Home> {
                           launchUrl(url);
                         },
                         icon: Icons.support_agent)),
+                    (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn) ? 
                     Expanded(child: homebutton(label: '要項',
                         onpressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Pdfview(
-                                    pdf: 'assets/docs/sportsprogram.pdf',
-                                    title: '体育祭実施要項')),
-                          );
+                         context.push('/pdfselect');
                         },
-                        icon: Icons.article)),
+                        icon: Icons.article)) : 
+                    Expanded(child: homebutton(label: 'ホームページ',
+                        onpressed: () {
+                            final url = Uri.parse(
+                              'https://www.nagoya-c.ed.jp/school/koyo-h/');
+                          launchUrl(url);
+                          },
+                        icon: Icons.open_in_new)),
                   ]),
               const SizedBox(
                 height: 20,
@@ -225,21 +232,25 @@ class _Home extends ConsumerState<Home> {
                       Menucard(title: 'スタッフ用', img: 'assets/images/symbol.jpg', ontap: () => context.push('/staffselect')),
                       if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
                       Menucard(title: 'クラス運営', img: 'assets/images/symbol.jpg', ontap: () => context.push('/classmanage')),
+                      
+                      Menucard(
+                          title: 'ご案内',
+                          img: 'assets/images/koyobuilding.jpg',
+                          ontap: () {
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Pdfview(
+                                    pdf: 'assets/docs/gakkousainogoannai.pdf',
+                                    title: 'ご案内')),
+                          );
+                          },),
                       Menucard(
                           title: 'アクセス',
                           img: 'assets/images/access.png',
                           ontap: () {
-                            /*final url = Uri.parse(
-                              'https://www.nagoya-c.ed.jp/school/koyo-h/index.html');
-                          launchUrl(url);*/
-                          LocalData.saveLocalData('10:00', '101');
-                          },),
-                      Menucard(
-                          title: '中学生へ',
-                          img: 'assets/images/koyobuilding.jpg',
-                          ontap: () {
                             final url = Uri.parse(
-                              'https://www.nagoya-c.ed.jp/school/koyo-h/d_juken.html');
+                              'https://www.nagoya-c.ed.jp/school/koyo-h/1_access.html');
                           launchUrl(url);
                           },),
                     ]),

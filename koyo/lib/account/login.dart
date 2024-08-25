@@ -22,6 +22,22 @@ class _Login extends ConsumerState<Login> {
     super.dispose();
   }
 
+  //初期設定用に使ってねfloating actionbuttonとかで実行させるといいと思う。admin とかは自分で作ってね
+  /*final List<String> classlist = [
+    '101','102','103','104','105','106','107','108','109',
+    '201','202','203','204','205','206','207','208','209',
+    '301','302','303','304','305','306','307','308','309',
+  ];
+  void _firstsetting() {
+    for (String classname in classlist) {
+      debugPrint(classname);
+        FirebaseFirestore.instance
+            .collection('Password')
+            .doc('passwaord')
+            .update({classname: '11234567890-qwertyuiop'});
+      }
+  }*/
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -153,7 +169,7 @@ class _Login extends ConsumerState<Login> {
                                   .doc('password')
                                   .get();
 
-                              if (_passcontroller.text == password['student']) {
+                              if (_passcontroller.text == password[_classcontroller.text]) {
                                 canlogin = true;
                                 logintype = LoginType.student;
                               } else if (_passcontroller.text == password['admin']) {

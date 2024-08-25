@@ -23,7 +23,8 @@ class Kouya extends StatelessWidget {
             children: [
                Kouyagym(),
                Kouyagym(),
-               Ondemand(),
+               //Ondemand(),
+               Kouyagym(),
             ],
           ),
         ),
