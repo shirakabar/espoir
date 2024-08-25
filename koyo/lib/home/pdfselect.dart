@@ -76,8 +76,8 @@ class Pdfselect extends StatelessWidget {
                         thickness: 1,
                         color: Colors.grey,
                       ),      
-              ListTile(
-                        title: const Text('後夜祭実施要項'),
+             const ListTile(
+                        title: Text('後夜祭実施要項'),
                         onTap: null /*() {
                           Navigator.push(
                             context,
