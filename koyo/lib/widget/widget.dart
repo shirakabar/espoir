@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:koyo/settings/koyo_icons.dart';
+import 'package:koyo/settings/loginprovider.dart';
+import 'package:koyo/widget/bottomnavi.dart';
 import 'package:koyo/widget/pdfview.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Bar extends StatelessWidget implements PreferredSizeWidget {
   const Bar({required this.title, super.key});
@@ -32,7 +36,7 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class Draw extends StatelessWidget {
+class Draw extends ConsumerWidget {
   const Draw({super.key});
 
   Widget tile({required String label, required void Function() ontap, required IconData icon}) {
@@ -44,7 +48,7 @@ class Draw extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -73,13 +77,13 @@ class Draw extends StatelessWidget {
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ])),
+           tile(label: "ホーム", ontap: () {
+            Navigator.pop(context);
+            ref.watch(bottomnaviProvider.notifier).setindex(0);
+            }, icon: Icons.home),
            tile(label: "結果", ontap: () => context.push('/result'), icon: Icons.emoji_events),
-           tile(label: "ホームページ", ontap: () {
-            final url = Uri.parse(
-                              'https://www.nagoya-c.ed.jp/school/koyo-h/index.html');
-                          launchUrl(url);
-           }, icon: Icons.receipt),
-           tile(label: "整理券", ontap: () {
+           tile(label: "整理券", ontap: () => context.push('/ticketlist'), icon: Koyo.ticketicon),
+           tile(label: "アンケート", ontap: () {
             final url = Uri.parse(
                               'https://docs.google.com/forms/d/e/1FAIpQLSenWU97munsKfYxjUQZ5Giws7LJux-6CCJxvGlmazFfSErfBA/viewform?usp=sf_link');
                           launchUrl(url);
@@ -91,7 +95,8 @@ class Draw extends StatelessWidget {
                           launchUrl(url);
                           context.push('/');
            }, icon: Icons.support_agent),
-           tile(label: "要項", ontap: () {
+           (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn) ? 
+           tile(label: "要項", ontap: (){
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -99,7 +104,12 @@ class Draw extends StatelessWidget {
                                     pdf: 'assets/docs/sportsprogram.pdf',
                                     title: '体育祭実施要項')),
                           );
-                        }, icon: Icons.article),
+                        }, icon: Icons.article) :
+           tile(label: "ホームページ", ontap: (){
+                            final url = Uri.parse(
+                              'https://www.nagoya-c.ed.jp/school/koyo-h/');
+                          launchUrl(url);
+                          }, icon: Icons.open_in_new),
           Align(
               alignment: Alignment.bottomCenter,
               child: ListView(
@@ -131,14 +141,17 @@ class Draw extends StatelessWidget {
 
 class CarouselContainerbox extends StatelessWidget {
   const CarouselContainerbox(
-      {required this.img, required this.title, super.key});
+      {required this.ontap,required this.img, required this.title, super.key});
 
   final String img;
   final String title;
+  final dynamic ontap;
   
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return GestureDetector(
+      onTap: ontap,
+      child: Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -180,6 +193,7 @@ class CarouselContainerbox extends StatelessWidget {
                             fontSize: 23,
                             fontWeight: FontWeight.bold))))),
       ),
+      )
     );
   }
 }

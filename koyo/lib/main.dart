@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {//アプリのいろんな設定
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false, //デバッグバナーの削除
       routerDelegate: goRouter.routerDelegate,//gorouterを使うための定型文
       routeInformationParser: goRouter.routeInformationParser,
       routeInformationProvider: goRouter.routeInformationProvider,

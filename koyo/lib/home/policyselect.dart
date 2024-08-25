@@ -10,7 +10,7 @@ class Policyselect extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      appBar: const Bar(title: '管理者用'),
+      appBar: const Bar(title: '法的事項'),
       body: ListView(
             physics: const NeverScrollableScrollPhysics(),
             children: [

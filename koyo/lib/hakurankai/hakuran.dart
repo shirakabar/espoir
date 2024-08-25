@@ -13,7 +13,7 @@ class Hakuran extends StatelessWidget {
    Widget build(BuildContext context) {
     
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
       drawer: const Draw(),
       appBar: AppBar(
@@ -30,7 +30,7 @@ class Hakuran extends StatelessWidget {
         bottom: TabBar(
         tabs: const [
            Tab( text:'教室'),
-           Tab( text:'舞台'),
+           //Tab( text:'舞台'),
            Tab( text:'部活動'),
         ],
          dividerColor: Theme.of(context).primaryColor,
@@ -43,7 +43,7 @@ class Hakuran extends StatelessWidget {
       body: const TabBarView(
         children: [
           Kyo(),
-          Butai(),
+          //Butai(),
           Club()
           ],
         )

@@ -153,7 +153,6 @@ class _TicketList extends State<TicketList> {
       if (prefs.containsKey(time)) {
         String? jsonString = prefs.getString(time);
         Map<String, dynamic> decodedJson = jsonDecode(jsonString!);
-        debugPrint('decodedjson:${decodedJson.toString()}');
         newticketlist.add(Ticket(
           time: decodedJson['time'],
           classname: decodedJson['classname'],
@@ -161,8 +160,6 @@ class _TicketList extends State<TicketList> {
           starttime: decodedJson['starttime'],
         ));
       }
-      debugPrint(time);
-      debugPrint('finished');
     }
     setState(() {
       ticketlist = newticketlist;
@@ -203,6 +200,15 @@ class _TicketList extends State<TicketList> {
             .doc(classname)
             .update({time: 10});
       }
+    }
+  }*/
+
+  /*sharedpreferences確認用
+  void test() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Set<String> testlist = prefs.getKeys();
+    for (String test in testlist) {
+      debugPrint(test);
     }
   }*/
 
@@ -262,11 +268,19 @@ class _TicketList extends State<TicketList> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Future(() {
+      getTicket();
+  });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (!isloaded) {
+   /* if (!isloaded) {
       getTicket();
       isloaded = true;
-    }
+    }*/
     return Scaffold(
         appBar: const Bar(title: '整理券'),
         floatingActionButton: FloatingActionButton(
@@ -304,7 +318,7 @@ class _TicketList extends State<TicketList> {
                           shrinkWrap: true,
                           itemCount: ticketlist.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return ticketcard(index: index);
+                            return (ticketlist.isEmpty) ? const Text('整理券を取得していません') : ticketcard(index: index);
                           })
                     ]))));
   }

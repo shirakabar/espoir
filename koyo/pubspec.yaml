@@ -141,6 +141,7 @@ flutter:
     - assets/images/nomalicon.jpg
     - assets/docs/hakurankaipolicy.pdf
     - assets/docs/bunkasaipolicy.pdf
+    - assets/docs/gakkousainogoannai.pdf
 
 flutter_native_splash:
     color: "#FFFFFF"

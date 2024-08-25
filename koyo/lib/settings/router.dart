@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:koyo/account/account.dart';
 import 'package:koyo/home/classmanage.dart';
 import 'package:koyo/home/mobilescan.dart';
+import 'package:koyo/home/pdfselect.dart';
 import 'package:koyo/home/ticketlist.dart';
 import 'package:koyo/home/ticketmanage.dart';
 import 'package:koyo/staff/adminselect.dart';
@@ -26,7 +27,7 @@ final goRouter = GoRouter(
   //各画面のpath、名前を指定
   routes: [GoRoute(
       path: '/',
-      name: 'initial',
+      name: '/',
       pageBuilder: (context, state) {
         return MaterialPage(
           key: state.pageKey,
@@ -185,6 +186,17 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: const Ticketmanage(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/pdfselect',
+      name: 'pdfselect',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Pdfselect(),
         );
       },
     ),
