@@ -55,7 +55,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app needs camera access to scan QR codes</string>
+	<string>QRコードを読み取るためにカメラへのアクセスが必要です</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
 </dict>
