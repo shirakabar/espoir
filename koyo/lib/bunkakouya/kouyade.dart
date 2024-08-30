@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:koyo/bunkakouya/bunkoushowde.dart';
 import 'package:koyo/data/kouyasaidata.dart';
-import 'package:koyo/widget/pdfview.dart';
 //文化祭のdetail各ページの詳細
 
-class Kouyagym extends StatefulWidget {
+class Kouyagym extends StatelessWidget {
+  Kouyagym({super.key});
 
-  const Kouyagym({super.key});
+ final _gymdata = GymdataList().gymdata;
 
   @override
-  State<Kouyagym> createState() => _Kouyagym();
-}
-
-class _Kouyagym extends State<Kouyagym> {
-
- final _kouyasaidata = KouyasaidataList().kouyasaidata;
-  @override
-  
    Widget build(BuildContext context) {
     
     return Scaffold(
@@ -35,7 +28,7 @@ class _Kouyagym extends State<Kouyagym> {
         Expanded(child: ListView.builder(//体育祭の各種目を一覧表示
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: _kouyasaidata.length,
+            itemCount: _gymdata.length,
           itemBuilder: (BuildContext context, int index) {
             return Padding(//ここからを表示
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
@@ -47,18 +40,14 @@ class _Kouyagym extends State<Kouyagym> {
             borderRadius: BorderRadius.circular(10)
           ),
               child: ListTile(
-                leading: Text(_kouyasaidata[index].number,style: const TextStyle(fontSize: 25,fontWeight: FontWeight.w400),),
-                title: Text(_kouyasaidata[index].title,style: const TextStyle(fontSize: 20),),
-                subtitle: Text(_kouyasaidata[index].type),
+                leading: Text(_gymdata[index].number,style: const TextStyle(fontSize: 25,fontWeight: FontWeight.w400),),
+                title: Text(_gymdata[index].title,style: const TextStyle(fontSize: 20),),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: () {
                   Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Pdfview(
-                                    pdf: 'assets/docs/bunkasaipolicy.pdf',
-                                    title: '文化祭実施要項')),
-                          );
+                                builder: (context) => Bunkoushowde(title: _gymdata[index].title, place: '@体育館', detail: _gymdata[index].detail, number: _gymdata[index].number)));
                 },//gorouterでのタップ時遷移　仮
                  shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -79,3 +68,70 @@ class _Kouyagym extends State<Kouyagym> {
     );
    }
 }
+
+class Kouyaground extends StatelessWidget {
+  Kouyaground({super.key});
+
+ final _grounddata = GrounddataList().grounddata;
+ 
+  @override
+   Widget build(BuildContext context) {
+    
+    return Scaffold(body: 
+      Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+        children:[
+           const SizedBox(
+          height: 10,
+        ),
+        const Center(child:
+        Text('スケジュール',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 20),), 
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Expanded(child: ListView.builder(//体育祭の各種目を一覧表示
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _grounddata.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(//ここからを表示
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
+              child:
+              Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+            //side: const BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10)
+          ),
+              child: ListTile(
+                leading: Text(_grounddata[index].number,style: const TextStyle(fontSize: 25,fontWeight: FontWeight.w400),),
+                title: Text(_grounddata[index].title,style: const TextStyle(fontSize: 20),),
+                tileColor: const Color.fromARGB(255, 241, 249, 255),
+                onTap: () {
+                  Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Bunkoushowde(title: _grounddata[index].title, place: '@体育館', detail: _grounddata[index].detail, number: _grounddata[index].number)));
+                },//gorouterでのタップ時遷移　仮
+                 shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+              )
+            )
+            
+        
+            );
+          }
+          
+         )
+        )
+      ]
+      
+      ),
+      
+    );
+   }
+}
+
+

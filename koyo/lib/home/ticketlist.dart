@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/data/localdata.dart';
+import 'package:koyo/widget/bottomnavi.dart';
 import 'package:koyo/widget/widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:koyo/data/hakurandata.dart';
@@ -21,14 +23,14 @@ class Ticket {
 
 //獲得整理券一覧
 
-class TicketList extends StatefulWidget {
+class TicketList extends ConsumerStatefulWidget {
   const TicketList({super.key});
 
   @override
-  State<TicketList> createState() => _TicketList();
+  ConsumerState<TicketList> createState() => _TicketList();
 }
 
-class _TicketList extends State<TicketList> {
+class _TicketList extends ConsumerState<TicketList> {
   final List<String> timelist = [
     '10:00',
     '10:30',
@@ -136,6 +138,7 @@ class _TicketList extends State<TicketList> {
             child: const Text("使用"),
             onPressed: () {
               _removeticket(starttime: starttime);
+              ref.watch(bottomnaviProvider.notifier).setindex(0);
             }),
         TextButton(
           child: const Text("閉じる"),

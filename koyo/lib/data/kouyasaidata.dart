@@ -1,22 +1,35 @@
-class Kouyasaidata {
-  const Kouyasaidata({
+class Gymdata {
+  const Gymdata({
     required this.number,
     required this.title,
-    required this.type,
-    //required this.detail,
+    required this.detail,
   });
 
   final String number;
   final String title;
-  final String type;
-  //final String detail;
+  final String detail;
 }
 
-class KouyasaidataList {
-  List<Kouyasaidata> kouyasaidata = [
-   const Kouyasaidata(number: '1', title: 'バタスカ', type: 'お笑い'),
-   const Kouyasaidata(number: '2', title: 'mignon', type: 'ダンス'),
-   const Kouyasaidata(number: '3', title: 'VBS-f-th', type: 'ダンス'),
-   const Kouyasaidata(number: '4', title: 'S-N-O-U-N', type: 'ダンス'),
+class GymdataList {
+  List<Gymdata> gymdata = [
+  const Gymdata(number: '1', title: '体育館テスト', detail: 'これはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストです'),
+  ];
+}
+
+class Grounddata {
+  const Grounddata({
+    required this.number,
+    required this.title,
+    required this.detail,
+  });
+
+  final String number;
+  final String title;
+  final String detail;
+}
+
+class GrounddataList {
+  List<Grounddata> grounddata = [
+   const Grounddata(number: '1', title: 'グラウンドテスト', detail: 'これはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストですこれはテストです'),
   ];
 }

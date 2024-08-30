@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:koyo/account/account.dart';
+import 'package:koyo/bunkakouya/videoplayer.dart';
 import 'package:koyo/home/classmanage.dart';
 import 'package:koyo/home/mobilescan.dart';
 import 'package:koyo/home/pdfselect.dart';
@@ -197,6 +198,17 @@ final goRouter = GoRouter(
         return MaterialPage(
           key: state.pageKey,
           child: const Pdfselect(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/videoplayer',
+      name: 'videoplayer',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const VideoPage(),
         );
       },
     ),

@@ -86,11 +86,11 @@ class _Classcrowd extends ConsumerState<Classcrowd> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-              Text(
+              /*Text(
                 '$classname混雑度変更',
                 style: const TextStyle(color: Colors.black, fontSize: 26),
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(height: 10,),*/
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(

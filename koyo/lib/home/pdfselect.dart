@@ -76,26 +76,6 @@ class Pdfselect extends StatelessWidget {
                         thickness: 1,
                         color: Colors.grey,
                       ),      
-             const ListTile(
-                        title: Text('後夜祭実施要項'),
-                        onTap: null /*() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Pdfview(
-                                    pdf: 'assets/docs/.pdf',
-                                    title: '後夜祭実施要項')),
-                          );
-                        },*/
-                      ),
-                      
-                      const Divider(
-                        //線
-                        height: 1,
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),        
-
               ],)
             )],
          )

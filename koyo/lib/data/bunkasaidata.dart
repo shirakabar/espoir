@@ -21,3 +21,23 @@ class BunkasaidataList {
    const Bunkasaidata(time: '12:45', title: 'フォークソング部', place: '@体育館'),
   ];
 }
+
+class Hannichidata {
+  const Hannichidata({
+    required this.time,
+    required this.title,
+    required this.place,
+    //required this.detail,
+  });
+
+  final String time;
+  final String title;
+  final String place;
+  //final String detail;
+}
+
+class HannichidataList {
+  List<Hannichidata> hannichidata = [
+   const Hannichidata(time: '午前', title: 'これはテストです', place: 'どっか'),
+  ];
+}

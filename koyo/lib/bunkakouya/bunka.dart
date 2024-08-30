@@ -18,10 +18,10 @@ class Bunka extends StatelessWidget {
               _tabSection()
             ];
           },
-          body: const TabBarView(
+          body: TabBarView(
             children: [
                Bunkagym(),
-               Bunkagym(),
+               Bunkahannichi()
             ],
           ),
         ),
@@ -50,7 +50,7 @@ Widget _headerSection() {
                      SizedBox(
                       height: 5,
                     ),
-                Text('9月5日（木）',style: TextStyle(fontSize: 18),),
+                Text('9月5日（木）10:00 ~ 15:00',style: TextStyle(fontSize: 18),),
                   ]
             )
                   ),
@@ -73,7 +73,7 @@ Widget _tabSection() {
             text: '部活動',
           ),
           Tab(
-            text: '半日教室',
+            text: '半日教室等',
           )
         ],
         dividerColor: Colors.white
