@@ -30,8 +30,8 @@ class _Classticket extends ConsumerState<Classticket> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text('$classname整理券配布',style: const TextStyle(color: Colors.black,fontSize: 26),),
-              const SizedBox(height: 10,),
+              //Text('$classname整理券配布',style: const TextStyle(color: Colors.black,fontSize: 26),),
+              //const SizedBox(height: 10,),
               StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('Ticket')

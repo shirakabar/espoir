@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:koyo/hakurankai/butai.dart';
 import 'package:koyo/data/hakurandata.dart';
+import 'package:koyo/hakurankai/hakuranclassde.dart';
 
 class Crowd extends StatefulWidget {
   const Crowd({super.key,required this.index});
@@ -66,10 +66,7 @@ class Kyo extends StatefulWidget {
 
 class _Kyo extends State<Kyo> {
   final _hakurankaidata = HakurankaidataList().hakurankaidata;
-  final List<String> classlist = ['101','102','103','104','105','106','107','108','109',
-  '201','202','203','204','205','206','207','208','209',
-  '301','302','303','304','305','306','307','308','309',
-  ];
+  
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +97,7 @@ class _Kyo extends State<Kyo> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '9月6日（金）\n9月7日（土）',
+                                  '9月6日（金）9:30 ~ 15:30\n9月7日（土）9:00 ~ 15:00',
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ])),
@@ -137,6 +134,7 @@ class _Kyo extends State<Kyo> {
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                               horizontal: 20),
+                                      leading: Text(_hakurankaidata[index].classname,style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400),),
                                      /* leading: FittedBox(
                                           fit: BoxFit.fitHeight,
                                           child: Image.asset('assets/images/postest.jpg')),//仮の画像*/
@@ -158,13 +156,13 @@ class _Kyo extends State<Kyo> {
                                       tileColor: const Color.fromARGB(
                                           255, 241, 249, 255),
                                       trailing: Crowd(index: index),
-                                      onTap: /*() {
+                                      onTap: () {
                                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => KyoDe(classname: classlist[index],title: _hakurankaidata[index].title, place: _hakurankaidata[index].place, detail: _hakurankaidata[index].detail)),
+                                builder: (context) => KyoDe(classname: _hakurankaidata[index].classname,title: _hakurankaidata[index].title, place: _hakurankaidata[index].place, detail: _hakurankaidata[index].detail)),
                           );
-                                      }, */null,
+                                      },
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10)),
@@ -172,130 +170,6 @@ class _Kyo extends State<Kyo> {
                                     )));
                           })
                     ]))));
-  }
-}
-
-class Butai extends StatelessWidget {
-  const Butai({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: DefaultTabController(
-        length: 3,
-        child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[_headerSection(), _tabSection()];
-          },
-          body: const TabBarView(
-            children: [
-              Ichiran(),
-              First(),
-              Second(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-//header部分
-Widget _headerSection() {
-  return SliverList(
-      delegate: SliverChildListDelegate([
-    const Padding(
-        //余白設定
-        padding: EdgeInsets.symmetric(
-          horizontal: 5,
-          vertical: 12,
-        ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Padding(
-              padding: EdgeInsets.only(left: 20, top: 15),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '博覧会',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      '9月6日（金）\n9月7日（土）',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ])),
-          SizedBox(
-            //間設定
-            height: 15,
-          ),
-          Center(
-            child: Text(
-              '舞台発表',
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-        ]))
-  ]));
-}
-
-//TabBar部分
-Widget _tabSection() {
-  return const SliverPersistentHeader(
-    pinned: true,
-    delegate: _StickyTabBarDelegate(
-      tabBar: TabBar(
-        tabs: [
-          Tab(
-            text: '発表一覧',
-          ),
-          Tab(
-            text: '一日目',
-          ),
-          Tab(
-            text: '二日目',
-          )
-        ],
-        dividerColor: Colors.white,
-      ),
-    ),
-  );
-}
-
-//SliverPersistentHeaderDelegateを継承したTabBarを作る
-class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
-  const _StickyTabBarDelegate({required this.tabBar});
-
-  final TabBar tabBar;
-
-  @override
-  double get minExtent => tabBar.preferredSize.height;
-
-  @override
-  double get maxExtent => tabBar.preferredSize.height;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(
-      color: Colors.white,
-      child: tabBar,
-    );
-  }
-
-  @override
-  bool shouldRebuild(_StickyTabBarDelegate oldDelegate) {
-    return tabBar != oldDelegate.tabBar;
   }
 }
 
@@ -334,7 +208,7 @@ class _Club extends State<Club> {
                           height: 5,
                         ),
                         Text(
-                          '9月6日（金）\n9月7日（土）',
+                          '9月6日（金）9:30 ~ 15:30\n9月7日（土）9:00 ~ 15:00',
                           style: TextStyle(fontSize: 18),
                         ),
                       ])),

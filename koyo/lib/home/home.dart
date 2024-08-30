@@ -230,7 +230,7 @@ class _Home extends ConsumerState<Home> {
                       Menucard(title: '管理者用', img: 'assets/images/symbol.jpg', ontap: () => context.push('/adminselect')),
                       if (ref.watch(currentLoginStatusProvider) == CurrentLoginStatus.loggedInStaff)
                       Menucard(title: 'スタッフ用', img: 'assets/images/symbol.jpg', ontap: () => context.push('/staffselect')),
-                      if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn)
+                      if (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn && !ref.watch(loggedInClassProvider).startsWith('3'))
                       Menucard(title: 'クラス運営', img: 'assets/images/symbol.jpg', ontap: () => context.push('/classmanage')),
                       
                       Menucard(

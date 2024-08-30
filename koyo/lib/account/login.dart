@@ -33,8 +33,8 @@ class _Login extends ConsumerState<Login> {
       debugPrint(classname);
         FirebaseFirestore.instance
             .collection('Password')
-            .doc('passwaord')
-            .update({classname: '11234567890-qwertyuiop'});
+            .doc('password')
+            .update({classname: '`'});
       }
   }*/
 
@@ -202,7 +202,16 @@ class _Login extends ConsumerState<Login> {
                               }
                             }
                           },
-                          child: const Text('ログイン',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
+                          child: const Text('ログイン',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                          const SizedBox(height: 10),
+                          const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '※生徒はTeamsに配信されたパスワードでログインしてください \n※生徒以外の方はログインできません',
+                                style:
+                                    TextStyle(fontSize: 15, color: Colors.grey),
+                              ),
+                            ),
                     ])));
   }
 }

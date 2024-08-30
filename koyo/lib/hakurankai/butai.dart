@@ -1,139 +1,118 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:koyo/hakurankai/butaide.dart';
 
-//体育祭のスケジュール一覧
+//舞台のスケジュール一覧
+class Butai extends StatelessWidget {
+  const Butai({super.key});
 
-class Ichiran extends StatefulWidget {
-   const Ichiran({super.key});
-
-   @override
-   State<Ichiran> createState() => _Ichiran();
-}
-
-class _Ichiran extends State<Ichiran> {
-
-@override
- Widget build(BuildContext context){
- return ListView.builder(//体育祭の各種目を一覧表示
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(//ここからを表示
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
-              child:
-              Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10)
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: DefaultTabController(
+        length: 3,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[_headerSection(), _tabSection()];
+          },
+          body: const TabBarView(
+            children: [
+              Ichiran(),
+              First(),
+              Second(),
+            ],
           ),
-              child: ListTile(
-                title: const Text('',style: TextStyle(fontSize: 20),),
-                subtitle: const Text(''),
-                tileColor: const Color.fromARGB(255, 241, 249, 255),
-                onTap: () {
-                  context.push('/come');
-                },//gorouterでのタップ時遷移　仮
-                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-              )
-            )
-            
-        
-            );
-          }
-          
-         );
-}
+        ),
+      ),
+    );
+  }
 }
 
-class First extends StatefulWidget {
-   const First({super.key});
-
-   @override
-   State<First> createState() => _First();
-}
-
-class _First extends State<First> {
-
-@override
- Widget build(BuildContext context){
- return ListView.builder(//体育祭の各種目を一覧表示
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(//ここからを表示
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
-              child:
-              Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10)
+//header部分
+Widget _headerSection() {
+  return SliverList(
+      delegate: SliverChildListDelegate([
+    const Padding(
+        //余白設定
+        padding: EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 12,
+        ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(
+              padding: EdgeInsets.only(left: 20, top: 15),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '博覧会',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      '9月6日（金）9:30 ~ 15:30\n9月7日（土）9:00 ~ 15:00',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ])),
+          SizedBox(
+            //間設定
+            height: 5,
           ),
-              child: ListTile(
-                title: const Text('',style: TextStyle(fontSize: 20),),
-                subtitle: const Text(''),
-                tileColor: const Color.fromARGB(255, 241, 249, 255),
-                onTap: () {
-                  context.push('/come');
-                },//gorouterでのタップ時遷移　仮
-                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-              )
-            )
-            
-        
-            );
-          }
-          
-         );
-}
+        ]))
+  ]));
 }
 
-class Second extends StatefulWidget {
-   const Second({super.key});
-
-   @override
-   State<Second> createState() => _Second();
-}
-
-class _Second extends State<Second> {
-
-@override
- Widget build(BuildContext context){
- return ListView.builder(//体育祭の各種目を一覧表示
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 5,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(//ここからを表示
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 1),
-              child:
-              Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10)
+//TabBar部分
+Widget _tabSection() {
+  return const SliverPersistentHeader(
+    pinned: true,
+    delegate: _StickyTabBarDelegate(
+      tabBar: TabBar(
+        tabs: [
+          Tab(
+            text: '発表一覧',
           ),
-              child: ListTile(
-                title: const Text('',style: TextStyle(fontSize: 20),),
-                subtitle: const Text(''),
-                tileColor: const Color.fromARGB(255, 241, 249, 255),
-                onTap: () {
-                  context.push('/come');
-                },//gorouterでのタップ時遷移　仮
-                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-              )
-            )
-            
-        
-            );
-          }
-          
-         );
+          Tab(
+            text: '一日目',
+          ),
+          Tab(
+            text: '二日目',
+          )
+        ],
+        dividerColor: Colors.white,
+      ),
+    ),
+  );
 }
+
+//SliverPersistentHeaderDelegateを継承したTabBarを作る
+class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
+  const _StickyTabBarDelegate({required this.tabBar});
+
+  final TabBar tabBar;
+
+  @override
+  double get minExtent => tabBar.preferredSize.height;
+
+  @override
+  double get maxExtent => tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      color: Colors.white,
+      child: tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_StickyTabBarDelegate oldDelegate) {
+    return tabBar != oldDelegate.tabBar;
+  }
 }

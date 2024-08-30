@@ -54,6 +54,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   mobile_scanner: ^5.1.1
   qr_flutter: ^4.1.0
+  video_player: ^2.9.1
 
 dev_dependencies:
   flutter_test:
@@ -143,6 +144,7 @@ flutter:
     - assets/docs/hakurankaipolicy.pdf
     - assets/docs/bunkasaipolicy.pdf
     - assets/docs/gakkousainogoannai.pdf
+    - assets/videos/kouyasaivideo.mp4
 
 flutter_native_splash:
     color: "#FFFFFF"

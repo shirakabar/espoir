@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:koyo/settings/koyo_icons.dart';
 import 'package:koyo/settings/loginprovider.dart';
 import 'package:koyo/widget/bottomnavi.dart';
-import 'package:koyo/widget/pdfview.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -83,7 +82,7 @@ class Draw extends ConsumerWidget {
             }, icon: Icons.home),
            tile(label: "結果", ontap: () => context.push('/result'), icon: Icons.emoji_events),
            tile(label: "整理券", ontap: () => context.push('/ticketlist'), icon: Koyo.ticketicon),
-           tile(label: "アンケート", ontap: () {
+           tile(label: "投票", ontap: () {
             final url = Uri.parse(
                               'https://docs.google.com/forms/d/e/1FAIpQLSenWU97munsKfYxjUQZ5Giws7LJux-6CCJxvGlmazFfSErfBA/viewform?usp=sf_link');
                           launchUrl(url);
@@ -97,13 +96,7 @@ class Draw extends ConsumerWidget {
            }, icon: Icons.support_agent),
            (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn) ? 
            tile(label: "要項", ontap: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Pdfview(
-                                    pdf: 'assets/docs/sportsprogram.pdf',
-                                    title: '体育祭実施要項')),
-                          );
+                          context.push('/pdfselect');
                         }, icon: Icons.article) :
            tile(label: "ホームページ", ontap: (){
                             final url = Uri.parse(

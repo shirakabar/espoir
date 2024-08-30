@@ -1,30 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:koyo/bunkakouya/kouyade.dart';
-//import 'package:koyo/bunkakouya/ondemand.dart';
 
 //文化祭ページのタブ遷移先一覧
 //stickeytabbarはネットから
-class Kouya extends StatelessWidget {
+class Kouya extends StatefulWidget {
   const Kouya({super.key});
 
+  @override
+  State<Kouya> createState() => _Kouya();
+}
+class _Kouya extends State<Kouya> {
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 3,
+        length: 2,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
-              _headerSection(),
+              //_headerSection(),
+              //buildcontextの関係で直で書きました
+              SliverList(
+    delegate: SliverChildListDelegate(
+      [ Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 12,),
+          child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[ 
+                     Padding(
+                     padding: const EdgeInsets.only(left:20,top:15),
+                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                       children:[ 
+                        const Text('後夜祭',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35),),
+                     const SizedBox(
+                      height: 5,
+                    ),
+                const Text('9月7日（土）',style: TextStyle(fontSize: 18),),
+                const SizedBox(
+                      height: 5,
+                    ),
+                OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            //minimumSize: const Size(200, 50),
+                              backgroundColor: Theme.of(context).primaryColor,
+                              side: BorderSide(
+                                  color: Theme.of(context).primaryColor)),
+                          onPressed: () {
+                            context.push('/videoplayer');
+                          },
+                          child: const Text('後夜祭紹介動画',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
+                  ]
+            )
+                  ),
+                  ]
+            ),
+        ),
+      ],
+    ),
+  ),
               _tabSection()
             ];
           },
-          body: const TabBarView(
+          body: TabBarView(
             children: [
                Kouyagym(),
-               Kouyagym(),
-               //Ondemand(),
-               Kouyagym(),
+               Kouyaground()
             ],
           ),
         ),
@@ -34,26 +79,39 @@ class Kouya extends StatelessWidget {
 }
 
 //header部分
-Widget _headerSection() {
+/*Widget _headerSection(context) {
   return SliverList(
     delegate: SliverChildListDelegate(
-      [ const Padding(
-        padding: EdgeInsets.symmetric(
+      [ Padding(
+        padding: const EdgeInsets.symmetric(
           horizontal: 5,
           vertical: 12,),
           child: Column(
                crossAxisAlignment: CrossAxisAlignment.start,
                   children:[ 
                      Padding(
-                     padding: EdgeInsets.only(left:20,top:15),
+                     padding: const EdgeInsets.only(left:20,top:15),
                      child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                        children:[ 
-                        Text('後夜祭',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35),),
-                     SizedBox(
+                        const Text('後夜祭',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35),),
+                     const SizedBox(
                       height: 5,
                     ),
-                Text('9月7日（土）',style: TextStyle(fontSize: 18),),
+                const Text('9月7日（土）',style: TextStyle(fontSize: 18),),
+                const SizedBox(
+                      height: 5,
+                    ),
+                OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            //minimumSize: const Size(200, 50),
+                              backgroundColor: Theme.of(context).primaryColor,
+                              side: BorderSide(
+                                  color: Theme.of(context).primaryColor)),
+                          onPressed: () {
+                            context.push('/videoplayer');
+                          },
+                          child: const Text('後夜祭紹介動画',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
                   ]
             )
                   ),
@@ -63,7 +121,7 @@ Widget _headerSection() {
       ],
     ),
   );
-}
+}*/
 
 //TabBar部分
 Widget _tabSection() {
@@ -76,11 +134,8 @@ Widget _tabSection() {
             text: '体育館',
           ),
           Tab(
-            text: '運動場',
+            text: 'グラウンド',
           ),
-          Tab(
-            text: 'オンデマンド',
-          )
         ],
         dividerColor: Colors.white
       ),
