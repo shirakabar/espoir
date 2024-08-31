@@ -7,6 +7,7 @@ import 'package:koyo/home/mobilescan.dart';
 import 'package:koyo/home/pdfselect.dart';
 import 'package:koyo/home/ticketlist.dart';
 import 'package:koyo/home/ticketmanage.dart';
+import 'package:koyo/result/hakuranresultmake.dart';
 import 'package:koyo/staff/adminselect.dart';
 import 'package:koyo/home/policyselect.dart';
 import 'package:koyo/result/resultmake.dart';
@@ -208,7 +209,18 @@ final goRouter = GoRouter(
       pageBuilder: (context, state) {
         return MaterialPage(
           key: state.pageKey,
-          child: const VideoPage(),
+          child: const Videoplayer(),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: '/resultmakehakuran',
+      name: 'resultmakehakuran',
+      pageBuilder: (context, state) {
+        return MaterialPage(
+          key: state.pageKey,
+          child: const Resultmakehakuran(),
         );
       },
     ),
