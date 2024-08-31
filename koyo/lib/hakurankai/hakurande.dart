@@ -66,7 +66,6 @@ class Kyo extends StatefulWidget {
 
 class _Kyo extends State<Kyo> {
   final _hakurankaidata = HakurankaidataList().hakurankaidata;
-  
 
   @override
   Widget build(BuildContext context) {

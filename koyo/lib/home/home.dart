@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:koyo/home/commentwidget.dart';
 import 'package:koyo/settings/koyo_icons.dart';
 import 'package:koyo/widget/bottomnavi.dart';
 import 'package:koyo/widget/pdfview.dart';
@@ -137,22 +138,7 @@ class _Home extends ConsumerState<Home> {
                     const SizedBox(
                       height: 9,
                     ),
-                    Container(
-                      width: 350,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      child: const Center(
-                          child: Text(
-                        '向陽祭は9月5日から‼',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )),
-                    ),
+                    const Commentwidget(),
                     const SizedBox(
                       height: 10,
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:koyo/data/hakurandata.dart';
 
 class Resultdetail {
   const Resultdetail({required this.resultname, required this.ismulti});
@@ -16,11 +17,29 @@ class Resulthakuran extends StatefulWidget {
 }
 
 class _Resulthakuran extends State<Resulthakuran> {
+  final _hakurankaidata = HakurankaidataList().hakurankaidata;
+  final _ichirandata = IchirandataList().ichirandata;
+
+  String? _getname(classname) {
+    final List<String> onetwoclasslist = [
+    '101','102','103','104','105','106','107','108','109',
+    '201','202','203','204','205','206','207','208','209',
+  ];
+  final List<String> threeclasslist = ['301','302','303','304','305','306','307','308','309',];
+  if (onetwoclasslist.contains(classname)) {
+    return _hakurankaidata[onetwoclasslist.indexOf(classname)].title;
+  } else if (threeclasslist.contains(classname)) {
+    return _ichirandata[threeclasslist.indexOf(classname)].title;
+  } else {
+    return '';
+    }
+  }
 
   final List resultdetaillist = const [
     Resultdetail(resultname: '向陽大賞', ismulti: false),
+    Resultdetail(resultname: '一般大賞', ismulti: false),
     Resultdetail(resultname: 'ポスター大賞', ismulti: false),
-    Resultdetail(resultname: '学年最優秀賞', ismulti: true),
+    Resultdetail(resultname: '全校大賞', ismulti: true),
     Resultdetail(resultname: '学年ポスター大賞', ismulti: true),
     ];
   final List keyList = ['1年','2年','3年'];
@@ -40,7 +59,7 @@ class _Resulthakuran extends State<Resulthakuran> {
               children: [
               ListTile(
               leading: Text(keyList[index],style: const TextStyle(fontSize: 16),),
-              title: Text(resultMap[keyList[index]],style: const TextStyle(fontSize: 16),),
+              title: Text('${resultMap[keyList[index]]} ${_getname(resultMap[keyList[index]])}',style: const TextStyle(fontSize: 16),),
             ),
             const Divider(height: 1,color: Colors.grey,indent: 5,endIndent: 5),
             ]);
@@ -54,7 +73,15 @@ class _Resulthakuran extends State<Resulthakuran> {
     if (classname.isEmpty) {
       return const Text('発表をお待ちください');
     } else {
-      return Text(classname,style: const TextStyle(fontSize: 18));
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+        Text(classname,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w400)),
+        Text('${_getname(classname)}',style: const TextStyle(fontSize: 18)),
+        const SizedBox(height: 5),
+        const Divider(height: 1,color: Colors.grey,indent: 5,endIndent: 5),
+      ] 
+      );
     }
   }
 
@@ -101,7 +128,7 @@ class _Resulthakuran extends State<Resulthakuran> {
                                         style: const TextStyle(fontSize: 18),
                                       ),
                                       const SizedBox(
-                                        height: 7,
+                                        height: 10,
                                         width: double.infinity,
                                       ),
                                     (resultdetaillist[index].ismulti == true) ?  

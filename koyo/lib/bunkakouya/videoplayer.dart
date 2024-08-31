@@ -1,56 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:chewie/chewie.dart';
+import 'package:koyo/widget/widget.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoPage extends StatefulWidget {
-  const VideoPage({super.key});
+class Videoplayer extends StatefulWidget {
+  const Videoplayer({super.key});
 
   @override
-  State<VideoPage> createState() => _VideoPageState();
+  VideoplayerState createState() => VideoplayerState();
 }
 
-class _VideoPageState extends State<VideoPage> {
-   late VideoPlayerController _controller;
+class VideoplayerState extends State<Videoplayer> {
+  late VideoPlayerController _videoPlayerController;
+  late ChewieController _chewieController;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-      });
+    _videoPlayerController = VideoPlayerController.asset('assets/videos/kouyasaivideo.mp4');
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController,
+      aspectRatio: 3 / 2,
+      autoPlay: false,
+      looping: true,
+      // Try playing around with some of these other options:
+
+      //showControls: false,
+      materialProgressColors: ChewieProgressColors(
+        playedColor: Colors.red,
+        handleColor: Colors.white,
+        backgroundColor: Colors.grey,
+        bufferedColor: Colors.grey,
+      ),
+      placeholder: Container(
+        color: Colors.grey,
+      ),
+      autoInitialize: true,
+    );
+  }
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    _chewieController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-          child: _controller.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: VideoPlayer(_controller),
-                )
-              : Container(),
+     appBar: const Bar(title:'後夜祭紹介動画',),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Center(
+                child: Chewie(
+                  controller: _chewieController,
+                ),
+              ),
+            ),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _controller.value.isPlaying
-                  ? _controller.pause()
-                  : _controller.play();
-            });
-          },
-          child: Icon(
-            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-          ),
-        ),
+      ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }
