@@ -2,21 +2,20 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:koyo/data/localdata.dart';
-import 'package:koyo/widget/bottomnavi.dart';
 import 'package:koyo/widget/widget.dart';
 
-class Ticket extends ConsumerStatefulWidget{
+class Ticket extends StatefulWidget{
   const Ticket({super.key,required this.classname});
 
   final String classname;
 
   @override
-  ConsumerState<Ticket> createState() => _Ticket();
+  State<Ticket> createState() => _Ticket();
 }
 
-class _Ticket extends ConsumerState<Ticket>{
+class _Ticket extends State<Ticket>{
 
 List<String> hour =['10:00','11:00','12:00','13:00','14:00','15:00'];
 List<String> half =['10:30','11:30','12:30','13:30','14:30'];
@@ -83,7 +82,12 @@ List<String> half =['10:30','11:30','12:30','13:30','14:30'];
                         .doc(classname)
                         .update({start : data?[start] - 1 });
                         saveTicket(start, end, classname);
-                        ref.watch(bottomnaviProvider.notifier).setindex(0);
+                        context.go('/');
+                       const snackBar = SnackBar(
+                        content: Text("整理券を取得しました"),
+                        duration: Duration(seconds: 1),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                      }
 
                      final int hourcom = int.parse(hour[index].replaceAll(':',""));//整理券の時間hhmmの整数

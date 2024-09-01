@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koyo/map/map.dart';
 double expander = 0;
 
 double topShifter(double a){
@@ -37,35 +38,35 @@ class SecondFloor extends StatelessWidget {
             left: leftShifter(340),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('201'),),
+            child: Classbutton(classname: '201')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(300),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('202'),),
+            child: Classbutton(classname: '202')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(240),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('203'),),
+            child: Classbutton(classname: '203')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(190),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('204'),),
+            child: Classbutton(classname: '204')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(140),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('205'),),
+            child: Classbutton(classname: '205')
           ),
         ],
       ),
