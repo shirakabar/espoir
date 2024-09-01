@@ -11,13 +11,20 @@ class Commentwidget extends StatefulWidget{
 class _Commentwidget extends State<Commentwidget>{
   final String usualtext = '向陽祭は9月5日から‼';
 
-  Widget commentbox(text) {
+  Color _parseColorFromString(String colorString) {
+  String valueString = colorString.split('(0x')[1].split(')')[0]; // 'ff42a5f5'
+  int value = int.parse(valueString, radix: 16);
+  return Color(value);
+}
+
+  Widget commentbox(text, color) {
+    color ??= Theme.of(context).primaryColor;
     return Container(
                       width: 350,
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Theme.of(context).primaryColor,
+                        color: color
                       ),
                       child: Center(
                           child: Text(
@@ -32,6 +39,7 @@ class _Commentwidget extends State<Commentwidget>{
 
 @override
   Widget build(BuildContext context) {
+  final Color usualcolor = Theme.of(context).primaryColor;
  return StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('Comment')
@@ -39,14 +47,15 @@ class _Commentwidget extends State<Commentwidget>{
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return commentbox(usualtext);
+                return commentbox(usualtext, usualcolor);
               }
               if (!snapshot.hasData) {
-                return commentbox(usualtext);
+                return commentbox(usualtext, usualcolor);
               }
               Map<String, dynamic> data =
                   snapshot.data!.data() as Map<String, dynamic>;
-              return (data['comment'] == '') ? commentbox(usualtext) : commentbox(data['comment']);
+              final Color changedcolor = _parseColorFromString(data['color']);
+              return (data['comment'] == '' && data['color'] == 'Color(0xff1976d2)') ? commentbox(usualtext, usualcolor) : commentbox(data['comment'], changedcolor);
             }
                     );
  }

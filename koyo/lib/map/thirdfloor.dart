@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koyo/map/map.dart';
 double expander = 0;
 
 double topShifter(double a){
@@ -36,49 +37,49 @@ class ThirdFloor extends StatelessWidget {
             left: leftShifter(330),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('101'),),
+            child: Classbutton(classname: '101')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(285),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('102'),),
+            child: Classbutton(classname: '102')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(240),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('103'),),
+            child: Classbutton(classname: '103')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(190),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('104'),),
+            child: Classbutton(classname: '104')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(145),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('105'),),
+            child: Classbutton(classname: '105')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(110),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('106'),),
+            child: Classbutton(classname: '106')
           ),
           Positioned(
             top: topShifter(190),
             left: leftShifter(50),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('107'),),
+            child: Classbutton(classname: '107')
           ),
           // Positionedで配置
           Positioned(
@@ -86,42 +87,42 @@ class ThirdFloor extends StatelessWidget {
             left: leftShifter(330),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('307'),),
+            child: Classbutton(classname: '307')
           ),
           Positioned(
             top: topShifter(110),
             left: leftShifter(285),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('306'),),
+            child: Classbutton(classname: '306')
           ),
           Positioned(
             top: topShifter(110),
             left: leftShifter(240),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('305'),),
+            child: Classbutton(classname: '305')
           ),
           Positioned(
             top: topShifter(110),
             left: leftShifter(190),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('304'),),
+            child: Classbutton(classname: '304')
           ),
           Positioned(
             top: topShifter(110),
             left: leftShifter(145),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('303'),),
+            child: Classbutton(classname: '303')
           ),
           Positioned(
             top: topShifter(110),
             left: leftShifter(110),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('302'),),
+            child: Classbutton(classname: '302')
           ),
 
           Positioned(
@@ -129,7 +130,7 @@ class ThirdFloor extends StatelessWidget {
             left: leftShifter(50),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('301'),),
+            child: Classbutton(classname: '301')
           ),
         ],
       ),

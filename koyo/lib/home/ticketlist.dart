@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/data/localdata.dart';
-import 'package:koyo/widget/bottomnavi.dart';
 import 'package:koyo/widget/widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:koyo/data/hakurandata.dart';
@@ -23,14 +21,14 @@ class Ticket {
 
 //獲得整理券一覧
 
-class TicketList extends ConsumerStatefulWidget {
+class TicketList extends StatefulWidget {
   const TicketList({super.key});
 
   @override
-  ConsumerState<TicketList> createState() => _TicketList();
+  State<TicketList> createState() => _TicketList();
 }
 
-class _TicketList extends ConsumerState<TicketList> {
+class _TicketList extends State<TicketList> {
   final List<String> timelist = [
     '10:00',
     '10:30',
@@ -138,7 +136,7 @@ class _TicketList extends ConsumerState<TicketList> {
             child: const Text("使用"),
             onPressed: () {
               _removeticket(starttime: starttime);
-              ref.watch(bottomnaviProvider.notifier).setindex(0);
+              context.go('/');
             }),
         TextButton(
           child: const Text("閉じる"),
@@ -280,10 +278,6 @@ class _TicketList extends ConsumerState<TicketList> {
 
   @override
   Widget build(BuildContext context) {
-   /* if (!isloaded) {
-      getTicket();
-      isloaded = true;
-    }*/
     return Scaffold(
         appBar: const Bar(title: '整理券'),
         floatingActionButton: FloatingActionButton(
@@ -300,10 +294,11 @@ class _TicketList extends ConsumerState<TicketList> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                          padding: EdgeInsets.only(left: 20, top: 15),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 15),
                           child: Column(children: [
-                            Align(
+                            if (ticketlist.isNotEmpty)  
+                            const Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 '※タップで使用します',
@@ -315,13 +310,15 @@ class _TicketList extends ConsumerState<TicketList> {
                       const SizedBox(
                         height: 10,
                       ),
+                      (ticketlist.isEmpty) ? 
+                      const Center(child: Text('整理券を取得していません\n右下の「+」ボタンから追加できます',style: TextStyle(fontSize: 17),)) : 
                       ListView.builder(
                           //一覧表示
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: ticketlist.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return (ticketlist.isEmpty) ? const Text('整理券を取得していません') : ticketcard(index: index);
+                            return ticketcard(index: index);
                           })
                     ]))));
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koyo/map/map.dart';
 double expander = 0;
 
 double topShifter(double a){
@@ -36,28 +37,28 @@ class FourthFloor extends StatelessWidget {
             left: leftShifter(340),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('108'),),
+            child: Classbutton(classname: '108')
           ),
           Positioned(
             top: topShifter(205),
             left: leftShifter(290),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('109'),),
+            child: Classbutton(classname: '109')
           ),
           Positioned(
             top: topShifter(205),
-            left: leftShifter(210),
+            left: leftShifter(220),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('LL'),),
+            child: const TextButton(onPressed: null,child: Text('LL'),),
           ),
           Positioned(
             top: topShifter(205),
-            left: leftShifter(110),
+            left: leftShifter(102),
             width: 100.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('大講義室'),),
+            child: Classbutton(classname: '206', buttonname: '大講義室',)
           ),
 
           
@@ -66,49 +67,49 @@ class FourthFloor extends StatelessWidget {
             left: leftShifter(340),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('309'),),
+            child: Classbutton(classname: '309')
           ),
           Positioned(
             top: topShifter(120),
             left: leftShifter(290),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('308'),),
+            child: Classbutton(classname: '308')
           ),
           Positioned(
             top: topShifter(120),
             left: leftShifter(240),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('307'),),
+            child: Classbutton(classname: '307')
           ),
           Positioned(
             top: topShifter(120),
             left: leftShifter(190),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('209'),),
+            child: Classbutton(classname: '209')
           ),
           Positioned(
             top: topShifter(120),
             left: leftShifter(150),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('208'),),
+            child: Classbutton(classname: '208')
           ),
           Positioned(
             top: topShifter(120),
             left: leftShifter(105),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('207'),),
+            child: Classbutton(classname: '207')
           ),
           Positioned(
             top: topShifter(120),
             left: leftShifter(40),
             width: 50.0,
             height: 50.0,
-            child: TextButton(onPressed: () { /* ボタンがタップされた時の処理 */ },child: const Text('206'),),
+            child: Classbutton(classname: '206')
           ),
         ],
       ),

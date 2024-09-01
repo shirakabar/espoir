@@ -63,7 +63,7 @@ class _Classticket extends ConsumerState<Classticket> {
               
               ),
               const SizedBox(height: 45,),
-              const Text('ホームの整理券から左下の「＋」ボタンを押して追加してください',style: TextStyle(color: Colors.black,fontSize: 20),),
+              const Text('ホームの整理券から右下の「＋」ボタンを押して追加してください',style: TextStyle(color: Colors.black,fontSize: 20),),
               const SizedBox(height: 47),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(

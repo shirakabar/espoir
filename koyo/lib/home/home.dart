@@ -82,10 +82,18 @@ class _Home extends ConsumerState<Home> {
                     ),
                     CarouselSlider(
                       items: [
-                        const CarouselContainerbox(
+                        CarouselContainerbox(
                           title: '向陽祭',
                           img: 'assets/images/symbol.jpg',
-                          ontap: null,
+                          ontap: () {
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Pdfview(
+                                    pdf: 'assets/docs/gakkousainogoannai.pdf',
+                                    title: 'ご案内')),
+                          );
+                          },
                         ),
                         CarouselContainerbox(
                           title: '体育祭',
@@ -152,13 +160,20 @@ class _Home extends ConsumerState<Home> {
                     Expanded(child: homebutton(label: '結果',onpressed: () => context.push('/result'),icon:  Icons.emoji_events), ),
                     
                     Expanded(child: homebutton(label: '整理券',onpressed: () => context.push('/ticketlist'),icon: Koyo.ticketicon),),
-                    
-                    Expanded(child: homebutton(label: '投票',onpressed: () {
+
+                    (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn) ? 
+                    Expanded(child: homebutton(label: '生徒投票',onpressed: () {
                      final url = Uri.parse(
-                              'https://forms.gle/dQ7mhnnWPkfj84jR8');
+                              'https://forms.office.com/Pages/ResponsePage.aspx?id=3meRRyNrWEOYBlpq_Yo7xPbWF0D1-uhNlY5oT1WmOxpUMTlUTFUxTFVDRDRGQkZDUU83Q0JHTFpCVS4u');
                           launchUrl(url);
-                    },icon: Icons.description),),
-                    
+                    },icon: Icons.description),) : 
+
+                    Expanded(child: homebutton(label: '来場者投票',onpressed: () {
+                     final url = Uri.parse(
+                              'https://forms.office.com/Pages/ResponsePage.aspx?id=3meRRyNrWEOYBlpq_Yo7xPbWF0D1-uhNlY5oT1WmOxpURFZDSkFGVk9SRjBCS1FHSE4zM0hBVjhGTi4u');
+                          launchUrl(url);
+                    },icon: Icons.description),)         
+
                   ]),
               const SizedBox(
                 height: 20,

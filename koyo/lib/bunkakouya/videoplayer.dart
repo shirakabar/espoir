@@ -17,7 +17,7 @@ class VideoplayerState extends State<Videoplayer> {
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.asset('assets/videos/kouyasaivideo.mp4');
+    _videoPlayerController = VideoPlayerController.asset('assets/videos/kouyasaivideo.mp4',videoPlayerOptions: VideoPlayerOptions());
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
       aspectRatio: 3 / 2,
@@ -36,6 +36,10 @@ class VideoplayerState extends State<Videoplayer> {
         color: Colors.grey,
       ),
       autoInitialize: true,
+      optionsTranslation: OptionsTranslation(
+        playbackSpeedButtonText: '再生速度',
+        cancelButtonText: 'キャンセル',
+),
     );
   }
   @override
