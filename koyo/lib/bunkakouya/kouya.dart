@@ -16,7 +16,7 @@ class _Kouya extends State<Kouya> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 2,
+        length: 3,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -69,7 +69,8 @@ class _Kouya extends State<Kouya> {
           body: TabBarView(
             children: [
                Kouyagym(),
-               Kouyaground()
+               Kouyaground(),
+               Ondemand()
             ],
           ),
         ),
@@ -135,6 +136,9 @@ Widget _tabSection() {
           ),
           Tab(
             text: 'グラウンド',
+          ),
+          Tab(
+            text: 'オンデマンド',
           ),
         ],
         dividerColor: Colors.white

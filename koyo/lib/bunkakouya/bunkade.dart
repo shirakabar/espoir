@@ -39,9 +39,9 @@ class Bunkagym extends StatelessWidget {
             borderRadius: BorderRadius.circular(10)
           ),
               child: ListTile(
-                leading: Text(_bunkasaidata[index].time,style: const TextStyle(fontSize: 25,fontWeight: FontWeight.w400),),
+                leading: Text(_bunkasaidata[index].time,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
                 title: Text(_bunkasaidata[index].title,style: const TextStyle(fontSize: 20),),
-                subtitle: Text(_bunkasaidata[index].place),
+                subtitle: Text('@${_bunkasaidata[index].place}'),
                 tileColor: const Color.fromARGB(255, 241, 249, 255),
                 onTap: null,
                  shape: const RoundedRectangleBorder(

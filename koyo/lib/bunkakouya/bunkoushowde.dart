@@ -23,11 +23,19 @@ class Bunkoushowde extends StatelessWidget {
            padding: const EdgeInsets.only(left:20,top:15),
             child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
+          children: <Widget>[  
+             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+              Text(number,style: const TextStyle(fontWeight: FontWeight.w700,fontSize: 30),),
+              const SizedBox(width: 10,),
+              Flexible(child: 
+             Text(title,style: const TextStyle(fontWeight: FontWeight.w700,fontSize: 30),))
+            ],),
             Align(alignment: Alignment.centerLeft,
-            child: Text('$number  $title',style: const TextStyle(fontWeight: FontWeight.w700,fontSize: 30),),),
+            child: Text('@$place', style: const TextStyle(fontSize: 18)),),
             const SizedBox(height: 20),
-            Text(detail, style: const TextStyle(fontSize: 18)),            
+            Text(detail, style: const TextStyle(fontSize: 18)),         
           ]
         ),
       )
