@@ -148,7 +148,7 @@ class _Kyo extends State<Kyo> {
                                       subtitle: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
-                                        child: Text(_hakurankaidata[index].place,
+                                        child: Text('@${_hakurankaidata[index].place}',
                                             style:
                                                 const TextStyle(fontSize: 14)),
                                       ),
@@ -253,7 +253,7 @@ class _Club extends State<Club> {
                                       subtitle: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
-                                        child: Text(_clubdata[index].place,
+                                        child: Text('${_clubdata[index].club} @${_clubdata[index].place}',
                                             style:
                                                 const TextStyle(fontSize: 14)),
                                       ),

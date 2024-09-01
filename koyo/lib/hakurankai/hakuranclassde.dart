@@ -20,12 +20,19 @@ class KyoDe extends StatelessWidget {
     return Scaffold(
       appBar: const Bar(title: 'クラス詳細'),
       body: Padding(
-           padding: const EdgeInsets.only(left:20,top:15),
+           padding: const EdgeInsets.symmetric(vertical:20,horizontal:15),
             child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Align(alignment: Alignment.centerLeft,
-            child: Text('$classname  $title',style: const TextStyle(fontWeight: FontWeight.w700,fontSize: 30),),),
+            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+              Text(classname,style: const TextStyle(fontWeight: FontWeight.w700,fontSize: 30),),
+              const SizedBox(width: 10,),
+              Flexible(child: 
+             Text(title,style: const TextStyle(fontWeight: FontWeight.w700,fontSize: 30),))
+            ],),
             Align(alignment: Alignment.centerLeft,
             child: Text('@$place', style: const TextStyle(fontSize: 18)),),
             const SizedBox(height: 20),

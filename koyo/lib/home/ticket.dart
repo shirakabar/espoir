@@ -48,7 +48,7 @@ List<String> half =['10:30','11:30','12:30','13:30','14:30'];
     final classname = widget.classname;
 
     return Scaffold(
-      appBar:  Bar(title: '$classname整理券確認'),
+      appBar:  Bar(title: '$classname整理券取得'),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
         child: Column(
