@@ -62,3 +62,36 @@ exports.pushnotification = functions
       };
       return admin.messaging().send(message);
     });
+
+exports.updateRandomCode = functions
+    .pubsub
+    .schedule("every 15 minutes")
+    .onRun((context) => {
+      const db = admin.firestore();
+      const ref = db.collection("Ticket").doc("randomCode");
+
+      /**
+       *
+       * @return {randomNumber}
+       */
+      function generateRandom16DigitNumber() {
+        let randomNumber = "";
+        for (let i = 0; i < 16; i++) {
+          randomNumber += Math.floor(Math.random() * 10); // 0から9までのランダムな数字を追加
+        }
+        return randomNumber;
+      }
+
+      const random16DigitNumber = generateRandom16DigitNumber();
+
+      return ref.update({
+        code: random16DigitNumber,
+      }).then(() => {
+        console.log("randomCode set");
+        return null;
+      }).catch((error) => {
+        console.error("Error updating randomCode:", error);
+      });
+    });
+
+// 現在スケジュールの関数はエミュレーターで使用できない

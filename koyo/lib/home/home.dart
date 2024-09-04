@@ -191,7 +191,7 @@ class _Home extends ConsumerState<Home> {
                         },
                         icon: Icons.support_agent)),
                     (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn) ? 
-                    Expanded(child: homebutton(label: '要項',
+                    Expanded(child: homebutton(label: '注意事項',
                         onpressed: () {
                          context.push('/pdfselect');
                         },

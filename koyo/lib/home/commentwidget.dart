@@ -50,7 +50,7 @@ class _Commentwidget extends State<Commentwidget>{
                 return commentbox(usualtext, usualcolor);
               }
               if (!snapshot.hasData) {
-                return commentbox(usualtext, usualcolor);
+                return commentbox('', usualcolor);
               }
               Map<String, dynamic> data =
                   snapshot.data!.data() as Map<String, dynamic>;
