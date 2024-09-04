@@ -10,7 +10,7 @@ class Pdfselect extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      appBar: const Bar(title: '要項一覧'),
+      appBar: const Bar(title: '注意事項一覧'),
       body: ListView(
             physics: const NeverScrollableScrollPhysics(),
             children: [
@@ -66,6 +66,25 @@ class Pdfselect extends StatelessWidget {
                                 builder: (context) => const Pdfview(
                                     pdf: 'assets/docs/hakurankaipolicy.pdf',
                                     title: '博覧会実施要項')),
+                          );
+                        },
+                      ),
+                      
+                      const Divider(
+                        //線
+                        height: 1,
+                        thickness: 1,
+                        color: Colors.grey,
+                      ),      
+                ListTile(
+                        title: const Text('後夜祭会場図'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Pdfview(
+                                    pdf: 'assets/docs/kouyasaiplace.pdf',
+                                    title: '後夜祭会場図')),
                           );
                         },
                       ),

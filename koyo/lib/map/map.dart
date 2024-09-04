@@ -60,6 +60,7 @@ class Map extends StatelessWidget {
 class Classbutton extends StatelessWidget {
   Classbutton({super.key,required this.classname,this.buttonname});
   final _hakurankaidata = HakurankaidataList().hakurankaidata;
+  final _ichirandata = IchirandataList().ichirandata;
   final String classname;
   final String? buttonname;
   final List<String> onetwoclasslist = [
@@ -78,6 +79,17 @@ class Classbutton extends StatelessWidget {
     }
     return TextButton(
       onPressed: () {
+        if (classname.startsWith('3')) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => KyoDe(
+                  classname: _ichirandata[index].classname,
+                  title: _ichirandata[index].title,
+                  place: '体育館',
+                  detail: _ichirandata[index].detail)),
+        );
+        } else {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -86,7 +98,8 @@ class Classbutton extends StatelessWidget {
                   title: _hakurankaidata[index].title,
                   place: _hakurankaidata[index].place,
                   detail: _hakurankaidata[index].detail)),
-        );
+        ); 
+        }
       },
       child:FittedBox(
   fit: BoxFit.fitWidth,

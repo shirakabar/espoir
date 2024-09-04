@@ -82,9 +82,15 @@ class Draw extends ConsumerWidget {
             }, icon: Icons.home),
            tile(label: "結果", ontap: () => context.push('/result'), icon: Icons.emoji_events),
            tile(label: "整理券", ontap: () => context.push('/ticketlist'), icon: Koyo.ticketicon),
-           tile(label: "投票", ontap: () {
+          (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn) ? 
+          tile(label: "生徒投票", ontap: () {
             final url = Uri.parse(
-                              'https://docs.google.com/forms/d/e/1FAIpQLSenWU97munsKfYxjUQZ5Giws7LJux-6CCJxvGlmazFfSErfBA/viewform?usp=sf_link');
+                              'https://forms.office.com/Pages/ResponsePage.aspx?id=3meRRyNrWEOYBlpq_Yo7xPbWF0D1-uhNlY5oT1WmOxpUMTlUTFUxTFVDRDRGQkZDUU83Q0JHTFpCVS4u');
+                          launchUrl(url);
+           }, icon: Icons.description) :
+           tile(label: "来場者投票", ontap: () {
+            final url = Uri.parse(
+                              'https://forms.office.com/Pages/ResponsePage.aspx?id=3meRRyNrWEOYBlpq_Yo7xPbWF0D1-uhNlY5oT1WmOxpURFZDSkFGVk9SRjBCS1FHSE4zM0hBVjhGTi4u');
                           launchUrl(url);
            }, icon: Icons.description),
            tile(label: "アカウント", ontap: () => context.push('/account'), icon: Icons.account_circle),
@@ -95,7 +101,7 @@ class Draw extends ConsumerWidget {
                           context.push('/');
            }, icon: Icons.support_agent),
            (ref.watch(currentLoginStatusProvider) != CurrentLoginStatus.notLoggedIn) ? 
-           tile(label: "要項", ontap: (){
+           tile(label: "注意事項", ontap: (){
                           context.push('/pdfselect');
                         }, icon: Icons.article) :
            tile(label: "ホームページ", ontap: (){

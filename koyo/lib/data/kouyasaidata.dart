@@ -43,6 +43,7 @@ class GrounddataList {
    const Grounddata(number: '4', title: 'fiverite', detail: ' k-popが好きな5人が集まって有名な曲を踊ります！メンバーのほとんどが未経験ですが、頑張って練習してきたので優しい目で見て貰えると嬉しいです！！'),
    const Grounddata(number: '5', title: 'crrsym', detail: '学年もクラスもバラバラ、ダンス未経験のメンバーもいますが、少ない期間で一生懸命練習しました！フォーメーションや衣装など見どころ盛りだくさんの私たちのダンスをどうぞお楽しみください！'),
    const Grounddata(number: '6', title: 'R＆N', detail: 'Justin BieberのPeachesのXGverと点描の唄をshort versionで歌います。アカペラのデュエットです。ぜひ見にきてください！'),
+   const Grounddata(number: '7', title: 'トーチ', detail: ''),
   ];
 }
 

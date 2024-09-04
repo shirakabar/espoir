@@ -63,6 +63,7 @@ class _Editdialog extends State<Editdialog> {
                                 color: Theme.of(context).primaryColor)),
                         onPressed: () { 
                           selectedColor = pickerColor;
+                          String colorString = 'Color(0x${selectedColor.value.toRadixString(16).padLeft(8, '0')})';
                               FirebaseFirestore.instance
                                     .collection("Comment")
                                     .doc("comment")
@@ -70,7 +71,7 @@ class _Editdialog extends State<Editdialog> {
                               FirebaseFirestore.instance
                                     .collection("Comment")
                                     .doc("comment")
-                                    .update({'color' : selectedColor.toString()});
+                                    .update({'color' : colorString});
                                 Navigator.pop(context);
                                 const snackBar = SnackBar(
                                   content: Text("更新しました"),
