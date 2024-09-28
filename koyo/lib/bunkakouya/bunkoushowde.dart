@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:koyo/bunkakouya/videoplayer.dart';
+import 'package:koyo/widget/videoplayer.dart';
 import 'package:koyo/settings/loginprovider.dart';
 import 'package:koyo/widget/widget.dart';
 
@@ -61,7 +61,7 @@ class Ondemandde extends ConsumerWidget {
   final String title;
   final String detail;
   final String number;
-  final String asset;
+  final String videourl;
   final String songname;
   //文化祭、後夜祭のオンデマンド発表詳細画面
 
@@ -70,7 +70,7 @@ class Ondemandde extends ConsumerWidget {
       required this.title,
       required this.detail,
       required this.number,
-      required this.asset,
+      required this.videourl,
       required this.songname});
 
   @override
@@ -122,7 +122,7 @@ class Ondemandde extends ConsumerWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Videoplayer(
-                                    title: 'オンデマンド再生', asset: asset)));
+                                    title: 'オンデマンド再生', videourl: videourl)));
                       },
                       child: Image.asset('assets/images/movieplay.png',
                           height: 100)),

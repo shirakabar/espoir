@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/bunkakouya/kouyade.dart';
-import 'package:koyo/bunkakouya/videoplayer.dart';
+import 'package:koyo/widget/videoplayer.dart';
 
 //後夜祭ページのタブ遷移先一覧
 class Kouya extends StatefulWidget {
@@ -72,8 +72,7 @@ class _Kouya extends State<Kouya> {
                                                       builder: (context) =>
                                                           const Videoplayer(
                                                               title: '後夜祭紹介動画',
-                                                              asset:
-                                                                  'assets/videos/kouyasaivideo.mp4')));
+                                                              videourl: 'kouyasaivideo.mp4')));
                                             },
                                             child: const Text(
                                               '後夜祭紹介動画',

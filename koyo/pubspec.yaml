@@ -61,6 +61,7 @@ dependencies:
   flutter_hooks: ^0.20.5
   wakelock_plus: ^1.2.8
   rainbow_color: ^2.0.1
+  firebase_storage: ^11.7.7
 
 dev_dependencies:
   flutter_test:
@@ -151,10 +152,6 @@ flutter:
     - assets/docs/bunkasaipolicy.pdf
     - assets/docs/gakkousainogoannai.pdf
     - assets/docs/kouyasaiplace.pdf
-    - assets/videos/kouyasaivideo.mp4
-    - assets/videos/gadaro.mp4
-    - assets/videos/kouyoujihen.mp4
-    - assets/videos/teamtamaire.mp4
     - assets/images/movieplay.png
 
 flutter_native_splash:

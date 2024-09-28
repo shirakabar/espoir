@@ -12,7 +12,6 @@ import 'package:koyo/staff/adminselect.dart';
 import 'package:koyo/home/policyselect.dart';
 import 'package:koyo/result/resultmake.dart';
 import 'package:koyo/staff/staffselect.dart';
-import 'package:koyo/widget/come.dart';
 import 'package:koyo/result/result.dart';
 import 'package:koyo/home/news.dart';
 import 'package:koyo/staff/newsmake.dart';
@@ -37,16 +36,7 @@ final goRouter = GoRouter(
           );
         },
       ),
-      GoRoute(
-        path: '/come',
-        name: 'come',
-        pageBuilder: (context, state) {
-          return MaterialPage(
-            key: state.pageKey,
-            child: const Come(),
-          );
-        },
-      ),
+   
       GoRoute(
         path: '/result',
         name: 'result',

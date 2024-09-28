@@ -101,13 +101,13 @@ class Ondemanddata {
       {required this.number,
       required this.title,
       required this.detail,
-      required this.asset,
+      required this.videourl,
       required this.songname});
 
   final String number;
   final String title;
   final String detail;
-  final String asset;
+  final String videourl;
   final String songname;
 }
 
@@ -117,19 +117,19 @@ class OndemanddataList {
         number: '1',
         title: 'GADARO',
         detail: '男5。',
-        asset: 'assets/videos/gadaro.mp4',
+        videourl: 'gadaro.mp4',
         songname: 'わかってないよ（Wurts）'),
     const Ondemanddata(
         number: '2',
         title: '向陽事変',
         detail: '東京事変、椎名林檎のコピーバンドの「向陽事変」です！普段は違うバンドで活動している5人が集まったガールズバンドです。',
-        asset: 'assets/videos/teamtamaire.mp4',
+        videourl: 'teamtamaire.mp4',
         songname: '群青日和（東京事変）'),
     const Ondemanddata(
         number: '3',
         title: 'チーム玉入れ',
         detail: '部活もクラスも違うけど、団結力ならそこらのバンドに負けません！玉入れは…強い…かな…？強いかもしれません！',
-        asset: 'assets/videos/kouyoujihen.mp4',
+        videourl: 'kouyoujihen.mp4',
         songname: '海の幽霊（米津玄師）'),
   ];
 }
