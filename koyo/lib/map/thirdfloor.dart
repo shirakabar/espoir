@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/map/map.dart';
+
 double expander = 0;
 
-double topShifter(double a){
+double topShifter(double a) {
   return expander * a / 10 - 4 * expander + 40;
 }
 
-double leftShifter(double a){
+double leftShifter(double a) {
   return expander * a / 10 - expander + 10;
 }
 
-//博覧ページのタブ遷移先
+//マップ三階
 
 class ThirdFloor extends StatelessWidget {
   const ThirdFloor({super.key});
-  
- @override
+
+  @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
     expander = (screenSize.width - 20) / 40;
@@ -33,105 +34,91 @@ class ThirdFloor extends StatelessWidget {
           ),
           // Positionedで配置
           Positioned(
-            top: topShifter(190),
-            left: leftShifter(330),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '101')
-          ),
+              top: topShifter(190),
+              left: leftShifter(330),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '101')),
           Positioned(
-            top: topShifter(190),
-            left: leftShifter(285),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '102')
-          ),
+              top: topShifter(190),
+              left: leftShifter(285),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '102')),
           Positioned(
-            top: topShifter(190),
-            left: leftShifter(240),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '103')
-          ),
+              top: topShifter(190),
+              left: leftShifter(240),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '103')),
           Positioned(
-            top: topShifter(190),
-            left: leftShifter(190),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '104')
-          ),
+              top: topShifter(190),
+              left: leftShifter(190),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '104')),
           Positioned(
-            top: topShifter(190),
-            left: leftShifter(145),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '105')
-          ),
+              top: topShifter(190),
+              left: leftShifter(145),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '105')),
           Positioned(
-            top: topShifter(190),
-            left: leftShifter(110),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '106')
-          ),
+              top: topShifter(190),
+              left: leftShifter(110),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '106')),
           Positioned(
-            top: topShifter(190),
-            left: leftShifter(50),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '107')
-          ),
+              top: topShifter(190),
+              left: leftShifter(50),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '107')),
           // Positionedで配置
           Positioned(
-            top: topShifter(110),
-            left: leftShifter(330),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '307')
-          ),
+              top: topShifter(110),
+              left: leftShifter(330),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '307')),
           Positioned(
-            top: topShifter(110),
-            left: leftShifter(285),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '306')
-          ),
+              top: topShifter(110),
+              left: leftShifter(285),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '306')),
           Positioned(
-            top: topShifter(110),
-            left: leftShifter(240),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '305')
-          ),
+              top: topShifter(110),
+              left: leftShifter(240),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '305')),
           Positioned(
-            top: topShifter(110),
-            left: leftShifter(190),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '304')
-          ),
+              top: topShifter(110),
+              left: leftShifter(190),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '304')),
           Positioned(
-            top: topShifter(110),
-            left: leftShifter(145),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '303')
-          ),
+              top: topShifter(110),
+              left: leftShifter(145),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '303')),
           Positioned(
-            top: topShifter(110),
-            left: leftShifter(110),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '302')
-          ),
+              top: topShifter(110),
+              left: leftShifter(110),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '302')),
 
           Positioned(
-            top: topShifter(110),
-            left: leftShifter(50),
-            width: 50.0,
-            height: 50.0,
-            child: Classbutton(classname: '301')
-          ),
+              top: topShifter(110),
+              left: leftShifter(50),
+              width: 50.0,
+              height: 50.0,
+              child: Classbutton(classname: '301')),
         ],
       ),
     );

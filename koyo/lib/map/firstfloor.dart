@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-//博覧ページのタブ遷移先
+//マップ一階
 double expander = 0;
 
 class FirstFloor extends StatelessWidget {
   const FirstFloor({super.key});
-  
- @override
+
+  @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
     expander = (screenSize.width - 20) / 40;

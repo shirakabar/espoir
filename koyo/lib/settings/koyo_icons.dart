@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-
+//インポートしたアイコン
 class Koyo {
   Koyo._();
 

@@ -5,13 +5,14 @@ import 'package:koyo/settings/loginprovider.dart';
 
 class News extends ConsumerStatefulWidget {
   const News({super.key});
+  //お知らせ画面
 
   @override
   ConsumerState<News> createState() => _News();
 }
 
 class _News extends ConsumerState<News> {
-  Widget _adminscreen() {
+  Widget _adminscreen() {//管理者用画面
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('news')
@@ -122,7 +123,7 @@ class _News extends ConsumerState<News> {
     );
   }
 
-  Widget _studentscreen() {
+  Widget _studentscreen() {//管理者以外用画面
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('news')
@@ -248,7 +249,7 @@ class _News extends ConsumerState<News> {
   }
 }
 
-class Newsde extends StatelessWidget {
+class Newsde extends StatelessWidget {//NEWSから遷移後
   const Newsde(
       {super.key,
       required this.title,

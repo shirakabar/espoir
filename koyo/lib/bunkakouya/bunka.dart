@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:koyo/bunkakouya/bunkade.dart';
 
 //文化祭ページのタブ遷移先一覧
-//stickeytabbarはネットから
 class Bunka extends StatelessWidget {
   const Bunka({super.key});
 
@@ -13,16 +12,10 @@ class Bunka extends StatelessWidget {
         length: 2,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              _headerSection(),
-              _tabSection()
-            ];
+            return <Widget>[_headerSection(), _tabSection()];
           },
           body: TabBarView(
-            children: [
-               Bunkagym(),
-               Bunkahannichi()
-            ],
+            children: [Bunkagym(), Bunkahannichi()],
           ),
         ),
       ),
@@ -34,29 +27,33 @@ class Bunka extends StatelessWidget {
 Widget _headerSection() {
   return SliverList(
     delegate: SliverChildListDelegate(
-      [ const Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 5,
-          vertical: 12,),
-          child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[ 
-                     Padding(
-                     padding: EdgeInsets.only(left:20,top:15),
-                     child: Column(
+      [
+        const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 5,
+              vertical: 12,
+            ),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Padding(
+                  padding: EdgeInsets.only(left: 20, top: 15),
+                  child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                       children:[ 
-                        Text('文化祭',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35),),
-                     SizedBox(
-                      height: 5,
-                    ),
-                Text('9月5日（木）10:00 ~ 15:00',style: TextStyle(fontSize: 18),),
-                  ]
-            )
-                  ),
-                  ]
-      )
-      )
+                      children: [
+                        Text(
+                          '文化祭',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 35),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          '9月5日（木）10:00 ~ 15:00',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ])),
+            ]))
       ],
     ),
   );
@@ -67,17 +64,14 @@ Widget _tabSection() {
   return const SliverPersistentHeader(
     pinned: true,
     delegate: _StickyTabBarDelegate(
-      tabBar: TabBar(
-        tabs: [
-          Tab(
-            text: '部活動',
-          ),
-          Tab(
-            text: '半日教室等',
-          )
-        ],
-        dividerColor: Colors.white
-      ),
+      tabBar: TabBar(tabs: [
+        Tab(
+          text: '部活動',
+        ),
+        Tab(
+          text: '半日教室等',
+        )
+      ], dividerColor: Colors.white),
     ),
   );
 }

@@ -6,6 +6,7 @@ import 'package:koyo/sportsfestival/sports.dart';//体育祭ページ
 import 'package:koyo/bunkakouya/bunkou.dart';//文化祭、後夜祭ページ
 import 'package:koyo/map/map.dart';//校舎内マップページ
 import 'package:koyo/settings/koyo_icons.dart';//文化祭、後夜祭ページ
+//ボトムナビゲーションバーウィジェット
 
 final bottomnaviProvider = NotifierProvider<BottomNaviNotifier, int>(BottomNaviNotifier.new);
 

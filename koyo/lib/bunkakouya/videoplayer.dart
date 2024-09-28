@@ -3,8 +3,11 @@ import 'package:chewie/chewie.dart';
 import 'package:koyo/widget/widget.dart';
 import 'package:video_player/video_player.dart';
 
+//動画再生画面
 class Videoplayer extends StatefulWidget {
-  const Videoplayer({super.key});
+  const Videoplayer({super.key,required this.title,required this.asset});
+  final String title;
+  final String asset;
 
   @override
   VideoplayerState createState() => VideoplayerState();
@@ -17,7 +20,7 @@ class VideoplayerState extends State<Videoplayer> {
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.asset('assets/videos/kouyasaivideo.mp4',videoPlayerOptions: VideoPlayerOptions());
+    _videoPlayerController = VideoPlayerController.asset(widget.asset,videoPlayerOptions: VideoPlayerOptions());
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
       aspectRatio: 3 / 2,
@@ -51,8 +54,8 @@ class VideoplayerState extends State<Videoplayer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     appBar: const Bar(title:'後夜祭紹介動画',),
+    return SafeArea(child: Scaffold(
+     appBar: Bar(title:widget.title),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -67,6 +70,7 @@ class VideoplayerState extends State<Videoplayer> {
           ],
         ),
       ),
+    )
     );
   }
 }
