@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
+//コメント編集
 class Editdialog extends StatefulWidget {
   const Editdialog({super.key});
 
@@ -12,17 +13,15 @@ class Editdialog extends StatefulWidget {
 class _Editdialog extends State<Editdialog> {
   final TextEditingController _commentcontroller = TextEditingController();
 
-    @override
+  @override
   void dispose() {
     _commentcontroller.dispose();
     super.dispose();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
-    Color pickerColor =Theme.of(context).primaryColor;
+    Color pickerColor = Theme.of(context).primaryColor;
     Color selectedColor = Theme.of(context).primaryColor;
     void changeColor(Color color) {
       pickerColor = color;
@@ -49,10 +48,10 @@ class _Editdialog extends State<Editdialog> {
                     )),
                 const SizedBox(height: 10, width: double.infinity),
                 ColorPicker(
-            pickerColor: pickerColor,
-            onColorChanged: changeColor,
-            pickerAreaHeightPercent: 0.8,
-          ),
+                  pickerColor: pickerColor,
+                  onColorChanged: changeColor,
+                  pickerAreaHeightPercent: 0.8,
+                ),
                 Row(
                   children: [
                     OutlinedButton(
@@ -61,27 +60,28 @@ class _Editdialog extends State<Editdialog> {
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
-                        onPressed: () { 
+                        onPressed: () {
                           selectedColor = pickerColor;
-                          String colorString = 'Color(0x${selectedColor.value.toRadixString(16).padLeft(8, '0')})';
-                              FirebaseFirestore.instance
-                                    .collection("Comment")
-                                    .doc("comment")
-                                    .update({'comment' : _commentcontroller.text });
-                              FirebaseFirestore.instance
-                                    .collection("Comment")
-                                    .doc("comment")
-                                    .update({'color' : colorString});
-                                Navigator.pop(context);
-                                const snackBar = SnackBar(
-                                  content: Text("更新しました"),
-                                  duration: Duration(seconds: 1),
-                                );
-                                if (context.mounted) {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                }
-                              },
+                          String colorString =
+                              'Color(0x${selectedColor.value.toRadixString(16).padLeft(8, '0')})';
+                          FirebaseFirestore.instance
+                              .collection("Comment")
+                              .doc("comment")
+                              .update({'comment': _commentcontroller.text});
+                          FirebaseFirestore.instance
+                              .collection("Comment")
+                              .doc("comment")
+                              .update({'color': colorString});
+                          Navigator.pop(context);
+                          const snackBar = SnackBar(
+                            content: Text("更新しました"),
+                            duration: Duration(seconds: 1),
+                          );
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        },
                         child: const Text(
                           '更新',
                           style: TextStyle(

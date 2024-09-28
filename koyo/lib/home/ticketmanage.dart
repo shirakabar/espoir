@@ -7,6 +7,7 @@ import 'package:koyo/widget/widget.dart';
 
 class Ticketmanage extends ConsumerStatefulWidget {
   const Ticketmanage({super.key});
+  //整理券枚数変更画面
 
   @override
   ConsumerState<Ticketmanage> createState() => _Ticketmanage();

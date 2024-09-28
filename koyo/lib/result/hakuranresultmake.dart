@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:koyo/result/hakuranresultde.dart';
 import 'package:koyo/widget/widget.dart';
 
+//博覧会結果作成
 class Resultmakehakuran extends StatefulWidget {
   const Resultmakehakuran({super.key});
 
@@ -11,66 +12,71 @@ class Resultmakehakuran extends StatefulWidget {
 }
 
 class _Resultmakehakuran extends State<Resultmakehakuran> {
-
-   final List resultdetaillist = const [
+  final List resultdetaillist = const [
     Resultdetail(resultname: '向陽大賞', ismulti: false),
     Resultdetail(resultname: '一般大賞', ismulti: false),
     Resultdetail(resultname: 'ポスター大賞', ismulti: false),
     Resultdetail(resultname: '全校大賞', ismulti: true),
     Resultdetail(resultname: '学年ポスター大賞', ismulti: true),
-    ];
-  final List keyList = ['1年','2年','3年'];
-
-  
+  ];
+  final List keyList = ['1年', '2年', '3年'];
 
   Widget _resultmulti(resultMap, resultname) {
-      return ListView.builder(
+    return ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         itemCount: resultMap.length,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-              ListTile(
-              leading: Text(keyList[index],style: const TextStyle(fontSize: 16),),
-              title: Text(resultMap[keyList[index]],style: const TextStyle(fontSize: 16),),
+          return Column(mainAxisSize: MainAxisSize.min, children: [
+            ListTile(
+              leading: Text(
+                keyList[index],
+                style: const TextStyle(fontSize: 16),
+              ),
+              title: Text(
+                resultMap[keyList[index]],
+                style: const TextStyle(fontSize: 16),
+              ),
               trailing: IconButton(
-                                  icon: Icon(Icons.edit,color: Colors.grey[700]),
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return Editdialog(resultname: resultname,gradename: (keyList[index]));
-                                        });
-                                  }),
+                  icon: Icon(Icons.edit, color: Colors.grey[700]),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Editdialog(
+                              resultname: resultname,
+                              gradename: (keyList[index]));
+                        });
+                  }),
             ),
-            const Divider(height: 1,color: Colors.grey,indent: 5,endIndent: 5),
-            ]);
-          }
-          
-      );
+            const Divider(
+                height: 1, color: Colors.grey, indent: 5, endIndent: 5),
+          ]);
+        });
   }
 
   Widget _resultone(classname, reusltname) {
-      return ListTile(
-              title: Text(classname,style: const TextStyle(fontSize: 16),),
-              trailing: IconButton(
-                                  icon: Icon(Icons.edit,color: Colors.grey[700]),
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return Editdialog(resultname: reusltname);
-                                        });
-                                  }),
-            );
+    return ListTile(
+      title: Text(
+        classname,
+        style: const TextStyle(fontSize: 16),
+      ),
+      trailing: IconButton(
+          icon: Icon(Icons.edit, color: Colors.grey[700]),
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return Editdialog(resultname: reusltname);
+                });
+          }),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Bar(title: '博覧会結果更新'),
+        appBar: const Bar(title: '博覧会結果更新'),
         body: StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('Results')
@@ -90,38 +96,41 @@ class _Resultmakehakuran extends State<Resultmakehakuran> {
                 scrollDirection: Axis.vertical,
                 itemCount: data.length,
                 itemBuilder: (BuildContext context, int index) {
-                   final eachresult =  data[resultdetaillist[index].resultname];
+                  final eachresult = data[resultdetaillist[index].resultname];
                   return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 2),
                       child: Card(
                         color: const Color.fromARGB(255, 241, 249, 255),
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                                  padding: const EdgeInsets.only(right: 10, left: 10,top: 12,bottom: 20),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        resultdetaillist[index].resultname,
-                                        style: const TextStyle(fontSize: 18),
-                                      ),
-                                      const SizedBox(
-                                        height: 7,
-                                        width: double.infinity,
-                                      ),
-                                    (resultdetaillist[index].ismulti == true) ?  
-                                      _resultmulti(eachresult, resultdetaillist[index].resultname) : 
-                                      _resultone(eachresult, resultdetaillist[index].resultname)
-                                    ],
-                                  ),
-                                )
-                          ]),)
-                      );
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 10, left: 10, top: 12, bottom: 20),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      resultdetaillist[index].resultname,
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                    const SizedBox(
+                                      height: 7,
+                                      width: double.infinity,
+                                    ),
+                                    (resultdetaillist[index].ismulti == true)
+                                        ? _resultmulti(eachresult,
+                                            resultdetaillist[index].resultname)
+                                        : _resultone(eachresult,
+                                            resultdetaillist[index].resultname)
+                                  ],
+                                ),
+                              )
+                            ]),
+                      ));
                 },
               );
             }));
@@ -129,7 +138,7 @@ class _Resultmakehakuran extends State<Resultmakehakuran> {
 }
 
 class Editdialog extends StatefulWidget {
-  const Editdialog({super.key,required this.resultname,this.gradename});
+  const Editdialog({super.key, required this.resultname, this.gradename});
   final String resultname;
   final String? gradename;
 
@@ -140,7 +149,7 @@ class Editdialog extends StatefulWidget {
 class _Editdialog extends State<Editdialog> {
   final TextEditingController _classnamecontroller = TextEditingController();
 
-    @override
+  @override
   void dispose() {
     _classnamecontroller.dispose();
     super.dispose();
@@ -178,29 +187,33 @@ class _Editdialog extends State<Editdialog> {
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
-                        onPressed: () { 
-                              if (gradename == null) {
-                              FirebaseFirestore.instance
-                                    .collection("Results")
-                                    .doc("hakurankairesult")
-                                    .update({resultname : _classnamecontroller.text });
-                                    } else {
-                              FirebaseFirestore.instance
-                                    .collection("Results")
-                                    .doc("hakurankairesult")
-                                    .update({'$resultname.$gradename' : _classnamecontroller.text});
-                                    }
-                
-                                Navigator.pop(context);
-                                const snackBar = SnackBar(
-                                  content: Text("更新しました"),
-                                  duration: Duration(seconds: 1),
-                                );
-                                if (context.mounted) {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
-                                }
-                              },
+                        onPressed: () {
+                          if (gradename == null) {
+                            FirebaseFirestore.instance
+                                .collection("Results")
+                                .doc("hakurankairesult")
+                                .update(
+                                    {resultname: _classnamecontroller.text});
+                          } else {
+                            FirebaseFirestore.instance
+                                .collection("Results")
+                                .doc("hakurankairesult")
+                                .update({
+                              '$resultname.$gradename':
+                                  _classnamecontroller.text
+                            });
+                          }
+
+                          Navigator.pop(context);
+                          const snackBar = SnackBar(
+                            content: Text("更新しました"),
+                            duration: Duration(seconds: 1),
+                          );
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        },
                         child: const Text(
                           '更新',
                           style: TextStyle(

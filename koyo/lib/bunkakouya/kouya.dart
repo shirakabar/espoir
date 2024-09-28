@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/bunkakouya/kouyade.dart';
+import 'package:koyo/bunkakouya/videoplayer.dart';
 
-//文化祭ページのタブ遷移先一覧
-//stickeytabbarはネットから
+//後夜祭ページのタブ遷移先一覧
 class Kouya extends StatefulWidget {
   const Kouya({super.key});
 
   @override
   State<Kouya> createState() => _Kouya();
 }
+
 class _Kouya extends State<Kouya> {
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,57 +21,99 @@ class _Kouya extends State<Kouya> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               //_headerSection(),
-              //buildcontextの関係で直で書きました
+              //buildcontextの関係で直書き
               SliverList(
-    delegate: SliverChildListDelegate(
-      [ Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 5,
-          vertical: 12,),
-          child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[ 
-                     Padding(
-                     padding: const EdgeInsets.only(left:20,top:15),
-                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                       children:[ 
-                        const Text('後夜祭',style: TextStyle(fontWeight: FontWeight.w700,fontSize: 35),),
-                     const SizedBox(
-                      height: 5,
+                delegate: SliverChildListDelegate(
+                  [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 5,
+                        vertical: 12,
+                      ),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 15),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      '後夜祭',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 35),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    const Text(
+                                      '9月7日（土）',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      children: [
+                                        OutlinedButton(
+                                            style: OutlinedButton.styleFrom(
+                                                //minimumSize: const Size(200, 50),
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .primaryColor,
+                                                side: BorderSide(
+                                                    color: Theme.of(context)
+                                                        .primaryColor)),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const Videoplayer(
+                                                              title: '後夜祭紹介動画',
+                                                              asset:
+                                                                  'assets/videos/kouyasaivideo.mp4')));
+                                            },
+                                            child: const Text(
+                                              '後夜祭紹介動画',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        const SizedBox(width: 10),
+                                        OutlinedButton(
+                                            style: OutlinedButton.styleFrom(
+                                                //minimumSize: const Size(200, 50),
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .primaryColor,
+                                                side: BorderSide(
+                                                    color: Theme.of(context)
+                                                        .primaryColor)),
+                                            onPressed: () {
+                                              context.push('/penlightselect');
+                                            },
+                                            child: const Text(
+                                              'ペンライトモード',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                      ],
+                                    )
+                                  ]),
+                            ),
+                          ]),
                     ),
-                const Text('9月7日（土）',style: TextStyle(fontSize: 18),),
-                const SizedBox(
-                      height: 5,
-                    ),
-                OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            //minimumSize: const Size(200, 50),
-                              backgroundColor: Theme.of(context).primaryColor,
-                              side: BorderSide(
-                                  color: Theme.of(context).primaryColor)),
-                          onPressed: () {
-                            context.push('/videoplayer');
-                          },
-                          child: const Text('後夜祭紹介動画',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                  ]
-            )
-                  ),
-                  ]
-            ),
-        ),
-      ],
-    ),
-  ),
+                  ],
+                ),
+              ),
               _tabSection()
             ];
           },
           body: TabBarView(
-            children: [
-               Kouyagym(),
-               Kouyaground(),
-               Ondemand()
-            ],
+            children: [Kouyagym(), Kouyaground(), Ondemand()],
           ),
         ),
       ),
@@ -129,20 +171,17 @@ Widget _tabSection() {
   return const SliverPersistentHeader(
     pinned: true,
     delegate: _StickyTabBarDelegate(
-      tabBar: TabBar(
-        tabs: [
-          Tab(
-            text: '体育館',
-          ),
-          Tab(
-            text: 'グラウンド',
-          ),
-          Tab(
-            text: 'オンデマンド',
-          ),
-        ],
-        dividerColor: Colors.white
-      ),
+      tabBar: TabBar(tabs: [
+        Tab(
+          text: '体育館',
+        ),
+        Tab(
+          text: 'グラウンド',
+        ),
+        Tab(
+          text: 'オンデマンド',
+        ),
+      ], dividerColor: Colors.white),
     ),
   );
 }

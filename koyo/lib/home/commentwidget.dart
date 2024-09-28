@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 
 class Commentwidget extends StatefulWidget{
   const Commentwidget({super.key});
+  //ホームのコメントウィジェット
 
   @override
   State<Commentwidget> createState() => _Commentwidget();
 }
 
 class _Commentwidget extends State<Commentwidget>{
-  final String usualtext = '向陽祭は9月5日から‼';
+  final String usualtext = '向陽祭は9月5日から‼';//firebaseから文字が取得できなかった場合
 
-  Color _parseColorFromString(String colorString) {
+  Color _parseColorFromString(String colorString) {//Firebaseからの色データをColorに変換
   String valueString = colorString.split('(0x')[1].split(')')[0]; // 'ff42a5f5'
   int value = int.parse(valueString, radix: 16);
-  return Color(value);
+  return Color(value);//
 }
 
   Widget commentbox(text, color) {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//体育祭結果作成ウィジェット
 class Resultlist extends StatefulWidget {
-  const Resultlist({super.key,required this.classdetailList,required this.sportsdetail});
+  const Resultlist(
+      {super.key, required this.classdetailList, required this.sportsdetail});
 
   final dynamic classdetailList;
   final dynamic sportsdetail;
@@ -12,8 +14,8 @@ class Resultlist extends StatefulWidget {
 }
 
 class _Resultlist extends State<Resultlist> {
-  
-  Widget deleteclassdialog({required dynamic classdetail,required dynamic sportsdetail}) {
+  Widget deleteclassdialog(
+      {required dynamic classdetail, required dynamic sportsdetail}) {
     return AlertDialog(
       title: const Text("クラス削除"),
       content: Text(
@@ -25,7 +27,9 @@ class _Resultlist extends State<Resultlist> {
             child: const Text("削除"),
             onPressed: () {
               try {
-               deleteValue(classname: classdetail.classname, sportsdetail: sportsdetail);
+                deleteValue(
+                    classname: classdetail.classname,
+                    sportsdetail: sportsdetail);
                 const snackBar = SnackBar(
                   content: Text("クラスを削除しました"),
                   duration: Duration(seconds: 1),
@@ -49,12 +53,15 @@ class _Resultlist extends State<Resultlist> {
     );
   }
 
-  void deleteValue({required String classname,required dynamic sportsdetail}) async {
+  void deleteValue(
+      {required String classname, required dynamic sportsdetail}) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    DocumentReference documentReference = firestore.collection('Results').doc('taiikusairesult');
+    DocumentReference documentReference =
+        firestore.collection('Results').doc('taiikusairesult');
 
     await documentReference.update({
-      '${sportsdetail.sportstitle}.${sportsdetail.order}.$classname' : FieldValue.delete(),
+      '${sportsdetail.sportstitle}.${sportsdetail.order}.$classname':
+          FieldValue.delete(),
     });
   }
 
@@ -63,43 +70,52 @@ class _Resultlist extends State<Resultlist> {
     final classdetailList = widget.classdetailList;
     final sportsdetail = widget.sportsdetail;
     if (classdetailList.isEmpty) {
-      return const Text('結果がありません',style: TextStyle(fontSize: 17),);
+      return const Text(
+        '結果がありません',
+        style: TextStyle(fontSize: 17),
+      );
     } else {
       return ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: classdetailList.length,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: classdetailList.length,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-              ListTile(
-              leading: Text('${classdetailList[index].place}位',style: const TextStyle(fontSize: 16),),
-              title: Text(classdetailList[index].classname,style: const TextStyle(fontSize: 16),),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min, 
-                children: [
-                Text('${classdetailList[index].point}点',style: const TextStyle(fontSize: 16),),
-                IconButton(
-                                  icon: Icon(Icons.delete,color: Colors.grey[700]),
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return deleteclassdialog(classdetail: classdetailList[index],sportsdetail: sportsdetail);
-                                        });
-                                  }),
-              ])
-            ),
-            const Divider(height: 1,color: Colors.grey,indent: 5,endIndent: 5),
-            ],);
-            
-          } 
-      );
+                ListTile(
+                    leading: Text(
+                      '${classdetailList[index].place}位',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    title: Text(
+                      classdetailList[index].classname,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                      Text(
+                        '${classdetailList[index].point}点',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      IconButton(
+                          icon: Icon(Icons.delete, color: Colors.grey[700]),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return deleteclassdialog(
+                                      classdetail: classdetailList[index],
+                                      sportsdetail: sportsdetail);
+                                });
+                          }),
+                    ])),
+                const Divider(
+                    height: 1, color: Colors.grey, indent: 5, endIndent: 5),
+              ],
+            );
+          });
     }
   }
-
 }
 
 class Floatingdialog extends StatefulWidget {
@@ -113,7 +129,7 @@ class _Floatingdialog extends State<Floatingdialog> {
   final TextEditingController _sportscontroller = TextEditingController();
   final TextEditingController _ordercontroller = TextEditingController();
 
-    @override
+  @override
   void dispose() {
     _sportscontroller.dispose();
     _ordercontroller.dispose();
@@ -167,19 +183,20 @@ class _Floatingdialog extends State<Floatingdialog> {
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
-                        onPressed: ( _sportscontroller.text == '' || _ordercontroller.text == '' ) 
-                            ?  () {
-                            }
-                            : () { try{
-                              FirebaseFirestore.instance
-                                    .collection("Results")
-                                    .doc("taiikusairesult")
-                                    .update({
-                                  _sportscontroller.text: {
-                                    _ordercontroller.text: {}
+                        onPressed: (_sportscontroller.text == '' ||
+                                _ordercontroller.text == '')
+                            ? () {}
+                            : () {
+                                try {
+                                  FirebaseFirestore.instance
+                                      .collection("Results")
+                                      .doc("taiikusairesult")
+                                      .update({
+                                    _sportscontroller.text: {
+                                      _ordercontroller.text: {}
                                     }
                                   });
-                                }catch(e) {
+                                } catch (e) {
                                   debugPrint(e.toString());
                                   debugPrint(_sportscontroller.text);
                                   debugPrint(_ordercontroller.text);
@@ -226,7 +243,7 @@ class _Floatingdialog extends State<Floatingdialog> {
 }
 
 class Resultdialog extends StatefulWidget {
-  const Resultdialog({super.key,required this.sportsdetail});
+  const Resultdialog({super.key, required this.sportsdetail});
 
   final dynamic sportsdetail;
 
@@ -239,7 +256,7 @@ class _Resultdialog extends State<Resultdialog> {
   final TextEditingController _pointcontroller = TextEditingController();
   final TextEditingController _placecontroller = TextEditingController();
 
-    @override
+  @override
   void dispose() {
     _classcontroller.dispose();
     _pointcontroller.dispose();
@@ -247,92 +264,98 @@ class _Resultdialog extends State<Resultdialog> {
     super.dispose();
   }
 
-    void updateValue({required String classname,required dynamic point,required dynamic place,required dynamic sportsdetail}) async {
+  void updateValue(
+      {required String classname,
+      required dynamic point,
+      required dynamic place,
+      required dynamic sportsdetail}) async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    DocumentReference documentReference = firestore.collection('Results').doc('taiikusairesult');
+    DocumentReference documentReference =
+        firestore.collection('Results').doc('taiikusairesult');
 
     await documentReference.update({
-      '${sportsdetail.sportstitle}.${sportsdetail.order}.$classname.point' : point,
-      '${sportsdetail.sportstitle}.${sportsdetail.order}.$classname.place' : place,
+      '${sportsdetail.sportstitle}.${sportsdetail.order}.$classname.point':
+          point,
+      '${sportsdetail.sportstitle}.${sportsdetail.order}.$classname.place':
+          place,
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
     final sportsdetail = widget.sportsdetail;
-    return SimpleDialog(
-              title: const Text('結果追加'),
-              children: [
-                SimpleDialogOption(child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                      TextField(
-                        controller: _classcontroller,
-                        onChanged: (value) => setState(() {}),
-                        decoration: InputDecoration(
-                            labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Colors.grey,
-                            ),
-                            labelText: 'ブロック名(例:青ブロック)',
-                            floatingLabelStyle: TextStyle(
-                              fontSize: 12,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                        )
+    return SimpleDialog(title: const Text('結果追加'), children: [
+      SimpleDialogOption(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                TextField(
+                    controller: _classcontroller,
+                    onChanged: (value) => setState(() {}),
+                    decoration: InputDecoration(
+                      labelStyle: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey,
                       ),
-                      const SizedBox(height: 10, width: double.infinity),
-                      TextField(
-                        controller: _placecontroller,
-                        onChanged: (value) => setState(() {}),
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Colors.grey,
-                            ),
-                            labelText: '順位',
-                            floatingLabelStyle: TextStyle(
-                              fontSize: 12,
-                              color: Theme.of(context).primaryColor,
-                            ),                           
-                              ),
+                      labelText: 'ブロック名(例:青ブロック)',
+                      floatingLabelStyle: TextStyle(
+                        fontSize: 12,
+                        color: Theme.of(context).primaryColor,
                       ),
-                      const SizedBox(height: 10, width: double.infinity),
-                      TextField(
-                        controller: _pointcontroller,
-                        onChanged: (value) => setState(() {}),
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            labelStyle: const TextStyle(
-                              fontSize: 13,
-                              color: Colors.grey,
-                            ),
-                            labelText: '点数',
-                            floatingLabelStyle: TextStyle(
-                              fontSize: 12,
-                              color: Theme.of(context).primaryColor,
-                            ),                           
-                              ),
-                      ),
-                      const SizedBox(height: 20, width: double.infinity),
-                      Row(children: [
-                        OutlinedButton(
-                          style: OutlinedButton.styleFrom(
+                    )),
+                const SizedBox(height: 10, width: double.infinity),
+                TextField(
+                  controller: _placecontroller,
+                  onChanged: (value) => setState(() {}),
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelStyle: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey,
+                    ),
+                    labelText: '順位',
+                    floatingLabelStyle: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10, width: double.infinity),
+                TextField(
+                  controller: _pointcontroller,
+                  onChanged: (value) => setState(() {}),
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelStyle: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey,
+                    ),
+                    labelText: '点数',
+                    floatingLabelStyle: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20, width: double.infinity),
+                Row(
+                  children: [
+                    OutlinedButton(
+                        style: OutlinedButton.styleFrom(
                             minimumSize: const Size(100, 40),
-                              backgroundColor: Theme.of(context).primaryColor,
-                              side: BorderSide(
-                                  color: Theme.of(context).primaryColor)),
-                          onPressed: _classcontroller.text.isEmpty || _pointcontroller.text.isEmpty || _placecontroller.text.isEmpty ? null : () { 
-
-                                updateValue(classname: _classcontroller.text,
-                                place: int.parse(_placecontroller.text),
-                                point: int.parse(_pointcontroller.text), 
-                                sportsdetail: sportsdetail);
+                            backgroundColor: Theme.of(context).primaryColor,
+                            side: BorderSide(
+                                color: Theme.of(context).primaryColor)),
+                        onPressed: _classcontroller.text.isEmpty ||
+                                _pointcontroller.text.isEmpty ||
+                                _placecontroller.text.isEmpty
+                            ? null
+                            : () {
+                                updateValue(
+                                    classname: _classcontroller.text,
+                                    place: int.parse(_placecontroller.text),
+                                    point: int.parse(_pointcontroller.text),
+                                    sportsdetail: sportsdetail);
 
                                 Navigator.pop(context);
 
@@ -345,21 +368,31 @@ class _Resultdialog extends State<Resultdialog> {
                                       .showSnackBar(snackBar);
                                 }
                               },
-                          child: const Text('更新',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                          const SizedBox(height: 2,width: 10,),
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
+                        child: const Text(
+                          '更新',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        )),
+                    const SizedBox(
+                      height: 2,
+                      width: 10,
+                    ),
+                    OutlinedButton(
+                        style: OutlinedButton.styleFrom(
                             minimumSize: const Size(100, 40),
-                              backgroundColor: Theme.of(context).primaryColor,
-                              side: BorderSide(
-                                  color: Theme.of(context).primaryColor)),
-                            onPressed: () {
-                            Navigator.pop(context);
-                          }, child: const Text('閉じる',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)))
-                      ],)                      
-                    ]))
+                            backgroundColor: Theme.of(context).primaryColor,
+                            side: BorderSide(
+                                color: Theme.of(context).primaryColor)),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('閉じる',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)))
+                  ],
                 )
-              ]
-            );
+              ])))
+    ]);
   }
 }

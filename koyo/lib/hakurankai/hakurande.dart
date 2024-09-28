@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:koyo/data/hakurandata.dart';
 import 'package:koyo/hakurankai/hakuranclassde.dart';
 
+//博覧会教室発表画面
 class Crowd extends StatefulWidget {
-  const Crowd({super.key,required this.index});
+  const Crowd({super.key, required this.index});
 
   final int index;
   @override
@@ -12,54 +13,84 @@ class Crowd extends StatefulWidget {
 }
 
 class _Crowd extends State<Crowd> {
-  final List<String> classlist = ['101','102','103','104','105','106','107','108','109',
-  '201','202','203','204','205','206','207','208','209',
-  '301','302','303','304','305','306','307','308','309',
+  final List<String> classlist = [
+    '101',
+    '102',
+    '103',
+    '104',
+    '105',
+    '106',
+    '107',
+    '108',
+    '109',
+    '201',
+    '202',
+    '203',
+    '204',
+    '205',
+    '206',
+    '207',
+    '208',
+    '209',
+    '301',
+    '302',
+    '303',
+    '304',
+    '305',
+    '306',
+    '307',
+    '308',
+    '309',
   ];
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final index = widget.index;
-    return StreamBuilder<DocumentSnapshot>(//各クラスのドキュメントをstreambuilderで監視
-                  stream: FirebaseFirestore.instance
-                  .collection('Crowd')
-                  .doc('classes')
-                  .snapshots(),
+    return StreamBuilder<DocumentSnapshot>(
+        //各クラスのドキュメントをstreambuilderで監視
+        stream: FirebaseFirestore.instance
+            .collection('Crowd')
+            .doc('classes')
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Container(
-              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
-              clipBehavior: Clip.antiAlias,
-              child: Image.asset('assets/images/crowdzero.png',height: 50,width: 50));
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                clipBehavior: Clip.antiAlias,
+                child: Image.asset('assets/images/crowdzero.png',
+                    height: 50, width: 50));
           }
           if (!snapshot.hasData) {
             return Container(
-              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
-              clipBehavior: Clip.antiAlias,
-              child: Image.asset('assets/images/crowdzero.png',height: 50,width: 50));//const Center(child: CircularProgressIndicator());
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                clipBehavior: Clip.antiAlias,
+                child: Image.asset('assets/images/crowdzero.png',
+                    height: 50, width: 50));
           }
 
           Map<String, dynamic> data =
-                  snapshot.data!.data() as Map<String, dynamic>;
+              snapshot.data!.data() as Map<String, dynamic>;
           final List<Widget> crowdimg = <Widget>[
-            Image.asset('assets/images/crowdone.png',height: 50,width: 50),
-            Image.asset('assets/images/crowdtwo.png',height: 50,width: 50),
-            Image.asset('assets/images/crowdthree.png',height: 50,width: 50),
+            Image.asset('assets/images/crowdone.png', height: 50, width: 50),
+            Image.asset('assets/images/crowdtwo.png', height: 50, width: 50),
+            Image.asset('assets/images/crowdthree.png', height: 50, width: 50),
           ];
           return Container(
-      decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
-      clipBehavior: Clip.antiAlias,
-      child: crowdimg.elementAt(data[classlist[index]]));
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              clipBehavior: Clip.antiAlias,
+              child: crowdimg.elementAt(data[classlist[index]]));
         });
   }
 }
-
 
 //博覧のdetailそれぞれのページの内容記載
 
 class Kyo extends StatefulWidget {
   const Kyo({super.key});
-  
+
   @override
   State<Kyo> createState() => _Kyo();
 }
@@ -85,7 +116,7 @@ class _Kyo extends State<Kyo> {
                           padding: EdgeInsets.only(left: 20, top: 15),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [        
+                              children: [
                                 Text(
                                   '博覧会',
                                   style: TextStyle(
@@ -115,7 +146,6 @@ class _Kyo extends State<Kyo> {
                         height: 10,
                       ),
                       ListView.builder(
-                          //体育祭の各種目を一覧表示
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: _hakurankaidata.length,
@@ -133,10 +163,15 @@ class _Kyo extends State<Kyo> {
                                       contentPadding:
                                           const EdgeInsets.symmetric(
                                               horizontal: 20),
-                                      leading: Text(_hakurankaidata[index].classname,style: const TextStyle(fontSize: 24,fontWeight: FontWeight.w400),),
-                                     /* leading: FittedBox(
+                                      leading: Text(
+                                        _hakurankaidata[index].classname,
+                                        style: const TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      /* leading: FittedBox(
                                           fit: BoxFit.fitHeight,
-                                          child: Image.asset('assets/images/postest.jpg')),//仮の画像*/
+                                          child: Image.asset('assets/images/postest.jpg')),//ポスターの画像*/
                                       title: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 5),
@@ -148,7 +183,8 @@ class _Kyo extends State<Kyo> {
                                       subtitle: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
-                                        child: Text('@${_hakurankaidata[index].place}',
+                                        child: Text(
+                                            '@${_hakurankaidata[index].place}',
                                             style:
                                                 const TextStyle(fontSize: 14)),
                                       ),
@@ -157,10 +193,19 @@ class _Kyo extends State<Kyo> {
                                       trailing: Crowd(index: index),
                                       onTap: () {
                                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => KyoDe(classname: _hakurankaidata[index].classname,title: _hakurankaidata[index].title, place: _hakurankaidata[index].place, detail: _hakurankaidata[index].detail)),
-                          );
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => KyoDe(
+                                                  classname:
+                                                      _hakurankaidata[index]
+                                                          .classname,
+                                                  title: _hakurankaidata[index]
+                                                      .title,
+                                                  place: _hakurankaidata[index]
+                                                      .place,
+                                                  detail: _hakurankaidata[index]
+                                                      .detail)),
+                                        );
                                       },
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -180,7 +225,7 @@ class Club extends StatefulWidget {
 }
 
 class _Club extends State<Club> {
-  final _clubdata = ClubdataList().clubdata; 
+  final _clubdata = ClubdataList().clubdata;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -236,27 +281,26 @@ class _Club extends State<Club> {
                         child: Card(
                             elevation: 2,
                             shape: RoundedRectangleBorder(
-                                //side: const BorderSide(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(10)),
                             child: ListTile(
                               tileColor:
                                   const Color.fromARGB(255, 241, 249, 255),
                               onTap: null,
                               title: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 5),
-                                        child: Text(
-                                          _clubdata[index].title,
-                                          style: const TextStyle(fontSize: 17),
-                                        ),
-                                      ),
-                                      subtitle: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 2),
-                                        child: Text('${_clubdata[index].club} @${_clubdata[index].place}',
-                                            style:
-                                                const TextStyle(fontSize: 14)),
-                                      ),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                  _clubdata[index].title,
+                                  style: const TextStyle(fontSize: 17),
+                                ),
+                              ),
+                              subtitle: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 2),
+                                child: Text(
+                                    '${_clubdata[index].club} @${_clubdata[index].place}',
+                                    style: const TextStyle(fontSize: 14)),
+                              ),
                               shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),

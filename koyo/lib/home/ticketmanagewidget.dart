@@ -7,6 +7,7 @@ class Ticketmanagedialog extends StatefulWidget {
   final int index;
   final int number;
   final String hourhalf;
+  //整理券枚数変更ウィジェット
 
   @override
   State<Ticketmanagedialog> createState() => _Ticketmanagedialog();

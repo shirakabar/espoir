@@ -3,7 +3,7 @@ import 'package:koyo/widget/widget.dart';
 import 'package:koyo/data/sportsdata.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 
-//体育祭のスケジュール一覧
+//体育祭の招集通知発信ページ
 
 class Push extends StatefulWidget {
   const Push({super.key});
@@ -15,17 +15,18 @@ class Push extends StatefulWidget {
 class _Push extends State<Push> {
   final _taiikusaidata = TaiikusaidataList().taiikusaidata;
 
-Future<void> pushNotification(String text) async {
-  final HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('pushnotification');
-  try {
-     await callable.call(<String, dynamic>{
-      'text': text,
-    });
-    debugPrint('Notification sent successfully');
-  } catch (e) {
-    debugPrint('Failed to send notification: $e');
+  Future<void> pushNotification(String text) async {
+    final HttpsCallable callable =
+        FirebaseFunctions.instance.httpsCallable('pushnotification');
+    try {
+      await callable.call(<String, dynamic>{
+        'text': text,
+      });
+      debugPrint('Notification sent successfully');
+    } catch (e) {
+      debugPrint('Failed to send notification: $e');
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,6 @@ Future<void> pushNotification(String text) async {
                         //間設定
                         height: 15,
                       ),
-
                       ListView.builder(
                           //体育祭の各種目を一覧表示
                           physics: const NeverScrollableScrollPhysics(),
@@ -101,29 +101,48 @@ Future<void> pushNotification(String text) async {
                                           builder: (context) {
                                             return AlertDialog(
                                               title: const Text("招集通知送信"),
-                                              content: Text('${_taiikusaidata[index].title}の招集通知を全ユーザーに送信します\n本当によろしいですか？',
-                                              style: const TextStyle(fontSize: 16),
+                                              content: Text(
+                                                '${_taiikusaidata[index].title}の招集通知を全ユーザーに送信します\n本当によろしいですか？',
+                                                style: const TextStyle(
+                                                    fontSize: 16),
                                               ),
                                               actions: [
                                                 TextButton(
-                                                  child: const Text("送信"),
-                                                  onPressed: () {
-                                                    try {
-                                                      //FirebaseFunctions.instance.httpsCallable('pushnotification').call({'text': _taiikusaidata[index].title});
-                                                      pushNotification(_taiikusaidata[index].title);
-                                                      const snackBar = SnackBar(
-                                                      content: Text("招集通知を送信しました"),
-                                                      duration: Duration(seconds: 1),);
-                                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                                    Navigator.pop(context);
-                                                    } catch (e) {
-                                                      const snackBar = SnackBar(
-                                                      content: Text("エラーが発生しました"),
-                                                      duration: Duration(seconds: 1),);
-                                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                                      Navigator.pop(context);
-                                                    }}
-                                                ),
+                                                    child: const Text("送信"),
+                                                    onPressed: () {
+                                                      try {
+                                                        //FirebaseFunctions.instance.httpsCallable('pushnotification').call({'text': _taiikusaidata[index].title});
+                                                        pushNotification(
+                                                            _taiikusaidata[
+                                                                    index]
+                                                                .title);
+                                                        const snackBar =
+                                                            SnackBar(
+                                                          content: Text(
+                                                              "招集通知を送信しました"),
+                                                          duration: Duration(
+                                                              seconds: 1),
+                                                        );
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                snackBar);
+                                                        Navigator.pop(context);
+                                                      } catch (e) {
+                                                        const snackBar =
+                                                            SnackBar(
+                                                          content: Text(
+                                                              "エラーが発生しました"),
+                                                          duration: Duration(
+                                                              seconds: 1),
+                                                        );
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                snackBar);
+                                                        Navigator.pop(context);
+                                                      }
+                                                    }),
                                                 TextButton(
                                                   child: const Text("閉じる"),
                                                   onPressed: () =>

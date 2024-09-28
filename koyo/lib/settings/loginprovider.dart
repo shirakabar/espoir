@@ -1,4 +1,4 @@
-//このページは製作者に許可を取って千種祭アプリを真似してます
+//ログインの設定
 //StateProviderは今後非推奨となるらしい
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/localdata.dart';

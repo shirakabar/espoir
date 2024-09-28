@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:koyo/settings/loginprovider.dart';
 
-//整理券配布
+//混雑度変更ページ
 
 class Classcrowd extends ConsumerStatefulWidget {
   const Classcrowd({super.key});
@@ -29,10 +29,7 @@ class _Classcrowd extends ConsumerState<Classcrowd> {
 
   _imgcrowd() {
     return SizedBox(
-      height: 250,
-      width: 250,
-      child: crowdimg.elementAt(localcrowd)
-    );
+        height: 250, width: 250, child: crowdimg.elementAt(localcrowd));
   }
 
   void _getcrowd(String classname) async {
@@ -41,7 +38,7 @@ class _Classcrowd extends ConsumerState<Classcrowd> {
             .collection('Crowd')
             .doc('classes')
             .get();
-    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;/*Unhandled Exception: type 'Null' is not a subtype of type 'int'*/
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     remotecrowd = data[classname];
     setState(() {
       localcrowd = remotecrowd;
@@ -52,8 +49,8 @@ class _Classcrowd extends ConsumerState<Classcrowd> {
   void initState() {
     super.initState();
     Future(() {
-   _getcrowd(classname);
-  });
+      _getcrowd(classname);
+    });
   }
 
   //初期設定用に使ってねicon buttonとかで実行させるといいと思う
@@ -83,70 +80,69 @@ class _Classcrowd extends ConsumerState<Classcrowd> {
               vertical: 12,
             ),
             child:
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-              /*Text(
-                '$classname混雑度変更',
-                style: const TextStyle(color: Colors.black, fontSize: 26),
-              ),
-              const SizedBox(height: 10,),*/
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Theme.of(context).primaryColor,width: 4),
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.transparent
-                ),
-                child: _imgcrowd()),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).primaryColor, width: 4),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.transparent),
+                  child: _imgcrowd()),
               Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          if (localcrowd == 0) return;
-                          setState((){
-                         --localcrowd;
-                         debugPrint(localcrowd.toString());
-                          });
-                        },
-                        icon: const Icon(Icons.arrow_left,
-                            color: Colors.grey, size: 70)),
-                    IconButton(
-                        onPressed: () {
-                          if (localcrowd == 2) return;
-                          setState((){
-                            ++localcrowd; 
-                            debugPrint(localcrowd.toString());
-                          });
-                        },
-                        icon: const Icon(Icons.arrow_right,
-                            color: Colors.grey, size: 70)),
-                  ],
-                ),
-              Text(crowdtextList[localcrowd], style: const TextStyle(fontSize: 20)),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        if (localcrowd == 0) return;
+                        setState(() {
+                          --localcrowd;
+                          debugPrint(localcrowd.toString());
+                        });
+                      },
+                      icon: const Icon(Icons.arrow_left,
+                          color: Colors.grey, size: 70)),
+                  IconButton(
+                      onPressed: () {
+                        if (localcrowd == 2) return;
+                        setState(() {
+                          ++localcrowd;
+                          debugPrint(localcrowd.toString());
+                        });
+                      },
+                      icon: const Icon(Icons.arrow_right,
+                          color: Colors.grey, size: 70)),
+                ],
+              ),
+              Text(crowdtextList[localcrowd],
+                  style: const TextStyle(fontSize: 20)),
               const SizedBox(
                 height: 10,
               ),
               OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(200, 50),
-                              backgroundColor: Theme.of(context).primaryColor,
-                              side: BorderSide(
-                                  color: Theme.of(context).primaryColor)),
-                onPressed: (localcrowd == remotecrowd) ? null : () {
-                FirebaseFirestore.instance.collection('Crowd').doc('classes').update({
-                  classname : localcrowd
-                });
-                setState(() {
-                  remotecrowd = localcrowd;
-                });
-                const snackBar = SnackBar(
-                  content: Text("混雑度を更新しました"),
-                  duration: Duration(seconds: 1),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }, child: const Text('更新',style : TextStyle(color: Colors.white,fontWeight: FontWeight.bold)))
+                  style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(200, 50),
+                      backgroundColor: Theme.of(context).primaryColor,
+                      side: BorderSide(color: Theme.of(context).primaryColor)),
+                  onPressed: (localcrowd == remotecrowd)
+                      ? null
+                      : () {
+                          FirebaseFirestore.instance
+                              .collection('Crowd')
+                              .doc('classes')
+                              .update({classname: localcrowd});
+                          setState(() {
+                            remotecrowd = localcrowd;
+                          });
+                          const snackBar = SnackBar(
+                            content: Text("混雑度を更新しました"),
+                            duration: Duration(seconds: 1),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        },
+                  child: const Text('更新',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold)))
             ])));
   }
 }

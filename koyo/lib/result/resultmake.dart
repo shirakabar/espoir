@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:koyo/widget/widget.dart';
 import 'package:koyo/result/resultwidget.dart';
 
+//体育祭結果作成ページ
 class Classdetail {
   const Classdetail(
       {required this.classname, required this.point, required this.place});
@@ -13,11 +14,10 @@ class Classdetail {
 }
 
 class Sportsdetail {
-  const Sportsdetail({
-    required this.order,
-    required this.sportstitle,
-    required this.classdetailList
-    });
+  const Sportsdetail(
+      {required this.order,
+      required this.sportstitle,
+      required this.classdetailList});
 
   final int order;
   final String sportstitle;
@@ -32,8 +32,7 @@ class Resultmakesp extends StatefulWidget {
 }
 
 class _Resultmakesp extends State<Resultmakesp> {
-   
-    Widget deletesportsdialog({required sports}) {
+  Widget deletesportsdialog({required sports}) {
     return AlertDialog(
       title: const Text("競技削除"),
       content: Text(
@@ -105,8 +104,8 @@ class _Resultmakesp extends State<Resultmakesp> {
               data.forEach((String sportstitle, dynamic orders) {
                 orders.forEach((String order, dynamic classes) {
                   final List<Classdetail> classdetailList = [];
-                  debugPrint('data:$data'); 
-                      //data: {男女リレー: {3: {105: {place: 5, point: 5}, 106: {place: 6, point: 6}}}, 向陽リレー: {1: {101: {place: 1, point: 1}, 102: {place: 2, point: 2}}}}
+                  debugPrint('data:$data');
+                  //data: {男女リレー: {3: {105: {place: 5, point: 5}, 106: {place: 6, point: 6}}}, 向陽リレー: {1: {101: {place: 1, point: 1}, 102: {place: 2, point: 2}}}}
 
                   classes.forEach((String? classname, dynamic classresults) {
                     classdetailList.add(Classdetail(
@@ -131,56 +130,67 @@ class _Resultmakesp extends State<Resultmakesp> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                       padding: const EdgeInsets.symmetric(
-                       horizontal: 15,vertical: 2
-                      ),
-                      child: 
-                        Card(
+                          horizontal: 15, vertical: 2),
+                      child: Card(
                           color: const Color.fromARGB(255, 241, 249, 255),
                           elevation: 2,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                           child: Padding(
-                      padding: const EdgeInsets.only(
-                        right: 10, left: 10,top: 10,bottom: 20
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ListTile(
-                            leading: Text(sportsList[index].order.toString(),style: const TextStyle(fontSize: 18),),
-                            title: Text(
-                              sportsList[index].sportstitle,
-                              style: const TextStyle(fontSize: 18),
+                            padding: const EdgeInsets.only(
+                                right: 10, left: 10, top: 10, bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                ListTile(
+                                  leading: Text(
+                                    sportsList[index].order.toString(),
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
+                                  title: Text(
+                                    sportsList[index].sportstitle,
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
+                                  trailing: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        IconButton(
+                                            icon: const Icon(Icons.add,
+                                                color: Colors.black),
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Resultdialog(
+                                                        sportsdetail:
+                                                            sportsList[index]);
+                                                  });
+                                            }),
+                                        IconButton(
+                                            icon: const Icon(Icons.delete,
+                                                color: Colors.black),
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return deletesportsdialog(
+                                                        sports:
+                                                            sportsList[index]);
+                                                  });
+                                            }),
+                                      ]),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                ),
+                                Resultlist(
+                                    classdetailList:
+                                        sportsList[index].classdetailList,
+                                    sportsdetail: sportsList[index])
+                              ],
                             ),
-                            trailing:
-                                Row(mainAxisSize: MainAxisSize.min, children: [
-                              IconButton(
-                                  icon: const Icon(Icons.add,color: Colors.black), onPressed: () {
-                                    showDialog(
-                                    context: context,
-                                        builder: (context) {
-                                          return Resultdialog(sportsdetail: sportsList[index]);
-                                        }
-                                  );}),
-                              IconButton(
-                                  icon: const Icon(Icons.delete,color: Colors.black),
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return deletesportsdialog(sports: sportsList[index]);
-                                        });
-                                  }),
-                            ]),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                          ),
-                          Resultlist(classdetailList: sportsList[index].classdetailList, sportsdetail: sportsList[index])
-                          ],),
-                      ))
-                      );
+                          )));
                 },
               );
             }));

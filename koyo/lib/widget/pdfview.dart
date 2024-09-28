@@ -1,15 +1,14 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:koyo/widget/widget.dart';
-
+//PDFが見れる画面
 
 class Pdfview extends StatefulWidget {
-  const Pdfview({super.key,required this.pdf, required this.title});
+  const Pdfview({super.key, required this.pdf, required this.title});
   final String pdf;
   final String title;
 
@@ -49,7 +48,6 @@ class _PdfviewState extends State<Pdfview> {
   }
 
   Future<File> _storeFile(String url, List<int> bytes) async {
-
     final filename = basename(url);
     final dir = await getApplicationDocumentsDirectory();
 
