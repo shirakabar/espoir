@@ -194,7 +194,7 @@ class Ondemand extends StatelessWidget {
                                             title: _ondemanddata[index].title,
                                             detail: _ondemanddata[index].detail,
                                             number: _ondemanddata[index].number,
-                                            asset: _ondemanddata[index].asset,
+                                            videourl: _ondemanddata[index].videourl,
                                             songname:
                                                 _ondemanddata[index].songname,
                                           )));
