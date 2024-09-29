@@ -27,10 +27,10 @@ class _Penlightselectwidget extends State<Penlightselectwidget> {
             onColorChanged: changeColor,
             ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(100, 40),
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
@@ -48,7 +48,6 @@ class _Penlightselectwidget extends State<Penlightselectwidget> {
                     ),
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(100, 40),
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
