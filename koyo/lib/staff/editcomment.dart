@@ -53,10 +53,10 @@ class _Editdialog extends State<Editdialog> {
                   pickerAreaHeightPercent: 0.8,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(100, 40),
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
@@ -93,7 +93,6 @@ class _Editdialog extends State<Editdialog> {
                     ),
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(100, 40),
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),

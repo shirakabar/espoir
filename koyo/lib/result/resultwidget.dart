@@ -176,10 +176,10 @@ class _Floatingdialog extends State<Floatingdialog> {
                 ),
                 const SizedBox(height: 20, width: double.infinity),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(100, 40),
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
@@ -224,7 +224,6 @@ class _Floatingdialog extends State<Floatingdialog> {
                     ),
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(100, 40),
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
@@ -339,10 +338,10 @@ class _Resultdialog extends State<Resultdialog> {
                 ),
                 const SizedBox(height: 20, width: double.infinity),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(100, 40),
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
@@ -379,7 +378,6 @@ class _Resultdialog extends State<Resultdialog> {
                     ),
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                            minimumSize: const Size(100, 40),
                             backgroundColor: Theme.of(context).primaryColor,
                             side: BorderSide(
                                 color: Theme.of(context).primaryColor)),
