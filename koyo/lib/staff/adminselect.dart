@@ -84,6 +84,30 @@ class Adminselect extends StatelessWidget {
                       thickness: 1,
                       color: Colors.grey,
                     ),
+                    ListTile(
+                      title: const Text('リズム作成'),
+                      onTap: () {
+                      context.push('/rythmmake');
+                      },
+                    ),
+                    const Divider(
+                      //線
+                      height: 1,
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    ListTile(
+                      title: const Text('テスト'),
+                      onTap: () {
+                       context.go('/firstoverboard');
+                      },
+                    ),
+                    const Divider(
+                      //線
+                      height: 1,
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
                   ],
                 ))
           ],

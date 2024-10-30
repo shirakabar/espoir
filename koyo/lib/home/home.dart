@@ -9,6 +9,7 @@ import 'package:koyo/widget/bottomnavi.dart';
 import 'package:koyo/widget/pdfview.dart';
 import 'package:koyo/widget/widget.dart';
 import 'package:koyo/settings/loginprovider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 //ホーム画面
 
@@ -54,8 +55,19 @@ class _Home extends ConsumerState<Home> {
     super.initState();
   }
 
+  void _showTutorial(BuildContext context) async {
+    final pref = await SharedPreferences.getInstance();
+    if (pref.getBool('firstoverboard') != true) {
+      if (!context.mounted) return;
+      context.go('/firstoverboard');
+      pref.setBool('firstoverboard', true);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // 画面の描画が終わったタイミングで表示させる
+    WidgetsBinding.instance.addPostFrameCallback((_) => _showTutorial(context));
     return Scaffold(
         drawer: const Draw(),
         appBar: const Bar(title: '第76回向陽祭'),
