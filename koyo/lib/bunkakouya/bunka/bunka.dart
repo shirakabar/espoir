@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/bunkakouya/bunkade.dart';
+import 'package:koyo/bunkakouya/bunka/bunkade.dart';
 
 //文化祭ページのタブ遷移先一覧
 class Bunka extends StatelessWidget {

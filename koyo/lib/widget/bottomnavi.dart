@@ -41,7 +41,6 @@ class _Bottomnavi extends ConsumerState<Bottomnavi> {//statefulWidgetを受け�
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(//bottomnavigationbarのみため
         items: const [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:koyo/bunkakouya/kouyade.dart';
+import 'package:koyo/bunkakouya/kouya/kouyade.dart';
 import 'package:koyo/widget/videoplayer.dart';
 
 //後夜祭ページのタブ遷移先一覧
@@ -91,10 +91,10 @@ class _Kouya extends State<Kouya> {
                                                     color: Theme.of(context)
                                                         .primaryColor)),
                                             onPressed: () {
-                                              context.push('/penlightselect');
+                                              context.push('/liveselect');
                                             },
                                             child: const Text(
-                                              'ペンライトモード',
+                                              'ライブモード',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold),

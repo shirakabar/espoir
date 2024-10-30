@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:koyo/bunkakouya/bunka.dart';
-import 'package:koyo/bunkakouya/kouya.dart';
+import 'package:koyo/bunkakouya/bunka/bunka.dart';
+import 'package:koyo/bunkakouya/kouya/kouya.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/widget/widget.dart';
 
