@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/home/commentwidget.dart';
 import 'package:koyo/settings/koyo_icons.dart';
 import 'package:koyo/widget/bottomnavi.dart';
@@ -22,6 +23,7 @@ class Home extends ConsumerStatefulWidget {
 
 class _Home extends ConsumerState<Home> {
   int _current = 0;
+  final String fesname = BasicData().fesname;
   //ここにないウィジェットはwidget.dartにある
   
   Widget homebutton(
@@ -69,8 +71,8 @@ class _Home extends ConsumerState<Home> {
     // 画面の描画が終わったタイミングで表示させる
     WidgetsBinding.instance.addPostFrameCallback((_) => _showTutorial(context));
     return Scaffold(
-        drawer: const Draw(),
-        appBar: const Bar(title: '第76回向陽祭'),
+        drawer: Draw(),
+        appBar: Bar(title: fesname),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

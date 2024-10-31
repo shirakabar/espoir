@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/settings/koyo_icons.dart';
 import 'package:koyo/settings/loginprovider.dart';
 import 'package:koyo/widget/bottomnavi.dart';
@@ -37,7 +38,8 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class Draw extends ConsumerWidget {
-  const Draw({super.key});
+  Draw({super.key});
+  final fesname = BasicData().fesname;
 
   Widget tile(
       {required String label,
@@ -71,9 +73,9 @@ class Draw extends ConsumerWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    const Text(
-                      '第76回向陽祭',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    Text(
+                      fesname,
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ])),
           tile(

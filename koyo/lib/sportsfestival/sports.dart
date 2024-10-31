@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/widget/widget.dart';
 import 'package:koyo/data/sportsdata.dart';
 
@@ -13,12 +14,14 @@ class Sports extends StatefulWidget {
 
 class _Sports extends State<Sports> {
   final _taiikusaidata = TaiikusaidataList().taiikusaidata;
+  final taiikusaidate = BasicData().taiikusaidate;
+  final taiikusaiplace = BasicData().taiikusaiplace;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const Bar(title: '体育祭'),
-        drawer: const Draw(),
+        drawer: Draw(),
         body: SingleChildScrollView(
             //スクロール可能
             child: Padding(
@@ -30,23 +33,23 @@ class _Sports extends State<Sports> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                          padding: EdgeInsets.only(left: 20, top: 15),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 15),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   '体育祭',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 35),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Text(
-                                  '6月17日（月）@愛知県体育館',
-                                  style: TextStyle(fontSize: 18),
+                                  '$taiikusaidate$taiikusaiplace',
+                                  style: const TextStyle(fontSize: 18),
                                 ),
                               ])),
                       const SizedBox(

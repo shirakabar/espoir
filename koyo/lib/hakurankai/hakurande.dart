@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/data/hakurandata.dart';
 import 'package:koyo/hakurankai/hakuranclassde.dart';
 
@@ -97,6 +98,8 @@ class Kyo extends StatefulWidget {
 
 class _Kyo extends State<Kyo> {
   final _hakurankaidata = HakurankaidataList().hakurankaidata;
+  final String hakuranfirstdate = BasicData().hakuranfirstdate;
+  final String hakuranseconddate = BasicData().hakuranseconddate;
 
   @override
   Widget build(BuildContext context) {
@@ -112,23 +115,23 @@ class _Kyo extends State<Kyo> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                          padding: EdgeInsets.only(left: 20, top: 15),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 15),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   '博覧会',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 35),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Text(
-                                  '9月6日（金）9:30 ~ 15:30\n9月7日（土）9:00 ~ 15:00',
-                                  style: TextStyle(fontSize: 18),
+                                  '$hakuranfirstdate\n$hakuranseconddate',
+                                  style: const TextStyle(fontSize: 18),
                                 ),
                               ])),
                       const SizedBox(
@@ -226,6 +229,9 @@ class Club extends StatefulWidget {
 
 class _Club extends State<Club> {
   final _clubdata = ClubdataList().clubdata;
+  final String hakuranfirstdate = BasicData().hakuranfirstdate;
+  final String hakuranseconddate = BasicData().hakuranseconddate;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -238,22 +244,22 @@ class _Club extends State<Club> {
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Padding(
-                  padding: EdgeInsets.only(left: 20, top: 15),
+               Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 15),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           '博覧会',
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 35),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Text(
-                          '9月6日（金）9:30 ~ 15:30\n9月7日（土）9:00 ~ 15:00',
-                          style: TextStyle(fontSize: 18),
+                          '$hakuranfirstdate\n$hakuranseconddate',
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ])),
               const SizedBox(

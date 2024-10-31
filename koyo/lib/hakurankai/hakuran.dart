@@ -14,7 +14,7 @@ class Hakuran extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-          drawer: const Draw(),
+          drawer: Draw(),
           appBar: AppBar(
             backgroundColor: Theme.of(context).primaryColor,
             title: const Text('博覧会', style: TextStyle(color: Colors.white)),
@@ -40,8 +40,8 @@ class Hakuran extends StatelessWidget {
               indicatorColor: Colors.white,
             ),
           ),
-          body: const TabBarView(
-            children: [Kyo(), Butai(), Club()],
+          body: TabBarView(
+            children: [const Kyo(), Butai(), const Club()],
           )),
     );
   }

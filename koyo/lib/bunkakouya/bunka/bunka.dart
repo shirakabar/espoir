@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/bunkakouya/bunka/bunkade.dart';
+import 'package:koyo/data/basicdata.dart';
 
 //文化祭ページのタブ遷移先一覧
 class Bunka extends StatelessWidget {
-  const Bunka({super.key});
+  Bunka({super.key});
+  final String bunkasaidate = BasicData().bunkasaidate;
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +30,29 @@ Widget _headerSection() {
   return SliverList(
     delegate: SliverChildListDelegate(
       [
-        const Padding(
-            padding: EdgeInsets.symmetric(
+         Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: 5,
               vertical: 12,
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
-                  padding: EdgeInsets.only(left: 20, top: 15),
+                  padding: const EdgeInsets.only(left: 20, top: 15),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           '文化祭',
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 35),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Text(
-                          '9月5日（木）10:00 ~ 15:00',
-                          style: TextStyle(fontSize: 18),
+                          BasicData().bunkasaidate,
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ])),
             ]))

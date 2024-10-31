@@ -44,6 +44,7 @@ class _Rythmmakedialog extends State<Rythmmakedialog> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
                     TextField(
+                      keyboardType: TextInputType.number,
                       style: const TextStyle(color: Colors.white),
                         controller: _bpmcontroller,
                         onChanged: (value) => setState(() {}),
@@ -82,11 +83,11 @@ class _Rythmmakedialog extends State<Rythmmakedialog> {
                         onPressed: () {
                           final Timestamp now =
                               Timestamp.fromDate(DateTime.now());
-                          final duration = (int.parse(_bpmcontroller.text) * 1000) / 60 ;
+                          final duration = 1000 / (int.parse(_bpmcontroller.text) / 60);
                           FirebaseFirestore.instance
                               .collection('Live')
                               .doc('rythm')
-                              .set({'duration': duration, 'starttime': now});
+                              .set({'duration': duration.round(), 'starttime': now});
                             Navigator.pop(context);
                         },
                         child: const Text(

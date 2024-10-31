@@ -17,7 +17,7 @@ class Map extends StatelessWidget {
     return DefaultTabController(
         length: 4,
         child: Scaffold(
-          drawer: const Draw(),
+          drawer: Draw(),
           appBar: AppBar(
             backgroundColor: Theme.of(context).primaryColor,
             title: const Text('校内マップ', style: TextStyle(color: Colors.white)),

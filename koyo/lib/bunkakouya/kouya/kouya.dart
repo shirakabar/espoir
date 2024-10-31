@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:koyo/bunkakouya/kouya/kouyade.dart';
+import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/widget/videoplayer.dart';
 
 //後夜祭ページのタブ遷移先一覧
@@ -12,6 +13,8 @@ class Kouya extends StatefulWidget {
 }
 
 class _Kouya extends State<Kouya> {
+  final String kouyasaidate = BasicData().kouyasaidate;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +50,9 @@ class _Kouya extends State<Kouya> {
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    const Text(
-                                      '9月7日（土）',
-                                      style: TextStyle(fontSize: 18),
+                                    Text(
+                                      kouyasaidate,
+                                      style: const TextStyle(fontSize: 18),
                                     ),
                                     const SizedBox(
                                       height: 5,
