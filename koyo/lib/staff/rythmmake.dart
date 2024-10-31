@@ -40,7 +40,7 @@ class _Rythmmake extends State<Rythmmake> {
       FirebaseFirestore.instance
           .collection('Live')
           .doc('rythm')
-          .set({'duration': intervalsave, 'starttime': now});
+          .set({'duration': intervalsave.round(), 'starttime': now});
       tapped = 0;
       intervalsList = [];
     }

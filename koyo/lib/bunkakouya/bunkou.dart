@@ -14,7 +14,7 @@ class Bunkou extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-          drawer: const Draw(),
+          drawer: Draw(),
           appBar: AppBar(
             backgroundColor: Theme.of(context).primaryColor,
             title: const Text('文化祭・後夜祭', style: TextStyle(color: Colors.white)),
@@ -39,10 +39,10 @@ class Bunkou extends StatelessWidget {
               indicatorColor: Colors.white,
             ),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
               Bunka(),
-              Kouya(),
+              const Kouya(),
             ],
           )),
     );

@@ -28,12 +28,12 @@ class _Penlightselect extends State<Penlightselect> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                 
                   const Text(
                     '※開始後、ダブルタップで終了します\n※スマートフォンを落とさないように注意してください\n※大変まぶしいので注意してください',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  const SizedBox(height: 20),
-                  const SizedBox(height: 10),
+                      const SizedBox(height: 20),
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                         minimumSize: const Size(200, 50),
@@ -54,6 +54,7 @@ class _Penlightselect extends State<Penlightselect> {
                     ),
                   ),
                   const SizedBox(height: 20),
+                  
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                         minimumSize: const Size(200, 50),

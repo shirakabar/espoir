@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/hakurankai/butaide.dart';
 
 //舞台のスケジュール一覧
 class Butai extends StatelessWidget {
-  const Butai({super.key});
+  Butai({super.key});
+  final String hakuranfirstdate = BasicData().hakuranfirstdate;
+  final String hakuranseconddate = BasicData().hakuranseconddate;
 
   @override
   Widget build(BuildContext context) {
@@ -31,32 +34,32 @@ class Butai extends StatelessWidget {
 Widget _headerSection() {
   return SliverList(
       delegate: SliverChildListDelegate([
-    const Padding(
+    Padding(
         //余白設定
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 5,
           vertical: 12,
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
-              padding: EdgeInsets.only(left: 20, top: 15),
+              padding: const EdgeInsets.only(left: 20, top: 15),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       '博覧会',
                       style:
                           TextStyle(fontWeight: FontWeight.w700, fontSize: 35),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
-                      '9月6日（金）9:30 ~ 15:30\n9月7日（土）9:00 ~ 15:00',
-                      style: TextStyle(fontSize: 18),
+                      '${BasicData().hakuranfirstdate}\n${BasicData().hakuranseconddate}',
+                      style: const TextStyle(fontSize: 18),
                     ),
                   ])),
-          SizedBox(
+          const SizedBox(
             //間設定
             height: 5,
           ),

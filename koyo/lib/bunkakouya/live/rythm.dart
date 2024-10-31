@@ -1,22 +1,21 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:vibration/vibration.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
-class Rythm extends ConsumerStatefulWidget {
+class Rythm extends StatefulHookWidget {
   const Rythm({super.key});
   //リズムモードのスタート画面
 
   @override
-  ConsumerState<Rythm> createState() => _Rythm();
+  State<Rythm> createState() => _Rythm();
 }
 
-class _Rythm extends ConsumerState<Rythm> {
+class _Rythm extends State<Rythm> {
   Timer? _timer;
-  DateTime startDateTime = DateTime(2024, 10, 27, 21, 50); 
+  DateTime startDateTime = DateTime(2024, 10, 27, 21, 50);
   double intervalSeconds = 0; // バイブレーションの間隔
   double bpm = 0;
 
@@ -25,7 +24,8 @@ class _Rythm extends ConsumerState<Rythm> {
 
     // 指定日時が過去の場合、intervalSecondsを足して未来の時刻に調整
     while (startDateTime.isBefore(now)) {
-      startDateTime = startDateTime.add(Duration(milliseconds: intervalSeconds.toInt()));
+      startDateTime =
+          startDateTime.add(Duration(milliseconds: intervalSeconds.toInt()));
     }
 
     // 現在の時刻と調整後のstartDateTimeの差を計算
@@ -38,19 +38,37 @@ class _Rythm extends ConsumerState<Rythm> {
   }
 
   void _startVibration() {
-    _timer = Timer.periodic(Duration(milliseconds: intervalSeconds.toInt()), (Timer timer) async {
+    _timer = Timer.periodic(Duration(milliseconds: intervalSeconds.toInt()),
+        (Timer timer) async {
       // デバイスがバイブレーションに対応しているか確認
       if (await Vibration.hasVibrator() ?? false) {
         Vibration.vibrate(duration: 200); // バイブレーション
       }
-      
     });
   }
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    useEffect(
+      () {
+        Future(() {
+          WakelockPlus.enable();
+        });
+        return () => {
+              // 画面から離れる時、スクリーンの明るさを本体設定の輝度に戻す
+              Future(() {
+                WakelockPlus.disable;
+              })
+            };
+      },
+      const [],
+    );
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -66,10 +84,34 @@ class _Rythm extends ConsumerState<Rythm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    '※開始後、他の画面に行ってもストップしない限り続きます\n※お使いの機種によっては正しく動作しない場合があります',
+                    '※自動でバイブレーションが開始、終了します\n※お使いの機種によっては正しく動作しない場合があります',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   const SizedBox(height: 20),
+                  Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black,
+                          border: Border.all(color: Colors.white)),
+                      width: 150,
+                      height: 150,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.music_note,
+                            color: Colors.white,
+                            size: 70,
+                          ),
+                          Text(
+                            'リズムモード',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      )),
+                      const SizedBox(height: 20),
                   StreamBuilder<DocumentSnapshot>(
                       //各クラスのドキュメントをstreambuilderで監視
                       stream: FirebaseFirestore.instance
@@ -78,35 +120,30 @@ class _Rythm extends ConsumerState<Rythm> {
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
-                          return const Text('error',style: TextStyle(color: Colors.white),);
+                          return const Text(
+                            'error',
+                            style: TextStyle(color: Colors.white),
+                          );
                         }
                         if (!snapshot.hasData) {
-                          return const Text('ee',style: TextStyle(color: Colors.white),);
+                          return const Text(
+                            'ee',
+                            style: TextStyle(color: Colors.white),
+                          );
                         }
-                        Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-                        intervalSeconds = data['duration'] as double;
+                        Map<String, dynamic> data =
+                            snapshot.data!.data() as Map<String, dynamic>;
+                        intervalSeconds = data['duration'].toDouble();
                         startDateTime = data['starttime'].toDate();
-                        bpm = 60 / ( intervalSeconds / 1000 ); //BPMに変更
-                        _timer?.cancel();//タイマーストップ
+                        bpm = 60 / (intervalSeconds / 1000); //BPMに変更
                         _scheduleVibration();
-                        return Text('BPM : ${bpm.round()}',style: const TextStyle(color: Colors.white,fontSize: 25),);
+                        return Text(
+                          'BPM : ${bpm.round()}',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 25),
+                        );
                       }),
                   const SizedBox(height: 20),
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        minimumSize: const Size(200, 50),
-                        backgroundColor: Colors.black,
-                        side: const BorderSide(color: Colors.white)),
-                    onPressed: () {
-                      _timer?.cancel();//タイマーストップ
-                      context.go('/');
-                    },
-                    child: const Text(
-                      'ストップ',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ),
                 ],
               ),
             )));
