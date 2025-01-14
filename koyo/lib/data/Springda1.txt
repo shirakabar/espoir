@@ -1,0 +1,9 @@
+competition:'サッカー'
+date:'２日目'
+iconstyle:57460
+matchplace:'グラウンドA'
+notificationTimes:'2025-03-07T15:15:00.000'
+result: ''
+team1:'103'
+team2:'102'
+time:'15:20'
