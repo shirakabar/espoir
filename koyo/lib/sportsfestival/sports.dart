@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/data/basicdata.dart';
-import 'package:koyo/widget/widget.dart';
 import 'package:koyo/data/sportsdata.dart';
 
 //体育祭のスケジュール一覧
@@ -20,8 +19,6 @@ class _Sports extends State<Sports> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const Bar(title: '体育祭'),
-        drawer: Draw(),
         body: SingleChildScrollView(
             //スクロール可能
             child: Padding(

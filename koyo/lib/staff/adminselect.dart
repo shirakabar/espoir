@@ -69,6 +69,18 @@ class Adminselect extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     ListTile(
+                      title: const Text('スプリングフェア設定'),
+                      onTap: () {
+                        context.push('/springsettings');
+                      },
+                    ),
+                    const Divider(
+                      //線
+                      height: 1,
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    ListTile(
                       title: const Text('コメント編集'),
                       onTap: () {
                         showDialog(

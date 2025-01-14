@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart'; //firebase連携で必須
 import 'settings/firebase_options.dart'; //同じくfirebase
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart'; //端末情報の取得等
+import 'package:koyo/sportsfestival/springnotifications.dart';
 
 //メインの関数
 
@@ -13,8 +14,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  springnotification();
   Notificationsettings.mainsettings(); //通知設定
-
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge); //ステータスバー
   SystemChrome.setPreferredOrientations([
     //縦向き固定

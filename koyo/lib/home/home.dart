@@ -114,7 +114,7 @@ class _Home extends ConsumerState<Home> {
                           },
                         ),
                         CarouselContainerbox(
-                          title: '体育祭',
+                          title: 'スポーツ',
                           img: 'assets/images/taiikusai.jpg',
                           ontap: () => ref
                               .watch(bottomnaviProvider.notifier)

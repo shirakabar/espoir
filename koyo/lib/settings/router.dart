@@ -7,6 +7,7 @@ import 'package:koyo/bunkakouya/live/rythm.dart';
 import 'package:koyo/home/classmanage.dart';
 import 'package:koyo/home/firstoverboard.dart';
 import 'package:koyo/staff/rythmmake.dart';
+import 'package:koyo/staff/springsettings.dart';
 import 'package:koyo/ticket/mobilescan.dart';
 import 'package:koyo/home/pdfselect.dart';
 import 'package:koyo/ticket/ticketlist.dart';
@@ -188,6 +189,16 @@ final goRouter = GoRouter(
           return MaterialPage(
             key: state.pageKey,
             child: const Resultmakehakuran(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/springsettings',
+        name: 'springsettings',
+        pageBuilder: (context, state) {
+          return MaterialPage(
+            key: state.pageKey,
+            child: const Springsettings(),
           );
         },
       ),
