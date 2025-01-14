@@ -1,9 +1,10 @@
-competition:'サッカー'
-date:'２日目'
-iconstyle:57460
-matchplace:'グラウンドA'
-notificationTimes:'2025-03-07T15:15:00.000'
-result: ''
-team1:'103'
-team2:'102'
-time:'15:20'
+ Springdata(
+   time: '09:00',
+   team1: '101',
+   team2: '102',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: '体育館A',
+   result: '',
+   notificationTimes: DateTime(2025, 1, 6, 21, 25),
+  ),
