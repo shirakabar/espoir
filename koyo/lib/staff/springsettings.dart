@@ -290,21 +290,53 @@ class _Springsettings extends State<Springsettings> {
  
   }
 Future<void> updateresult1(mainindexsetting) async {
-  print(mainindexsetting);
   int i = mainindexsetting + 1;
-  await _db.collection('springdata').doc('00$i').update(
-    {
-      'result': '1',
-    }
-  );
+  print(_springdata[mainindexsetting].result);
+  if (_springdata[mainindexsetting].result != '1'){
+    await _db.collection('springdata').doc('00$i').update(
+      {
+        'result': '1',
+      }
+    );
+    setState(() {
+      _springdata[mainindexsetting].result = '1';
+    });
+  }else{
+    await _db.collection('springdata').doc('00$i').update(
+      {
+        'result': '0',
+      }
+    );
+  print(_springdata[mainindexsetting].result);
+  setState(() {
+    _springdata[mainindexsetting].result = '0';
+  });
+  }
 }
 Future<void> updateresult2(mainindexsetting) async {
   int i = mainindexsetting + 1;
-  await _db.collection('springdata').doc('00$i').update(
-    {
-    'result': '2',
-    }
-  );
+  print(_springdata[mainindexsetting].result);
+  if (_springdata[mainindexsetting].result != '2'){
+    await _db.collection('springdata').doc('00$i').update(
+      {
+        'result': '2',
+      }
+    );
+    setState(() {
+      _springdata[mainindexsetting].result = '2';
+    });
+  print(_springdata[mainindexsetting].result);
+  }else{
+    await _db.collection('springdata').doc('00$i').update(
+      {
+        'result': '0',
+      }
+    );
+  print(_springdata[mainindexsetting].result);
+  setState(() {
+    _springdata[mainindexsetting].result = '0';
+  });
+  }
 }
 
   @override
@@ -334,15 +366,6 @@ Future<void> updateresult2(mainindexsetting) async {
                   searchitem.add(i);
                 }
                 _springdata = springdataList.springdata;
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              // `showNotificationChangedDialog` の表示タイミング
-              if (springDataIconColor.isEmpty || springDataIconColor.length != springdataList.springLength) {
-                showNotificationChangedDialog(context);
-      print(springdataList.springLength);
-      print(springDataIconColor.length);
-      print('mmm');
-              }
-            });
 
 
                 print(startspring);
@@ -718,7 +741,7 @@ Future<void> updateresult2(mainindexsetting) async {
                                                                 updateresult1(mainindexsetting);
                                                               },
                                                               style: ElevatedButton.styleFrom(
-                                                                foregroundColor: Colors.black, backgroundColor: Colors.white, // ボタンの文字色を黒に設定
+                                                                backgroundColor: _springdata[mainindexsetting].result == '1' ? Colors.blue : Colors.white,
                                                               ),
                                                               child: Text(
                                                                 _springdata[mainindexsetting].team1,
@@ -736,7 +759,7 @@ Future<void> updateresult2(mainindexsetting) async {
                                                                 updateresult2(mainindexsetting);
                                                               },
                                                               style: ElevatedButton.styleFrom(
-                                                                foregroundColor: Colors.black, backgroundColor: Colors.white, // ボタンの文字色を黒に設定
+                                                                backgroundColor: _springdata[mainindexsetting].result == '2' ? Colors.blue : Colors.white, // ボタンの文字色を黒に設定
                                                               ),
                                                               child: Text(
                                                                 _springdata[mainindexsetting].team2,
@@ -1138,26 +1161,6 @@ Future<void> updateresult2(mainindexsetting) async {
       },
     );
   }
-
-  void showNotificationChangedDialog(BuildContext context) {
-    showCupertinoDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoAlertDialog(
-          title: Text('最新情報に更新されました'),
-          content: Text('設定した通知が初期化されましたので変更し直してください。'),
-          actions: <Widget>[
-            CupertinoDialogAction(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop(); // ダイアログを閉じる
-              },
-            ),
-          ],
-        );
-      },
-    );
-  } 
 }
 
 

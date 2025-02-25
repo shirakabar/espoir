@@ -98,7 +98,7 @@ class Pdfselect extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const Pdfview(
-                                  pdf: 'file:///C:/Users/shunk/OneDrive/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/2024%E3%82%B9%E3%83%95%E3%82%9A%E3%83%AA%E3%83%B3%E3%82%AF%E3%82%99%E3%83%95%E3%82%A7%E3%82%A2%E5%AE%9F%E6%96%BD%E8%A6%81%E9%A0%85%20%E3%83%A2%E3%83%AB%E3%83%83%E3%82%AF%E3%82%A8%E3%82%AD%E3%82%B7%E3%83%92%E3%82%99%E3%82%B7%E3%83%A7%E3%83%B3ver%E6%94%B9.pdf',
+                                  pdf: 'assets/docs/kouyasaiplace.pdf',
                                   title: 'スプリングフェア実施要項')),
                         );
                       },

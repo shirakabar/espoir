@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/semantics.dart';
 import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/data/springdata.dart';
 import 'package:koyo/sportsfestival/springnotifications.dart';
@@ -69,6 +70,8 @@ class _Spring extends State<Spring> {
   int notificationday = 0;
   int notificationhour = 0;
   int notificationminute= 0;
+  int change = 0; 
+  int prechange = 0; 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   int searchsystem1(String item1index) {
@@ -284,9 +287,6 @@ class _Spring extends State<Spring> {
   }
 
   });
-    print(notificationhour);
-    print(_springdata[mainindex].time);
-    print(mainindex);
   }
 
 
@@ -314,6 +314,10 @@ Future<void> getData() async {
         if (data.containsKey('daydata') && data['daydata'] is num) {
           dayDataList.add((data['daydata'] as num).toInt());  // doubleをintに変換してリストに追加
         }
+        else if (data.containsKey('new') && data['new'] is String) {
+          change = int.tryParse(data['new'])!;
+          // 変換後の値は変数changeに格納される
+        }
       }
     } else {
       throw 'No documents found in the collection';
@@ -335,13 +339,21 @@ Future<void> getData() async {
     _springdatafire = readSpringdata();
     start();
     _loadData(); 
+    _loadPrechangeValue();
+  }
 
-    
- 
+  // prechangeの値を保存する
+  Future<void> _savePrechangeValue(int value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('prechange', value); // 'prechange' キーで保存
+  }
 
-    // springdataList.fetchData().then((_) {
-    //   setState(() {});
-    // });
+  // ローカルストレージからprechangeの値を読み込む
+  Future<void> _loadPrechangeValue() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prechange = prefs.getInt('prechange') ?? 0; // 保存された値を取得、なければ0をデフォルト値に
+    });
   }
   // SharedPreferencesからspringDataIconColorデータを読み込む
   Future<void> _loadData() async {
@@ -428,9 +440,19 @@ void _addItem() {
                 }
                 _springdata = springdataList.springdata;
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (springDataIconColor.isEmpty || springDataIconColor.length != springdataList.springLength) {
+              if (change != prechange) {
                 showNotificationChangedDialog(context);
-
+                prechange = change;
+                _savePrechangeValue(prechange);
+                notificationSelect.clear();
+                notificationSelect.add(DateTime(2030, 1, 1, 17, 59));
+                springDataIconColor.clear();
+                setState(() {
+                  for (int i = 0; i < springdataList.springLength; i++) {
+                    springDataIconColor.add(Color(0xfff44336));  // 赤色を追加
+                  }                  
+                });
+                _addIconStyle();
               }
             });
                 _addItem();
@@ -822,14 +844,12 @@ void _addItem() {
                                                         Text.rich(TextSpan(
                                                             text: _springdata[mainindex].team1,
                                                             style:
-                                                                const TextStyle(
+                                                             TextStyle(
                                                               fontSize: 22,
                                                               backgroundColor:
                                                                   Colors
                                                                       .transparent,
-                                                              color: Color
-                                                                  .fromARGB(255,
-                                                                      0, 0, 0),
+                                                              color: _springdata[mainindex].result == '1' ? Colors.blue : Color.fromARGB(255, 0, 0, 0),
                                                             ),
                                                             children: <TextSpan>[
                                                               const TextSpan(
@@ -841,29 +861,19 @@ void _addItem() {
                                                                       Colors
                                                                           .transparent,
                                                                   fontSize: 22,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          0,
-                                                                          0,
-                                                                          0),
+                                                                  color: Color.fromARGB(255, 0, 0, 0),
                                                                 ),
                                                               ),
                                                               TextSpan(
                                                                 text:
                                                                     _springdata[mainindex].team2,
                                                                 style:
-                                                                    const TextStyle(
+                                                                    TextStyle(
                                                                   backgroundColor:
                                                                       Colors
                                                                           .transparent,
                                                                   fontSize: 22,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          0,
-                                                                          0,
-                                                                          0),
+                                                                  color: _springdata[mainindex].result == '2' ? Colors.blue : Color.fromARGB(255, 0, 0, 0),
                                                                 ),
                                                               ),
                                                             ]) as InlineSpan),
