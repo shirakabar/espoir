@@ -269,7 +269,12 @@ class _Springsettings extends State<Springsettings> {
         .toList();
   }
 
-  
+  Future<void> update() async {
+  await clearCollection('springdata');
+  await clearCollection('counters');
+    Springdatafiredata fireData = Springdatafiredata();
+    await fireData.updatedata();
+  }
 
   @override
   void initState() {
@@ -283,23 +288,19 @@ class _Springsettings extends State<Springsettings> {
     _springdatafire = readSpringdata();
     start();
  
- 
-
-    // springdataList.fetchData().then((_) {
-    //   setState(() {});
-    // });
   }
-Future<void> updateresult1() async {
-  String mainindexString = mainindexsetting.toString();
-  await _db.collection('springdata').doc(mainindexString).update(
+Future<void> updateresult1(mainindexsetting) async {
+  print(mainindexsetting);
+  int i = mainindexsetting + 1;
+  await _db.collection('springdata').doc('00$i').update(
     {
       'result': '1',
     }
   );
 }
-Future<void> updateresult2() async {
-  String mainindexString = mainindexsetting.toString();
-  await _db.collection('springdata').doc(mainindexString).update(
+Future<void> updateresult2(mainindexsetting) async {
+  int i = mainindexsetting + 1;
+  await _db.collection('springdata').doc('00$i').update(
     {
     'result': '2',
     }
@@ -319,9 +320,6 @@ Future<void> updateresult2() async {
               } else if (snapshot.hasError) {
                 // エラー発生時
                 return Center(child: Text('エラー: ${snapshot.error}'));
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                // データがない場合
-                return const Center(child: Text('データがありません'));
               } else {
                 // データが正常に取得できた場合
                 final springfire = snapshot.data!;
@@ -368,13 +366,14 @@ Future<void> updateresult2() async {
                                 children: [
                                   ElevatedButton(
                                     onPressed: () {
+                                      update();
                                     },
                                     style: ElevatedButton.styleFrom(
                                       foregroundColor: Colors.black, backgroundColor: Colors.white, // ボタンの文字色を黒に設定
                                     ),
-                                    child: Text(
-                                      _springdata[mainindexsetting].team1,
-                                      style: const TextStyle(
+                                    child: const Text(
+                                      '値を全更新',
+                                      style: TextStyle(
                                         fontSize: 16, 
                                         color: Colors.black, 
                                       ),
@@ -716,7 +715,7 @@ Future<void> updateresult2() async {
                                                           children: [
                                                             ElevatedButton(
                                                               onPressed: () {
-                                                                updateresult1();
+                                                                updateresult1(mainindexsetting);
                                                               },
                                                               style: ElevatedButton.styleFrom(
                                                                 foregroundColor: Colors.black, backgroundColor: Colors.white, // ボタンの文字色を黒に設定
@@ -734,7 +733,7 @@ Future<void> updateresult2() async {
                                                                     ),
                                                             ElevatedButton(
                                                               onPressed: () {
-                                                                updateresult2();
+                                                                updateresult2(mainindexsetting);
                                                               },
                                                               style: ElevatedButton.styleFrom(
                                                                 foregroundColor: Colors.black, backgroundColor: Colors.white, // ボタンの文字色を黒に設定

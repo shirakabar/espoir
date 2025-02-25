@@ -16,6 +16,7 @@ class Spring extends StatefulWidget {
 }
 
 class _Spring extends State<Spring> {
+  List<int> dayDataList = [];
   List<Color> springDataIconColor = [];
   List<Color> springDataIconStyle = [];
   List<int> springDataResult = [];
@@ -62,6 +63,13 @@ class _Spring extends State<Spring> {
   int date = 1;
   int startspring = 0;
   int mainindex = 0;
+  int day1 = 0;
+  int day2 = 0;
+  int day3 = 0;
+  int notificationday = 0;
+  int notificationhour = 0;
+  int notificationminute= 0;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   int searchsystem1(String item1index) {
     if (item1index == '終了') {
@@ -251,9 +259,39 @@ class _Spring extends State<Spring> {
       });
     }
   }
+  Future<void> makeNotifications(mainindex) async {
+  if (_springdata[mainindex].date == '１日目') {
+    notificationday = notificationdaylist[dayDataList[0]];
+  } else if (_springdata[mainindex].date == '２日目') {
+    notificationday = notificationdaylist[dayDataList[1]];
+  } else if (_springdata[mainindex].date == '３日目') {
+    notificationday = notificationdaylist[dayDataList[2]];
+  }
+  List<String> timeParts = _springdata[mainindex].time.split(':');
+  // 分割した部分を整数に変換
+  notificationhour = int.parse(timeParts[0]);
+  notificationminute = int.parse(timeParts[1]);
+  setState(() {
+  notificationhour = int.parse(timeParts[0]);
+  notificationminute = int.parse(timeParts[1]);
+  if (notificationminute < 5) {
+    // 分が5未満なら1時間減らし、分は60から引く
+    notificationhour = (notificationhour - 1) % 24;  // 24時間制なので、負の値になる場合に対応
+    notificationminute = 60 + notificationminute - 5;
+  } else {
+    // 5分以上なら単純に5分を引く
+    notificationminute -= 5;
+  }
+
+  });
+    print(notificationhour);
+    print(_springdata[mainindex].time);
+    print(mainindex);
+  }
 
 
   Future<List<Map<String, dynamic>>> readSpringdata() async {
+    getData();
     final snapshot = await _db
         .collection('springdata')
         .get();
@@ -263,8 +301,27 @@ class _Spring extends State<Spring> {
         .map((doc) => doc.data() as Map<String, dynamic>)
         .toList();
   }
-
-  
+Future<void> getData() async {
+  dayDataList.clear();
+  try {
+    // コレクション全体を取得
+    QuerySnapshot snapshot = await _firestore.collection('spring').get();
+    // ドキュメントが存在する場合に処理
+    if (snapshot.docs.isNotEmpty) {
+      for (var doc in snapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        // 必要なフィールドをint型に変換してリストに格納
+        if (data.containsKey('daydata') && data['daydata'] is num) {
+          dayDataList.add((data['daydata'] as num).toInt());  // doubleをintに変換してリストに追加
+        }
+      }
+    } else {
+      throw 'No documents found in the collection';
+    }
+  } catch (e) {
+    throw 'Error retrieving data: $e';
+  }
+}
 
   @override
   void initState() {
@@ -306,13 +363,8 @@ void _addItem() {
       }
 
 
-    print('did');
-      print(springdataList.springLength);
-      print(springDataIconColor.length);
-      print('lll');
+
   }
-  print('disd');
-  print(springDataIconColor);
 }
   void _toggleIconColor(int index) {
     setState(() {
@@ -324,7 +376,6 @@ void _addItem() {
       }
     });
     DataStorage.saveData(springDataIconColor);  // 変更後にデータを保存
-      print(springDataIconColor);
 
   }
   void _toggleIconStyle(int index) {
@@ -377,19 +428,14 @@ void _addItem() {
                 }
                 _springdata = springdataList.springdata;
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              // `showNotificationChangedDialog` の表示タイミング
               if (springDataIconColor.isEmpty || springDataIconColor.length != springdataList.springLength) {
                 showNotificationChangedDialog(context);
-      print(springdataList.springLength);
-      print(springDataIconColor.length);
-      print('mmm');
+
               }
             });
                 _addItem();
                 _addIconStyle();
 
-
-                print(startspring);
                      }
                 startspring++;
                 return SingleChildScrollView(
@@ -821,13 +867,6 @@ void _addItem() {
                                                                 ),
                                                               ),
                                                             ]) as InlineSpan),
-                                                        Text(
-                                                          _springdata[mainindex]
-                                                              .competition,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 16),
-                                                        ),
                                                         // Row(
                                                         //   children: [
                                                         Text(
@@ -851,33 +890,32 @@ void _addItem() {
                                                   ),
                                                   onPressed: () {
                                                     setState(() {
-                                                      _springdata[mainindex]
-                                                              .iconstyle =
-                                                          (_springdata[mainindex]
-                                                                      .iconstyle ==
-                                                                  Icons
-                                                                      .alarm_off)
-                                                              ? Icons.alarm_on
-                                                              : Icons.alarm_off;
-                                                      if (notificationSelect
-                                                          .contains(_springdata[
-                                                                  mainindex]
-                                                              .notificationTimes)) {
-                                                        // 存在する場合、その日時をリストから削除
-                                                        notificationSelect
-                                                            .remove(_springdata[
-                                                                    mainindex]
-                                                                .notificationTimes);
-                                                      } else {
-                                                        // 存在しない場合、その日時をリストに追加
-                                                        notificationSelect.add(
-                                                            _springdata[mainindex]
-                                                                .notificationTimes);
-                                                      }
-                                                      _toggleIconColor(mainindex);
-                                                      _toggleIconStyle(mainindex);
+                                                        _springdata[mainindex]
+                                                                .iconstyle =
+                                                            (_springdata[mainindex]
+                                                                        .iconstyle ==
+                                                                    Icons
+                                                                        .alarm_off)
+                                                                ? Icons.alarm_on
+                                                                : Icons.alarm_off;
+                                                      
+                                                      makeNotifications(mainindex);
+                                                      print(mainindex);
+                                                        if (notificationSelect
+                                                            .contains(DateTime(2025, 3, notificationday, notificationhour, notificationminute))) {
+                                                          // 存在する場合、その日時をリストから削除
+                                                          notificationSelect
+                                                              .remove(DateTime(2025, 3, notificationday, notificationhour, notificationminute));
+                                                        } else {
+                                                          // 存在しない場合、その日時をリストに追加
+                                                          notificationSelect.add(DateTime(2025, 3, notificationday, notificationhour, notificationminute));
+                                                        }
+                                                        _toggleIconColor(mainindex);
+                                                        _toggleIconStyle(mainindex);
+                                                        print(mainindex);
                                                     });
                                                     scheduleNotifications();
+                                                    print(notificationSelect);
                                                   },
                                                   padding: EdgeInsets.zero,
                                                 ),
@@ -1280,10 +1318,110 @@ void _addItem() {
         );
       },
     );
-  } 
+} 
 }
 
 
+
+// class Springdata {
+//   late int notificationhour;
+//   late int notificationminute;
+//   late int notificationday;
+//   Springdata({
+//     required this.time,
+//     required this.team1,
+//     required this.team2,
+//     required this.competition,
+//     required this.date,
+//     required this.matchplace,
+//     required this.result,
+//     this.iconstyle = Icons.alarm_off,  // デフォルトのアイコン
+//     this.notificationTimes,
+//   });
+
+//   final String time;
+//   final String team1;
+//   final String team2;
+//   final String competition;
+//   final String date;
+//   final String matchplace;
+//   String result;
+//   late IconData iconstyle;
+//   DateTime? notificationTimes; 
+
+//   factory Springdata.fromMap(Map<String, dynamic> map) {
+//     // timeを取り出して「:」で分割
+//     String time = map['time'] ?? '';
+//     List<String> timeParts = time.split(":");
+
+//     // 分割した結果から hour と minute を設定
+//     int notificationhour = int.tryParse(timeParts[0]) ?? 0;  // 時間部分
+//     int notificationminute = int.tryParse(timeParts[1]) ?? 0;  // 分部分
+
+//     // notificationday を 0 に設定（必要に応じて変更）
+//     int notificationday = 0;
+
+//     return Springdata(
+//       time: time,
+//       team1: map['team1'] ?? '',
+//       team2: map['team2'] ?? '',
+//       competition: map['competition'] ?? '',
+//       date: map['date'] ?? '',
+//       matchplace: map['matchplace'] ?? '',
+//       result: map['result'] ?? '',
+//       notificationTimes: DateTime(2025, 4, notificationday, notificationhour, notificationminute - 5),
+//       // notificationTimes:
+//       //     DateTime.tryParse(map['notificationTimes'] ?? '') ?? DateTime.now(),
+
+//     );
+//   }
+// Future<Springdata> fetchSpringData(date) async {
+//   // Firestoreインスタンスを取得
+//   final firestore = FirebaseFirestore.instance;
+  
+//   // `date`の内容に応じてデータを取得
+//   String dayPath = '';
+//   if (date == '１日目') {
+//     dayPath = 'day1';
+//   } else if (date == '２日目') {
+//     dayPath = 'day2';
+//   } else if (date == '３日目') {
+//     dayPath = 'day3';
+//   }
+  
+//   if (dayPath.isEmpty) {
+//     throw Exception('不正な日付が指定されました');
+//   }
+  
+//   try {
+//     // Firestoreからデータを取得
+//     print('1111');
+//     DocumentSnapshot snapshot = await firestore.collection('spring').doc(dayPath).get();
+    
+//     if (snapshot.exists) {
+//       // データをMap形式で取得
+//       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+//       int notificationdayindex = data['daydata'] ?? 0;
+//       notificationday = notificationdaylist[notificationdayindex];
+      
+//       return Springdata(
+//         time: time,
+//         team1: team1,
+//         team2: team2,
+//         competition: competition,
+//         date: date,
+//         matchplace: matchplace,
+//         result: result,
+//         notificationTimes: DateTime(2025, 3, notificationday, notificationhour, notificationminute),
+//       );
+//     } else {
+//       throw Exception('データが見つかりません');
+//     }
+//   } catch (e) {
+//     throw Exception('データの取得に失敗しました: $e');
+//   }
+// }
+// }
 
 class Springdata {
   Springdata({
@@ -1295,7 +1433,7 @@ class Springdata {
     required this.matchplace,
     required this.result,
     this.iconstyle = Icons.alarm_off,  // デフォルトのアイコン
-    required this.notificationTimes,
+    this.notificationTimes,
   });
 
   final String time;
@@ -1306,7 +1444,7 @@ class Springdata {
   final String matchplace;
   String result;
   late IconData iconstyle;
-  DateTime notificationTimes;
+  DateTime? notificationTimes; 
 
   factory Springdata.fromMap(Map<String, dynamic> map) {
     return Springdata(
@@ -1317,8 +1455,6 @@ class Springdata {
       date: map['date'] ?? '',
       matchplace: map['matchplace'] ?? '',
       result: map['result'] ?? '',
-      notificationTimes:
-          DateTime.tryParse(map['notificationTimes'] ?? '') ?? DateTime.now(),
     );
   }
 }

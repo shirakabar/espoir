@@ -6,6 +6,9 @@ class DataStorage {
   // データの保存
   static Future<void> saveData(List<Color> springDataIconColor) async {
     final prefs = await SharedPreferences.getInstance();
+
+
+    
     List<String> colorStrings = springDataIconColor
         .map((color) => color.value.toRadixString(16))  // 色を16進数の文字列に変換
         .toList();
