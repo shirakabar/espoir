@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/data/springdata.dart';
-import 'package:koyo/sportsfestival/springnotifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:koyo/sportsfestival/springstate.dart';
 import 'package:koyo/sportsfestival/spring.dart';
 
 //スプリングフェアのスケジュール一覧
@@ -265,7 +262,7 @@ class _Springsettings extends State<Springsettings> {
 
     // ドキュメントデータをリストに格納
     return snapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
+        .map((doc) => doc.data())
         .toList();
   }
 
@@ -291,7 +288,6 @@ class _Springsettings extends State<Springsettings> {
   }
 Future<void> updateresult1(mainindexsetting) async {
   int i = mainindexsetting + 1;
-  print(_springdata[mainindexsetting].result);
   if (_springdata[mainindexsetting].result != '1'){
     await _db.collection('springdata').doc('00$i').update(
       {
@@ -307,7 +303,6 @@ Future<void> updateresult1(mainindexsetting) async {
         'result': '0',
       }
     );
-  print(_springdata[mainindexsetting].result);
   setState(() {
     _springdata[mainindexsetting].result = '0';
   });
@@ -315,7 +310,6 @@ Future<void> updateresult1(mainindexsetting) async {
 }
 Future<void> updateresult2(mainindexsetting) async {
   int i = mainindexsetting + 1;
-  print(_springdata[mainindexsetting].result);
   if (_springdata[mainindexsetting].result != '2'){
     await _db.collection('springdata').doc('00$i').update(
       {
@@ -325,14 +319,12 @@ Future<void> updateresult2(mainindexsetting) async {
     setState(() {
       _springdata[mainindexsetting].result = '2';
     });
-  print(_springdata[mainindexsetting].result);
   }else{
     await _db.collection('springdata').doc('00$i').update(
       {
         'result': '0',
       }
     );
-  print(_springdata[mainindexsetting].result);
   setState(() {
     _springdata[mainindexsetting].result = '0';
   });
@@ -366,9 +358,6 @@ Future<void> updateresult2(mainindexsetting) async {
                   searchitem.add(i);
                 }
                 _springdata = springdataList.springdata;
-
-
-                print(startspring);
                      }
                 startspring++;
                 return SingleChildScrollView(

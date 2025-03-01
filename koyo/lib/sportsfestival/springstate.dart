@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'package:koyo/sportsfestival/spring.dart';
 
 class DataStorage {
   // データの保存

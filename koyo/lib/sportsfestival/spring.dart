@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/semantics.dart';
 import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/data/springdata.dart';
 import 'package:koyo/sportsfestival/springnotifications.dart';
@@ -298,7 +297,7 @@ class _Spring extends State<Spring> {
 
     // ドキュメントデータをリストに格納
     return snapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
+        .map((doc) => doc.data())
         .toList();
   }
 Future<void> getData() async {
@@ -371,7 +370,7 @@ void _addItem() {
 
       // springDataIconColorリストの長さ分だけ赤色を追加
       for (int i = 0; i < springdataList.springLength; i++) {
-        springDataIconColor.add(Color(0xfff44336));  // 赤色を追加
+        springDataIconColor.add(const Color(0xfff44336));  // 赤色を追加
       }
 
 
@@ -449,7 +448,7 @@ void _addItem() {
                 springDataIconColor.clear();
                 setState(() {
                   for (int i = 0; i < springdataList.springLength; i++) {
-                    springDataIconColor.add(Color(0xfff44336));  // 赤色を追加
+                    springDataIconColor.add(const Color(0xfff44336));  // 赤色を追加
                   }                  
                 });
                 _addIconStyle();
@@ -849,7 +848,7 @@ void _addItem() {
                                                               backgroundColor:
                                                                   Colors
                                                                       .transparent,
-                                                              color: _springdata[mainindex].result == '1' ? Colors.blue : Color.fromARGB(255, 0, 0, 0),
+                                                              color: _springdata[mainindex].result == '1' ? Colors.blue : const Color.fromARGB(255, 0, 0, 0),
                                                             ),
                                                             children: <TextSpan>[
                                                               const TextSpan(
@@ -873,7 +872,7 @@ void _addItem() {
                                                                       Colors
                                                                           .transparent,
                                                                   fontSize: 22,
-                                                                  color: _springdata[mainindex].result == '2' ? Colors.blue : Color.fromARGB(255, 0, 0, 0),
+                                                                  color: _springdata[mainindex].result == '2' ? Colors.blue : const Color.fromARGB(255, 0, 0, 0),
                                                                 ),
                                                               ),
                                                             ]) as InlineSpan),
@@ -910,7 +909,6 @@ void _addItem() {
                                                                 : Icons.alarm_off;
                                                       
                                                       makeNotifications(mainindex);
-                                                      print(mainindex);
                                                         if (notificationSelect
                                                             .contains(DateTime(2025, 3, notificationday, notificationhour, notificationminute))) {
                                                           // 存在する場合、その日時をリストから削除
@@ -922,10 +920,8 @@ void _addItem() {
                                                         }
                                                         _toggleIconColor(mainindex);
                                                         _toggleIconStyle(mainindex);
-                                                        print(mainindex);
                                                     });
                                                     scheduleNotifications();
-                                                    print(notificationSelect);
                                                   },
                                                   padding: EdgeInsets.zero,
                                                 ),
@@ -1315,11 +1311,11 @@ void _addItem() {
       context: context,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-          title: Text('最新情報に更新されました'),
-          content: Text('設定した通知が初期化されましたので変更し直してください。'),
+          title: const Text('最新情報に更新されました'),
+          content: const Text('設定した通知が初期化されましたので変更し直してください。'),
           actions: <Widget>[
             CupertinoDialogAction(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop(); // ダイアログを閉じる
               },
@@ -1332,106 +1328,6 @@ void _addItem() {
 }
 
 
-
-// class Springdata {
-//   late int notificationhour;
-//   late int notificationminute;
-//   late int notificationday;
-//   Springdata({
-//     required this.time,
-//     required this.team1,
-//     required this.team2,
-//     required this.competition,
-//     required this.date,
-//     required this.matchplace,
-//     required this.result,
-//     this.iconstyle = Icons.alarm_off,  // デフォルトのアイコン
-//     this.notificationTimes,
-//   });
-
-//   final String time;
-//   final String team1;
-//   final String team2;
-//   final String competition;
-//   final String date;
-//   final String matchplace;
-//   String result;
-//   late IconData iconstyle;
-//   DateTime? notificationTimes; 
-
-//   factory Springdata.fromMap(Map<String, dynamic> map) {
-//     // timeを取り出して「:」で分割
-//     String time = map['time'] ?? '';
-//     List<String> timeParts = time.split(":");
-
-//     // 分割した結果から hour と minute を設定
-//     int notificationhour = int.tryParse(timeParts[0]) ?? 0;  // 時間部分
-//     int notificationminute = int.tryParse(timeParts[1]) ?? 0;  // 分部分
-
-//     // notificationday を 0 に設定（必要に応じて変更）
-//     int notificationday = 0;
-
-//     return Springdata(
-//       time: time,
-//       team1: map['team1'] ?? '',
-//       team2: map['team2'] ?? '',
-//       competition: map['competition'] ?? '',
-//       date: map['date'] ?? '',
-//       matchplace: map['matchplace'] ?? '',
-//       result: map['result'] ?? '',
-//       notificationTimes: DateTime(2025, 4, notificationday, notificationhour, notificationminute - 5),
-//       // notificationTimes:
-//       //     DateTime.tryParse(map['notificationTimes'] ?? '') ?? DateTime.now(),
-
-//     );
-//   }
-// Future<Springdata> fetchSpringData(date) async {
-//   // Firestoreインスタンスを取得
-//   final firestore = FirebaseFirestore.instance;
-  
-//   // `date`の内容に応じてデータを取得
-//   String dayPath = '';
-//   if (date == '１日目') {
-//     dayPath = 'day1';
-//   } else if (date == '２日目') {
-//     dayPath = 'day2';
-//   } else if (date == '３日目') {
-//     dayPath = 'day3';
-//   }
-  
-//   if (dayPath.isEmpty) {
-//     throw Exception('不正な日付が指定されました');
-//   }
-  
-//   try {
-//     // Firestoreからデータを取得
-//     print('1111');
-//     DocumentSnapshot snapshot = await firestore.collection('spring').doc(dayPath).get();
-    
-//     if (snapshot.exists) {
-//       // データをMap形式で取得
-//       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-//       int notificationdayindex = data['daydata'] ?? 0;
-//       notificationday = notificationdaylist[notificationdayindex];
-      
-//       return Springdata(
-//         time: time,
-//         team1: team1,
-//         team2: team2,
-//         competition: competition,
-//         date: date,
-//         matchplace: matchplace,
-//         result: result,
-//         notificationTimes: DateTime(2025, 3, notificationday, notificationhour, notificationminute),
-//       );
-//     } else {
-//       throw Exception('データが見つかりません');
-//     }
-//   } catch (e) {
-//     throw Exception('データの取得に失敗しました: $e');
-//   }
-// }
-// }
 
 class Springdata {
   Springdata({
