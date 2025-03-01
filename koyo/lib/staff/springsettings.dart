@@ -20,7 +20,7 @@ class Springsettings extends StatefulWidget {
 class _Springsettings extends State<Springsettings> {
   List<Color> springDataIconColor = [];
   List<Color> springDataIconStyle = [];
-  List<int> springDataResult = [];
+  List<int> springDataResult2 = [];
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   late Future<List<Map<String, dynamic>>> _springdatafire;
   List<int> selectedIndices = [];
@@ -256,6 +256,7 @@ class _Springsettings extends State<Springsettings> {
 
 
   Future<List<Map<String, dynamic>>> readSpringdata() async {
+    getresultData();
     final snapshot = await _db
         .collection('springdata')
         .get();
@@ -266,13 +267,63 @@ class _Springsettings extends State<Springsettings> {
         .toList();
   }
 
-  Future<void> update() async {
-  await clearCollection('springdata');
-  await clearCollection('counters');
-    Springdatafiredata fireData = Springdatafiredata();
-    await fireData.updatedata();
+  // Future<void> update() async {
+  // await clearCollection('springdata');
+  // await clearCollection('counters');
+  //   Springdatafiredata fireData = Springdatafiredata();
+  //   await fireData.updatedata();
+  // }
+  Future<void> result() async {
+    springDataResult2.clear();  
+    int resultnumber = _springdata.length;
+    if (resultnumber >= 1){
+      final FirebaseFirestore firestore = FirebaseFirestore.instance;
+      String docId = 'result';
+      Map<String, dynamic> fieldsToUpdate = {};
+      for (int i = 1; i <= resultnumber; i++) {
+        fieldsToUpdate[i.toString()] = 0;  
+      }
+      await firestore.collection('springresult').doc(docId).set(fieldsToUpdate, SetOptions(merge: true));
+    } else {
+      final FirebaseFirestore firestore = FirebaseFirestore.instance;
+      String docId = 'result';
+      Map<String, dynamic> fieldsToUpdate = {};
+        fieldsToUpdate[1.toString()] = 0000;  
+      await firestore.collection('springresult').doc(docId).set(fieldsToUpdate, SetOptions(merge: true)); 
+    }
+    print(_springdata.length);
   }
+Future<void> getresultData() async {
+  springDataResult2.clear();  // リストを初期化
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  try {
+    // コレクション全体を取得
+    QuerySnapshot snapshot = await firestore.collection('springresult').get();
+
+    // ドキュメントが存在する場合に処理
+    if (snapshot.docs.isNotEmpty) {
+      for (var doc in snapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+        // フィールド名を数値順にソート
+        var sortedEntries = data.entries.toList()
+          ..sort((a, b) => int.parse(a.key).compareTo(int.parse(b.key)));  // フィールド名を数値としてソート
+
+        // 並び替えた結果をリストに追加
+        for (var entry in sortedEntries) {
+          if (entry.value is num) {
+            springDataResult2.add(entry.value.toInt());  
+          }
+        }
+      }
+    } else {
+      throw 'No documents found in the collection';
+    }
+  } catch (e) {
+    throw 'Error retrieving data: $e';
+  }
+}
   @override
   void initState() {
     super.initState();
@@ -284,57 +335,51 @@ class _Springsettings extends State<Springsettings> {
     minutesPassed = difference.inMinutes;
     _springdatafire = readSpringdata();
     start();
- 
   }
-Future<void> updateresult1(mainindexsetting) async {
+Future<void> updateresult1(int mainindexsetting) async {
   int i = mainindexsetting + 1;
-  if (_springdata[mainindexsetting].result != '1'){
-    await _db.collection('springdata').doc('00$i').update(
-      {
-        'result': '1',
-      }
-    );
-    setState(() {
-      _springdata[mainindexsetting].result = '1';
-    });
-  }else{
-    await _db.collection('springdata').doc('00$i').update(
-      {
-        'result': '0',
-      }
-    );
-  setState(() {
-    _springdata[mainindexsetting].result = '0';
-  });
-  }
+  String fieldName = '$i';
+  String docId = 'result'; 
+    if (springDataResult2[mainindexsetting] != 1) {
+      await _db.collection('springresult').doc(docId).update({
+        fieldName: 1,
+      });
+      setState(() {
+        springDataResult2[mainindexsetting] = 1;
+      });
+    } else {
+      await _db.collection('springresult').doc(docId).update({
+        fieldName: 0,
+      });
+      setState(() {
+        springDataResult2[mainindexsetting] = 0;
+      });
+  } 
 }
-Future<void> updateresult2(mainindexsetting) async {
+Future<void> updateresult2(int mainindexsetting) async {
   int i = mainindexsetting + 1;
-  if (_springdata[mainindexsetting].result != '2'){
-    await _db.collection('springdata').doc('00$i').update(
-      {
-        'result': '2',
-      }
-    );
-    setState(() {
-      _springdata[mainindexsetting].result = '2';
-    });
-  }else{
-    await _db.collection('springdata').doc('00$i').update(
-      {
-        'result': '0',
-      }
-    );
-  setState(() {
-    _springdata[mainindexsetting].result = '0';
-  });
-  }
+  String fieldName = '$i';
+  String docId = 'result'; 
+    if (springDataResult2[mainindexsetting] != 2) {
+      await _db.collection('springresult').doc(docId).update({
+        fieldName: 2,
+      });
+      setState(() {
+        springDataResult2[mainindexsetting] = 2;
+      });
+    } else {
+      await _db.collection('springresult').doc(docId).update({
+        fieldName: 0,
+      });
+      setState(() {
+        springDataResult2[mainindexsetting] = 0;
+      });
+  } 
 }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const Bar(title: 'おしらせ作成'),
+        appBar: const Bar(title: 'スプリングフェア設定'),
         body: FutureBuilder<List<Map<String, dynamic>>>(
             future: _springdatafire, // 非同期処理を渡す
             builder: (context, snapshot) {
@@ -378,7 +423,8 @@ Future<void> updateresult2(mainindexsetting) async {
                                 children: [
                                   ElevatedButton(
                                     onPressed: () {
-                                      update();
+                                      // update();
+                                      result();
                                     },
                                     style: ElevatedButton.styleFrom(
                                       foregroundColor: Colors.black, backgroundColor: Colors.white, // ボタンの文字色を黒に設定
@@ -730,7 +776,7 @@ Future<void> updateresult2(mainindexsetting) async {
                                                                 updateresult1(mainindexsetting);
                                                               },
                                                               style: ElevatedButton.styleFrom(
-                                                                backgroundColor: _springdata[mainindexsetting].result == '1' ? Colors.blue : Colors.white,
+                                                                backgroundColor: springDataResult2[mainindexsetting] == 1 ? Colors.blue : Colors.white,
                                                               ),
                                                               child: Text(
                                                                 _springdata[mainindexsetting].team1,
@@ -748,7 +794,7 @@ Future<void> updateresult2(mainindexsetting) async {
                                                                 updateresult2(mainindexsetting);
                                                               },
                                                               style: ElevatedButton.styleFrom(
-                                                                backgroundColor: _springdata[mainindexsetting].result == '2' ? Colors.blue : Colors.white, // ボタンの文字色を黒に設定
+                                                                backgroundColor: springDataResult2[mainindexsetting] == 2 ? Colors.blue : Colors.white, // ボタンの文字色を黒に設定
                                                               ),
                                                               child: Text(
                                                                 _springdata[mainindexsetting].team2,

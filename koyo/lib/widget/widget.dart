@@ -127,7 +127,7 @@ class Draw extends ConsumerWidget {
           (ref.watch(currentLoginStatusProvider) !=
                   CurrentLoginStatus.notLoggedIn)
               ? tile(
-                  label: "注意事項",
+                  label: "要項",
                   ontap: () {
                     context.push('/pdfselect');
                   },

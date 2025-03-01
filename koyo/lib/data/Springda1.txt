@@ -5,8 +5,6 @@
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
-  
   ),
  Springdata(
    time: '13:10',
@@ -15,7 +13,6 @@
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
   ),
  Springdata(
    time: '13:23',
@@ -24,7 +21,6 @@
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
  ),
  Springdata(
    time: '13:23',
@@ -33,7 +29,6 @@
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
  ),
 Springdata(
    time: '13:36',
@@ -42,7 +37,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
 ),
 Springdata(
    time: '13:36',
@@ -51,7 +45,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
 ),
 Springdata(
    time: '13:49',
@@ -60,7 +53,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
 ),
 Springdata(
    time: '13:49',
@@ -69,7 +61,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
 ),
 Springdata(
    time: '14:02',
@@ -78,7 +69,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
 ),
 Springdata(
    time: '14:02',
@@ -87,7 +77,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
 ),
 Springdata(
    time: '14:15',
@@ -96,7 +85,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
 ),
 Springdata(
    time: '14:15',
@@ -105,7 +93,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
 ),
 Springdata(
    time: '14:28',
@@ -114,7 +101,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
 ),
 Springdata(
    time: '14:28',
@@ -123,7 +109,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
 ),
 Springdata(
    time: '14:41',
@@ -132,7 +117,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
 ),
 Springdata(
    time: '14:41',
@@ -141,7 +125,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
 ),
 Springdata(
    time: '14:54',
@@ -150,7 +133,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
   ),
 Springdata(
    time: '14:54',
@@ -159,7 +141,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
 ),
 Springdata(
    time: '15:07',
@@ -168,7 +149,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館A',
-   result: '',
 ),
 Springdata(
    time: '15:07',
@@ -177,7 +157,6 @@ Springdata(
    competition: 'バドミントン',
    date: '１日目',
    matchplace: '体育館B',
-   result: '',
 ),
 
 
@@ -188,7 +167,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスA',
-   result: '',
 ),
 Springdata(
    time: '13:10',
@@ -197,7 +175,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスB',
-   result: '',
 ),
 Springdata(
    time: '13:10',
@@ -206,7 +183,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスC',
-   result: '',
 ),
 Springdata(
    time: '13:10',
@@ -215,7 +191,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスD',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -224,7 +199,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスA',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -233,7 +207,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスB',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -242,7 +215,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスC',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -251,7 +223,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスD',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -260,7 +231,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスA',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -269,7 +239,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスB',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -278,7 +247,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスC',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -287,7 +255,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスD',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -296,7 +263,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスA',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -305,7 +271,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスB',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -314,7 +279,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスC',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -323,7 +287,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスD',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -332,7 +295,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスA',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -341,7 +303,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスB',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -350,7 +311,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスC',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -359,7 +319,6 @@ Springdata(
    competition: 'バレー',
    date: '１日目',
    matchplace: 'テニスD',
-   result: '',
 ),
 
 
@@ -370,7 +329,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドA',
-   result: '',
 ),
 Springdata(
    time: '13:10',
@@ -379,7 +337,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドB',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -388,7 +345,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドA',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -397,7 +353,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドB',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -406,7 +361,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドA',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -415,7 +369,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドB',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -424,7 +377,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドA',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -433,7 +385,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドB',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -442,7 +393,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドA',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -451,7 +401,6 @@ Springdata(
    competition: 'サッカー',
    date: '１日目',
    matchplace: 'グラウンドB',
-   result: '',
 ),
 
 
@@ -462,7 +411,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場A',
-   result: '',
 ),
 Springdata(
    time: '13:10',
@@ -471,7 +419,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場B',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -480,7 +427,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場A',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -489,7 +435,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場B',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -498,7 +443,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場A',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -507,7 +451,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場B',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -516,7 +459,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場A',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -525,7 +467,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場B',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -534,7 +475,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場A',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -543,7 +483,6 @@ Springdata(
    competition: '卓球',
    date: '１日目',
    matchplace: '格技場B',
-   result: '',
 ),
 
 
@@ -554,7 +493,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックA',
-   result: '',
 ),
 Springdata(
    time: '13:10',
@@ -563,7 +501,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックB',
-   result: '',
 ),
 Springdata(
    time: '13:10',
@@ -572,7 +509,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックC',
-   result: '',
 ),
 Springdata(
    time: '13:10',
@@ -581,7 +517,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックD',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -590,7 +525,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックA',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -599,7 +533,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックB',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -608,7 +541,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックC',
-   result: '',
 ),
 Springdata(
    time: '13:35',
@@ -617,7 +549,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックD',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -626,7 +557,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックA',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -635,7 +565,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックB',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -644,7 +573,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックC',
-   result: '',
 ),
 Springdata(
    time: '14:00',
@@ -653,7 +581,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックD',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -662,7 +589,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックA',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -671,7 +597,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックB',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -680,7 +605,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックC',
-   result: '',
 ),
 Springdata(
    time: '14:25',
@@ -689,7 +613,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックD',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -698,7 +621,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックA',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -707,7 +629,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックB',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -716,7 +637,6 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックC',
-   result: '',
 ),
 Springdata(
    time: '14:50',
@@ -725,5 +645,4 @@ Springdata(
    competition: 'モルック',
    date: '１日目',
    matchplace: 'モルックD',
-   result: '',
 ),

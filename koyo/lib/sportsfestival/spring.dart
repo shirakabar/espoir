@@ -291,6 +291,7 @@ class _Spring extends State<Spring> {
 
   Future<List<Map<String, dynamic>>> readSpringdata() async {
     getData();
+    getresultData();
     final snapshot = await _db
         .collection('springdata')
         .get();
@@ -316,6 +317,35 @@ Future<void> getData() async {
         else if (data.containsKey('new') && data['new'] is String) {
           change = int.tryParse(data['new'])!;
           // 変換後の値は変数changeに格納される
+        }
+      }
+    } else {
+      throw 'No documents found in the collection';
+    }
+  } catch (e) {
+    throw 'Error retrieving data: $e';
+  }
+}
+Future<void> getresultData() async {
+  springDataResult.clear();  // リストを初期化
+  try {
+    // コレクション全体を取得
+    QuerySnapshot snapshot = await _firestore.collection('springresult').get();
+
+    // ドキュメントが存在する場合に処理
+    if (snapshot.docs.isNotEmpty) {
+      for (var doc in snapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+        // フィールド名でソートするために、Map をエントリのリストに変換して並べ替え
+        var sortedEntries = data.entries.toList()
+          ..sort((a, b) => int.parse(a.key).compareTo(int.parse(b.key)));  // フィールド名を数値としてソート
+
+        // 並び替えた結果をリストに追加
+        for (var entry in sortedEntries) {
+          if (entry.value is num) {
+            springDataResult.add(entry.value.toInt());
+          }
         }
       }
     } else {
@@ -421,9 +451,6 @@ void _addItem() {
               } else if (snapshot.hasError) {
                 // エラー発生時
                 return Center(child: Text('エラー: ${snapshot.error}'));
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                // データがない場合
-                return const Center(child: Text('データがありません'));
               } else {
                 // データが正常に取得できた場合
                 final springfire = snapshot.data!;
@@ -848,7 +875,7 @@ void _addItem() {
                                                               backgroundColor:
                                                                   Colors
                                                                       .transparent,
-                                                              color: _springdata[mainindex].result == '1' ? Colors.blue : const Color.fromARGB(255, 0, 0, 0),
+                                                              color: springDataResult[mainindex] == 1 ? Colors.blue : const Color.fromARGB(255, 0, 0, 0),
                                                             ),
                                                             children: <TextSpan>[
                                                               const TextSpan(
@@ -872,7 +899,7 @@ void _addItem() {
                                                                       Colors
                                                                           .transparent,
                                                                   fontSize: 22,
-                                                                  color: _springdata[mainindex].result == '2' ? Colors.blue : const Color.fromARGB(255, 0, 0, 0),
+                                                                  color: springDataResult[mainindex] == 2 ? Colors.blue : const Color.fromARGB(255, 0, 0, 0),
                                                                 ),
                                                               ),
                                                             ]) as InlineSpan),
@@ -1337,7 +1364,6 @@ class Springdata {
     required this.competition,
     required this.date,
     required this.matchplace,
-    required this.result,
     this.iconstyle = Icons.alarm_off,  // デフォルトのアイコン
     this.notificationTimes,
   });
@@ -1348,7 +1374,6 @@ class Springdata {
   final String competition;
   final String date;
   final String matchplace;
-  String result;
   late IconData iconstyle;
   DateTime? notificationTimes; 
 
@@ -1360,7 +1385,6 @@ class Springdata {
       competition: map['competition'] ?? '',
       date: map['date'] ?? '',
       matchplace: map['matchplace'] ?? '',
-      result: map['result'] ?? '',
     );
   }
 }
@@ -1369,6 +1393,655 @@ class Springdata {
 class SpringdataList {
   // 初期のspringdataリスト
   List<Springdata> springdata = [
+ Springdata(
+   time: '13:10',
+   team1: '102',
+   team2: '107',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+  ),
+ Springdata(
+   time: '13:10',
+   team1: '106',
+   team2: '108',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+  ),
+ Springdata(
+   time: '13:23',
+   team1: '101',
+   team2: '103',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+ ),
+ Springdata(
+   time: '13:23',
+   team1: '103',
+   team2: '104',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+ ),
+Springdata(
+   time: '13:36',
+   team1: '201A',
+   team2: '205',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+),
+Springdata(
+   time: '13:36',
+   team1: '201',
+   team2: '206',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+),
+Springdata(
+   time: '13:49',
+   team1: '203',
+   team2: '204',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+),
+Springdata(
+   time: '13:49',
+   team1: '101',
+   team2: '102',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+),
+Springdata(
+   time: '14:02',
+   team1: '104',
+   team2: '106',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+),
+Springdata(
+   time: '14:02',
+   team1: '202',
+   team2: '204',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+),
+Springdata(
+   time: '14:15',
+   team1: '107',
+   team2: '109',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+),
+Springdata(
+   time: '14:15',
+   team1: '108',
+   team2: '109',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+),
+Springdata(
+   time: '14:28',
+   team1: '207',
+   team2: '208',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+),
+Springdata(
+   time: '14:28',
+   team1: '203',
+   team2: '205',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+),
+Springdata(
+   time: '14:41',
+   team1: '201B',
+   team2: '202',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+),
+Springdata(
+   time: '14:41',
+   team1: '206',
+   team2: '209',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+),
+Springdata(
+   time: '14:54',
+   team1: '103',
+   team2: '105',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+  ),
+Springdata(
+   time: '14:54',
+   team1: '104',
+   team2: '107',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+),
+Springdata(
+   time: '15:07',
+   team1: '106',
+   team2: '108',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館A',
+),
+Springdata(
+   time: '15:07',
+   team1: '102',
+   team2: '105',
+   competition: 'バドミントン',
+   date: '１日目',
+   matchplace: '体育館B',
+),
+
+
+Springdata(
+   time: '13:10',
+   team1: '107',
+   team2: '108',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスA',
+),
+Springdata(
+   time: '13:10',
+   team1: '206',
+   team2: '207',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスB',
+),
+Springdata(
+   time: '13:10',
+   team1: '108',
+   team2: '102',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスC',
+),
+Springdata(
+   time: '13:10',
+   team1: '204',
+   team2: '208',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスD',
+),
+Springdata(
+   time: '13:35',
+   team1: '102',
+   team2: '105',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスA',
+),
+Springdata(
+   time: '13:35',
+   team1: '202',
+   team2: '205',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスB',
+),
+Springdata(
+   time: '13:35',
+   team1: '109',
+   team2: '104',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスC',
+),
+Springdata(
+   time: '13:35',
+   team1: '201',
+   team2: '202',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスD',
+),
+Springdata(
+   time: '14:00',
+   team1: '101B',
+   team2: '104',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスA',
+),
+Springdata(
+   time: '14:00',
+   team1: '201',
+   team2: '204',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスB',
+),
+Springdata(
+   time: '14:00',
+   team1: '106',
+   team2: '107',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスC',
+),
+Springdata(
+   time: '14:00',
+   team1: '203',
+   team2: '205',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスD',
+),
+Springdata(
+   time: '14:25',
+   team1: '103',
+   team2: '106',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスA',
+),
+Springdata(
+   time: '14:25',
+   team1: '205',
+   team2: '209',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスB',
+),
+Springdata(
+   time: '14:25',
+   team1: '103',
+   team2: '105',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスC',
+),
+Springdata(
+   time: '14:25',
+   team1: '208',
+   team2: '209',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスD',
+),
+Springdata(
+   time: '14:50',
+   team1: '105',
+   team2: '109',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスA',
+),
+Springdata(
+   time: '14:50',
+   team1: '204',
+   team2: '208',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスB',
+),
+Springdata(
+   time: '14:50',
+   team1: '108',
+   team2: '101B',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスC',
+),
+Springdata(
+   time: '14:50',
+   team1: '202',
+   team2: '206',
+   competition: 'バレー',
+   date: '１日目',
+   matchplace: 'テニスD',
+),
+
+
+Springdata(
+   time: '13:10',
+   team1: '101',
+   team2: '106',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドA',
+),
+Springdata(
+   time: '13:10',
+   team1: '201',
+   team2: '206',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドB',
+),
+Springdata(
+   time: '13:35',
+   team1: '102',
+   team2: '105',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドA',
+),
+Springdata(
+   time: '13:35',
+   team1: '204',
+   team2: '205',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドB',
+),
+Springdata(
+   time: '14:00',
+   team1: '103',
+   team2: '104',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドA',
+),
+Springdata(
+   time: '14:00',
+   team1: '202',
+   team2: '203',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドB',
+),
+Springdata(
+   time: '14:25',
+   team1: '106',
+   team2: '107',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドA',
+),
+Springdata(
+   time: '14:25',
+   team1: '206',
+   team2: '207',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドB',
+),
+Springdata(
+   time: '14:50',
+   team1: '108',
+   team2: '103',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドA',
+),
+Springdata(
+   time: '14:50',
+   team1: '205',
+   team2: '208',
+   competition: 'サッカー',
+   date: '１日目',
+   matchplace: 'グラウンドB',
+),
+
+
+Springdata(
+   time: '13:10',
+   team1: '109',
+   team2: '101',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場A',
+),
+Springdata(
+   time: '13:10',
+   team1: '209',
+   team2: '204',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場B',
+),
+Springdata(
+   time: '13:35',
+   team1: '104',
+   team2: '105',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場A',
+),
+Springdata(
+   time: '13:35',
+   team1: '202',
+   team2: '203',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場B',
+),
+Springdata(
+   time: '14:00',
+   team1: '106',
+   team2: '108',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場A',
+),
+Springdata(
+   time: '14:00',
+   team1: '205',
+   team2: '208',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場B',
+),
+Springdata(
+   time: '14:25',
+   team1: '101',
+   team2: '102',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場A',
+),
+Springdata(
+   time: '14:25',
+   team1: '206',
+   team2: '207',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場B',
+),
+Springdata(
+   time: '14:50',
+   team1: '105',
+   team2: '107',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場A',
+),
+Springdata(
+   time: '14:50',
+   team1: '208',
+   team2: '209',
+   competition: '卓球',
+   date: '１日目',
+   matchplace: '格技場B',
+),
+
+
+Springdata(
+   time: '13:10',
+   team1: '109',
+   team2: '204',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックA',
+),
+Springdata(
+   time: '13:10',
+   team1: '107',
+   team2: '102',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックB',
+),
+Springdata(
+   time: '13:10',
+   team1: '108',
+   team2: '101',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックC',
+),
+Springdata(
+   time: '13:10',
+   team1: '教員1',
+   team2: '105',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックD',
+),
+Springdata(
+   time: '13:35',
+   team1: '104',
+   team2: '教員2',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックA',
+),
+Springdata(
+   time: '13:35',
+   team1: '208',
+   team2: '202',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックB',
+),
+Springdata(
+   time: '13:35',
+   team1: '207',
+   team2: '203',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックC',
+),
+Springdata(
+   time: '13:35',
+   team1: '106',
+   team2: '205',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックD',
+),
+Springdata(
+   time: '14:00',
+   team1: '109',
+   team2: '206',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックA',
+),
+Springdata(
+   time: '14:00',
+   team1: '107',
+   team2: '201',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックB',
+),
+Springdata(
+   time: '14:00',
+   team1: '108',
+   team2: '103',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックC',
+),
+Springdata(
+   time: '14:00',
+   team1: '教員1',
+   team2: '209',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックD',
+),
+Springdata(
+   time: '14:25',
+   team1: '204',
+   team2: '104',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックA',
+),
+Springdata(
+   time: '14:25',
+   team1: '102',
+   team2: '208',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックB',
+),
+Springdata(
+   time: '14:25',
+   team1: '101',
+   team2: '207',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックC',
+),
+Springdata(
+   time: '14:25',
+   team1: '105',
+   team2: '106',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックD',
+),
+Springdata(
+   time: '14:50',
+   team1: '教員2',
+   team2: '206',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックA',
+),
+Springdata(
+   time: '14:50',
+   team1: '202',
+   team2: '201',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックB',
+),
+Springdata(
+   time: '14:50',
+   team1: '203',
+   team2: '103',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックC',
+),
+Springdata(
+   time: '14:50',
+   team1: '205',
+   team2: '209',
+   competition: 'モルック',
+   date: '１日目',
+   matchplace: 'モルックD',
+),
+
   ];
 
   dynamic springdatatemp = SpringdataListfirst().springdatafirst;

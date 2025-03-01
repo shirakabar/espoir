@@ -9,7 +9,7 @@ class Pdfselect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const Bar(title: '注意事項一覧'),
+        appBar: const Bar(title: '要項一覧'),
         body: ListView(
           physics: const NeverScrollableScrollPhysics(),
           children: [
@@ -98,7 +98,7 @@ class Pdfselect extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const Pdfview(
-                                  pdf: 'assets/docs/kouyasaiplace.pdf',
+                                  pdf: 'assets/docs/2024spring.pdf',
                                   title: 'スプリングフェア実施要項')),
                         );
                       },
