@@ -291,7 +291,6 @@ class _Springsettings extends State<Springsettings> {
         fieldsToUpdate[1.toString()] = 0000;  
       await firestore.collection('springresult').doc(docId).set(fieldsToUpdate, SetOptions(merge: true)); 
     }
-    print(_springdata.length);
   }
 Future<void> getresultData() async {
   springDataResult2.clear();  // リストを初期化
