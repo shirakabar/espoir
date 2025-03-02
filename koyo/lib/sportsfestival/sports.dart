@@ -20,7 +20,7 @@ class _Sports extends State<Sports> {
   //     final FirebaseFirestore firestore = FirebaseFirestore.instance;
   //     String docId = 'result';
   //     Map<String, dynamic> fieldsToUpdate = {};
-  //     for (int i = 1; i <= 80; i++) {
+  //     for (int i = 1; i <= 192; i++) {
   //       fieldsToUpdate[i.toString()] = 0;  
   //     }
   //     await firestore.collection('springresult').doc(docId).set(fieldsToUpdate, SetOptions(merge: true));
