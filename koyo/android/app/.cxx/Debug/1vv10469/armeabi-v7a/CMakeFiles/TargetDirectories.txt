@@ -1,0 +1,2 @@
+C:/Users/nakan_hkntmtn/github/flutterkoyo/koyo/android/app/.cxx/Debug/1vv10469/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/nakan_hkntmtn/github/flutterkoyo/koyo/android/app/.cxx/Debug/1vv10469/armeabi-v7a/CMakeFiles/rebuild_cache.dir
