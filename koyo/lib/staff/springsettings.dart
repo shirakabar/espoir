@@ -267,12 +267,12 @@ class _Springsettings extends State<Springsettings> {
         .toList();
   }
 
-  // Future<void> update() async {
-  // await clearCollection('springdata');
-  // await clearCollection('counters');
-  //   Springdatafiredata fireData = Springdatafiredata();
-  //   await fireData.updatedata();
-  // }
+  Future<void> update() async {
+  await clearCollection('springdata');
+  await clearCollection('counters');
+    Springdatafiredata fireData = Springdatafiredata();
+    await fireData.updatedata();
+  }
   Future<void> result() async {
     springDataResult2.clear();  
     int resultnumber = _springdata.length;
@@ -422,7 +422,7 @@ Future<void> updateresult2(int mainindexsetting) async {
                                 children: [
                                   ElevatedButton(
                                     onPressed: () {
-                                      // update();
+                                      update();
                                       result();
                                     },
                                     style: ElevatedButton.styleFrom(

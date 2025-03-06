@@ -270,18 +270,15 @@ class _Spring extends State<Spring> {
     notificationday = notificationdaylist[dayDataList[2]];
   }
   List<String> timeParts = _springdata[mainindex].time.split(':');
-  // 分割した部分を整数に変換
   notificationhour = int.parse(timeParts[0]);
   notificationminute = int.parse(timeParts[1]);
   setState(() {
-  notificationhour = int.parse(timeParts[0]);
-  notificationminute = int.parse(timeParts[1]);
+    notificationhour = int.parse(timeParts[0]);
+    notificationminute = int.parse(timeParts[1]);
   if (notificationminute < 5) {
-    // 分が5未満なら1時間減らし、分は60から引く
-    notificationhour = (notificationhour - 1) % 24;  // 24時間制なので、負の値になる場合に対応
+    notificationhour = (notificationhour - 1) % 24;
     notificationminute = 60 + notificationminute - 5;
   } else {
-    // 5分以上なら単純に5分を引く
     notificationminute -= 5;
   }
 
@@ -296,7 +293,6 @@ class _Spring extends State<Spring> {
         .collection('springdata')
         .get();
 
-    // ドキュメントデータをリストに格納
     return snapshot.docs
         .map((doc) => doc.data())
         .toList();
@@ -304,19 +300,18 @@ class _Spring extends State<Spring> {
 Future<void> getData() async {
   dayDataList.clear();
   try {
-    // コレクション全体を取得
     QuerySnapshot snapshot = await _firestore.collection('spring').get();
-    // ドキュメントが存在する場合に処理
     if (snapshot.docs.isNotEmpty) {
       for (var doc in snapshot.docs) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        // 必要なフィールドをint型に変換してリストに格納
         if (data.containsKey('daydata') && data['daydata'] is num) {
-          dayDataList.add((data['daydata'] as num).toInt());  // doubleをintに変換してリストに追加
+          dayDataList.add((data['daydata'] as num).toInt());  
         }
         else if (data.containsKey('new') && data['new'] is String) {
           change = int.tryParse(data['new'])!;
-          // 変換後の値は変数changeに格納される
+        }
+        else if (data.containsKey('today') && data['today'] is num) {
+          date = data['today'] as int; 
         }
       }
     } else {
@@ -327,21 +322,14 @@ Future<void> getData() async {
   }
 }
 Future<void> getresultData() async {
-  springDataResult.clear();  // リストを初期化
+  springDataResult.clear(); 
   try {
-    // コレクション全体を取得
     QuerySnapshot snapshot = await _firestore.collection('springresult').get();
-
-    // ドキュメントが存在する場合に処理
     if (snapshot.docs.isNotEmpty) {
       for (var doc in snapshot.docs) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-
-        // フィールド名でソートするために、Map をエントリのリストに変換して並べ替え
         var sortedEntries = data.entries.toList()
-          ..sort((a, b) => int.parse(a.key).compareTo(int.parse(b.key)));  // フィールド名を数値としてソート
-
-        // 並び替えた結果をリストに追加
+          ..sort((a, b) => int.parse(a.key).compareTo(int.parse(b.key))); 
         for (var entry in sortedEntries) {
           if (entry.value is num) {
             springDataResult.add(entry.value.toInt());
@@ -360,7 +348,6 @@ Future<void> getresultData() async {
   void initState() {
     super.initState();
     startspring = 0;
-    // now を initState 内で初期化
     now = DateTime.now();
     todayMidnight = DateTime(now.year, now.month, now.day);
     difference = now.difference(todayMidnight);
@@ -371,20 +358,19 @@ Future<void> getresultData() async {
     _loadPrechangeValue();
   }
 
-  // prechangeの値を保存する
+
   Future<void> _savePrechangeValue(int value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('prechange', value); // 'prechange' キーで保存
+    await prefs.setInt('prechange', value);
   }
 
-  // ローカルストレージからprechangeの値を読み込む
   Future<void> _loadPrechangeValue() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      prechange = prefs.getInt('prechange') ?? 0; // 保存された値を取得、なければ0をデフォルト値に
+      prechange = prefs.getInt('prechange') ?? 0;
     });
   }
-  // SharedPreferencesからspringDataIconColorデータを読み込む
+
   Future<void> _loadData() async {
     List<Color> colors = await DataStorage.loadData();
     setState(() {
@@ -393,14 +379,13 @@ Future<void> getresultData() async {
   }
 
 
-// springDataIconColorリストの長さ分だけ赤色を追加
+
 void _addItem() {
   if (springDataIconColor.isEmpty || springDataIconColor.length != springdataList.springLength) {
     springDataIconColor.clear();
 
-      // springDataIconColorリストの長さ分だけ赤色を追加
       for (int i = 0; i < springdataList.springLength; i++) {
-        springDataIconColor.add(const Color(0xfff44336));  // 赤色を追加
+        springDataIconColor.add(const Color(0xfff44336));  
       }
 
 
@@ -409,19 +394,17 @@ void _addItem() {
 }
   void _toggleIconColor(int index) {
     setState(() {
-      // 現在の色を確認し、赤→緑、緑→赤に切り替える
       if (springDataIconColor[index] == const Color(0xfff44336)) {
         springDataIconColor[index] = const Color(0xff4caf50);
       } else if (springDataIconColor[index] == const Color(0xff4caf50)) {
         springDataIconColor[index] = const Color(0xfff44336);
       }
     });
-    DataStorage.saveData(springDataIconColor);  // 変更後にデータを保存
+    DataStorage.saveData(springDataIconColor); 
 
   }
   void _toggleIconStyle(int index) {
     setState(() {
-      // 現在の色を確認し、赤→緑、緑→赤に切り替える
       if (springDataIconColor[index] == const Color(0xfff44336)) {
         _springdata[index].iconstyle = Icons.alarm_off;
       } else if (springDataIconColor[index] == const Color(0xff4caf50)) {
@@ -443,21 +426,18 @@ void _addItem() {
   Widget build(BuildContext context) {
     return Scaffold(
         body: FutureBuilder<List<Map<String, dynamic>>>(
-            future: _springdatafire, // 非同期処理を渡す
+            future: _springdatafire, 
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                // ローディング中
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
-                // エラー発生時
                 return Center(child: Text('エラー: ${snapshot.error}'));
               } else {
-                // データが正常に取得できた場合
                 final springfire = snapshot.data!;
                 List<Springdata> springdatafirestore = springfire
                     .map((map) =>
-                        Springdata.fromMap(map)) // 各 `map` を `Springdata` に変換
-                    .toList(); // リストに変換
+                        Springdata.fromMap(map)) 
+                    .toList(); 
                      if (startspring == 0) {
                 springdataList.addData(springdatafirestore);
                 searchitem.clear();
@@ -475,7 +455,7 @@ void _addItem() {
                 springDataIconColor.clear();
                 setState(() {
                   for (int i = 0; i < springdataList.springLength; i++) {
-                    springDataIconColor.add(const Color(0xfff44336));  // 赤色を追加
+                    springDataIconColor.add(const Color(0xfff44336));  
                   }                  
                 });
                 _addIconStyle();
