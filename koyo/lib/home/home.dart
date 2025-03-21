@@ -337,7 +337,7 @@ class _Home extends ConsumerState<Home> {
                       color: Colors.grey,
                     ),
                     ListTile(
-                      title: const Text('法的事項'),
+                      title: const Text('このアプリについて'),
                       onTap: () {
                         context.push('/policyselect');
                       },

@@ -9,7 +9,7 @@ class Policyselect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const Bar(title: '法的事項'),
+        appBar: const Bar(title: 'このアプリについて'),
         body: ListView(
           physics: const NeverScrollableScrollPhysics(),
           children: [
@@ -55,7 +55,9 @@ class Policyselect extends StatelessWidget {
                       thickness: 1,
                       color: Colors.grey,
                     ),
-                  ],
+                    const SizedBox(height: 10),
+                    const Text('このアプリは旭丘高校・千種高校の協力のもと、向陽祭のために作成されました。',style: TextStyle(fontSize: 17),),
+                  ],//初期作成時に千種祭アプリを参考にしたため記載。何かあれば千種祭アプリを作成した旭丘高校に確認する。
                 ))
           ],
         ));
