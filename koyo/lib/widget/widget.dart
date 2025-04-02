@@ -152,7 +152,7 @@ class Draw extends ConsumerWidget {
                       color: Colors.grey,
                     ),
                     ListTile(
-                      title: const Text('法的事項'),
+                      title: const Text('このアプリについて'),
                       onTap: () {
                         context.push('/policyselect');
                       },

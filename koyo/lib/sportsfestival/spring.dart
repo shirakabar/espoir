@@ -802,8 +802,8 @@ void _addItem() {
                                             width: 75,
                                             child: Align(
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
                                                   Padding(
                                                     padding:
@@ -814,7 +814,6 @@ void _addItem() {
                                                     child: Text(
                                                       _springdata[mainindex].date,
                                                       style: const TextStyle(
-                                                          fontSize: 10,
                                                           fontWeight:
                                                               FontWeight.w400),
                                                     ),
@@ -822,14 +821,11 @@ void _addItem() {
                                                   Text(
                                                     _springdata[mainindex].time,
                                                     style: const TextStyle(
-                                                        fontSize: 18,
                                                         fontWeight:
                                                             FontWeight.w400),
                                                   ),
                                                   Text(
-                                                    '@${_springdata[mainindex].matchplace}',
-                                                    style: const TextStyle(
-                                                        fontSize: 10),
+                                                    '@${_springdata[mainindex].matchplace}'
                                                   ),
                                                 ],
                                               ),
@@ -941,7 +937,8 @@ void _addItem() {
                                                 Radius.circular(10)),
                                           ),
                                         ),
-                                      ),
+                                        ),
+                                      
                                     ),
                                   );
                                 } else {
