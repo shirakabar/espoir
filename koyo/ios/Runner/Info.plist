@@ -13,13 +13,13 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.koyo.koyosai</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
+	<string>10.0</string>
 	<key>CFBundleName</key>
 	<string>koyo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.7</string>
+	<string>1.0.10</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -28,6 +28,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>QRコードを読み取るためにカメラへのアクセスが必要です</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>このアプリはローカルネットワークを使用します。</string>
+	<key>NSUserNotificationUsageDescription</key>
+	<string>このアプリは通知を使用して重要な情報をお知らせします。</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -58,14 +62,5 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-	<key>UIBackgroundModes</key>
-	<array>
-	<string>fetch</string>
-	<string>remote-notification</string>
-	</array>
-	<key>NSUserNotificationUsageDescription</key>
-	<string>このアプリは通知を使用して重要な情報をお知らせします。</string>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>このアプリはローカルネットワークを使用します。</string>
 </dict>
 </plist>
