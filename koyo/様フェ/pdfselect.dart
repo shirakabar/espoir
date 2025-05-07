@@ -116,7 +116,7 @@ class Pdfselect extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const Pdfview(
-                                  pdf: //'assets/docs/2024spring.pdf',
+                                  pdf: 'assets/docs/2024spring.pdf',
                                   title: 'サマーフェア実施要項')),
                         );
                       },
