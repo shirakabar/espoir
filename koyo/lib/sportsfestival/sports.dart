@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:koyo/data/basicdata.dart';
 import 'package:koyo/data/sportsdata.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 //体育祭のスケジュール一覧
 
 class Sports extends StatefulWidget {
@@ -16,15 +16,15 @@ class _Sports extends State<Sports> {
   final taiikusaidate = BasicData().taiikusaidate;
   final taiikusaiplace = BasicData().taiikusaiplace;
 
-  Future<void> result() async {
-      final FirebaseFirestore firestore = FirebaseFirestore.instance;
-      String docId = 'result';
-      Map<String, dynamic> fieldsToUpdate = {};
-      for (int i = 1; i <= 283; i++) {
-        fieldsToUpdate[i.toString()] = 0;  
-      }
-      await firestore.collection('springresult').doc(docId).set(fieldsToUpdate, SetOptions(merge: true));
-  }
+  // Future<void> result() async {
+  //     final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  //     String docId = 'result';
+  //     Map<String, dynamic> fieldsToUpdate = {};
+  //     for (int i = 1; i <= 283; i++) {
+  //       fieldsToUpdate[i.toString()] = 0;  
+  //     }
+  //     await firestore.collection('springresult').doc(docId).set(fieldsToUpdate, SetOptions(merge: true));
+  // }
   @override
 
   Widget build(BuildContext context) {
@@ -45,22 +45,22 @@ class _Sports extends State<Sports> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      // update();
-                                      result();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      foregroundColor: Colors.black, backgroundColor: Colors.white, // ボタンの文字色を黒に設定
-                                    ),
-                                    child: const Text(
-                                      '値を全更新',
-                                      style: TextStyle(
-                                        fontSize: 16, 
-                                        color: Colors.black, 
-                                      ),
-                                    ),
-                                  ),
+                                  // ElevatedButton(
+                                  //   onPressed: () {
+                                  //     // update();
+                                  //     result();
+                                  //   },
+                                  //   style: ElevatedButton.styleFrom(
+                                  //     foregroundColor: Colors.black, backgroundColor: Colors.white, // ボタンの文字色を黒に設定
+                                  //   ),
+                                  //   child: const Text(
+                                  //     '値を全更新',
+                                  //     style: TextStyle(
+                                  //       fontSize: 16, 
+                                  //       color: Colors.black, 
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 const Text(
                                   '体育祭',
                                   style: TextStyle(
